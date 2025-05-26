@@ -34,7 +34,14 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules"
+              ]
+            },
+            "scripts": [
+              "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -91,13 +98,15 @@
               }
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/bootstrap/scss/bootstrap.scss",
-              "node_modules/bootstrap-icons/fonts/scss/bootstrap.scss",
-              "node_modules/animate.css/animate.min.css"
+              "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules"
+              ]
+            },
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+              "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
           ]
           }
         }
