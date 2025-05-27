@@ -1,4 +1,16 @@
-#pito{
-    background-color: aqua;
+.col-custom {
+    flex: 0 0 30%;
+    max-width: 30%;
+    min-width: 30%;
+    height: auto;
+  }
+  .img-ajustada {
+    max-height: 100%;    /* nunca más alta que el contenedor */
+    width: auto;         /* mantiene proporción */
+    object-fit: contain; /* ajusta la imagen sin recortarla */
+    display: block;      /* evita pequeños bugs de alineación */
+  }
+  .row-custom{
 
-}
+    height: 600px;
+  }
