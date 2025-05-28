@@ -1,3 +1,4 @@
+
 <div class="container">
 
 
@@ -10,24 +11,65 @@
         </button>
         <ul class="dropdown-menu">
           <li>
-            <button class="dropdown-item" type="button">Acción 1</button>
+            <button class="dropdown-item" type="button">Nueva Creatura</button>
           </li>
           <li>
-            <button class="dropdown-item" type="button">Acción 2</button>
+            <button class="dropdown-item" type="button">Importar Creatura</button>
           </li>
         </ul>
       </div>
   </div>
-  
-  <div class="container">
+  <div class="container bg-dark">
       <div class="row row-custom align-items-start">
           <div class="col-custom bg-primary text-white m-2 p-2">
-            <img src="/Lorina.jpg" class="w-100 h-100 object-fit-contain d-block align-self-start">
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad sunt repellendus rerum et. Culpa earum saepe labore! Quisquam eius rem delectus quae, omnis sapiente nihil architecto assumenda corrupti iure qui.</p>
+            
+            <figure class="figure">
+              <img src="/Lorina.jpg" class="figure-img w-100 h-100 object-fit-contain d-block align-self-start">
+              <div class = "bg-sexo">
+                <figcaption class="figure-caption d-flex justify-content-between">
+                    <div id = "nombreCrea">nombrecreatura</div>
+                  <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      ...
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <button class="dropdown-item" type="button">Modificar Creatura</button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button">Publicar/Ocultar</button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button">Exportar</button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button">Eliminar</button>
+                      </li>
+                    </ul>
+                  </div>
+                </figcaption>
+                <figcaption class="figure-caption d-flex justify-content">
+                    <div class = "tipo bg-danger">
+                      <div id="tipo1">tipo1</div>
+                    </div>
+                    <div class = "tipo bg-secondary">
+                      <div id = "tipo2">tipo2</div>
+                    </div>
+                </figcaption>
+                <figcaption class="figure-caption d-flex justify-content">
+                    Creador:
+                    <div id = "creador">nombrecreador</div>
+                </figcaption>
+                
+              </div>
+             
+            
+            </figure>
+            
+
             
           </div>
-          <div class="col-custom bg-secondary text-white m-2 p-2">
-            Elemento 2</div>
+          <div class="col-custom bg-secondary text-white m-2 p-2">Elemento 2</div>
           <div class="col-custom bg-success text-white m-2 p-2">Elemento 3</div>
           <div class="col-custom bg-danger text-white m-2 p-2">Elemento 4</div>
           <div class="col-custom bg-warning text-dark m-2 p-2">Elemento 5</div>
