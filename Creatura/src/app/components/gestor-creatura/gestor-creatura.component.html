@@ -21,13 +21,18 @@
   </div>
   <div class="container bg-dark">
       <div class="row row-custom align-items-start">
-          <div class="col-custom bg-primary text-white m-2 p-2">
+
+      <!-- ARRANCA EL LISTADO-->
+
+
+          <div class="col-custom bg-primary text-white m-2 p-2" *ngFor="let creatura of creaturas">
             
-            <figure class="figure">
-              <img src="/Lorina.jpg" class="figure-img w-100 h-100 object-fit-contain d-block align-self-start">
+            
+            <img [src]="creatura.imagen" (error)="onImgError($event)" alt="{{ creatura.nombre }}" class="figure-img d-block align-self-start img-ajustada">
+             <!--  <img ngSrc="defoult.jpg" fill>-->
               <div class = "bg-sexo">
                 <figcaption class="figure-caption d-flex justify-content-between">
-                    <div id = "nombreCrea">nombrecreatura</div>
+                    <div id = "nombreCrea">{{ creatura.nombre_creatura }}</div>
                   <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       ...
@@ -50,32 +55,27 @@
                 </figcaption>
                 <figcaption class="figure-caption d-flex justify-content">
                     <div class = "tipo bg-danger">
-                      <div id="tipo1">tipo1</div>
+                      <div id="tipo1">{{ creatura.id_tipo1 }}</div>
                     </div>
                     <div class = "tipo bg-secondary">
-                      <div id = "tipo2">tipo2</div>
+                      <div id = "tipo2">{{ creatura.id_tipo2 }}</div>
                     </div>
                 </figcaption>
                 <figcaption class="figure-caption d-flex justify-content">
                     Creador:
-                    <div id = "creador">nombrecreador</div>
+                    <div id = "creador">{{ creatura.creador }}</div>
                 </figcaption>
                 
               </div>
              
             
-            </figure>
+       
             
 
             
           </div>
-          <div class="col-custom bg-secondary text-white m-2 p-2">Elemento 2</div>
-          <div class="col-custom bg-success text-white m-2 p-2">Elemento 3</div>
-          <div class="col-custom bg-danger text-white m-2 p-2">Elemento 4</div>
-          <div class="col-custom bg-warning text-dark m-2 p-2">Elemento 5</div>
-          <div class="col-custom bg-info text-white m-2 p-2">Elemento 6</div>
-        </div>
 
+        <!-- TERMINA EL LISTADO-->
   </div>
 
   </div>

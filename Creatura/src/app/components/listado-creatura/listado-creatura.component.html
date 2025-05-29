@@ -1,0 +1,44 @@
+<div class="container mt-4 custom-table">
+    <h2>Listado</h2>
+    <table class="table table-bordered">
+      <thead class= "table-dark">
+        <tr>
+          <th>Id</th>
+          <th>Nombre</th>
+          <th>tipo1</th>
+          <th>tipo2 </th>
+
+          <th>Descripcion</th>
+          <th>H.P </th>
+          <th>Atake</th>
+          <th>Defensa </th>
+          <th>Especial</th>
+          <th>Defencia Especial </th>
+          <th>Sneed</th>
+          <th>Creador </th>
+          <th>Imagen </th>
+          <th>Publico </th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let creatura of creaturas">
+          <td>{{ creatura.id_creatura }}</td>
+          <td>{{ creatura.nombre_creatura }}</td>
+          <td>{{ creatura.id_tipo1 }}</td>
+          <td>{{ creatura.id_tipo2 }}</td>
+
+          <td>{{ creatura.descripcion }}</td>
+          <td>{{ creatura.hp }}</td>
+          <td>{{ creatura.atk }}</td>
+          <td>{{ creatura.def }}</td>
+          <td>{{ creatura.spa }}</td>
+          <td>{{ creatura.sdef }}</td>
+          <td>{{ creatura.spe }}</td>
+          <td>{{ creatura.creador }}</td>
+          <td>{{ creatura.imagen }}</td>
+          <td>{{ creatura.publico }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

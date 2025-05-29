@@ -5,14 +5,14 @@
     height: auto;
   }
   .img-ajustada {
-    max-height: 100%;    /* nunca más alta que el contenedor */
-    width: auto;         /* mantiene proporción */
-    object-fit: contain; /* ajusta la imagen sin recortarla */
-    display: block;      /* evita pequeños bugs de alineación */
+    width: 100%;       /* ocupa todo el ancho del contenedor */
+    height: 241px;     /* altura fija */
+    object-fit: fill;  /* estira la imagen para rellenar */
+    display: block;    /* elimina espacios blancos debajo de la imagen */
   }
   .row-custom{
 
-    height: 600px;
+    //height: 600px;
   }
   .bg-sexo{
 background-color: rgb(186, 255, 241);

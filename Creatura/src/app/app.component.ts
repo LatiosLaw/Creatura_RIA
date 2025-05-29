@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { BarraBusquedaComponent } from "./components/barra-busqueda/barra-busqueda.component";
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet,RouterLink,BarraBusquedaComponent],
