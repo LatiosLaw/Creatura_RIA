@@ -1,0 +1,2 @@
+npm install express //para ejecutar la api
+npm install cors  //Para que deje al navegador usar una api que se genera en la misma pc
