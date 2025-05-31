@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg bg-success">
+<nav class="navbar navbar-expand-lg main-nav">
     <div class="container-fluid">
 
-        <a class="navbar-brand bg-primary" href="#">
+        <a class="navbar-brand" routerLink="inicio">
             <img src="" alt="[Logo Pagina]">
         </a>
         
@@ -10,20 +10,23 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-            <form class="navbar-collapse justify-content-center mt-2 mb-2 bg-danger">
+            <form class="navbar-collapse justify-content-center mt-2 mb-2">
                 <div class="d-flex justify-content-center w-100">
                     <input class="w-50 form-control me-2" type="search">
                     <button class="bi bi-search btn btn-primary"></button>
                 </div>
             </form>
 
-            <ul class="navbar-nav align-items-center bg-warning" id="navbarList">
+            <ul class="navbar-nav align-items-center" id="navbarList">
+                <!--IF usuario logueado-->
                 <li class="nav-item">
                     <span class="nav-link">Nickname usuario</span>
                 </li>
+                <!--ELSE-->
                 <li class="nav-item">
                     <button class="nav-link">Iniciar sesión</button>
                 </li>
+                <!--END ELSE-->
             </ul>
         </div>
     </div>
