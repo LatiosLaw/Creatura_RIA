@@ -5,12 +5,18 @@
                 <img src="" alt="[Logo Pagina]">
             </a>
             
-            <form class="d-flex w-50 justify-content-center bg-danger">
-                <input class="form-control me-2" type="search">
-                <button class="btn btn-primary">Buscar</button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="bi bi-search"></span>
+            </button>
+    
+            <form class="collapse navbar-collapse justify-content-center bg-danger" id="navbarNav">
+                <div class="d-flex justify-content-center w-100">
+                    <input class="w-50 form-control me-2" type="search">
+                    <button class="btn btn-primary">Buscar</button>
+                </div>
             </form>
 
-            <ul class="navbar-nav align-items-center bg-warning">
+            <ul class="navbar-nav align-items-center bg-warning" id="navbarList">
                 <li class="">
                     <span class="nav-link">Nickname usuario</span>
                 </li>
