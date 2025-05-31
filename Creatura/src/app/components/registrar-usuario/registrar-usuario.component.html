@@ -1,0 +1,100 @@
+<form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+    <!-- NICKNAME -->
+    <div class="mb-3">
+      <label for="nickname" class="form-label">Nickname</label>
+      <input
+        id="nickname"
+        formControlName="nickname"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': registroForm.get('nickname')?.invalid && registroForm.get('nickname')?.touched
+        }"
+      />
+      <div *ngIf="registroForm.get('nickname')?.touched && registroForm.get('nickname')?.errors" class="invalid-feedback">
+        <div *ngIf="registroForm.get('nickname')?.errors?.['required']">
+          El nickname es obligatorio.
+        </div>
+      </div>
+    </div>
+  
+    <!-- CORREO -->
+    <div class="mb-3">
+      <label for="correo" class="form-label">Correo</label>
+      <input
+        id="correo"
+        type="email"
+        formControlName="correo"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': registroForm.get('correo')?.invalid && registroForm.get('correo')?.touched
+        }"
+      />
+      <div *ngIf="registroForm.get('correo')?.touched && registroForm.get('correo')?.errors" class="invalid-feedback">
+        <div *ngIf="registroForm.get('correo')?.errors?.['required']">
+          El correo es obligatorio.
+        </div>
+        <div *ngIf="registroForm.get('correo')?.errors?.['email']">
+          El correo no es válido.
+        </div>
+      </div>
+    </div>
+  
+    <!-- CONTRASEÑA -->
+    <div class="mb-3">
+      <label for="contrasena" class="form-label">Contraseña</label>
+      <input
+        id="contrasena"
+        type="password"
+        formControlName="contrasena"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': registroForm.get('contrasena')?.invalid && registroForm.get('contrasena')?.touched
+        }"
+      />
+      <div *ngIf="registroForm.get('contrasena')?.touched && registroForm.get('contrasena')?.errors" class="invalid-feedback">
+        <div *ngIf="registroForm.get('contrasena')?.errors?.['required']">
+          La contraseña es obligatoria.
+        </div>
+        <div *ngIf="registroForm.get('contrasena')?.errors?.['minlength']">
+          La contraseña debe tener al menos 8 caracteres.
+        </div>
+      </div>
+    </div>
+  
+    <!-- VERIFICAR CONTRASEÑA -->
+    <div class="mb-3">
+      <label for="verificarContrasena" class="form-label">Verificar contraseña</label>
+      <input
+        id="verificarContrasena"
+        type="password"
+        formControlName="verificarContrasena"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': (registroForm.get('verificarContrasena')?.touched && registroForm.get('verificarContrasena')?.invalid) || (registroForm.errors?.['contrasenasNoCoinciden'] && registroForm.get('verificarContrasena')?.touched)
+        }"
+      />
+      <div *ngIf="registroForm.get('verificarContrasena')?.touched" class="invalid-feedback">
+        <div *ngIf="registroForm.get('verificarContrasena')?.errors?.['required']">
+          Debes verificar la contraseña.
+        </div>
+        <div *ngIf="registroForm.errors?.['contrasenasNoCoinciden']">
+          Las contraseñas no coinciden.
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="fotoPerfil" class="form-label">Foto de perfil (opcional)</label>
+      <input id="fotoPerfil" type="file" (change)="onFileChange($event)" class="form-control" />
+    </div>
+  
+    <div class="mb-3">
+      <label for="biografia" class="form-label">Biografía (opcional)</label>
+      <textarea id="biografia" formControlName="biografia" class="form-control"></textarea>
+    </div>
+  
+    <button type="submit" class="btn btn-success" [disabled]="registroForm.invalid">
+      Registrarse
+    </button>
+  </form>
+  

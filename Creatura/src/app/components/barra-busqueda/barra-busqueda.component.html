@@ -23,11 +23,50 @@
                     <span class="nav-link">Nickname usuario</span>
                 </li>
                 <!--ELSE-->
-                <li class="nav-item">
-                    <button class="nav-link">Iniciar sesión</button>
+                <li class="nav-item" style="padding-right: 5px;">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#iniciarSesionModal">
+                        Iniciar Sesión
+                    </button>
                 </li>
+                <!--ELSE-->
+                <li class="nav-item">
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registroModal">
+                    Registrarse
+                  </button>
+              </li>
                 <!--END ELSE-->
             </ul>
         </div>
     </div>
 </nav>
+
+<div class="modal fade" id="iniciarSesionModal" tabindex="-1" aria-labelledby="iniciarSesionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="iniciarSesionModalLabel">Iniciar Sesión</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <app-login></app-login>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registroModal">
+            Registrarse
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="registroModalLabel">Registrar Usuario</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <app-registrar-usuario></app-registrar-usuario>
+        </div>
+      </div>
+    </div>
+  </div>
