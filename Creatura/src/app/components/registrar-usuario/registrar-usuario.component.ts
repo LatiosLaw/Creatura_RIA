@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { LocalStorageService } from '../../serviceses/local-storage.service';
+import { UsuarioService } from '../../serviceses/usuario.service';
 
 @Component({
   selector: 'app-registrar-usuario',
@@ -11,7 +13,9 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class RegistrarUsuarioComponent {
   registroForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, 
+    private usuarioService : UsuarioService,
+    private localStorage: LocalStorageService) {
     this.registroForm = this.fb.group({
       nickname: ['', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
@@ -31,10 +35,14 @@ export class RegistrarUsuarioComponent {
   }
 
   onSubmit() {
+
     if (this.registroForm.valid) {
       const datos = this.registroForm.value;
-      console.log('Formulario válido:', datos);
-      // Aquí podrías enviar el formulario a una API o guardarlo en localStorage
+
+      this.usuarioService.registrarUsuario(datos).subscribe({
+        next: (res) => console.log('Usuario creado:', res),
+        error: (err) => console.error('Error al registrar:', err),
+      });
     } else {
       console.warn('Formulario inválido');
     }
