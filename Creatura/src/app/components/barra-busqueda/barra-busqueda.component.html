@@ -12,29 +12,28 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <form class="navbar-collapse justify-content-center mt-2 mb-2">
                 <div class="d-flex justify-content-center w-100">
-                    <input class="w-50 form-control me-2" type="search">
+                    <input class="w-50 form-control me-2" type="search" placeholder="Buscar...">
                     <button class="bi bi-search btn btn-primary"></button>
                 </div>
             </form>
 
             <ul class="navbar-nav align-items-center" id="navbarList">
-                <!--IF usuario logueado-->
-                <li class="nav-item">
-                    <span class="nav-link">Nickname usuario</span>
-                </li>
-                <!--ELSE-->
-                <li class="nav-item" style="padding-right: 5px;">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#iniciarSesionModal">
-                        Iniciar Sesión
-                    </button>
-                </li>
-                <!--ELSE-->
-                <li class="nav-item">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registroModal">
-                    Registrarse
+              <!--IF usuario logueado-->
+              <li class="nav-item campo-nu">
+                  <span class="nav-link nombre-usuario">Nickname usuario</span>
+              </li>
+              <!--ELSE-->
+              <li class="nav-item inicio-sesion-boton">
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#iniciarSesionModal">
+                      Iniciar Sesión
                   </button>
               </li>
-                <!--END ELSE-->
+              <li class="nav-item">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registroModal">
+                  Registrarse
+                </button>
+              </li>
+              <!--END ELSE-->
             </ul>
         </div>
     </div>
