@@ -8,16 +8,16 @@
     text-overflow: ellipsis;
 }
 
+.inicio-sesion-boton{
+    margin-right: 5px;
+}
+
 input::placeholder{
     color: rgb(170, 170, 170);
 }
 
 //pantalla grande
 @media (min-width: 991.5px) {
-
-    .inicio-sesion-boton{
-        margin-right: 5px;
-    }
 
     .campo-nu{
         max-width: 300px;
@@ -26,10 +26,6 @@ input::placeholder{
 
 //pantalla chica
 @media (max-width: 991.5px) {
-
-    .inicio-sesion-boton{
-        margin-bottom: 5px;
-    }
 
     .campo-nu{
         max-width: 55vw;
