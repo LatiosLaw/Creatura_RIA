@@ -1,0 +1,27 @@
+<div style="padding-bottom: 15px;">
+    <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()">
+        <div class="mb-3">
+          <label for="nickname" class="form-label">Nickname</label>
+          <input
+            type="text"
+            id="nickname"
+            formControlName="nickname"
+            class="form-control"
+          />
+        </div>
+      
+        <div class="mb-3">
+          <label for="contrasena" class="form-label">Contraseña</label>
+          <input
+            type="password"
+            id="contrasena"
+            formControlName="contrasena"
+            class="form-control"
+          />
+        </div>
+      
+        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Iniciar Sesión</button>
+      </form>
+</div>
+
+  

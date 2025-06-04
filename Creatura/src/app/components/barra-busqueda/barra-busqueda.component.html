@@ -1,22 +1,69 @@
-    <nav class="navbar navbar-expand-lg bg-success">
-        <div class="container-fluid">
+<nav class="navbar navbar-expand-lg main-nav">
+    <div class="container-fluid">
 
-            <a class="navbar-brand bg-primary" href="#">
-                <img src="" alt="[Logo Pagina]">
-            </a>
-            
-            <form class="d-flex w-50 justify-content-center bg-danger">
-                <input class="form-control me-2" type="search">
-                <button class="btn btn-primary">Buscar</button>
+        <a class="navbar-brand" routerLink="inicio">
+            <img src="" alt="[Logo Pagina]">
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <form class="navbar-collapse justify-content-center mt-2 mb-2">
+                <div class="d-flex justify-content-center w-100">
+                    <input class="w-50 form-control me-2" type="search" placeholder="Buscar...">
+                    <button class="bi bi-search btn btn-primary"></button>
+                </div>
             </form>
 
-            <ul class="navbar-nav align-items-center bg-warning">
-                <li class="">
-                    <span class="nav-link">Nickname usuario</span>
-                </li>
-                <li class="">
-                    <button class="nav-link">Iniciar sesión</button>
-                </li>
+            <ul class="navbar-nav align-items-center" id="navbarList">
+              <!--IF usuario logueado-->
+              <li class="nav-item campo-nu">
+                  <span class="nav-link nombre-usuario">Nickname usuario</span>
+              </li>
+              <!--ELSE-->
+              <li class="nav-item">
+                  <button type="button" class="btn btn-primary inicio-sesion-boton" data-bs-toggle="modal" data-bs-target="#iniciarSesionModal">
+                      Iniciar Sesión
+                  </button>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registroModal">
+                    Registrarse
+                  </button>
+              </li>
+              <!--END ELSE-->
             </ul>
         </div>
-    </nav>
+    </div>
+</nav>
+
+<div class="modal fade" id="iniciarSesionModal" tabindex="-1" aria-labelledby="iniciarSesionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="iniciarSesionModalLabel">Iniciar Sesión</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <app-login></app-login>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registroModal">
+            Registrarse
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="registroModalLabel">Registrar Usuario</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <app-registrar-usuario></app-registrar-usuario>
+        </div>
+      </div>
+    </div>
+  </div>

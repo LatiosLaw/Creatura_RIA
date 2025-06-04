@@ -1,0 +1,33 @@
+.main-nav{
+    background-color: darkgray;
+}
+
+.nombre-usuario{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.inicio-sesion-boton{
+    margin-right: 5px;
+}
+
+input::placeholder{
+    color: rgb(170, 170, 170);
+}
+
+//pantalla grande
+@media (min-width: 991.5px) {
+
+    .campo-nu{
+        max-width: 300px;
+    }
+}
+
+//pantalla chica
+@media (max-width: 991.5px) {
+
+    .campo-nu{
+        max-width: 55vw;
+    }
+}
