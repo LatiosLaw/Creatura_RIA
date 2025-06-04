@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class ConeccionService {
   private url = 'http://localhost:3000/creaturas'; 
+  private urlTipos = 'http://localhost:3000/tipos';
   private llave = new HttpHeaders({
     'x-api-key': 'reqres-free-v1' 
   });
@@ -19,10 +20,31 @@ export class ConeccionService {
   // Método para obtener usuarios con GET
 
   listadoCreatura(): Observable<any> {
-   /* this.http.get<any[]>(this.url).subscribe(data => {
-      console.log(data); // Aquí sí obtienes los datos reales
-    });
-*/
     return this.http.get<any[]>(this.url);
   }
+  getCreatura(id:any){
+    const url2 = this.url+ "/"+id;
+     return this.http.get<any>(url2);
+  }
+
+  listadoCreaturaConTipos(): Observable<any> {
+    const url2 = this.urlTipos + "/creaturas";
+     return this.http.get<any[]>(url2);
+   }
+   eliminarCreatura(id:any){
+    const url2 = this.url + "/"+id;
+    console.log(url2);
+     this.http.delete<any[]>(url2).subscribe(data => {
+      console.log(data);
+    });
+
+
+   }
+
+  devolberTipo(id:any): Observable<any> {
+     const url2 = this.urlTipos + "/"+id;
+     
+     return this.http.get<any[]>(url2);
+   }
+
 }

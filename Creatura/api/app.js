@@ -103,8 +103,8 @@ let creaturas = [
   },{
     id_creatura: 6,
     nombre_creatura: 'The Queen of hearts',
-    id_tipo1: 1,
-    id_tipo2: 0,
+    id_tipo1: 3,
+    id_tipo2: 20,
     descripcion: 'Off with his head. NOW!',
     hp: 30,
     atk: 150,
@@ -260,6 +260,9 @@ app.put('/creaturas/:id', (req, res) => {
   res.json(creaturas[index]);
 });
 
+
+
+
 //BAJA
 /*
 curl -X DELETE http://localhost:3000/creaturas/6
@@ -283,6 +286,15 @@ curl http://localhost:3000/creaturas
 app.get('/creaturas', (req, res) => {
   res.json(creaturas);
 });
+
+app.get('/creaturas2', (req, res) => {
+  res.json(creaturas);
+
+
+
+});
+
+
 
 //BUSCAR POR ID
 /*
@@ -510,8 +522,42 @@ let tipos = [
     color: "797480",
     icono: "https://i.imgur.com/gualberto.png",
     creador: "Gualberto"
+  },
+  {
+    id_tipo: 20,
+    nombre_tipo: "Sinistro",
+    color: "535353",
+    icono: "https://i.imgur.com/sinestro.png",
+    creador: "Mr.Dr.Admin"
   }
 ];
+let creaturasConTipos = creaturas.map(creatura => {
+  let tipo1 = tipos.find(tipo => tipo.id_tipo === creatura.id_tipo1);
+  let tipo2 = tipos.find(tipo => tipo.id_tipo === creatura.id_tipo2);
+
+  return {
+    ...creatura,
+    tipo1: tipo1 || null,
+    tipo2: tipo2 || null
+  };
+});
+
+function setearCreaConTipos(){
+  creaturasConTipos = creaturas.map(creatura => {
+    const tipo1 = tipos.find(tipo => tipo.id_tipo === creatura.id_tipo1);
+    const tipo2 = tipos.find(tipo => tipo.id_tipo === creatura.id_tipo2);
+  
+    return {
+      ...creatura,
+      tipo1: tipo1 || null,
+      tipo2: tipo2 || null
+    };
+  });
+}
+
+
+
+
 
 //ALTA
 /*
@@ -594,6 +640,10 @@ curl http://localhost:3000/tipos
 app.get('/tipos', (req, res) => {
   res.json(tipos);
 });
+app.get('/tipos/creaturas', (req, res) => {
+  setearCreaConTipos();
+  res.json(creaturasConTipos);
+});
 
 //BUSCAR TIPOS POR CREADOR
 /*
@@ -604,6 +654,19 @@ app.get('/tipos/creador/:creador', (req, res) => {
   const resultados = tipos.filter(t => t.creador.toLowerCase() === creador);
   res.json(resultados);
 });
+
+app.get('/tipos/:id', (req, res) => {
+  res.json(resultados);
+
+});
+
+function getTipoPorId(id){
+  const resultados = tipos.filter(t => t.id_tipo === id);
+  return resultados;
+}
+
+
+
 
 ///////////////////////////////////////////////////////////////////
 // FIN SECCION TIPOS //////////////////////////////////////////////

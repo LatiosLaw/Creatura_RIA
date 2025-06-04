@@ -1,44 +1,82 @@
-<div class="container mt-4 custom-table">
-    <h2>Listado</h2>
-    <table class="table table-bordered">
-      <thead class= "table-dark">
-        <tr>
-          <th>Id</th>
-          <th>Nombre</th>
-          <th>tipo1</th>
-          <th>tipo2 </th>
+<div class="container bg-dark">
+  <div class="row row-custom align-items-center">
 
-          <th>Descripcion</th>
-          <th>H.P </th>
-          <th>Atake</th>
-          <th>Defensa </th>
-          <th>Especial</th>
-          <th>Defencia Especial </th>
-          <th>Sneed</th>
-          <th>Creador </th>
-          <th>Imagen </th>
-          <th>Publico </th>
+  <!-- ARRANCA EL LISTADO-->
 
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let creatura of creaturas">
-          <td>{{ creatura.id_creatura }}</td>
-          <td>{{ creatura.nombre_creatura }}</td>
-          <td>{{ creatura.id_tipo1 }}</td>
-          <td>{{ creatura.id_tipo2 }}</td>
 
-          <td>{{ creatura.descripcion }}</td>
-          <td>{{ creatura.hp }}</td>
-          <td>{{ creatura.atk }}</td>
-          <td>{{ creatura.def }}</td>
-          <td>{{ creatura.spa }}</td>
-          <td>{{ creatura.sdef }}</td>
-          <td>{{ creatura.spe }}</td>
-          <td>{{ creatura.creador }}</td>
-          <td>{{ creatura.imagen }}</td>
-          <td>{{ creatura.publico }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+      <div class="col-custom bg-primary text-white m-2 p-2" *ngFor="let creatura of creaturas">
+        
+        <img [src]="creatura.imagen" (error)="onImgError($event)" alt="{{ creatura.nombre }}" class="figure-img d-block align-self-start img-ajustada">
+         <!--  <img ngSrc="defoult.jpg" fill>-->
+          <div class = "bg-sexo">
+            <figcaption class="figure-caption d-flex justify-content-between">
+                <div id = "nombreCrea">{{ creatura.nombre_creatura }}</div>
+              <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  ...
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <button class="dropdown-item" type="button">Modificar Creatura</button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" type="button">Publicar/Ocultar</button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" type="button" (click)="mostrarJScreatura(creatura.id_creatura)">Exportar</button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" type="button" (click)="eliminarCreatura(creatura.id_creatura)">Eliminar</button>
+                  </li>
+                </ul>
+              </div>
+            </figcaption>
+            <figcaption class="figure-caption d-flex justify-content gap-2">
+                <div [style.backgroundColor]="'#' + creatura.tipo1.color">
+                  <div id="tipo1">{{ creatura.tipo1.nombre_tipo }}</div>
+                </div>
+                <div *ngIf="creatura.tipo2" [style.backgroundColor]="'#' + creatura.tipo2.color">
+                      <div id = "tipo2" >{{ creatura.tipo2.nombre_tipo }} </div>
+                </div>
+
+            </figcaption>
+            <figcaption class="figure-caption d-flex justify-content">
+                Creador:
+                <div id = "creador">{{ creatura.creador }}</div>
+            </figcaption>
+            
+          </div>
+         <!--
+            div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  ...
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <button class="dropdown-item" type="button">Modificar Creatura</button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" type="button">Publicar/Ocultar</button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" type="button">Exportar</button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" type="button">Eliminar</button>
+                  </li>
+                </ul>
+              </div>
+     
+         
+         -->
+        
+   
+        
+
+        
+      </div>
+
+    <!-- TERMINA EL LISTADO-->
+</div>
+
+</div>

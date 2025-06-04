@@ -16,66 +16,15 @@
           <li>
             <button class="dropdown-item" type="button">Importar Creatura</button>
           </li>
+
+          <a class="nav-link" routerLink="listadoCreatura">
+          <li>
+            <button class="dropdown-item" type="button">Listar Creatura</button>
+          </li>
+          </a>
+
+          
         </ul>
       </div>
   </div>
-  <div class="container bg-dark">
-      <div class="row row-custom align-items-start">
-
-      <!-- ARRANCA EL LISTADO-->
-
-
-          <div class="col-custom bg-primary text-white m-2 p-2" *ngFor="let creatura of creaturas">
-            
-            
-            <img [src]="creatura.imagen" (error)="onImgError($event)" alt="{{ creatura.nombre }}" class="figure-img d-block align-self-start img-ajustada">
-             <!--  <img ngSrc="defoult.jpg" fill>-->
-              <div class = "bg-sexo">
-                <figcaption class="figure-caption d-flex justify-content-between">
-                    <div id = "nombreCrea">{{ creatura.nombre_creatura }}</div>
-                  <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      ...
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li>
-                        <button class="dropdown-item" type="button">Modificar Creatura</button>
-                      </li>
-                      <li>
-                        <button class="dropdown-item" type="button">Publicar/Ocultar</button>
-                      </li>
-                      <li>
-                        <button class="dropdown-item" type="button">Exportar</button>
-                      </li>
-                      <li>
-                        <button class="dropdown-item" type="button">Eliminar</button>
-                      </li>
-                    </ul>
-                  </div>
-                </figcaption>
-                <figcaption class="figure-caption d-flex justify-content">
-                    <div class = "tipo bg-danger">
-                      <div id="tipo1">{{ creatura.id_tipo1 }}</div>
-                    </div>
-                    <div class = "tipo bg-secondary">
-                      <div id = "tipo2">{{ creatura.id_tipo2 }}</div>
-                    </div>
-                </figcaption>
-                <figcaption class="figure-caption d-flex justify-content">
-                    Creador:
-                    <div id = "creador">{{ creatura.creador }}</div>
-                </figcaption>
-                
-              </div>
-             
-            
-       
-            
-
-            
-          </div>
-
-        <!-- TERMINA EL LISTADO-->
-  </div>
-
-  </div>
+ <router-outlet></router-outlet>

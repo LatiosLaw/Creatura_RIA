@@ -1,0 +1,20 @@
+.col-custom {
+    flex: 0 0 30%;
+    max-width: 30%;
+    min-width: 30%;
+    height: auto;
+  }
+  .img-ajustada {
+    width: 100%;       /* ocupa todo el ancho del contenedor */
+    height: 241px;     /* altura fija */
+    object-fit: fill;  /* estira la imagen para rellenar */
+    display: block;    /* elimina espacios blancos debajo de la imagen */
+  }
+  .row-custom{
+
+    //height: 600px;
+  }
+  .bg-sexo{
+background-color: rgb(186, 255, 241);
+//background-color: #535353;
+  }
