@@ -16,26 +16,33 @@ export class ListadoCreaturaComponent implements OnInit{
   constructor(private connector: ConeccionService) {}
   
   eliminarCreatura(idCreatura:any){
-    this.connector.eliminarCreatura(idCreatura);
+    
     Swal.fire({
-      icon: 'success',
-      title: 'Creatura Eliminada de id:' + idCreatura,
-      text: `Se eliminó la Creatura.`,
-      confirmButtonColor: '#3085d6',
+      title: "Está seguro que desea eliminar esta Creatura™",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Eliminar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.connector.eliminarCreatura(idCreatura);
+        this.cargarCreaturasLista();
+      }
     });
-    this.cargarCreaturasLista();
+    
   }
-  mostrarJScreatura(id:any){
+  mostrarJScreatura(id: any) {
     this.connector.getCreatura(id).subscribe(data => {
-      console.log(data);
       Swal.fire({
-        title: 'Exportacion de la creatura con el id: ' + id,
-        text: `
+        title: 'Exportación de la creatura con el id: ' + id,
+        html: `<pre style="text-align: left;">
         "id_creatura": ${data.id_creatura},
         "nombre_creatura": ${data.nombre_creatura},
         "id_tipo1": ${data.id_tipo1},
         "id_tipo2": ${data.id_tipo2},
-        "descripcion": ${data.descripcion}",
+        "descripcion": ${data.descripcion},
         "hp": ${data.hp},
         "atk": ${data.atk},
         "def": ${data.def},
@@ -44,13 +51,11 @@ export class ListadoCreaturaComponent implements OnInit{
         "spe": ${data.spe},
         "creador": ${data.creador},
         "imagen": ${data.imagen},
-        "publico": ${data.publico}`,
-
+        "publico": ${data.publico}
+        </pre>`,
         confirmButtonColor: '#3085d6',
       });
     });
-  
-
   }
   onImgError(event: Event) {
     const element = event.target as HTMLImageElement;
