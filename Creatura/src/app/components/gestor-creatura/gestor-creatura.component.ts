@@ -2,13 +2,14 @@ import { Component,OnInit  } from '@angular/core';
 import { ConeccionService } from '../../serviceses/coneccion.service';
 import { CommonModule } from '@angular/common';
 import { NgOptimizedImage } from '@angular/common';
+import { ListadoCreaturaComponent } from '../listado-creatura/listado-creatura.component';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import Swal from 'sweetalert2';
 
 
 @Component({
   selector: 'app-gestor-creatura',
-  imports: [RouterOutlet,RouterLink,CommonModule, NgOptimizedImage],
+  imports: [RouterOutlet,RouterLink,ListadoCreaturaComponent,CommonModule, NgOptimizedImage],
   templateUrl: './gestor-creatura.component.html',
   styleUrl: './gestor-creatura.component.scss'
 })

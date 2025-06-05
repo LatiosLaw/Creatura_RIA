@@ -59,7 +59,7 @@ export class ListadoCreaturaComponent implements OnInit{
   }
   onImgError(event: Event) {
     const element = event.target as HTMLImageElement;
-    element.src = 'defoult.jpg'; // Ruta de imagen por defecto
+    element.src = 'defoult.png'; // Ruta de imagen por defecto
   }
   cargarCreaturasLista(){
     this.connector.listadoCreaturaConTipos().subscribe((res) => {
