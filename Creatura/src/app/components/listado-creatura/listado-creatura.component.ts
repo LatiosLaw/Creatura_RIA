@@ -2,12 +2,13 @@ import { Component,OnInit  } from '@angular/core';
 import { ConeccionService } from '../../serviceses/coneccion.service';
 import { CommonModule } from '@angular/common';
 import { NgOptimizedImage } from '@angular/common';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import Swal from 'sweetalert2';
 
 
 @Component({
   selector: 'app-listado-creatura',
-  imports: [CommonModule, NgOptimizedImage],
+  imports: [RouterOutlet,RouterLink,CommonModule, NgOptimizedImage],
   templateUrl: './listado-creatura.component.html',
   styleUrl: './listado-creatura.component.scss'
 })

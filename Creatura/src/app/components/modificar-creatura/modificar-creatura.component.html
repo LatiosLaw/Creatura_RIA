@@ -1,1 +1,91 @@
-<p>modificar-creatura works!</p>
+<app-barra-gestor-creatura></app-barra-gestor-creatura>
+<div class = "container bg-primary">
+ <div class = "row">
+    <div class = "col col-Img bg-danger">
+       <div class= "contendoorImagen mt-3 mb-3">
+        <div class="mb-3">
+            <input id="imegenCreatura" type="file" class="form-control" />
+        <!--(change)="onFileChange($event)"-->
+        </div>
+            <img src="defoult.png" alt="creatura.nombre" class="w-100  img-ajustada">
+         <!--  <img ngSrc="defoult.jpg" fill>-->
+    </div>
+
+
+
+
+    </div>
+    <div class = "col col-Stats bg-info">
+        <div class = "row justify-content-center">
+            <div class = "col">
+                <div class="d-flex align-items-center gap-2">
+                    Nombre: <div class="bg-success text-white m-2 p-2">Creatura.nombre</div>
+                </div>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col d-flex justify-content-center align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                hp: <div class="bg-success text-white m-2 p-2">Creatura.hp</div>
+              </div>
+            </div>
+          
+            <div class="col d-flex justify-content-center align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                atk: <div class="bg-danger text-white m-2 p-2">Creatura.atk</div>
+              </div>
+            </div>
+          
+            <div class="col d-flex justify-content-center align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                def: <div class="bg-primary text-white m-2 p-2">Creatura.def</div>
+              </div>
+            </div>
+          
+            <div class="w-100"></div>
+          
+            <div class="col d-flex justify-content-center align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                spa: <div class="bg-spa text-white m-2 p-2">Creatura.spa</div>
+              </div>
+            </div>
+          
+            <div class="col d-flex justify-content-center align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                sdef: <div class="bg-sdef text-white m-2 p-2">Creatura.sdef</div>
+              </div>
+            </div>
+          
+            <div class="col d-flex justify-content-center align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                <div>spe:</div> <div class="bg-warning text-white m-2 p-2">Creatura.spe</div>
+              </div>
+            </div>
+          </div>
+          
+    <div class = "row">
+        <div class = "col">
+            <div class="bg-danger text-white m-2 p-2">Creatura.tipo1</div>
+        </div>
+        <div class = "col">
+            <div class="bg-dark text-white m-2 p-2">Creatura.tipo2</div>
+        </div>
+    </div>
+    <div class = "row">
+        <div class = "col">
+            <textarea class="form-control" id="comentario" rows="4" maxlength="200"
+            placeholder="Escriba la descripción de su Creatura"></textarea>
+        </div>
+
+    </div>
+
+
+    </div>
+
+
+ </div>
+
+
+</div>
+
+
