@@ -7,7 +7,8 @@
             <input id="imegenCreatura" type="file" class="form-control" />
         <!--(change)="onFileChange($event)"-->
         </div>
-            <img src="defoult.png" alt="creatura.nombre" class="w-100  img-ajustada">
+            <img [src]="creatura.imagen" (error)="onImgError($event)" alt="{{ creatura.nombre }}" class="w-100  img-ajustada">
+        
          <!--  <img ngSrc="defoult.jpg" fill>-->
     </div>
 
@@ -19,26 +20,26 @@
         <div class = "row justify-content-center">
             <div class = "col">
                 <div class="d-flex align-items-center gap-2">
-                    Nombre: <div class="bg-success text-white m-2 p-2">Creatura.nombre</div>
+                    Nombre: <div class="bg-success text-white m-2 p-2">{{ creatura.nombre_creatura }}</div>
                 </div>
             </div>
         </div>
         <div class="row text-center">
             <div class="col d-flex justify-content-center align-items-center">
               <div class="d-flex align-items-center gap-2">
-                hp: <div class="bg-success text-white m-2 p-2">Creatura.hp</div>
+                hp: <div class="bg-success text-white m-2 p-2">{{ creatura.hp }}</div>
               </div>
             </div>
           
             <div class="col d-flex justify-content-center align-items-center">
               <div class="d-flex align-items-center gap-2">
-                atk: <div class="bg-danger text-white m-2 p-2">Creatura.atk</div>
+                atk: <div class="bg-danger text-white m-2 p-2">{{ creatura.atk }}</div>
               </div>
             </div>
           
             <div class="col d-flex justify-content-center align-items-center">
               <div class="d-flex align-items-center gap-2">
-                def: <div class="bg-primary text-white m-2 p-2">Creatura.def</div>
+                def: <div class="bg-primary text-white m-2 p-2">{{ creatura.def }}</div>
               </div>
             </div>
           
@@ -46,39 +47,62 @@
           
             <div class="col d-flex justify-content-center align-items-center">
               <div class="d-flex align-items-center gap-2">
-                spa: <div class="bg-spa text-white m-2 p-2">Creatura.spa</div>
+                spa: <div class="bg-spa text-white m-2 p-2">{{ creatura.spa }}</div>
               </div>
             </div>
           
             <div class="col d-flex justify-content-center align-items-center">
               <div class="d-flex align-items-center gap-2">
-                sdef: <div class="bg-sdef text-white m-2 p-2">Creatura.sdef</div>
+                sdef: <div class="bg-sdef text-white m-2 p-2">{{ creatura.sdef }}</div>
               </div>
             </div>
           
             <div class="col d-flex justify-content-center align-items-center">
               <div class="d-flex align-items-center gap-2">
-                <div>spe:</div> <div class="bg-warning text-white m-2 p-2">Creatura.spe</div>
+                <div>spe:</div> <div class="bg-warning text-white m-2 p-2">{{ creatura.spe }}</div>
               </div>
             </div>
           </div>
           
     <div class = "row">
         <div class = "col">
-            <div class="bg-danger text-white m-2 p-2">Creatura.tipo1</div>
+            <div class="text-white m-2 p-2" [style.backgroundColor]="'#' + creatura.tipo1.color">{{ creatura.tipo1.nombre_tipo }}</div>
         </div>
         <div class = "col">
-            <div class="bg-dark text-white m-2 p-2">Creatura.tipo2</div>
+            <div class="text-white m-2 p-2" *ngIf="creatura.tipo2" [style.backgroundColor]="'#' + creatura.tipo2.color">{{ creatura.tipo2.nombre_tipo }}</div>
         </div>
     </div>
     <div class = "row">
         <div class = "col">
             <textarea class="form-control" id="comentario" rows="4" maxlength="200"
-            placeholder="Escriba la descripción de su Creatura"></textarea>
+            placeholder="Escriba la descripción de su Creatura">{{ creatura.descripcion }}</textarea>
         </div>
-
     </div>
-
+    <div class = "row">
+      <table class="table table-bordered">
+        <thead class= "table-dark">
+          <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Potencia</th>
+            <th>Descricion</th>
+            <th>Caregoria</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let moveset of movesets">
+            <td>{{ moveset.id_habilidad }}</td>
+            <td>{{ moveset.habilidad.nombre_habilidad }}</td>
+            <td [style.backgroundColor]="'#' +  moveset.tipo.color">{{ moveset.tipo.nombre_tipo }}</td>
+            <td>{{ moveset.habilidad.potencia }}</td>
+            <td>{{ moveset.habilidad.descripcion }}</td>
+            <td>{{ moveset.habilidad.categoria_habilidad }}</td>
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     </div>
 

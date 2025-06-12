@@ -19,12 +19,12 @@
                 </button>
                  <ul class="dropdown-menu">
 
-                <a class="nav-link" routerLink="modificarCreatura">
+                <a class="nav-link" [routerLink]="['modificarCreatura']" 
+                [queryParams]= "{idCreatura:creatura.id_creatura}">
                   <li>
                     <button class="dropdown-item" type="button">Modificar Creatura</button>
                   </li>
                   </a>
-
 
                   <li>
                     <button class="dropdown-item" type="button">Publicar/Ocultar</button>

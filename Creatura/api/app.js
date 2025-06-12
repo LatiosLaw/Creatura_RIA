@@ -652,6 +652,16 @@ app.get('/tipos/creaturas', (req, res) => {
   setearCreaConTipos();
   res.json(creaturasConTipos);
 });
+app.get('/tipos/creaturas/:id', (req, res) => {
+  setearCreaConTipos();
+  const id = parseInt(req.params.id);
+  const creatura = creaturasConTipos.find(c => c.id_creatura === id);
+  if (creatura) {
+    res.json(creatura);
+  } else {
+    res.status(404).send('Creatura no encontrada');
+  }
+});
 
 //BUSCAR TIPOS POR CREADOR
 /*
@@ -711,6 +721,42 @@ let habilidades = [
     categoria_habilidad: "Estado",
     potencia: 0,
     creador: "SYSTEM"
+  },
+  {
+    id_habilidad: 4,
+    nombre_habilidad: "Orden de atacar",
+    id_tipo_habilidad: 3,
+    descripcion: "Ordena a sus solados a atacar con todo.",
+    categoria_habilidad: "Fisico",
+    potencia: 100,
+    creador: "Mr.Dr.Admin"
+  },
+  {
+    id_habilidad: 5,
+    nombre_habilidad: "Orden de curar",
+    id_tipo_habilidad: 20,
+    descripcion: "Obliga a sus medicos a cuarla al instante.",
+    categoria_habilidad: "Estado",
+    potencia: 0,
+    creador: "Mr.Dr.Admin"
+  },
+  {
+    id_habilidad: 6,
+    nombre_habilidad: "Orden de defender",
+    id_tipo_habilidad: 20,
+    descripcion: "Ordena a sus peones que mueran por ella.",
+    categoria_habilidad: "Estado",
+    potencia: 0,
+    creador: "Mr.Dr.Admin"
+  },
+  {
+    id_habilidad: 7,
+    nombre_habilidad: "Guillotina",
+    id_tipo_habilidad: 4,
+    descripcion: "Comboca una gogante guillotina para decapitar a su oponente.",
+    categoria_habilidad: "Fisico",
+    potencia: 170,
+    creador: "Mr.Dr.Admin"
   }
 ];
 
@@ -870,7 +916,11 @@ app.get('/habilidades/tipo/:id_tipo_habilidad', (req, res) => {
 let movesets = [
   { id_moveset: 1, id_creatura: 1, id_habilidad: 2 },
   { id_moveset: 2, id_creatura: 2, id_habilidad: 1 },
-  { id_moveset: 3, id_creatura: 2, id_habilidad: 3 }
+  { id_moveset: 3, id_creatura: 2, id_habilidad: 3 },
+  { id_moveset: 4, id_creatura: 6, id_habilidad: 4 },
+  { id_moveset: 5, id_creatura: 6, id_habilidad: 5 },
+  { id_moveset: 6, id_creatura: 6, id_habilidad: 6 },
+  { id_moveset: 7, id_creatura: 6, id_habilidad: 7 }
 ];
 
 //ALTA
@@ -956,7 +1006,28 @@ app.get('/movesets/creatura/:id_creatura', (req, res) => {
   const resultado = movesets.filter(m => m.id_creatura === id);
   res.json(resultado);
 });
+let movesetFull = movesets.map(moveset =>{
+  let habilidad = habilidades.find(habilidad => habilidad.id_habilidad === moveset.id_habilidad);
+  let tipo = habilidad ? tipos.find(t => t.id_tipo === habilidad.id_tipo_habilidad) : null;
+  return {
+    ...moveset,
+    habilidad:habilidad ||null,
+    tipo: tipo || null
+  };
 
+})
+function resetearMovesetFull(movesets) {
+  return movesets.map(moveset => ({
+    ...moveset,
+    habilidad: null,
+    tipo: null
+  }));
+}
+app.get('/movesets/full/creatura/:id_creatura', (req, res) => {
+  const id = parseInt(req.params.id_creatura);
+  const resultado = movesetFull.filter(m => m.id_creatura === id);
+  res.json(resultado);
+});
 ///////////////////////////////////////////////////////////////////
 // FIN SECCION MOVESET ////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////

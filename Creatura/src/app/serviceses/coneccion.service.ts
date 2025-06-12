@@ -6,10 +6,8 @@ import { Observable } from 'rxjs';
 export class ConeccionService {
   private url = 'http://localhost:3000/creaturas'; 
   private urlTipos = 'http://localhost:3000/tipos';
-  private llave = new HttpHeaders({
-    'x-api-key': 'reqres-free-v1' 
-  });
-
+  private urlMoovesets = 'http://localhost:3000/movesets';
+///creatura/:id_creatura
   constructor(private http: HttpClient) {}
 
   // Método para crear un usuario con POST
@@ -26,7 +24,10 @@ export class ConeccionService {
     const url2 = this.url+ "/"+id;
      return this.http.get<any>(url2);
   }
-
+  getCreaturaConTipos(id: any){
+    const url2 = this.urlTipos + "/creaturas/" + id;
+    return this.http.get<any>(url2);
+  }
   listadoCreaturaConTipos(): Observable<any> {
     const url2 = this.urlTipos + "/creaturas";
      return this.http.get<any[]>(url2);
@@ -37,10 +38,11 @@ export class ConeccionService {
      this.http.delete<any[]>(url2).subscribe(data => {
       console.log(data);
     });
-
-
    }
-
+   getMoveset(id:any){
+    const url2 = this.urlMoovesets + "/full/creatura/" + id;
+    return this.http.get<any>(url2);
+   }
   devolberTipo(id:any): Observable<any> {
      const url2 = this.urlTipos + "/"+id;
      
