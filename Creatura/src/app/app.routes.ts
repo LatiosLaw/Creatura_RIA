@@ -11,6 +11,7 @@ export const routes: Routes = [
     { path: 'gestorCreatura', component: GestorCreaturaComponent },
     {path: 'gestorCreatura/listadoCreatura',component: ListadoCreaturaComponent},
     {path: 'gestorCreatura/modificarCreatura',component: ModificarCreaturaComponent},
+    { path: 'gestorCreatura/modificarCreatura/gestorCreatura', component: GestorCreaturaComponent },
     { path: 'login', component: LoginComponent }
 
 ];

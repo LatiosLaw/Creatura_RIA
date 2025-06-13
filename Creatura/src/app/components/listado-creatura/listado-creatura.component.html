@@ -18,23 +18,22 @@
                   ...
                 </button>
                  <ul class="dropdown-menu">
+                      <a class="nav-link" [routerLink]="['modificarCreatura']" 
+                      [queryParams]= "{idCreatura:creatura.id_creatura}">
+                        <li>
+                          <button class="dropdown-item" type="button">Modificar Creatura</button>
+                        </li>
+                      </a>
 
-                <a class="nav-link" [routerLink]="['modificarCreatura']" 
-                [queryParams]= "{idCreatura:creatura.id_creatura}">
-                  <li>
-                    <button class="dropdown-item" type="button">Modificar Creatura</button>
-                  </li>
-                  </a>
-
-                  <li>
-                    <button class="dropdown-item" type="button">Publicar/Ocultar</button>
-                  </li>
-                  <li>
-                    <button class="dropdown-item" type="button" (click)="mostrarJScreatura(creatura.id_creatura)">Exportar</button>
-                  </li>
-                  <li>
-                    <button class="dropdown-item" type="button" (click)="eliminarCreatura(creatura.id_creatura)">Eliminar</button>
-                  </li>
+                      <li>
+                        <button class="dropdown-item" type="button">Publicar/Ocultar</button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button" (click)="mostrarJScreatura(creatura.id_creatura)">Exportar</button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button" (click)="eliminarCreatura(creatura.id_creatura)">Eliminar</button>
+                      </li>
                 </ul>
               </div>
             </figcaption>

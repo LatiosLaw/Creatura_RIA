@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
 export class ConeccionService {
   private url = 'http://localhost:3000/creaturas'; 
   private urlTipos = 'http://localhost:3000/tipos';
-  private urlMoovesets = 'http://localhost:3000/movesets';
+  private urlMovesets = 'http://localhost:3000/movesets';
+  private urlHabilidades = "http://localhost:3000/habilidades";
 ///creatura/:id_creatura
   constructor(private http: HttpClient) {}
 
@@ -40,13 +41,26 @@ export class ConeccionService {
     });
    }
    getMoveset(id:any){
-    const url2 = this.urlMoovesets + "/full/creatura/" + id;
+    const url2 = this.urlMovesets + "/full/creatura/" + id;
     return this.http.get<any>(url2);
    }
+
+   getHabilidadesConTipos(){
+    const url2 = this.urlHabilidades + "/CONtipo";
+    return this.http.get<any>(url2);
+   }
+
+
   devolberTipo(id:any): Observable<any> {
      const url2 = this.urlTipos + "/"+id;
      
      return this.http.get<any[]>(url2);
+   }
+   getTipos(){
+    return this.http.get<any[]>(this.urlTipos);
+   }
+   getHabilidades(){
+    return this.http.get<any[]>(this.urlHabilidades);
    }
 
 }
