@@ -62,5 +62,57 @@ export class ConeccionService {
    getHabilidades(){
     return this.http.get<any[]>(this.urlHabilidades);
    }
+	get_Todos_Los_Tipos(){
+		return this.http.get<any>(this.urlTipos);
+	}
+	Alta_Tipo(nuevo_tipo:any): Observable<any>{
+		return this.http.post(this.urlTipos, nuevo_tipo);
+	}
+	Baja_Tipo(id:any){
+		const url2 = this.urlTipos + "/" + id;
+		return this.http.delete(url2);
+	}
 
+	Modificar_Tipo(id:any, tipo:any){
+		const url2 = this.urlTipos + "/"+ id;
+		return this.http.put(url2, tipo);
+	}
+
+	get_Tipos_Creados_Por(id:any){
+		const url2 = this.urlTipos +"/creador/"+id;
+		return this.http.get<any>(url2);
+	}
+	get_Tipo_Con_Id(id:any){
+		const url2 = this.urlTipos + "/" + id;
+		return this.http.get(url2);
+	}
+
+	Alta_Habilidades(nueva_habilidad:any){
+		return this.http.post(this.urlHabilidades,nueva_habilidad);
+	}
+	
+	Baja_Habilidad(id:any){
+		const url2 = this.urlHabilidades + "/" + id;
+		return this.http.delete(url2);
+	}
+
+	Modificar_Habilidad(id:any, habilidad:any){
+		const url2 = this.urlHabilidades + "/" + id;
+		return this.http.put(url2,habilidad);
+	}
+
+	Listar_Habilidades(){
+		return this.http.get(this.urlHabilidades);
+	}
+	
+	Listar_Habilidades_Creadas_Por(id:any){	
+		const url2 = this.urlHabilidades + "/creador/" + id;
+		return this.http.get(url2);
+	}
+
+	Listar_Habilidades_Por_Tipo(id:any){	
+		const url2 = this.urlHabilidades + "/tipo/" + id;
+		return this.http.get(url2);
+	}
+	
 }
