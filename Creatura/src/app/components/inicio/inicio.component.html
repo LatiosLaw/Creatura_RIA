@@ -6,25 +6,26 @@
 </div>
 
 <div class="d-flex flex-wrap justify-content-around">
-    
+    @for (creatura of creaturas; track $index){
     <div class="contenido-creatura m-2">
         <a>
             <div class="text-center">
-                <img src="https://exoticfruitbox.com/wp-content/uploads/2015/10/aguacate.jpg" class="my-2" draggable="false" alt="[Imagen Creatura]">
+                <img [src]="creatura.imagen" (error)="onImgError($event)" alt="{{ creatura.nombre }}" class="my-2" draggable="false" alt="[Imagen Creatura]">
             </div>
-            <div class="px-2 text-center nombre">
-                [Nombre Creatura][Nombre Creatura][Nombre Creatura][Nombre Creatura]
+            <div class="px-2 text-center nombre-crea-list">
+                {{ creatura.nombre_creatura }}
             </div>
             <div class="tipos pt-2 pb-1 text-center">
-                <img src="https://media.tenor.com/Pkz68vuQmikAAAAi/rock.gif" class="" draggable="false" alt="Tipo1">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI8peqMDlgiMtqwYU5VOR1L0ElXODs18k4Yg&s" class="ms-2" draggable="false" alt="Tipo2">
+                <img [src]="creatura.tipo1.icono" class="" draggable="false" [alt]="creatura.tipo1.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo1.color">
+                <img [src]="creatura.tipo2.icono" class="ms-2" draggable="false" [alt]="creatura.tipo2.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo2.color">
             </div>
         </a>
-        <div class="creador text-center mt-1 px-2">
-            Default
+        <div class="creador-crea-list text-center mt-1 px-2">
+            Creador: {{ creatura.creador }}
         </div>
     </div>
-
+    }
+    
 </div>
 
 <div class="cont-titular d-flex align-items-center"> 
@@ -41,7 +42,7 @@
             <div class="text-center">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScrT2sPvbG6inLDX0KrcaJCg5JUThKUpGV7w&s" class="my-2" draggable="false" alt="[Imagen otro Usuario]">
             </div>
-            <div class="px-1 text-center nombre">
+            <div class="px-1 text-center nombre-user-list">
                 [Nombre otro Usuario][Nombre otro Usuario][Nombre otro Usuario][Nombre otro Usuario]
             </div>
         </a>
