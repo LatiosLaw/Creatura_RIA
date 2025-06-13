@@ -25,7 +25,7 @@
               <!--ELSE-->
               <li class="nav-item">
                   <button type="button" class="btn btn-dark inicio-sesion-boton" data-bs-toggle="modal" data-bs-target="#iniciarSesionModal">
-                      Iniciar Sesión
+                    Iniciar Sesión
                   </button>
                   <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#registroModal">
                     Registrarse
@@ -46,8 +46,9 @@
         </div>
         <div class="modal-body">
           <app-login></app-login>
-          <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#registroModal">
-            Registrarse
+          <p class="d-inline">Si aun no tienes cuenta puedes </p>
+          <button type="button" class="boton-otro-modal" data-bs-toggle="modal" data-bs-target="#registroModal">
+            Registrarte
           </button>
         </div>
       </div>
@@ -63,6 +64,10 @@
         </div>
         <div class="modal-body">
           <app-registrar-usuario></app-registrar-usuario>
+          <p class="d-inline">Si ya tienes cuenta puedes </p>
+          <button type="button" class="boton-otro-modal" data-bs-toggle="modal" data-bs-target="#iniciarSesionModal">
+            Iniciar Sesión
+          </button>
         </div>
       </div>
     </div>

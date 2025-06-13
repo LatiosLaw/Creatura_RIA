@@ -16,6 +16,12 @@ input::placeholder{
     color: rgb(170, 170, 170);
 }
 
+.boton-otro-modal{
+    background: transparent;
+    border: none;
+    color: blue;
+}
+
 //pantalla grande
 @media (min-width: 991.5px) {
 

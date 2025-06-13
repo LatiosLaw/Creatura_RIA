@@ -1,4 +1,4 @@
-<div style="padding-bottom: 15px;">
+<div class="pb-3">
     <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()">
         <div class="mb-3">
           <label for="nickname" class="form-label">Nickname</label>
@@ -20,7 +20,7 @@
           />
         </div>
       
-        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Iniciar Sesión</button>
+        <button type="submit" class="btn btn-primary d-block m-auto" [disabled]="loginForm.invalid">Iniciar Sesión</button>
       </form>
 </div>
 
