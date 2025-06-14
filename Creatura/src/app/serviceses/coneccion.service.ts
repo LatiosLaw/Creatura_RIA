@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ConeccionService {
-  private url = 'http://localhost:3000/creaturas'; 
+  private url = 'http://localhost:3000/creaturas';
+  private urlUsuarios = 'http://localhost:3000/usuarios';
   private urlTipos = 'http://localhost:3000/tipos';
   private urlMovesets = 'http://localhost:3000/movesets';
   private urlHabilidades = "http://localhost:3000/habilidades";
@@ -114,5 +115,9 @@ export class ConeccionService {
 		const url2 = this.urlHabilidades + "/tipo/" + id;
 		return this.http.get(url2);
 	}
+
+  listarUsuarios(){
+    return this.http.get<any[]>(this.urlUsuarios);
+  }
 	
 }

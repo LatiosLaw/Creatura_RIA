@@ -9,19 +9,31 @@ import { ConeccionService } from '../../serviceses/coneccion.service';
 })
 export class InicioComponent implements OnInit{
   creaturas: any[] = [];
+  usuarios: any[] = [];
   constructor(private connector: ConeccionService) {}
 
-  onImgError(event: Event) {
-    const element = event.target as HTMLImageElement;
-    element.src = 'defoult.png'; // Ruta de imagen por defecto
+  onImgErrorCreatura(event: Event) {
+    const element1 = event.target as HTMLImageElement;
+    element1.src = 'defoult.png'; // Ruta de imagen por defecto
+  }
+
+  onImgErrorUsuario(event: Event) {
+    const element2 = event.target as HTMLImageElement;
+    element2.src = 'defoultUser.png'; // Ruta de imagen por defecto
   }
 
   ngOnInit(): void {
-    this.connector.listadoCreaturaConTipos().subscribe((res) => {
-      this.randomizador(res);
-      this.creaturas = res.slice(0, 20); //limitador
+    this.connector.listadoCreaturaConTipos().subscribe((res1) => {
+      this.randomizador(res1);
+      this.creaturas = res1.slice(0, 15); //limitador
       console.log(this.creaturas);
     });
+
+    this.connector.listarUsuarios().subscribe((res2) => {
+      this.randomizador(res2);
+      this.usuarios = res2.slice(0, 24); //limitador
+      console.log(this.usuarios);
+    })
   }
 
   private randomizador(array: any[]): void {

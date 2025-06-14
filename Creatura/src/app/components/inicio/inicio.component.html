@@ -10,7 +10,7 @@
     <div class="contenido-creatura m-2">
         <a>
             <div class="text-center">
-                <img [src]="creatura.imagen" (error)="onImgError($event)" alt="{{ creatura.nombre }}" class="my-2" draggable="false" alt="[Imagen Creatura]">
+                <img [src]="creatura.imagen" (error)="onImgErrorCreatura($event)" class="my-2" draggable="false" [alt]="creatura.nombre_creatura">
             </div>
             <div class="px-2 text-center nombre-crea-list">
                 {{ creatura.nombre_creatura }}
@@ -36,16 +36,16 @@
 </div>
 
 <div class="d-flex flex-wrap justify-content-around">
-    
+    @for (usuario of usuarios; track $index){
     <div class="contenido-usuario m-2">
         <a>
             <div class="text-center">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScrT2sPvbG6inLDX0KrcaJCg5JUThKUpGV7w&s" class="my-2" draggable="false" alt="[Imagen otro Usuario]">
+                <img [src]="usuario.foto" (error)="onImgErrorUsuario($event)" class="my-2" draggable="false" [alt]="usuario.nickname">
             </div>
             <div class="px-1 text-center nombre-user-list">
-                [Nombre otro Usuario][Nombre otro Usuario][Nombre otro Usuario][Nombre otro Usuario]
+                {{usuario.nickname}}
             </div>
         </a>
     </div>
-
+    }
 </div>
