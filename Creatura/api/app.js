@@ -375,9 +375,9 @@ curl -X POST http://localhost:3000/usuarios \
   }'
 */
 app.post('/usuarios', (req, res) => {
-  const { nickname, correo, foto, biografia, contraseña, tipo } = req.body;
+  const { nickname, correo, foto, biografia, contraseña} = req.body;
 
-  if (!nickname || !correo || !contraseña || !tipo) {
+  if (!nickname || !correo || !contraseña) {
     return res.status(400).json({ error: 'Datos incompletos' });
   }
 
@@ -392,7 +392,7 @@ app.post('/usuarios', (req, res) => {
     foto: foto || '',            // opcional
     biografia: biografia || '',  // opcional
     contraseña,
-    tipo
+    foto: 'usuario'
   };
   
   usuarios.push(nuevoUsuario);
