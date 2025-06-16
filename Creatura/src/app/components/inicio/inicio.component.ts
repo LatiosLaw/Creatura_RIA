@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ConeccionService } from '../../serviceses/coneccion.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-inicio',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.scss'
 })
