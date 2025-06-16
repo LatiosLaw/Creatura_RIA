@@ -29,6 +29,7 @@ export class UsuarioService {
         localStorage.setItem('usuarioActual', JSON.stringify({
           nickname: usuario.nickname,
           correo: usuario.correo,
+          biografia: usuario.biografia,
           tipo: usuario.tipo
         }));
   
