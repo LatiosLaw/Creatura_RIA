@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LocalStorageService } from '../../serviceses/local-storage.service';
 import { UsuarioService } from '../../serviceses/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registrar-usuario',
@@ -34,14 +35,40 @@ export class RegistrarUsuarioComponent {
     return pass === confirm ? null : { contrasenasNoCoinciden: true };
   }
 
+  exito(){
+    Swal.fire({
+      title: "Exito!",
+      text: "Usuario registrado correctamente!",
+      icon: "success"
+    });
+  }
+
+  error(){
+    Swal.fire({
+      title: "Error!",
+      text: "Algo ha salido mal!",
+      icon: "error"
+    });
+  }
+
   onSubmit() {
-
     if (this.registroForm.valid) {
-      const datos = this.registroForm.value;
-
+      const formValue = this.registroForm.value;
+  
+      const datos = {
+        nickname: formValue.nickname,
+        correo: formValue.correo,
+        contraseña: formValue.contrasena,          // renombrado
+        foto: formValue.fotoPerfil,                // renombrado
+        biografia: formValue.biografia,
+      };
+  
       this.usuarioService.registrarUsuario(datos).subscribe({
-        next: (res) => console.log('Usuario creado:', res),
-        error: (err) => console.error('Error al registrar:', err),
+        next: () => {
+          this.exito();
+          this.registroForm.reset();
+        },
+        error: () => this.error(),
       });
     } else {
       console.warn('Formulario inválido');

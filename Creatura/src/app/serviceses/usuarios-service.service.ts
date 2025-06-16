@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 
   export class UsuariosServiceService {
     private apiUrl = 'http://localhost:3000/usuarios';
@@ -10,5 +10,6 @@ import { Observable } from 'rxjs';
     registrarUsuario(datos: any): Observable<any> {
       return this.http.post(this.apiUrl, datos);
     }
+    
   }
   
