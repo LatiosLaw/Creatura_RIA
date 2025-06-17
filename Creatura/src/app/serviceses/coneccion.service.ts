@@ -36,10 +36,7 @@ export class ConeccionService {
    }
    eliminarCreatura(id:any){
     const url2 = this.url + "/"+id;
-    console.log(url2);
-     this.http.delete<any[]>(url2).subscribe(data => {
-      console.log(data);
-    });
+    return this.http.delete<any>(url2);
    }
    getMoveset(id:any){
     const url2 = this.urlMovesets + "/full/creatura/" + id;
