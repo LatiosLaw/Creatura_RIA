@@ -4,17 +4,45 @@ import { CommonModule } from '@angular/common';
 import { NgOptimizedImage } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import Swal from 'sweetalert2';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BarraGestorCreaturaComponent } from '../barra-gestor-creatura/barra-gestor-creatura.component';
 
 @Component({
   selector: 'app-modificar-creatura',
-  imports: [RouterOutlet,RouterLink,CommonModule, NgOptimizedImage,BarraGestorCreaturaComponent],
+  imports: [RouterOutlet,RouterLink,CommonModule,ReactiveFormsModule, FormsModule, NgOptimizedImage,BarraGestorCreaturaComponent],
   templateUrl: './modificar-creatura.component.html',
   styleUrl: './modificar-creatura.component.scss'
 })
 export class ModificarCreaturaComponent {
-  constructor(private connector: ConeccionService, private route: ActivatedRoute) {}
+  statControl = new FormControl('', [
+    Validators.required,
+    Validators.min(1),
+    Validators.max(255),
+    Validators.pattern('^[0-9]+$') // asegura que sea un número entero
+  ]);
+  datosCreaturaForm: FormGroup;
+
+  constructor(private connector: ConeccionService, private fb: FormBuilder,private route: ActivatedRoute) {
+    this.datosCreaturaForm = this.fb.group({
+      nombre: ['', Validators.required],
+      hp: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
+      atk: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
+      def: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
+      sdef: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
+      satk: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
+      spe: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
+      descripcion: ['', Validators.required],
+
+    });
+   
+  }
+  
+
+
+
+
   movesets: any[] = [];
   movesetsEli: any[] = [];
   habilidadesNew: any[] = [];
@@ -81,6 +109,33 @@ export class ModificarCreaturaComponent {
         this.habilideishon();
       }
     )
+    this.datosCreaturaForm.setValue({
+      nombre: this.creatura.nombre ,
+      hp: this.creatura.hp,
+      atk: this.creatura.atk,
+      def: this.creatura.def,
+      sdef: this.creatura.sdef,
+      satk: this.creatura.satk,
+      spe: this.creatura.spe,
+      descripcion: this.creatura.descripcion
+    });
+
+    this.datosCreaturaForm = this.fb.group({
+        nombre: ['', Validators.required],
+        hp: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
+        atk: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
+        def: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
+        sdef: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
+        satk: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
+        spe: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
+        descripcion: ['', Validators.required],
+    });
+    this.datosCreaturaForm.patchValue({
+      hp: 123
+    });
+
+
+
   }
 
   seleccionarTipo1(tipo: any): void {
@@ -179,4 +234,17 @@ export class ModificarCreaturaComponent {
  genuinaGenuinamenteAgregar(){
 
  }
+ isInvalid(controlName: string): boolean {
+  const control = this.datosCreaturaForm.get(controlName);
+  return !!(control && control.invalid && (control.dirty || control.touched));
+}
+validarRango(event: Event) {
+ /* const input = event.target as HTMLInputElement;
+  const value = parseInt(input.value, 10);
+
+  if (value > 255) input.value = '255';
+  if (value < 1) input.value = '1';*/
+}
+
+
 }

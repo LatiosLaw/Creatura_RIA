@@ -30,7 +30,7 @@
 
     
     </div>
-    <div class = "col col-Stats bg-info">
+    <div class = "col col-Stats bg-info" [formGroup]="datosCreaturaForm">
         <div class = "row justify-content-center">
             <div class = "col">
                 <div class="d-flex align-items-center gap-2">
@@ -41,7 +41,10 @@
         <div class="row text-center">
             <div class="col d-flex justify-content-center align-items-center">
               <div class="d-flex align-items-center gap-2">
-                hp: <div class="bg-success text-white m-2 p-2">{{ creatura.hp }}</div>
+                hp: <input 
+                formControlName="hp"
+                (input)="validarRango($event)"
+                class="form-control bg-success text-white m-2 p-2" type="number" min="1" max="255">
               </div>
             </div>
           
