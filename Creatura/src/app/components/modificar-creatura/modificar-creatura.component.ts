@@ -20,21 +20,19 @@ export class ModificarCreaturaComponent {
     Validators.required,
     Validators.min(1),
     Validators.max(255),
-    Validators.pattern('^[0-9]+$') // asegura que sea un número entero
   ]);
   datosCreaturaForm: FormGroup;
 
   constructor(private connector: ConeccionService, private fb: FormBuilder,private route: ActivatedRoute) {
     this.datosCreaturaForm = this.fb.group({
-      nombre: ['', Validators.required],
-      hp: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
-      atk: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
-      def: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
-      sdef: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
-      satk: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
-      spe: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
-      descripcion: ['', Validators.required],
-
+      hp: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
+      atk: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
+      satk: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
+      def: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
+      sdef: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
+      spe: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
+      descripcion: [null, [Validators.required]],
+      nombre: [null, [Validators.required]]
     });
    
   }
@@ -104,39 +102,22 @@ export class ModificarCreaturaComponent {
 
         this.mostrarCreatura2().then((resolve:any) => {
           this.cargarTipos();
+          this.datosCreaturaForm.patchValue({
+            hp: this.creatura.hp, 
+            atk: this.creatura.atk,
+            def: this.creatura.def,
+            sdef: this.creatura.sdef,
+            satk: this.creatura.spa,
+            spe: this.creatura.spe,
+            descripcion: this.creatura.descripcion,
+            nombre: this.creatura.nombre_creatura,
+          });
+
         });
         this.mostrarHabilidades();
         this.habilideishon();
       }
-    )
-    this.datosCreaturaForm.setValue({
-      nombre: this.creatura.nombre ,
-      hp: this.creatura.hp,
-      atk: this.creatura.atk,
-      def: this.creatura.def,
-      sdef: this.creatura.sdef,
-      satk: this.creatura.satk,
-      spe: this.creatura.spe,
-      descripcion: this.creatura.descripcion
-    });
-
-    this.datosCreaturaForm = this.fb.group({
-        nombre: ['', Validators.required],
-        hp: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
-        atk: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
-        def: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
-        sdef: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
-        satk: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
-        spe: ['', Validators.required,Validators.min(1),Validators.max(255), Validators.pattern('^[0-9]+$')],
-        descripcion: ['', Validators.required],
-    });
-    this.datosCreaturaForm.patchValue({
-      hp: 123
-    });
-
-
-
-  }
+    )}
 
   seleccionarTipo1(tipo: any): void {
     this.creatura.tipo1 = tipo;
@@ -174,7 +155,6 @@ export class ModificarCreaturaComponent {
       })
     });
   }
-
 
   limpiarListaHabilidades(){
 
@@ -225,13 +205,37 @@ export class ModificarCreaturaComponent {
         this.movesets.push(newMoveset);
         console.log(this.movesets);
       });
+
+      ////////////////////////////////////////////////////////
       this.habilidadesNew = [];
-      this.genuinaGenuinamenteAgregar();
+      //this.genuinaGenuinamenteAgregar();
       console.log(this.movesets);
     //moveset.habilidad.nombre_habilidad
 
  }
  genuinaGenuinamenteAgregar(){
+  const newCretura = {
+        
+        id_creatura: this.creatura.id_creatura,
+        nombre_creatura: this.datosCreaturaForm.get('nombre')?.value,
+        hp: this.datosCreaturaForm.get('hp')?.value,
+        atk: this.datosCreaturaForm.get('atk')?.value,
+        def: this.datosCreaturaForm.get('def')?.value,
+        sdef: this.datosCreaturaForm.get('sdef')?.value,
+        spa: this.datosCreaturaForm.get('satk')?.value,
+        spe: this.datosCreaturaForm.get('spe')?.value,
+        descripcion: this.datosCreaturaForm.get('descripcion')?.value,
+        id_tipo1: this.creatura.tipo1?.id_tipo,
+        id_tipo2: this.creatura.tipo2?.id_tipo,
+        imagen: "",
+        publico: this.creatura.publico
+    }
+    console.log("New Creatura:");
+    console.log(newCretura);
+
+    /////////////////////////////////////
+
+    //this.connector.actalizarCreatura(newCreatura,movesetNew);
 
  }
  isInvalid(controlName: string): boolean {
@@ -239,12 +243,14 @@ export class ModificarCreaturaComponent {
   return !!(control && control.invalid && (control.dirty || control.touched));
 }
 validarRango(event: Event) {
- /* const input = event.target as HTMLInputElement;
+  const input = event.target as HTMLInputElement;
   const value = parseInt(input.value, 10);
 
   if (value > 255) input.value = '255';
-  if (value < 1) input.value = '1';*/
+  if (value < 1) input.value = '1';
 }
+onSubmit(){
 
+}
 
 }
