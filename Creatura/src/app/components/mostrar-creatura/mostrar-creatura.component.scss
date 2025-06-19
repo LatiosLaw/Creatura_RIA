@@ -1,0 +1,32 @@
+.col-Stats{
+    max-width: 60%;
+    min-width: 60%;
+    height: auto;
+
+}
+
+.col-Img{
+    max-width: 40%;
+    min-width: 40%;
+    height: auto;
+
+
+}
+
+.img-ajustada {
+    width: 100%;       /* ocupa todo el ancho del contenedor */
+    height: auto;     /* altura fija */
+    object-fit: fill;  /* estira la imagen para rellenar */
+    display: block;    /* elimina espacios blancos debajo de la imagen */
+    aspect-ratio: 1 / 1;
+  }
+  
+  .bg-sdef{
+    background-color: deeppink;
+  }
+  .bg-spa{
+    background-color: rgb(43, 230, 255);
+  }
+  textarea {
+    resize: none;
+  }

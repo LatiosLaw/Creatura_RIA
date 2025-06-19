@@ -7,9 +7,10 @@
 
 
       <div class="col-custom bg-primary text-white m-2 p-2" *ngFor="let creatura of creaturas">
-        
+        <a class="nav-link" routerLink="/mostrarCreatura" 
+        [queryParams]= "{idCreatura:creatura.id_creatura}">
         <img [src]="creatura.imagen" (error)="onImgError($event)" alt="{{ creatura.nombre }}" class="figure-img d-block align-self-start img-ajustada">
-         <!--  <img ngSrc="defoult.jpg" fill>-->
+      </a>
           <div class = "bg-sexo">
             <figcaption class="figure-caption d-flex justify-content-between">
                 <div id = "nombreCrea">{{ creatura.nombre_creatura }}</div>
@@ -51,35 +52,8 @@
                 <div id = "creador">{{ creatura.creador }}</div>
             </figcaption>
             
-          </div>
-         <!--
-            div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  ...
-                </button>
-                <ul class="dropdown-menu">
-                  <li>
-                    <button class="dropdown-item" type="button">Modificar Creatura</button>
-                  </li>
-                  <li>
-                    <button class="dropdown-item" type="button">Publicar/Ocultar</button>
-                  </li>
-                  <li>
-                    <button class="dropdown-item" type="button">Exportar</button>
-                  </li>
-                  <li>
-                    <button class="dropdown-item" type="button">Eliminar</button>
-                  </li>
-                </ul>
-              </div>
-     
-         
-         -->
-        
-   
-        
+          </div>  
 
-        
       </div>
 
     <!-- TERMINA EL LISTADO-->
