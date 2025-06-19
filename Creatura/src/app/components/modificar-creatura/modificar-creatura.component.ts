@@ -16,11 +16,6 @@ import { BarraGestorCreaturaComponent } from '../barra-gestor-creatura/barra-ges
   styleUrl: './modificar-creatura.component.scss'
 })
 export class ModificarCreaturaComponent {
-  statControl = new FormControl('', [
-    Validators.required,
-    Validators.min(1),
-    Validators.max(255),
-  ]);
   datosCreaturaForm: FormGroup;
 
   constructor(private connector: ConeccionService, private fb: FormBuilder,private route: ActivatedRoute) {
@@ -230,12 +225,14 @@ export class ModificarCreaturaComponent {
         imagen: "",
         publico: this.creatura.publico
     }
-    console.log("New Creatura:");
+    console.log("Modificada Creatura:");
     console.log(newCretura);
 
+    console.log("Modificada Creatura´s movepool:");
+    console.log(this.movesets);
     /////////////////////////////////////
 
-    //this.connector.actalizarCreatura(newCreatura,movesetNew);
+    //this.connector.crearCreatura(newCreatura,movesetNew);
 
  }
  isInvalid(controlName: string): boolean {
