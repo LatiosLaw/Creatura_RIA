@@ -4,61 +4,52 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ConeccionService {
-  private url = 'http://localhost:3000/creaturas';
-  private urlUsuarios = 'http://localhost:3000/usuarios';
-  private urlTipos = 'http://localhost:3000/tipos';
-  private urlMovesets = 'http://localhost:3000/movesets';
-  private urlHabilidades = "http://localhost:3000/habilidades";
+  private url = 'http://localhost/Creatura_PHP/api/creatura';
+  private urlUsuarios = 'http://localhost/Creatura_PHP/api/usuario';
+  private urlTipos = 'http://localhost/Creatura_PHP/api/tipo';
+  //private urlMovesets = 'http://localhost:3000/movesets';
+  private urlHabilidades = "http://localhost/Creatura_PHP/api/habilidades";
 ///creatura/:id_creatura
   constructor(private http: HttpClient) {}
 
   // Método para crear un usuario con POST
-  altaCreatura(datos: any): Observable<any> {
+  /*altaCreatura(datos: any): Observable<any> {
     return this.http.post(this.url, datos);
-  }
+  }*/
 
   // Método para obtener usuarios con GET
 
-  listadoCreatura(): Observable<any> {
-    return this.http.get<any[]>(this.url);
-  }
   getCreatura(id:any){
-    const url2 = this.url+ "/"+id;
-     return this.http.get<any>(url2);
+    const url2 = this.url + "/retornar_creatura.php?id_creatura=" + id;
+    //retornar_creatura.php?nombre_creatura=Blastoise&creador=SYSTEM
+    return this.http.get<any>(url2);
   }
-  getCreaturaConTipos(id: any){
-    const url2 = this.urlTipos + "/creaturas/" + id;
+  getCreaturaConTipos( id: any){
+    const url2 = this.url + "/retornar_creatura.php?id_creatura=" + id;
+    //retornar_creatura.php?nombre_creatura=Blastoise&creador=SYSTEM
     return this.http.get<any>(url2);
   }
   listadoCreaturaConTipos(): Observable<any> {
-    const url2 = this.urlTipos + "/creaturas";
+    const url2 = this.url + "/listado.php";
      return this.http.get<any[]>(url2);
    }
    eliminarCreatura(id:any){
-    const url2 = this.url + "/"+id;
-    return this.http.delete<any>(url2);
+    const url2 = this.url + "/baja.php";
+    const body = '{"id_creatura":' + id +'}';
+    return this.http.post<any>(url2,body);
    }
    getMoveset(id:any){
-    const url2 = this.urlMovesets + "/full/creatura/" + id;
+    const url2 = this.url + "/retornar_habilidades.php?id_creatura=" + id;
     return this.http.get<any>(url2);
    }
 
    getHabilidadesConTipos(){
-    const url2 = this.urlHabilidades + "/CONtipo";
+    const url2 = this.urlHabilidades + "/getAll_habilidades.php";
     return this.http.get<any>(url2);
    }
 
-
-  devolberTipo(id:any): Observable<any> {
-     const url2 = this.urlTipos + "/"+id;
-     
-     return this.http.get<any[]>(url2);
-   }
    getTipos(){
-    return this.http.get<any[]>(this.urlTipos);
-   }
-   getHabilidades(){
-    return this.http.get<any[]>(this.urlHabilidades);
+    return this.http.get<any[]>(this.urlTipos+ "/retornarAll_tipos.php");
    }
 	get_Todos_Los_Tipos(){
 		return this.http.get<any>(this.urlTipos);

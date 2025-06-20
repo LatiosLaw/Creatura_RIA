@@ -156,11 +156,11 @@
         <tbody>
           <tr *ngFor="let moveset of movesets">
             <td>{{ moveset.id_habilidad }}</td>
-            <td>{{ moveset.habilidad.nombre_habilidad }}</td>
-            <td [style.backgroundColor]="'#' +  moveset.tipo.color">{{ moveset.tipo.nombre_tipo }}</td>
-            <td>{{ moveset.habilidad.potencia }}</td>
-            <td>{{ moveset.habilidad.descripcion }}</td>
-            <td>{{ moveset.habilidad.categoria_habilidad }}</td>
+            <td>{{ moveset.nombre_habilidad }}</td>
+            <td [style.backgroundColor]="'#' +  moveset.color_tipo_habilidad">{{ moveset.nombre_tipo_habilidad }}</td>
+            <td>{{ moveset.potencia }}</td>
+            <td>{{ moveset.descripcion }}</td>
+            <td>{{ moveset.categoria_habilidad }}</td>
             <td> <button class="bg-danger" (click)="eliminarHabilidad(moveset)">Eliminar</button> </td>
             
           </tr>
