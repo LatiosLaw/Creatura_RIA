@@ -10,6 +10,7 @@ import { ListadoCreaturasSystemComponent } from './components/listado-creaturas-
 import { AgregarCreaturaComponent } from './components/agregar-creatura/agregar-creatura.component';
 import { ExportarCreaturaComponent } from './components/exportar-creatura/exportar-creatura.component';
 import { MostrarCreaturaComponent } from './components/mostrar-creatura/mostrar-creatura.component';
+import { ListadoTiposComponent } from './components/listado-tipos/listado-tipos.component'
 
 export const routes: Routes = [
     { path: '', redirectTo: '/inicio', pathMatch: 'full'},
@@ -25,6 +26,7 @@ export const routes: Routes = [
     { path: 'agregarCreatura', component: AgregarCreaturaComponent },
     { path: 'exportarCreatura', component: ExportarCreaturaComponent },
     { path: 'mostrarCreatura', component: MostrarCreaturaComponent },
+    { path: 'listarTipos' , component: ListadoTiposComponent}
 
 
 

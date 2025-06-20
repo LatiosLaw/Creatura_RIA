@@ -4,42 +4,43 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ConeccionService {
-  private url = 'http://localhost/Creatura_PHP/api/creatura';
-  private urlUsuarios = 'http://localhost/Creatura_PHP/api/usuario';
-  private urlTipos = 'http://localhost/Creatura_PHP/api/tipo';
+  private url = 'http://localhost:41062/www/api';
+	private url_creatura = this.url + '/creatura';
+  private urlUsuarios = this.url+'/usuario';
+  private urlTipos = this.url+'/tipo';
   //private urlMovesets = 'http://localhost:3000/movesets';
-  private urlHabilidades = "http://localhost/Creatura_PHP/api/habilidades";
+  private urlHabilidades = this.url+"/habilidades";
 ///creatura/:id_creatura
   constructor(private http: HttpClient) {}
 
   // Método para crear un usuario con POST
   /*altaCreatura(datos: any): Observable<any> {
-    return this.http.post(this.url, datos);
+    return this.http.post(this.url_creatura datos);
   }*/
 
   // Método para obtener usuarios con GET
 
   getCreatura(id:any){
-    const url2 = this.url + "/retornar_creatura.php?id_creatura=" + id;
+    const url2 = this.url_creatura+ "/retornar_creatura.php?id_creatura=" + id;
     //retornar_creatura.php?nombre_creatura=Blastoise&creador=SYSTEM
     return this.http.get<any>(url2);
   }
   getCreaturaConTipos( id: any){
-    const url2 = this.url + "/retornar_creatura.php?id_creatura=" + id;
+    const url2 = this.url_creatura+ "/retornar_creatura.php?id_creatura=" + id;
     //retornar_creatura.php?nombre_creatura=Blastoise&creador=SYSTEM
     return this.http.get<any>(url2);
   }
   listadoCreaturaConTipos(): Observable<any> {
-    const url2 = this.url + "/listado.php";
+    const url2 = this.url_creatura+ "/listado.php";
      return this.http.get<any[]>(url2);
    }
    eliminarCreatura(id:any){
-    const url2 = this.url + "/baja.php";
+    const url2 = this.url_creatura+ "/baja.php";
     const body = '{"id_creatura":' + id +'}';
     return this.http.post<any>(url2,body);
    }
    getMoveset(id:any){
-    const url2 = this.url + "/retornar_habilidades.php?id_creatura=" + id;
+    const url2 = this.url_creatura+ "/retornar_habilidades.php?id_creatura=" + id;
     return this.http.get<any>(url2);
    }
 
@@ -52,7 +53,7 @@ export class ConeccionService {
     return this.http.get<any[]>(this.urlTipos+ "/retornarAll_tipos.php");
    }
 	get_Todos_Los_Tipos(){
-		return this.http.get<any>(this.urlTipos);
+		return this.http.get<any>(this.urlTipos+"/retornarAll_Tipos.php");
 	}
 	Alta_Tipo(nuevo_tipo:any): Observable<any>{
 		return this.http.post(this.urlTipos, nuevo_tipo);
@@ -106,6 +107,11 @@ export class ConeccionService {
 
   listarUsuarios(){
     return this.http.get<any[]>(this.urlUsuarios);
+  }
+
+  Mostar_Tipo(id:any){
+  	const url2 = this.url_creatura +"/retornar_calculo_defensivo.php?tipo1=" + id;
+	return this.http.get(url2);
   }
 	
 }

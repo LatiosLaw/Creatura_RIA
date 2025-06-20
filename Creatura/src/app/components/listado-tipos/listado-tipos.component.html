@@ -1,1 +1,38 @@
 <p>listado-tipos works!</p>
+
+<div class="d-flex flex-wrap justify-content-around">
+	@for (tipo of tipos; track $index){
+	<div class="contenido-tipo m-2">
+		<a>
+			<div class="imagen-del-tipo text-center">
+				<img [src]="url_iconos+tipo.icono" class="icon-del-tipo" draggable=false [alt]="tipo.nombre_tipo" [style.backgoundColor]="'#' + tipo.color">
+			</div>
+			<div class="nombre-del-tipo text-center" [style.backgoundColor]="'#'+tipo.color">
+				{{ tipo.nombre_tipo }}
+			</div>
+			<div class="creador-del-tipo text-center mt-1 px-2">
+				Creador: {{ tipo.creador }}
+			</div>
+			<div class="dropdown">
+				<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+					...
+				</button>
+				<ul class="dropdown-menu">
+					<li>
+						<button class="dropdown-item" type="button">Modificar Tipo</button>
+					</li>
+					<li>
+						<button class="dropdown-item" type="button" (click)="Mostrar_Tipo(tipo.id_tipo)">Mostar Tipo</button>
+					</li>
+					<li>
+						<button class="dropdown-item" type="button" (click)="Exportar_Tipo(tipo.id_tipo)">Exportar Tipo</button>
+					</li>
+					<li>
+						<button class="dropdown-item" type="button" (click)="Eliminar_Tipo(tipo.id_tipo)">Eliminar Tipo</button>
+					</li>
+				</ul>
+			</div>
+		</a>
+	</div>
+	}
+</div>
