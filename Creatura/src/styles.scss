@@ -3,6 +3,9 @@
 @use 'bootstrap-icons/font/bootstrap-icons.css';
 //@use 'animate.css/animate.min.css';
 
+body{
+    padding-top: 70px;
+}
 
 .cont-titular{
     background-color: lightslategray;
@@ -30,7 +33,7 @@
     max-height: 280px;
 }
 
-.nombre, .creador{
+.nombre-crea-list, .creador-crea-list, .nombre-user-list{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

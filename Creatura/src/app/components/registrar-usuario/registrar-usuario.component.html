@@ -1,4 +1,4 @@
-<form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="registroForm" (ngSubmit)="onSubmit()" class="pb-3">
     <!-- NICKNAME -->
     <div class="mb-3">
       <label for="nickname" class="form-label">Nickname</label>
@@ -93,7 +93,7 @@
       <textarea id="biografia" formControlName="biografia" class="form-control"></textarea>
     </div>
   
-    <button type="submit" class="btn btn-success" [disabled]="registroForm.invalid">
+    <button type="submit" class="btn btn-success d-block m-auto" [disabled]="registroForm.invalid">
       Registrarse
     </button>
   </form>

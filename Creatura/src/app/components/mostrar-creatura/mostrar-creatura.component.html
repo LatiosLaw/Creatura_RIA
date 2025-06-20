@@ -1,1 +1,43 @@
-<p>mostrar-creatura works!</p>
+<div class = "container">
+<div class = "row">
+    <div class = "col col-Img bg-danger">
+            <img [src]="creatura.imagen" (error)="onImgError($event)" alt="creaturaIMG" class="w-100  img-ajustada">
+            <div class = "row justify-content-center">
+                <div class= "col d-flex justify-content-center gap-2">
+                    <div class="btn btn-primary" [style.backgroundColor]="'#' + creatura.tipo1?.color">{{creatura.tipo1.nombre_tipo}}</div>
+                
+                    <div class="btn btn-primary" [style.backgroundColor]="'#' + creatura.tipo2?.color">{{creatura.tipo2.nombre_tipo}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <textarea id="comentario" rows="4" maxlength="200"
+                placeholder="Escriba la descripción de su Creatura"></textarea>
+            </div>
+    </div>
+    
+
+    <!--////////////////////////////////////////-->
+    <div class = "col col-Img bg-info">
+        <div class="row">
+            <div class="col justify-content-start gap-2">
+                <div class = "btn btn-primary bg-success">{{creatura.nombre_creatura}}</div>
+                <div class = "btn btn-primary bg-danger">{{creatura.creador}}</div>
+            </div>
+            <div class="col justify-content-end gap-2">
+                <div class = "btn btn-primary bg-success">Puntuar: 0/0</div>
+            </div>
+        </div>
+        <div class="row"></div>
+        <div class="row"></div>
+        <div class="row"></div>
+        <div class="row"></div>
+        <div class="row"></div>
+        <div class="row"></div>
+        <div class="row"></div>
+
+
+    </div>
+    
+</div>
+</div>
+

@@ -1,0 +1,196 @@
+import { Component,OnInit  } from '@angular/core';
+import { ConeccionService } from '../../serviceses/coneccion.service';
+import { CommonModule } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import Swal from 'sweetalert2';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { BarraGestorCreaturaComponent } from '../barra-gestor-creatura/barra-gestor-creatura.component';
+
+@Component({
+  selector: 'app-agregar-creatura',
+  imports: [RouterOutlet,RouterLink,CommonModule,ReactiveFormsModule, FormsModule, NgOptimizedImage,BarraGestorCreaturaComponent],
+  templateUrl: './agregar-creatura.component.html',
+  styleUrl: './agregar-creatura.component.scss'
+})
+export class AgregarCreaturaComponent {
+  datosCreaturaForm: FormGroup;
+  creatura: any;
+  idTipo1:any;
+  idTipo2:any;
+  tipo1:any;
+  tipo2:any;
+  movesets: any[] = [];
+  idCreatura:any;
+  habilidades: any[] =[];
+  tipos1: any[] = [];
+  tipos2: any[] = [];
+  typeNull = {
+    id_tipo: "0",
+    nombre_tipo: "null",
+    color :"eaeae5",
+    icono : "no.png",
+    creador : "tuvieja"
+  }
+
+
+
+  habilidadesNew: any[] = [];
+  imagenCreatura = "defoult.jpg";
+  constructor(private connector: ConeccionService, private fb: FormBuilder,private route: ActivatedRoute) {
+    this.datosCreaturaForm = this.fb.group({
+      hp: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
+      atk: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
+      satk: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
+      def: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
+      sdef: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
+      spe: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
+      descripcion: [null, [Validators.required]],
+      nombre: [null, [Validators.required]]
+    });
+   
+  }
+
+  onImgError(event: Event) {
+    const element = event.target as HTMLImageElement;
+    element.src = 'defoult.png'; // Ruta de imagen por defecto
+  }
+  ngOnInit(): void {
+    this.cargarTipos();
+    this.habilideishon();
+    this.idTipo1 = 1;
+    this.idTipo2 = 0;
+    this.tipo1 = this.typeNull;
+    this.tipo2 = this.typeNull;
+
+    this.datosCreaturaForm.patchValue({
+      hp: 1, 
+      atk: 1,
+      def: 1,
+      sdef: 1,
+      satk: 1,
+      spe: 1,
+    });
+
+  }
+
+  cargarTipos(){
+    this.connector.getTipos().subscribe(data => {
+      console.log(data);
+    
+      this.tipos1 = [...data];
+      this.tipos2 = [...data];
+      this.tipos2.push(this.typeNull);
+      this.limpiarListaDeTipos()
+    })
+  }
+  limpiarListaDeTipos(){
+    console.log(this.tipos1);
+    console.log(this.creatura);
+    
+    const idTipo1 = this.tipo1.id_tipo;
+    const idTipo2 = this.tipo2.id_tipo;
+
+    this.tipos1 = this.tipos1.filter(tipo => tipo.id_tipo !== idTipo1 && tipo.id_tipo !== idTipo2);
+    this.tipos2 = this.tipos2.filter(tipo => tipo.id_tipo !== idTipo1 && tipo.id_tipo !== idTipo2);
+
+  }
+  seleccionarTipo1(tipo: any): void {
+    this.tipo1 = tipo;
+    this.cargarTipos();
+
+  }
+  seleccionarTipo2(tipo: any): void {
+    this.tipo2 = tipo;
+    this.cargarTipos();
+
+  }
+  cargarHabilidades2():Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.connector.getHabilidadesConTipos().subscribe(data => {
+        console.log("getHabilidades");
+        console.log(data);
+        this.habilidades = data;
+        resolve();
+      })
+    });
+  }
+
+  limpiarListaHabilidades(){
+
+    this.movesets.forEach(element => {
+      this.habilidades = this.habilidades.filter(habilidad => habilidad.id_habilidad !== element.id_habilidad);
+    });
+  }
+
+  habilideishon(){
+    this.cargarHabilidades2().then((resolve:any) => {
+      this.limpiarListaHabilidades();
+    });
+  }
+
+  eliminarHabilidad(movesetAeli:any){
+    //this.movesets.splice(movesetAeli.id_moveset,1);
+    this.movesets = this.movesets.filter(movesett => movesett.id_habilidad !== movesetAeli.id_habilidad);
+    console.log(this.movesets);
+    this.habilideishon();
+  }
+  eliminarHabilidadDeNew(habilidadd:any){
+    this.habilidadesNew = this.habilidadesNew.filter(habilidad => habilidad.id_habilidad !== habilidadd.id_habilidad);
+    this.habilidades.push(habilidadd);
+ }
+  agregarHabilidad(habilidadd:any){
+    this.habilidades = this.habilidades.filter(habilidad => habilidad.id_habilidad !== habilidadd.id_habilidad);
+    this.habilidadesNew.push(habilidadd);
+ }
+ genuinamenteAgregar(){
+  this.habilidadesNew.forEach(element => {
+
+    this.movesets.push(element);
+    console.log(this.movesets);
+  });
+
+  ////////////////////////////////////////////////////////
+  this.habilidadesNew = [];
+  //this.genuinaGenuinamenteAgregar();
+  
+//moveset.habilidad.nombre_habilidad
+
+}
+ genuinaGenuinamenteAgregar(){
+  const newCretura = {
+        
+        //id_creatura: this.creatura.id_creatura,
+        nombre_creatura: this.datosCreaturaForm.get('nombre')?.value,
+        hp: this.datosCreaturaForm.get('hp')?.value,
+        atk: this.datosCreaturaForm.get('atk')?.value,
+        def: this.datosCreaturaForm.get('def')?.value,
+        sdef: this.datosCreaturaForm.get('sdef')?.value,
+        spa: this.datosCreaturaForm.get('satk')?.value,
+        spe: this.datosCreaturaForm.get('spe')?.value,
+        descripcion: this.datosCreaturaForm.get('descripcion')?.value,
+        id_tipo1: this.tipo1,
+        id_tipo2: this.tipo2,
+        imagen: "",
+        publico: 0
+    }
+    console.log("New Creatura:");
+    console.log(newCretura);
+
+    /////////////////////////////////////
+    console.log("New Creatura's Movepool");
+    console.log(this.movesets);
+    //this.connector.actalizarCreatura(newCreatura,movesetNew);
+
+ }
+ validarRango(event: Event) {
+  const input = event.target as HTMLInputElement;
+  const value = parseInt(input.value, 10);
+
+  if (value > 255) input.value = '255';
+  if (value < 1) input.value = '1';
+}
+
+}

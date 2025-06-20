@@ -375,9 +375,9 @@ curl -X POST http://localhost:3000/usuarios \
   }'
 */
 app.post('/usuarios', (req, res) => {
-  const { nickname, correo, foto, biografia, contraseña, tipo } = req.body;
+  const { nickname, correo, foto, biografia, contraseña} = req.body;
 
-  if (!nickname || !correo || !contraseña || !tipo) {
+  if (!nickname || !correo || !contraseña) {
     return res.status(400).json({ error: 'Datos incompletos' });
   }
 
@@ -392,7 +392,7 @@ app.post('/usuarios', (req, res) => {
     foto: foto || '',            // opcional
     biografia: biografia || '',  // opcional
     contraseña,
-    tipo
+    foto: 'usuario'
   };
   
   usuarios.push(nuevoUsuario);
@@ -744,7 +744,7 @@ let habilidades = [
     id_habilidad: 6,
     nombre_habilidad: "Orden de defender",
     id_tipo_habilidad: 20,
-    descripcion: "Ordena a sus peones que mueran por ella.",
+    descripcion: "Ordena a sus peones a que mueran por ella.",
     categoria_habilidad: "Estado",
     potencia: 0,
     creador: "Mr.Dr.Admin"
@@ -753,13 +753,33 @@ let habilidades = [
     id_habilidad: 7,
     nombre_habilidad: "Guillotina",
     id_tipo_habilidad: 4,
-    descripcion: "Comboca una gogante guillotina para decapitar a su oponente.",
+    descripcion: "Comboca una gigante guillotina para decapitar a su oponente.",
     categoria_habilidad: "Fisico",
     potencia: 170,
     creador: "Mr.Dr.Admin"
   }
 ];
+let habulidadesConTipos = habilidades.map(h => {
+  let tipo = tipos.find(tipo => tipo.id_tipo === h.id_tipo_habilidad);
 
+
+  return {
+    ...h,
+    tipo: tipo || null,
+  };
+});
+
+function setearHabulidadesConTiposConTipos(){
+  habulidadesConTipos = habilidades.map(h => {
+    const tipo = tipos.find(tipo => tipo.id_tipo === h.id_tipo_habilidad);
+
+  
+    return {
+      ...h,
+      tipo: tipo || null
+    };
+  });
+}
 //ALTA
 /*
 curl -X POST http://localhost:3000/habilidades \
@@ -904,6 +924,13 @@ app.get('/habilidades/tipo/:id_tipo_habilidad', (req, res) => {
   const resultados = habilidades.filter(h => h.id_tipo_habilidad === id);
   res.json(resultados);
 });
+
+app.get('/habilidades/CONtipo', (req, res) => {
+  setearHabulidadesConTiposConTipos();
+  res.json(habulidadesConTipos);
+  
+});
+//setearHabulidadesConTiposConTipos
 
 ///////////////////////////////////////////////////////////////////
 // FIN SECCION TIPOS //////////////////////////////////////////////

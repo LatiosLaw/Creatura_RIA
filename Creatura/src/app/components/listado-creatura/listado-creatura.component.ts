@@ -28,8 +28,15 @@ export class ListadoCreaturaComponent implements OnInit{
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        this.connector.eliminarCreatura(idCreatura);
-        this.cargarCreaturasLista();
+        this.connector.eliminarCreatura(idCreatura).subscribe({
+          next: () => {
+            this.cargarCreaturasLista(); // recarga el listado
+            Swal.fire("Eliminada", "La creatura ha sido eliminada.", "success");
+          },
+          error: () => {
+            Swal.fire("Error", "No se pudo eliminar la creatura.", "error");
+          }
+        });
       }
     });
     

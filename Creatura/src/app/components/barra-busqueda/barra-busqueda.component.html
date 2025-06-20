@@ -18,21 +18,25 @@
             </form>
 
             <ul class="navbar-nav align-items-center" id="navbarList">
-              <!--IF usuario logueado-->
-              <li class="nav-item campo-nu">
-                  <span class="nav-link nombre-usuario">Nickname usuario</span>
+
+              <!-- Si hay usuario -->
+              <li class="nav-item campo-nu" *ngIf="usuarioActual">
+                <button class="btn btn-outline-light ms-2"><a class="nav-link" routerLink="perfil">Perfil</a></button>
+                <button class="btn btn-outline-light ms-2" (click)="salir()">Salir</button>
               </li>
-              <!--ELSE-->
-              <li class="nav-item">
-                  <button type="button" class="btn btn-dark inicio-sesion-boton" data-bs-toggle="modal" data-bs-target="#iniciarSesionModal">
-                      Iniciar Sesión
-                  </button>
-                  <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#registroModal">
-                    Registrarse
-                  </button>
+            
+              <!-- Si NO hay usuario -->
+              <li class="nav-item" *ngIf="!usuarioActual">
+                <button type="button" class="btn btn-dark inicio-sesion-boton me-2" data-bs-toggle="modal" data-bs-target="#iniciarSesionModal">
+                  Iniciar Sesión
+                </button>
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#registroModal">
+                  Registrarse
+                </button>
               </li>
-              <!--END ELSE-->
+            
             </ul>
+            
         </div>
     </div>
 </nav>
@@ -46,8 +50,9 @@
         </div>
         <div class="modal-body">
           <app-login></app-login>
-          <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#registroModal">
-            Registrarse
+          <p class="d-inline">Si aun no tienes cuenta puedes </p>
+          <button type="button" class="boton-otro-modal" data-bs-toggle="modal" data-bs-target="#registroModal">
+            Registrarte
           </button>
         </div>
       </div>
@@ -63,6 +68,10 @@
         </div>
         <div class="modal-body">
           <app-registrar-usuario></app-registrar-usuario>
+          <p class="d-inline">Si ya tienes cuenta puedes </p>
+          <button type="button" class="boton-otro-modal" data-bs-toggle="modal" data-bs-target="#iniciarSesionModal">
+            Iniciar Sesión
+          </button>
         </div>
       </div>
     </div>
