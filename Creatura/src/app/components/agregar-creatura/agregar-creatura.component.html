@@ -20,15 +20,12 @@
   <div class = "container bg-primary">
    <div class = "row">
       <div class = "col col-Img bg-danger">
-         <div class= "contendoorImagen mt-3 mb-3">
+        <div class="contendoorImagen mt-3 mb-3">
           <div class="mb-3">
-              <input id="imegenCreatura" type="file" class="form-control" />
-          <!--(change)="onFileChange($event)"-->
+            <input id="imegenCreatura" type="file" class="form-control" (change)="onFileChange($event)" />
           </div>
-              <img [src]="imagenCreatura" (error)="onImgError($event)" alt="creaturaIMG" class="w-100  img-ajustada">
-          
-           <!--  <img ngSrc="defoult.jpg" fill>-->
-      </div>
+          <img [src]="imagenCreatura" (error)="onImgError($event)" alt="creaturaIMG" class="w-100 img-ajustada">
+        </div>
   
       
       </div>
@@ -159,7 +156,7 @@
             <tr *ngFor="let moveset of movesets">
               <td>{{ moveset.id_habilidad }}</td>
               <td>{{ moveset.nombre_habilidad }}</td>
-              <td [style.backgroundColor]="'#' +  moveset.tipo.color">{{ moveset.tipo.nombre_tipo }}</td>
+              <td [style.backgroundColor]="'#' +   moveset.color_tipo_habilidad">{{ moveset.nombre_tipo_habilidad }}</td>
               <td>{{ moveset.potencia }}</td>
               <td>{{ moveset.descripcion }}</td>
               <td>{{ moveset.categoria_habilidad }}</td>

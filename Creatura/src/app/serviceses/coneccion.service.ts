@@ -12,12 +12,10 @@ export class ConeccionService {
 ///creatura/:id_creatura
   constructor(private http: HttpClient) {}
 
-  // Método para crear un usuario con POST
-  /*altaCreatura(datos: any): Observable<any> {
-    return this.http.post(this.url, datos);
-  }*/
+  CrearCreatura(datos: any): Observable<any> {
+    return this.http.post(this.url + "/alta.php", datos);
+  }
 
-  // Método para obtener usuarios con GET
 
   getCreatura(id:any){
     const url2 = this.url + "/retornar_creatura.php?id_creatura=" + id;

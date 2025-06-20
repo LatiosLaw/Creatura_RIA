@@ -18,6 +18,7 @@ import { BarraGestorCreaturaComponent } from '../barra-gestor-creatura/barra-ges
 export class AgregarCreaturaComponent {
   datosCreaturaForm: FormGroup;
   creatura: any;
+  creador: any;
   idTipo1:any;
   idTipo2:any;
   tipo1:any;
@@ -39,6 +40,7 @@ export class AgregarCreaturaComponent {
 
   habilidadesNew: any[] = [];
   imagenCreatura = "defoult.jpg";
+  imagenCreatura2:any;
   constructor(private connector: ConeccionService, private fb: FormBuilder,private route: ActivatedRoute) {
     this.datosCreaturaForm = this.fb.group({
       hp: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
@@ -58,6 +60,8 @@ export class AgregarCreaturaComponent {
     element.src = 'defoult.png'; // Ruta de imagen por defecto
   }
   ngOnInit(): void {
+    this.creador = "token"
+    this.imagenCreatura = "defoult.png"
     this.cargarTipos();
     this.habilideishon();
     this.idTipo1 = 1;
@@ -112,7 +116,7 @@ export class AgregarCreaturaComponent {
       this.connector.getHabilidadesConTipos().subscribe(data => {
         console.log("getHabilidades");
         console.log(data);
-        this.habilidades = data;
+        this.habilidades = data.habilidades;
         resolve();
       })
     });
@@ -171,10 +175,13 @@ export class AgregarCreaturaComponent {
         spa: this.datosCreaturaForm.get('satk')?.value,
         spe: this.datosCreaturaForm.get('spe')?.value,
         descripcion: this.datosCreaturaForm.get('descripcion')?.value,
-        id_tipo1: this.tipo1,
-        id_tipo2: this.tipo2,
-        imagen: "",
-        publico: 0
+        id_tipo1: this.tipo1.id_tipo,
+        id_tipo2: this.tipo2.id_tipo,
+        imagen: this.imagenCreatura,
+        publico: 0,
+        creador: "token",
+        habilidades: this.movesets,
+        
     }
     console.log("New Creatura:");
     console.log(newCretura);
@@ -182,7 +189,14 @@ export class AgregarCreaturaComponent {
     /////////////////////////////////////
     console.log("New Creatura's Movepool");
     console.log(this.movesets);
-    //this.connector.actalizarCreatura(newCreatura,movesetNew);
+    this.connector.CrearCreatura(newCretura).subscribe({
+      next: () => {
+        Swal.fire("Eliminada", "La creatura ha sido eliminada.", "success");
+      },
+     error: () => {
+        Swal.fire("Error", "No se pudo eliminar la creatura.", "error");
+     }
+    })
 
  }
  validarRango(event: Event) {
@@ -192,5 +206,22 @@ export class AgregarCreaturaComponent {
   if (value > 255) input.value = '255';
   if (value < 1) input.value = '1';
 }
+onFileChange(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+    const reader = new FileReader();
 
+    reader.onload = () => {
+      this.imagenCreatura = reader.result as string;
+    };
+
+    reader.readAsDataURL(file); 
+    console.log(file);
+    this.imagenCreatura2 = file;
+    console.log("imagenCreatura2");
+    console.log(this.imagenCreatura2);
+  }
 }
+}
+
