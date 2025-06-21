@@ -271,7 +271,7 @@ export class ModificarCreaturaComponent {
       id_tipo2: this.creatura.tipo2.id_tipo,
       imagen: this.imagenCreatura,
       publico: 0,
-      creador: "token",
+      creador: this.creatura.creador,
       habilidades: this.movesets
   }
     console.log("Modificada Creatura:");
