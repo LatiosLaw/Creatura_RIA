@@ -54,4 +54,13 @@ retornarCreaturasUsuario( creador: any){
     return this.http.get<any>(url_completa);
   }
 
+  borrarUsuario(nickname: string): Observable<any> {
+  const body = {
+    nickname,
+    metodo: 'DELETE'
+  };
+
+  return this.http.post(`${this.urlUsuarios}/baja.php`, body);
+}
+
 }

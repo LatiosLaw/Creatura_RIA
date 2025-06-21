@@ -4,7 +4,12 @@
   Correo : {{ informacion_usuario.usuario.correo }}<br>
   Biografia : {{ informacion_usuario.usuario.biografia }}<br>
   <img [src]="informacion_usuario.usuario.foto" style="max-width: 150px; max-height: 150px;"><br>
-
+<div *ngIf="informacion_usuario.usuario.nickname == usuarioLogueado.nickname">
+  <button class="btn btn-outline-light ms-2">
+    <a class="nav-link" [routerLink]="['/modificar_usuario', usuarioLogueado.nickname]">Modificar</a>
+    <a class="nav-link text-danger" (click)="eliminarUsuario()">Eliminar</a>
+  </button>
+</div>
 </div>
 <div *ngIf="creaturas?.creaturas && creaturas.creaturas.length > 0">
 ============================ CREATURAS =================================<br>
