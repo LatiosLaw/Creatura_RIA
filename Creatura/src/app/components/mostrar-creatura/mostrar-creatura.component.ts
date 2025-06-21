@@ -17,22 +17,60 @@ import { BarraGestorCreaturaComponent } from '../barra-gestor-creatura/barra-ges
 })
 export class MostrarCreaturaComponent {
   constructor(private connector: ConeccionService,private route: ActivatedRoute) {
+    const usuarioData = localStorage.getItem('usuarioActual');
+    if (usuarioData) {
+      this.usuarioActual = JSON.parse(usuarioData);
+    }
   }
   creatura:any;
+  barraRateBlock:boolean = false;
   idCreatura:any;
+  usuarioActual:any;
   movesets: any[] = [];
-
+  rating: number = 0;
+  stars: number[] = [1, 2, 3, 4, 5];
+  creturaRating = 0;
   cargarCreatura(){
       this.connector.getCreaturaConTipos(this.idCreatura).subscribe(data => {
         console.log(data);
-          this.creatura = data;
+        this.creatura = {
+          id_creatura: data.creatura.id_creatura,
+          nombre_creatura: data.creatura.nombre_creatura,
+          id_tipo1: data.creatura.id_tipo1,
+          id_tipo2: data.creatura.id_tipo2,
+          descripcion: data.creatura.descripcion,
+          hp: data.creatura.hp,
+          atk: data.creatura.atk,
+          def: data.creatura.def,
+          spa: data.creatura.spa,
+          sdef: data.creatura.sdef,
+          spe: data.creatura.spe,
+          creador: data.creatura.creador,
+          imagen: data.creatura.imagen,
+          rating: data.creatura.rating_promedio,
+          tipo1:{
+            id_tipo: data.creatura.tipo1.id_tipo,
+            nombre_tipo: data.creatura.tipo1.nombre_tipo,
+            color: data.creatura.tipo1.color,
+            icono: data.creatura.tipo1.icono,
+            creador: data.creatura.tipo1.creador,
+          },
+          tipo2:{
+            id_tipo: data.creatura.tipo2.id_tipo,
+            nombre_tipo: data.creatura.tipo2.nombre_tipo,
+            color: data.creatura.tipo2.color,
+            icono: data.creatura.tipo2.icono,
+            creador: data.creatura.tipo2.creador,
+          }
+        };
+        this.creturaRating = this.creatura.rating;
     });
   }
   cargarMoveset(){
     this.connector.getMoveset(this.idCreatura).subscribe(data => {
       console.log("get Moveset");
       console.log(data);
-      this.movesets = data;
+      this.movesets = data.habilidades;
     })
   }
   ngOnInit(): void {
@@ -41,11 +79,46 @@ export class MostrarCreaturaComponent {
         this.idCreatura = params['idCreatura'];
       })
    this.cargarCreatura();
+   this.cargarMoveset();
+   const datos ={
+      id_creatura: this.idCreatura,
+      usuario: this.usuarioActual.nickname
+   }
+   this.chequearSiRateo(datos);
+
   }
   onImgError(event: Event) {
     const element = event.target as HTMLImageElement;
     element.src = 'defoult.png'; // Ruta de imagen por defecto
   }
+  ratingMomento(value: number): void {
+    if(!this.barraRateBlock){
+      this.barraRateBlock = true;
+      this.rating = value;
 
-
+    const datos = {
+      id_creatura: this.idCreatura,
+      usuario: this.usuarioActual.nickname,
+      puntaje: this.rating
+    }
+    this.connector.modificarCalificacion(datos).subscribe(params => {
+      this.creturaRating = params.puntaje;
+    })
+    console.log('Rating seleccionado:', this.rating);
+    }
+    
+  }
+  chequearSiRateo(datos:any){
+    this.connector.chequearSiRateo(datos).subscribe(params => {
+      console.log("rateo chequeacion momento");
+      console.log(params);
+      if(params.ok == 0){
+        this.barraRateBlock = false;
+      }else{
+        console.log(params.ok.estrellas);
+        this.barraRateBlock = true;
+        this.rating = params.ok.estrellas;
+      }
+    })
+  }
 }

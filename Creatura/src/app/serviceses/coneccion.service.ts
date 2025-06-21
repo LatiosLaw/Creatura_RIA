@@ -18,7 +18,16 @@ export class ConeccionService {
   modificarCreatura(datos:any){
 	return this.http.post(this.url + "/modificacion.php", datos);
   }
-
+  modificarCalificacion(datos:any){
+	const url2 = this.url + "/rating.php";
+    const body = datos;
+    return this.http.post<any>(url2,body);
+  }
+  chequearSiRateo(datos:any){
+	const url2 = this.url + "/devolverSiRateo.php";
+    const body = datos;
+    return this.http.post<any>(url2,body);
+  }
   getCreatura(id:any){
     const url2 = this.url + "/retornar_creatura.php?id_creatura=" + id;
     //retornar_creatura.php?nombre_creatura=Blastoise&creador=SYSTEM

@@ -1,4 +1,4 @@
-<div class = "container">
+<div class = "container ngif" *ngIf="creatura">
 <div class = "row">
     <div class = "col col-Img bg-danger">
             <img [src]="creatura.imagen" (error)="onImgError($event)" alt="creaturaIMG" class="w-100  img-ajustada">
@@ -11,30 +11,126 @@
             </div>
             <div class="row">
                 <textarea id="comentario" rows="4" maxlength="200"
-                placeholder="Escriba la descripción de su Creatura"></textarea>
+                placeholder="Escriba la descripción de su Creatura" [value] = "creatura.descripcion"></textarea>
             </div>
     </div>
     
 
     <!--////////////////////////////////////////-->
-    <div class = "col col-Img bg-info">
-        <div class="row">
-            <div class="col justify-content-start gap-2">
-                <div class = "btn btn-primary bg-success">{{creatura.nombre_creatura}}</div>
-                <div class = "btn btn-primary bg-danger">{{creatura.creador}}</div>
+    <div class = "col col-Stats bg-info">
+        <div class = "row justify-content-start">
+            <div class = "col">
+                <div class="d-flex align-items-center gap-2">
+                    Nombre:<input type="text" class="bg-success text-white m-2 p-2" maxlength="30" [value] = "creatura.nombre_creatura"> 
+                </div>
             </div>
-            <div class="col justify-content-end gap-2">
-                <div class = "btn btn-primary bg-success">Puntuar: 0/0</div>
+            <div class="col">
+                Creador: {{creatura.creador}}
+            </div>
+            <div class="col">
+                <div class="d-flex align-items-center ">
+                    Calificá:  
+                    <i *ngFor="let star of stars; index as i"
+                       class="bi"
+                       [ngClass]="{
+                         'bi-star-fill text-warning': i < rating,
+                         'bi-star text-secondary': i >= rating,
+                         'cursor-pointer': !barraRateBlock,
+                         'opacity-50': barraRateBlock
+                       }"
+                       [style.cursor]="barraRateBlock ? 'default' : 'pointer'"
+                       (click)="ratingMomento(i + 1)"
+                       style="font-size: 2rem; cursor: pointer;">
+                    </i>
+                  </div>
+                  <div class="col">rating: "{{creturaRating}}"</div>
             </div>
         </div>
-        <div class="row"></div>
-        <div class="row"></div>
-        <div class="row"></div>
-        <div class="row"></div>
-        <div class="row"></div>
-        <div class="row"></div>
-        <div class="row"></div>
+        <div class="row text-center">
+            <div class="col d-flex justify-content-start align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                hp: <input 
+                
+                class="form-control bg-success text-white m-2 p-2" type="number" min="1" max="255" [value] = "creatura.hp">
+              </div>
+            </div>
+            <div class="w-100"></div>
+            <div class="col d-flex justify-content-start r align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                atk: <input 
+               
+                class="form-control bg-danger text-white m-2 p-2" type="number" min="1" max="255" [value] = "creatura.atk">
+              </div>
+            </div>
+            <div class="w-100"></div>
+            <div class="col d-flex justify-content-start  align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                def: <input 
+                
+                class="form-control bg-primary text-white m-2 p-2" type="number" min="1" max="255" [value] = "creatura.def">
+              </div>
+            </div>
+          
+            <div class="w-100"></div>
+          
+            <div class="col d-flex justify-content-start  align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                spa: <input 
+               
+                class="form-control bg-spa text-white m-2 p-2" type="number" min="1" max="255" [value] = "creatura.spa">
+              </div>
+            </div>
+            <div class="w-100"></div>
+            <div class="col d-flex justify-content-start  align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                  sdef: <input 
+                    
+                class="form-control bg-sdef text-white m-2 p-2" type="number" min="1" max="255" [value] = "creatura.sdef">
+              </div>
+            </div>
+            <div class="w-100"></div>
+            <div class="col d-flex justify-content-start  align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                spe: <input 
+               
+                class="form-control bg-warning text-white m-2 p-2" type="number" min="1" max="255" [value] = "creatura.spe">
+              </div>
+            </div>
+          </div>
+          
+    <div class = "row">
+        
+    </div>
+    <div class = "row">
+        
 
+    </div>
+    <div class = "row">
+      <table class="table table-bordered">
+        <thead class= "table-dark">
+          <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Potencia</th>
+            <th>Descricion</th>
+            <th>Caregoria</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let moveset of movesets">
+            <td>{{ moveset.id_habilidad }}</td>
+            <td>{{ moveset.nombre_habilidad }}</td>
+            <td [style.backgroundColor]="'#' +  moveset.color_tipo_habilidad">{{ moveset.nombre_tipo_habilidad }}</td>
+            <td>{{ moveset.potencia }}</td>
+            <td>{{ moveset.descripcion }}</td>
+            <td>{{ moveset.categoria_habilidad }}</td>
+            
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
 
     </div>
     

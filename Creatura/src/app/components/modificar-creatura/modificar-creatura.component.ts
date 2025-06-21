@@ -312,14 +312,14 @@ onFileChange(event: Event): void {
     const reader = new FileReader();
 
     reader.onload = () => {
-      this.imagenCreatura = reader.result as string;
+      //if(condicional para la extencion del archivo){
+        this.imagenCreatura = reader.result as string;
+      //}
+      
     };
 
     reader.readAsDataURL(file); 
     console.log(file);
-    this.imagenCreatura2 = file;
-    console.log("imagenCreatura2");
-    console.log(this.imagenCreatura2);
   }
 }
 }

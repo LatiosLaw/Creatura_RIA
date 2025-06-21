@@ -23,6 +23,7 @@ export class AgregarCreaturaComponent {
   idTipo2:any;
   tipo1:any;
   tipo2:any;
+  usuarioActual:any;
   movesets: any[] = [];
   idCreatura:any;
   habilidades: any[] =[];
@@ -42,6 +43,10 @@ export class AgregarCreaturaComponent {
   imagenCreatura = "defoult.jpg";
   imagenCreatura2:any;
   constructor(private connector: ConeccionService, private fb: FormBuilder,private route: ActivatedRoute) {
+    const usuarioData = localStorage.getItem('usuarioActual');
+    if (usuarioData) {
+      this.usuarioActual = JSON.parse(usuarioData);
+    }
     this.datosCreaturaForm = this.fb.group({
       hp: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
       atk: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
@@ -179,7 +184,7 @@ export class AgregarCreaturaComponent {
         id_tipo2: this.tipo2.id_tipo,
         imagen: this.imagenCreatura,
         publico: 0,
-        creador: "token",
+        creador: this.usuarioActual.nickname,
         habilidades: this.movesets,
         
     }
