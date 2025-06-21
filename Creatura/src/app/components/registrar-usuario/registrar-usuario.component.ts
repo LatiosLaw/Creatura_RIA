@@ -13,16 +13,15 @@ import Swal from 'sweetalert2';
 })
 export class RegistrarUsuarioComponent {
   registroForm: FormGroup;
+  imagen_usuario = "";
 
   constructor(private fb: FormBuilder, 
-    private usuarioService : UsuarioService,
-    private localStorage: LocalStorageService) {
+    private usuarioService : UsuarioService) {
     this.registroForm = this.fb.group({
       nickname: ['', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
       contrasena: ['', [Validators.required, Validators.minLength(8)]],
       verificarContrasena: ['', Validators.required],
-      fotoPerfil: [null],
       biografia: [''],
     }, {
       validators: this.contrasenasIguales
@@ -59,7 +58,7 @@ export class RegistrarUsuarioComponent {
         nickname: formValue.nickname,
         correo: formValue.correo,
         contraseña: formValue.contrasena,          // renombrado
-        foto: formValue.fotoPerfil,                // renombrado
+        foto: this.imagen_usuario,          // renombrado
         biografia: formValue.biografia,
       };
   
@@ -75,10 +74,22 @@ export class RegistrarUsuarioComponent {
     }
   }
 
-  onFileChange(event: any) {
-    const file = event.target.files?.[0];
-    if (file) {
-      this.registroForm.patchValue({ fotoPerfil: file });
-    }
+  onFileChange(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      this.imagen_usuario = reader.result as string;
+    };
+
+    reader.readAsDataURL(file); 
+
+    console.log("imagen uysuaroi :");
+    console.log(this.imagen_usuario);
+
   }
+}
+
 }
