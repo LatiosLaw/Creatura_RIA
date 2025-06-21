@@ -17,7 +17,14 @@ import { BarraGestorCreaturaComponent } from '../barra-gestor-creatura/barra-ges
 })
 export class ModificarCreaturaComponent {
   datosCreaturaForm: FormGroup;
-
+  typeNull = {
+    id_tipo: "0",
+    nombre_tipo: "null",
+    color :"eaeae5",
+    icono : "no.png",
+    creador : "tuvieja"
+  }
+  
   constructor(private connector: ConeccionService, private fb: FormBuilder,private route: ActivatedRoute) {
     this.datosCreaturaForm = this.fb.group({
       hp: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
@@ -31,7 +38,8 @@ export class ModificarCreaturaComponent {
     });
    
   }
-  
+  imagenCreatura = "defoult.jpg";
+  imagenCreatura2:any;
   movesets: any[] = [];
   movesets2: any[] = [];
 
@@ -50,8 +58,15 @@ export class ModificarCreaturaComponent {
   cargarTipos(){
     this.connector.getTipos().subscribe(data => {
       console.log(data);
-      this.tipos1 = data;
-      this.tipos2 = data;
+      this.tipos1 = [...data];
+      this.tipos2 = [...data];
+      if(!(this.creatura.tipo2?.id_tipo > 0)){
+        //console.log("//////////////////////////////////////////cargarTipos//////////////////////////////////////////");
+        //console.log(this.creatura.tipo2);
+        this.creatura.tipo2 = this.typeNull;
+      }else{
+        this.tipos2.push(this.typeNull);
+      }
       this.limpiarListaDeTipos()
     })
   }
@@ -93,9 +108,16 @@ export class ModificarCreaturaComponent {
               color: data.creatura.tipo1.color,
               icono: data.creatura.tipo1.icono,
               creador: data.creatura.tipo1.creador,
+            },
+            tipo2:{
+              id_tipo: data.creatura.tipo2.id_tipo,
+              nombre_tipo: data.creatura.tipo2.nombre_tipo,
+              color: data.creatura.tipo2.color,
+              icono: data.creatura.tipo2.icono,
+              creador: data.creatura.tipo2.creador,
             }
           };
-
+          this.imagenCreatura = this.creatura.imagen;
           //this.creatura = data;
           resolve();
       });
@@ -116,6 +138,7 @@ export class ModificarCreaturaComponent {
   }
 
   ngOnInit(): void {
+    
     this.route.queryParams.subscribe(
       params => {
         this.idCreatura = params['idCreatura'];
@@ -232,22 +255,25 @@ export class ModificarCreaturaComponent {
 
  }
  genuinaGenuinamenteAgregar(){
-  const newCretura = {
+
+    const newCretura = {
         
-        id_creatura: this.creatura.id_creatura,
-        nombre_creatura: this.datosCreaturaForm.get('nombre')?.value,
-        hp: this.datosCreaturaForm.get('hp')?.value,
-        atk: this.datosCreaturaForm.get('atk')?.value,
-        def: this.datosCreaturaForm.get('def')?.value,
-        sdef: this.datosCreaturaForm.get('sdef')?.value,
-        spa: this.datosCreaturaForm.get('satk')?.value,
-        spe: this.datosCreaturaForm.get('spe')?.value,
-        descripcion: this.datosCreaturaForm.get('descripcion')?.value,
-        id_tipo1: this.creatura.tipo1?.id_tipo,
-        id_tipo2: this.creatura.tipo2?.id_tipo,
-        imagen: "",
-        publico: this.creatura.publico
-    }
+      id_creatura: this.creatura.id_creatura,
+      nombre_creatura: this.datosCreaturaForm.get('nombre')?.value,
+      hp: this.datosCreaturaForm.get('hp')?.value,
+      atk: this.datosCreaturaForm.get('atk')?.value,
+      def: this.datosCreaturaForm.get('def')?.value,
+      sdef: this.datosCreaturaForm.get('sdef')?.value,
+      spa: this.datosCreaturaForm.get('satk')?.value,
+      spe: this.datosCreaturaForm.get('spe')?.value,
+      descripcion: this.datosCreaturaForm.get('descripcion')?.value,
+      id_tipo1: this.creatura.tipo1.id_tipo,
+      id_tipo2: this.creatura.tipo2.id_tipo,
+      imagen: this.imagenCreatura,
+      publico: 0,
+      creador: "token",
+      habilidades: this.movesets
+  }
     console.log("Modificada Creatura:");
     console.log(newCretura);
 
@@ -255,8 +281,15 @@ export class ModificarCreaturaComponent {
     console.log(this.movesets);
     /////////////////////////////////////
 
-    //this.connector.crearCreatura(newCreatura,movesetNew);
-
+    this.connector.modificarCreatura(newCretura).subscribe({
+          next: () => {
+            Swal.fire("Modificada", "La creatura ha sido modificada.", "success");
+          },
+         error: () => {
+            Swal.fire("Error", "No se pudo modificar la creatura.", "error");
+         }
+        });
+    //cretura, poetico.
  }
  isInvalid(controlName: string): boolean {
   const control = this.datosCreaturaForm.get(controlName);
@@ -272,5 +305,21 @@ validarRango(event: Event) {
 onSubmit(){
 
 }
+onFileChange(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+    const reader = new FileReader();
 
+    reader.onload = () => {
+      this.imagenCreatura = reader.result as string;
+    };
+
+    reader.readAsDataURL(file); 
+    console.log(file);
+    this.imagenCreatura2 = file;
+    console.log("imagenCreatura2");
+    console.log(this.imagenCreatura2);
+  }
+}
 }

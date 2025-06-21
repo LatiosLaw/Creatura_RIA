@@ -20,10 +20,9 @@
     <div class = "col col-Img bg-danger">
        <div class= "contendoorImagen mt-3 mb-3">
         <div class="mb-3">
-            <input id="imegenCreatura" type="file" class="form-control" />
-        <!--(change)="onFileChange($event)"-->
+          <input id="imegenCreatura" type="file" class="form-control" (change)="onFileChange($event)" />
         </div>
-            <img [src]="creatura.imagen" (error)="onImgError($event)" alt="creaturaIMG" class="w-100  img-ajustada">
+            <img [src]="imagenCreatura" (error)="onImgError($event)" alt="creaturaIMG" class="w-100  img-ajustada">
         
          <!--  <img ngSrc="defoult.jpg" fill>-->
     </div>

@@ -15,7 +15,9 @@ export class ConeccionService {
   CrearCreatura(datos: any): Observable<any> {
     return this.http.post(this.url + "/alta.php", datos);
   }
-
+  modificarCreatura(datos:any){
+	return this.http.post(this.url + "/modificacion.php", datos);
+  }
 
   getCreatura(id:any){
     const url2 = this.url + "/retornar_creatura.php?id_creatura=" + id;

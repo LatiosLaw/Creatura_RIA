@@ -191,10 +191,10 @@ export class AgregarCreaturaComponent {
     console.log(this.movesets);
     this.connector.CrearCreatura(newCretura).subscribe({
       next: () => {
-        Swal.fire("Eliminada", "La creatura ha sido eliminada.", "success");
+        Swal.fire("Agregada", "La creatura ha sido agregada.", "success");
       },
      error: () => {
-        Swal.fire("Error", "No se pudo eliminar la creatura.", "error");
+        Swal.fire("Error", "No se pudo agregar la creatura.", "error");
      }
     })
 
