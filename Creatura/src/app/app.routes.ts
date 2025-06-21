@@ -4,7 +4,7 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { ListadoCreaturaComponent } from './components/listado-creatura/listado-creatura.component';
 import { LoginComponent } from './components/login/login.component';
 import { ModificarCreaturaComponent } from './components/modificar-creatura/modificar-creatura.component';
-import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
+import { VerUsuarioComponent } from './components/ver-usuario/ver-usuario.component';
 import { ListadoUsuariosComponent } from './components/listado-usuarios/listado-usuarios.component';
 import { ListadoCreaturasSystemComponent } from './components/listado-creaturas-system/listado-creaturas-system.component';
 import { AgregarCreaturaComponent } from './components/agregar-creatura/agregar-creatura.component';
@@ -19,7 +19,7 @@ export const routes: Routes = [
     {path: 'modificarCreatura',component: ModificarCreaturaComponent},
     { path: 'gestorCreatura/modificarCreatura/gestorCreatura', component: GestorCreaturaComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'perfil', component: PerfilUsuarioComponent },
+    { path: 'ver_usuario/:nickname', component: VerUsuarioComponent },
     { path: 'listadoUsuarios', component: ListadoUsuariosComponent },
     { path: 'listadoCreaturasSystem', component: ListadoCreaturasSystemComponent },
     { path: 'agregarCreatura', component: AgregarCreaturaComponent },

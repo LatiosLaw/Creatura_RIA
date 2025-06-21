@@ -1,0 +1,26 @@
+<div *ngIf="informacion_usuario">
+  ============================ PERFIL =================================<br>
+  Nickname : {{ informacion_usuario.usuario.nickname }}<br>
+  Correo : {{ informacion_usuario.usuario.correo }}<br>
+  Biografia : {{ informacion_usuario.usuario.biografia }}<br>
+  <img [src]="informacion_usuario.usuario.foto" style="max-width: 150px; max-height: 150px;"><br>
+
+</div>
+<div *ngIf="creaturas?.creaturas && creaturas.creaturas.length > 0">
+============================ CREATURAS =================================<br>
+  <div *ngFor="let c of creaturas.creaturas">
+    <h4>Nombre: {{ c.nombre }}</h4>
+    <img [src]="c.imagen" style="max-width: 150px; max-height: 150px;">
+    <p>Rating : {{ c.rating }}/5</p>
+    <p>Tipo 1 : {{ c.tipo1.nombre_tipo }}</p>
+    <p>Tipo 2 : {{ c.tipo2.nombre_tipo }}</p>
+    <p>Creador: {{ informacion_usuario.usuario.nickname }}</p>
+    <!-- Agregá más propiedades según tu modelo -->
+  </div>
+</div>
+
+<!-- Mostrar un mensaje si no hay creaturas -->
+<div *ngIf="creaturas?.creaturas?.length === 0">
+  <p>Este usuario no tiene creaturas registradas.</p>
+</div>
+
