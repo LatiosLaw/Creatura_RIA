@@ -7,6 +7,7 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 })
 export class UsuarioService {
   private urlUsuarios = 'http://localhost/Creatura_PHP/api/usuario';
+  private urlCreaturas = 'http://localhost/Creatura_PHP/api/creatura';
 
   constructor(private http: HttpClient) {}
 
@@ -29,7 +30,7 @@ export class UsuarioService {
           nickname: respuesta.usuario.nickname,
           correo: respuesta.usuario.correo,
           biografia: respuesta.usuario.biografia,
-          tipo: respuesta.usuario.tipo
+          foto: respuesta.usuario.foto
         }));
         return respuesta.usuario;
       } else {
@@ -41,6 +42,25 @@ export class UsuarioService {
       return throwError(() => error);
     })
   );
+}
+
+retornarUsuario( nickname: any){
+    const url_completa = this.urlUsuarios + "/retornar_usuario.php?nickname=" + nickname;
+    return this.http.get<any>(url_completa);
+  }
+
+retornarCreaturasUsuario( creador: any){
+    const url_completa = this.urlCreaturas + "/retornar_creatura_con_filtros.php?creador=" + creador;
+    return this.http.get<any>(url_completa);
+  }
+
+  borrarUsuario(nickname: string): Observable<any> {
+  const body = {
+    nickname,
+    metodo: 'DELETE'
+  };
+
+  return this.http.post(`${this.urlUsuarios}/baja.php`, body);
 }
 
 }

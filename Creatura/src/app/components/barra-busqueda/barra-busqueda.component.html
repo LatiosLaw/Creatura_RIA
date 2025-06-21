@@ -21,9 +21,11 @@
 
               <!-- Si hay usuario -->
               <li class="nav-item campo-nu" *ngIf="usuarioActual">
-                <button class="btn btn-outline-light ms-2"><a class="nav-link" routerLink="perfil">Perfil</a></button>
-                <button class="btn btn-outline-light ms-2" (click)="salir()">Salir</button>
-              </li>
+  <button class="btn btn-outline-light ms-2">
+    <a class="nav-link" [routerLink]="['/ver_usuario', usuarioActual.nickname]">Perfil</a>
+  </button>
+  <button class="btn btn-outline-light ms-2" (click)="salir()">Salir</button>
+</li>
             
               <!-- Si NO hay usuario -->
               <li class="nav-item" *ngIf="!usuarioActual">

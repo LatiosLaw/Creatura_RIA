@@ -25,14 +25,11 @@ export class InicioComponent implements OnInit{
 
   ngOnInit(): void {
     this.connector.listadoCreaturaConTipos().subscribe((res1) => {
-/*
+
       const filtradas = res1.filter((creatura: any) => creatura.creador === 'SYSTEM');
       this.randomizador(filtradas);
       this.creaturas = filtradas.slice(0, 15); //limitador
-*/
-//IMPORTANTE DESCOMENTAR LO DE ARRIBA Y BORRAR/COMENTAR LAS DOS LINEAS DE ABAJO PARA QUE FUNKE COMO DEBE
-      this.randomizador(res1);
-      this.creaturas = res1.slice(0, 15); //limitador
+
       console.log(this.creaturas);
     });
 
