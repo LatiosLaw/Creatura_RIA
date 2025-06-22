@@ -86,7 +86,7 @@ export class RegistrarUsuarioComponent {
 
     reader.readAsDataURL(file); 
 
-    console.log("imagen uysuaroi :");
+    console.log("imagen usuario :");
     console.log(this.imagen_usuario);
 
   }

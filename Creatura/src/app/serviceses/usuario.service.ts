@@ -63,4 +63,8 @@ retornarCreaturasUsuario( creador: any){
   return this.http.post(`${this.urlUsuarios}/baja.php`, body);
 }
 
+modificarUsuario(data: any) {
+    return this.http.post(`${this.urlUsuarios}/modificacion.php`, data);
+  }
+
 }

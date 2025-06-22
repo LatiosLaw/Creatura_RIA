@@ -20,10 +20,21 @@ export class BarraBusquedaComponent {
     }
   }
 
-  salir() {
-    localStorage.removeItem('usuarioActual');
-    location.reload(); // O recarga más limpia si lo necesitás
+salir() {
+  localStorage.removeItem('usuarioActual');
+
+  const verificacion = localStorage.getItem('usuarioActual');
+  if (verificacion === null) {
+    console.log("✅ 'usuarioActual' eliminado con éxito del localStorage.");
+    
+    // Forzar recarga y redirección al mismo tiempo
+    window.location.href = '/inicio'; // recarga la página y va a /inicio
+
+  } else {
+    console.error("❌ Falló la eliminación de 'usuarioActual'.");
   }
+}
+
 }
 
 
