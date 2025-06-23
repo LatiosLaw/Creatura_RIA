@@ -34,7 +34,8 @@ export class ModificarCreaturaComponent {
       sdef: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
       spe: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
       descripcion: [null, [Validators.required]],
-      nombre: [null, [Validators.required]]
+      nombre: [null, [Validators.required]],
+      publicoToken: [false, []]
     });
    
   }
@@ -94,6 +95,7 @@ export class ModificarCreaturaComponent {
             id_tipo1: data.creatura.id_tipo1,
             id_tipo2: data.creatura.id_tipo2,
             descripcion: data.creatura.descripcion,
+            publico:data.creatura.publico,
             hp: data.creatura.hp,
             atk: data.creatura.atk,
             def: data.creatura.def,
@@ -145,6 +147,10 @@ export class ModificarCreaturaComponent {
 
         this.mostrarCreatura2().then((resolve:any) => {
           this.cargarTipos();
+          var publicoPosta = false;
+          if(this.creatura.publico === 1){
+            publicoPosta = true;
+          }
           this.datosCreaturaForm.patchValue({
             hp: this.creatura.hp, 
             atk: this.creatura.atk,
@@ -154,6 +160,7 @@ export class ModificarCreaturaComponent {
             spe: this.creatura.spe,
             descripcion: this.creatura.descripcion,
             nombre: this.creatura.nombre_creatura,
+            publicoToken: publicoPosta
           });
 
         });
@@ -255,22 +262,68 @@ export class ModificarCreaturaComponent {
 
  }
  genuinaGenuinamenteAgregar(){
+    var hpNew = this.datosCreaturaForm.get('hp')?.value;
+    var atkNew = this.datosCreaturaForm.get('atk')?.value;
+    var defNew = this.datosCreaturaForm.get('def')?.value;
+    var sdefNew = this.datosCreaturaForm.get('sdef')?.value;
+    var spaNew = this.datosCreaturaForm.get('satk')?.value;
+    var speNew = this.datosCreaturaForm.get('spe')?.value;
+    //////If momento////////////////////////////////////////////////////////////////////////////////
+   if(hpNew > 255){
+     hpNew = 255;
+  }else if(hpNew < 1){
+    hpNew = 1;
+  }
+    
+  if(atkNew > 255){
+    atkNew = 255;
+   }else if(atkNew < 1){
+    atkNew = 1;
+   }
+
+  if(defNew > 255){
+    defNew = 255;
+  }else if(defNew < 1){
+    defNew = 1;
+  }
+
+  if(sdefNew > 255){
+    sdefNew = 255;
+  }else if(sdefNew < 1){
+    sdefNew = 1;
+  }
+
+  if(spaNew > 255){
+    spaNew = 255;
+  }else if(spaNew < 1){
+    spaNew = 1;
+  }
+
+  if(speNew > 255){
+    speNew = 255;
+  }else if(speNew < 1){
+    speNew = 1;
+  }
+    //////If momento////////////////////////////////////////////////////////////////////////////////
+    var publicoPosta = 0;
+    if(this.datosCreaturaForm.get('publicoToken')?.value){
+      publicoPosta = 1;
+    }
 
     const newCretura = {
-        
       id_creatura: this.creatura.id_creatura,
       nombre_creatura: this.datosCreaturaForm.get('nombre')?.value,
-      hp: this.datosCreaturaForm.get('hp')?.value,
-      atk: this.datosCreaturaForm.get('atk')?.value,
-      def: this.datosCreaturaForm.get('def')?.value,
-      sdef: this.datosCreaturaForm.get('sdef')?.value,
-      spa: this.datosCreaturaForm.get('satk')?.value,
-      spe: this.datosCreaturaForm.get('spe')?.value,
+      hp:   hpNew,
+      atk:  atkNew,
+      def:  defNew,
+      sdef: sdefNew,
+      spa:  spaNew,
+      spe:  speNew,
       descripcion: this.datosCreaturaForm.get('descripcion')?.value,
       id_tipo1: this.creatura.tipo1.id_tipo,
       id_tipo2: this.creatura.tipo2.id_tipo,
       imagen: this.imagenCreatura,
-      publico: 0,
+      publico: publicoPosta,
       creador: this.creatura.creador,
       habilidades: this.movesets
   }
