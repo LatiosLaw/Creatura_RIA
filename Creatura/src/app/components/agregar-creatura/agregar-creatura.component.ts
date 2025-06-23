@@ -21,6 +21,7 @@ export class AgregarCreaturaComponent {
   creador: any;
   idTipo1:any;
   idTipo2:any;
+  tipo3:any;
   tipo1:any;
   tipo2:any;
   usuarioActual:any;
@@ -29,6 +30,8 @@ export class AgregarCreaturaComponent {
   habilidades: any[] =[];
   tipos1: any[] = [];
   tipos2: any[] = [];
+  tipos3: any[] = [];
+
   typeNull = {
     id_tipo: "0",
     nombre_tipo: "null",
@@ -66,6 +69,7 @@ export class AgregarCreaturaComponent {
     element.src = 'defoult.png'; // Ruta de imagen por defecto
   }
   ngOnInit(): void {
+    this.tipo3 = this.typeNull;
     this.creador = "token"
     this.imagenCreatura = "defoult.png"
     this.cargarTipos();
@@ -74,6 +78,7 @@ export class AgregarCreaturaComponent {
     this.idTipo2 = 0;
     this.tipo1 = this.typeNull;
     this.tipo2 = this.typeNull;
+    
 
     this.datosCreaturaForm.patchValue({
       hp: 1, 
@@ -92,7 +97,9 @@ export class AgregarCreaturaComponent {
     
       this.tipos1 = [...data];
       this.tipos2 = [...data];
+      this.tipos3 = [...data];
       this.tipos2.push(this.typeNull);
+      this.tipos3.push(this.typeNull);
       this.limpiarListaDeTipos()
     })
   }
@@ -117,6 +124,13 @@ export class AgregarCreaturaComponent {
     this.cargarTipos();
 
   }
+
+  seleccionartipo3(tipo: any): void {
+    this.tipo3 = tipo;
+    this.habilideishon();
+
+
+  }
   cargarHabilidades2():Promise<void> {
     return new Promise((resolve, reject) => {
       this.connector.getHabilidadesConTipos().subscribe(data => {
@@ -127,18 +141,41 @@ export class AgregarCreaturaComponent {
       })
     });
   }
+  listarHabilidadesPorTipos(tipo:any):Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.connector.getHabilidadesPorTipo(tipo).subscribe(data => {
+        console.log("getHabilidades por TIPO");
+        console.log(data.habilidades);
+        console.log(this.tipo3);
+        //this.habilidades2 = data.habilidades;
 
+        this.habilidades = data.habilidades;
+        resolve();
+      })
+    });
+  }
   limpiarListaHabilidades(){
 
     this.movesets.forEach(element => {
       this.habilidades = this.habilidades.filter(habilidad => habilidad.id_habilidad !== element.id_habilidad);
     });
+
+    this.habilidadesNew.forEach(element => {
+      this.habilidades = this.habilidades.filter(habilidad => habilidad.id_habilidad !== element.id_habilidad);
+    });
   }
 
   habilideishon(){
-    this.cargarHabilidades2().then((resolve:any) => {
+    if(this.tipo3.id_tipo === "0"){
+      this.cargarHabilidades2().then((resolve:any) => {
+        this.limpiarListaHabilidades();
+      });
+    }else{
+      this.cargarTipos();
+    this.listarHabilidadesPorTipos(this.tipo3.id_tipo).then((resolve:any) => {
       this.limpiarListaHabilidades();
     });
+    }
   }
 
   eliminarHabilidad(movesetAeli:any){
@@ -149,6 +186,7 @@ export class AgregarCreaturaComponent {
   }
   eliminarHabilidadDeNew(habilidadd:any){
     this.habilidadesNew = this.habilidadesNew.filter(habilidad => habilidad.id_habilidad !== habilidadd.id_habilidad);
+    this.seleccionartipo3(this.tipo3);
     this.habilidades.push(habilidadd);
  }
   agregarHabilidad(habilidadd:any){
