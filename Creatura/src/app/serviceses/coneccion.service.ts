@@ -42,6 +42,10 @@ export class ConeccionService {
     const url2 = this.url + "/listado.php";
      return this.http.get<any[]>(url2);
    }
+   listadoCreaturaConTiposDeUsuario(usuario:any): Observable<any> {
+    const url2 = this.url + "/retornar_creatura_con_filtros.php?creador=" + usuario;
+     return this.http.get<any[]>(url2);
+   }
    eliminarCreatura(id:any){
     const url2 = this.url + "/baja.php";
     const body = '{"id_creatura":' + id +'}';
@@ -56,7 +60,13 @@ export class ConeccionService {
     const url2 = this.urlHabilidades + "/getAll_habilidades.php";
     return this.http.get<any>(url2);
    }
+   getHabilidadesPorTipo(tipo:any){
+    const url2 = this.urlHabilidades + "/get_habilidades_tipos.php?id_tipo=" + tipo;
+    console.log("Console log momento");
+    console.log(tipo);
 
+    return this.http.get<any>(url2);
+   }
    getTipos(){
     return this.http.get<any[]>(this.urlTipos+ "/retornarAll_tipos.php");
    }

@@ -19,7 +19,7 @@ export class ModificarCreaturaComponent {
   datosCreaturaForm: FormGroup;
   typeNull = {
     id_tipo: "0",
-    nombre_tipo: "null",
+    nombre_tipo: "-",
     color :"eaeae5",
     icono : "no.png",
     creador : "tuvieja"
@@ -33,7 +33,7 @@ export class ModificarCreaturaComponent {
       def: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
       sdef: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
       spe: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
-      descripcion: [null, [Validators.required]],
+      descripcion: [null, []],
       nombre: [null, [Validators.required]],
       publicoToken: [false, []]
     });
@@ -43,7 +43,7 @@ export class ModificarCreaturaComponent {
   imagenCreatura2:any;
   movesets: any[] = [];
   movesets2: any[] = [];
-
+  tipo3:any;
   movesetsEli: any[] = [];
   habilidadesNew: any[] = [];
 
@@ -55,18 +55,22 @@ export class ModificarCreaturaComponent {
   
   tipos1: any[] = [];
   tipos2: any[] = [];
+  tipos3: any[] = [];
 
   cargarTipos(){
     this.connector.getTipos().subscribe(data => {
       console.log(data);
       this.tipos1 = [...data];
       this.tipos2 = [...data];
+      this.tipos3 = [...data];
+
       if(!(this.creatura.tipo2?.id_tipo > 0)){
         //console.log("//////////////////////////////////////////cargarTipos//////////////////////////////////////////");
         //console.log(this.creatura.tipo2);
         this.creatura.tipo2 = this.typeNull;
       }else{
         this.tipos2.push(this.typeNull);
+        this.tipos3.push(this.typeNull);
       }
       this.limpiarListaDeTipos()
     })
@@ -78,7 +82,7 @@ export class ModificarCreaturaComponent {
     
     const idTipo1 = this.creatura.tipo1?.id_tipo;
     const idTipo2 = this.creatura.tipo2?.id_tipo;
-
+    
     this.tipos1 = this.tipos1.filter(tipo => tipo.id_tipo !== idTipo1 && tipo.id_tipo !== idTipo2);
     this.tipos2 = this.tipos2.filter(tipo => tipo.id_tipo !== idTipo1 && tipo.id_tipo !== idTipo2);
 
@@ -140,7 +144,7 @@ export class ModificarCreaturaComponent {
   }
 
   ngOnInit(): void {
-    
+    this.tipo3 = this.typeNull;
     this.route.queryParams.subscribe(
       params => {
         this.idCreatura = params['idCreatura'];
@@ -179,6 +183,27 @@ export class ModificarCreaturaComponent {
     this.cargarTipos();
 
   }
+  seleccionartipo3(tipo: any): void {
+    this.tipo3 = tipo;
+    this.habilideishon();
+
+
+  }
+    listarHabilidadesPorTipos(tipo:any):Promise<void> {
+      return new Promise((resolve, reject) => {
+        this.connector.getHabilidadesPorTipo(tipo).subscribe(data => {
+          console.log("getHabilidades por TIPO");
+          console.log(data.habilidades);
+          console.log(this.tipo3);
+          this.habilidades2 = data.habilidades;
+  
+          this.habilidades = data.habilidades;
+          resolve();
+        })
+      });
+    }
+
+
 
   eliminarHabilidad(movesetAeli:any){
     this.movesetsEli.push(movesetAeli);
@@ -186,6 +211,7 @@ export class ModificarCreaturaComponent {
     this.movesets = this.movesets.filter(movesett => movesett.id_habilidad !== movesetAeli.id_habilidad);
     console.log(this.movesets);
     console.log(this.movesetsEli);
+
     this.habilideishon();
   }
   cargarHabilidades(){
@@ -201,27 +227,7 @@ export class ModificarCreaturaComponent {
         console.log("getHabilidades");
         console.log(data.habilidades);
         this.habilidades2 = data.habilidades;
-/////////////////////////////////////////////////////////////////////////////////////////////////     ///////////8/
-/*this.habilidades2.forEach(element => {
-  const habiliadNew = 
-        { 
-            id_habilidad: element.id_habilidad,
-            nombre_habilidad: element.nombre_habilidad,
-            id_tipo_habilidad: element.id_tipo_habilidad,
-            descripcion: element.descripcion,
-            categoria_habilidad: element.categoria_habilidad,
-            potencia: element.potencia,
-            creador: element.creador,
-          tipo: {
-            nombre_tipo: element.nombre_tipo_habilidad,
-            color: element.color_tipo_habilidad,
-            icono: element.icono_tipo_habilidad
-          }
-      
-         }
-   this.habilidades.push(habiliadNew);
-});*/
-////////////////////////////////////////////////////////////////////////////////////////////////
+
         this.habilidades = data.habilidades;
         resolve();
       })
@@ -229,15 +235,26 @@ export class ModificarCreaturaComponent {
   }
 
   limpiarListaHabilidades(){
-
     this.movesets.forEach(element => {
       this.habilidades = this.habilidades.filter(habilidad => habilidad.id_habilidad !== element.id_habilidad);
     });
+    this.habilidadesNew.forEach(element => {
+      this.habilidades = this.habilidades.filter(habilidad => habilidad.id_habilidad !== element.id_habilidad);
+    });
+
+
   }
   habilideishon(){
-    this.cargarHabilidades2().then((resolve:any) => {
+    if(this.tipo3.id_tipo === "0"){
+      this.cargarHabilidades2().then((resolve:any) => {
+        this.limpiarListaHabilidades();
+      });
+    }else{
+      this.cargarTipos();
+    this.listarHabilidadesPorTipos(this.tipo3.id_tipo).then((resolve:any) => {
       this.limpiarListaHabilidades();
     });
+    }
   }
   agregarHabilidad(habilidadd:any){
      this.habilidades = this.habilidades.filter(habilidad => habilidad.id_habilidad !== habilidadd.id_habilidad);
@@ -245,6 +262,7 @@ export class ModificarCreaturaComponent {
   }
   eliminarHabilidadDeNew(habilidadd:any){
     this.habilidadesNew = this.habilidadesNew.filter(habilidad => habilidad.id_habilidad !== habilidadd.id_habilidad);
+    this.seleccionartipo3(this.tipo3);
     this.habilidades.push(habilidadd);
  }
  genuinamenteAgregar(){
@@ -262,6 +280,7 @@ export class ModificarCreaturaComponent {
 
  }
  genuinaGenuinamenteAgregar(){
+  if (this.datosCreaturaForm.valid) {
     var hpNew = this.datosCreaturaForm.get('hp')?.value;
     var atkNew = this.datosCreaturaForm.get('atk')?.value;
     var defNew = this.datosCreaturaForm.get('def')?.value;
@@ -304,6 +323,15 @@ export class ModificarCreaturaComponent {
   }else if(speNew < 1){
     speNew = 1;
   }
+  var desc = this.datosCreaturaForm.get('descripcion')?.value;
+  if(!desc){
+    this.datosCreaturaForm.patchValue({
+
+      descripcion: "",
+
+    });
+  }
+
     //////If momento////////////////////////////////////////////////////////////////////////////////
     var publicoPosta = 0;
     if(this.datosCreaturaForm.get('publicoToken')?.value){
@@ -340,9 +368,14 @@ export class ModificarCreaturaComponent {
           },
          error: () => {
             Swal.fire("Error", "No se pudo modificar la creatura.", "error");
+            
          }
         });
     //cretura, poetico.
+  }else{
+    Swal.fire("Error", "No se pudo modificar la creatura, faltan campos.", "error");
+    this.datosCreaturaForm.markAllAsTouched()
+  }
  }
  isInvalid(controlName: string): boolean {
   const control = this.datosCreaturaForm.get(controlName);

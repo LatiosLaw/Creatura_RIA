@@ -14,8 +14,14 @@ import Swal from 'sweetalert2';
 })
 export class ListadoCreaturaComponent implements OnInit{
   creaturas: any[] = [];
-  constructor(private connector: ConeccionService) {}
-  
+  constructor(private connector: ConeccionService) {
+    const usuarioData = localStorage.getItem('usuarioActual');
+    if (usuarioData) {
+      this.usuarioActual = JSON.parse(usuarioData);
+    }
+  }
+  usuarioActual:any;
+
   eliminarCreatura(idCreatura:any){
     
     Swal.fire({
@@ -47,7 +53,7 @@ export class ListadoCreaturaComponent implements OnInit{
         title: 'Exportación de la creatura con el id: ' + id,
         html: `<pre style="text-align: left;">
         "id_creatura": ${data.id_creatura},
-        "nombre_creatura": ${data.nombre_creatura},
+        "nombre_creatura": ${data.nombre},
         "id_tipo1": ${data.id_tipo1},
         "id_tipo2": ${data.id_tipo2},
         "descripcion": ${data.descripcion},
@@ -70,8 +76,8 @@ export class ListadoCreaturaComponent implements OnInit{
     element.src = 'defoult.png'; // Ruta de imagen por defecto
   }
   cargarCreaturasLista(){
-    this.connector.listadoCreaturaConTipos().subscribe((res) => {
-      this.creaturas = res;
+    this.connector.listadoCreaturaConTiposDeUsuario(this.usuarioActual.nickname).subscribe((res) => {
+      this.creaturas = res.creaturas;
      // console.log(this.creaturas);
 
     });
@@ -79,8 +85,8 @@ export class ListadoCreaturaComponent implements OnInit{
   ngOnInit(): void {
     //this.connector.eliminarCreatura(1);
 
-    this.connector.listadoCreaturaConTipos().subscribe((res) => {
-      this.creaturas = res;
+    this.connector.listadoCreaturaConTiposDeUsuario(this.usuarioActual.nickname).subscribe((res) => {
+      this.creaturas = res.creaturas;
       console.log(this.creaturas);
 
     });

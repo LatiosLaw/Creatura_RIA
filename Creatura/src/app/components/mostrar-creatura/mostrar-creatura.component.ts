@@ -30,14 +30,28 @@ export class MostrarCreaturaComponent {
   rating: number = 0;
   stars: number[] = [1, 2, 3, 4, 5];
   creturaRating = 0;
+  typeNull = {
+    id_tipo: "0",
+    nombre_tipo: "-",
+    color :"eaeae5",
+    icono : "no.png",
+    creador : "tuvieja"
+  }
+
   cargarCreatura(){
       this.connector.getCreaturaConTipos(this.idCreatura).subscribe(data => {
         console.log(data);
+        var tipo2:any;
+        if(!data.creatura.id_tipo2){
+          tipo2 = this.typeNull;
+        }else{
+          tipo2 = data.creatura.tipo2;
+        }
         this.creatura = {
           id_creatura: data.creatura.id_creatura,
           nombre_creatura: data.creatura.nombre_creatura,
           id_tipo1: data.creatura.id_tipo1,
-          id_tipo2: data.creatura.id_tipo2,
+          id_tipo2: tipo2,
           descripcion: data.creatura.descripcion,
           hp: data.creatura.hp,
           atk: data.creatura.atk,
@@ -56,11 +70,11 @@ export class MostrarCreaturaComponent {
             creador: data.creatura.tipo1.creador,
           },
           tipo2:{
-            id_tipo: data.creatura.tipo2.id_tipo,
-            nombre_tipo: data.creatura.tipo2.nombre_tipo,
-            color: data.creatura.tipo2.color,
-            icono: data.creatura.tipo2.icono,
-            creador: data.creatura.tipo2.creador,
+            id_tipo: tipo2.id_tipo,
+            nombre_tipo: tipo2.nombre_tipo,
+            color: tipo2.color,
+            icono: tipo2.icono,
+            creador: tipo2.creador,
           }
         };
         this.creturaRating = this.creatura.rating;
