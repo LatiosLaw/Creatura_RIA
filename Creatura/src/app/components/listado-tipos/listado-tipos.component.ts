@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ConeccionService } from '../../serviceses/coneccion.service';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router'
+import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 import { TipoComparado } from '../../interfaces/tipo-comparado';
@@ -20,17 +22,18 @@ export class ListadoTiposComponent {
 	mostar_tipos_html:any;
 
 
-	constructor(private connector: ConeccionService){}
+	constructor(private connector: ConeccionService, private fb: FormBuilder,private route: ActivatedRoute){}
 
 	url_iconos = 'http://localhost:41062/www/imagenes/tipos/';
 	
 	ngOnInit(): void {
 		this.connector.get_Todos_Los_Tipos().subscribe(res => {
 			this.tipos = res;
-			console.log(this.tipos);
+			this.Arreglar_url_imagenes();
 		});
 		//this.mostar_tipos_html = require('html-loader!./mostrar-tipos.html');
 		//this.mostar_tipos_html = this.mostar_tipos_html.default;
+
 	}
 	Recargar_Listado_de_Tipos(): void {
 		this.connector.get_Todos_Los_Tipos().subscribe(res => {
@@ -255,5 +258,24 @@ export class ListadoTiposComponent {
 			}
 		
 		});
+	}
+	//La siguiente funcion es solo para mi [Manuel]; es para que funcione con mi configuración local.
+	Arreglar_url_imagenes():void{
+		if (this.tipos == undefined){
+			return;
+		}
+		let buffer_temporal_de_todos_los_tipos : Tipo[] =[];
+		for (let un_tipo of this.tipos){
+			if (un_tipo == undefined){
+				return;
+			}
+			if (un_tipo.icono == undefined){
+				return;
+			}
+			un_tipo.icono = this.url_iconos + un_tipo.icono;
+			buffer_temporal_de_todos_los_tipos.push(un_tipo);
+		}
+		this.tipos = buffer_temporal_de_todos_los_tipos;
+	
 	}
 }
