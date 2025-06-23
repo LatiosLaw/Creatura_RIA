@@ -9,7 +9,7 @@
       <div class="col-custom bg-primary text-white m-2 p-2" *ngFor="let creatura of creaturas">
         <a class="nav-link" routerLink="/mostrarCreatura" 
         [queryParams]= "{idCreatura:creatura.id_creatura}">
-        <img [src]="creatura.imagen" (error)="onImgError($event)" alt="{{ creatura.nombre }}" class="figure-img d-block align-self-start img-ajustada">
+        <img [src]="'http://localhost:41062/www/imagenes/creaturas/'+creatura.imagen" (error)="onImgError($event)" alt="{{ creatura.nombre }}" class="figure-img d-block align-self-start img-ajustada">
       </a>
           <div class = "bg-sexo">
             <figcaption class="figure-caption d-flex justify-content-between">

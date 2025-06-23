@@ -52,28 +52,17 @@ export class ConeccionService {
    getTipos(){
     return this.http.get<any[]>(this.urlTipos+ "/retornarAll_tipos.php");
    }
-	get_Todos_Los_Tipos(){
-		return this.http.get<any>(this.urlTipos+"/retornarAll_Tipos.php");
-	}
 	Alta_Tipo(nuevo_tipo:any): Observable<any>{
 		return this.http.post(this.urlTipos, nuevo_tipo);
 	}
-	Baja_Tipo(id:any){
-		const url2 = this.urlTipos + "/" + id;
-		return this.http.delete(url2);
-	}
 
-	Modificar_Tipo(id:any, tipo:any){
-		const url2 = this.urlTipos + "/"+ id;
-		return this.http.put(url2, tipo);
-	}
 
 	get_Tipos_Creados_Por(id:any){
 		const url2 = this.urlTipos +"/creador/"+id;
 		return this.http.get<any>(url2);
 	}
 	get_Tipo_Con_Id(id:any){
-		const url2 = this.urlTipos + "/" + id;
+		const url2 = this.urlTipos + "/retornar_tipo.php?id_tipo=" + id;
 		return this.http.get(url2);
 	}
 
@@ -113,5 +102,17 @@ export class ConeccionService {
   	const url2 = this.url_creatura +"/retornar_calculo_defensivo.php?tipo1=" + id;
 	return this.http.get(url2);
   }
+	get_Todos_Los_Tipos(){
+		return this.http.get<any>(this.urlTipos+"/retornarAll_Tipos.php");
+	}
+
+	Baja_Tipo(id:any){
+		//Sustituir con la llamada a api adecuada.
+		return this.get_Todos_Los_Tipos();
+	}
+	Modificar_Tipo(id:any, tipo:any){
+		//Sustituir con la llamada a api adecuada.
+		return this.get_Todos_Los_Tipos();
+	}
 	
 }
