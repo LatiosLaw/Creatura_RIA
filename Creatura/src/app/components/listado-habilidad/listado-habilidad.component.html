@@ -1,0 +1,46 @@
+
+
+<div>
+
+  <!-- ARRANCA EL LISTADO-->
+
+
+      <div *ngFor="let habilidad of habilidades">
+          <div>
+            <figcaption>
+                <div id = "nombreHab">Nombre : {{ habilidad.nombre_habilidad }}</div>
+                <img [src]="habilidad.tipo.icono_base64" style="max-width: 100px; max-height: 100px;" (error)="onImgError($event)" alt="{{ habilidad.icono_tipo }}">
+              <div id = "nombreTipo">Tipo : {{ habilidad.tipo.nombre }}</div>
+              <div id = "Descripcion">Descripcion : {{ habilidad.descripcion }}</div>
+            </figcaption>
+            <figcaption>
+                  <div id="potencia">Categoria : {{ habilidad.categoria_habilidad }}</div>
+            </figcaption>
+            <figcaption>
+                  <div id="potencia">Potencia : {{ habilidad.potencia }}</div>
+            </figcaption>
+            <figcaption>
+                <div id = "creador">Creador: {{ habilidad.creador }}</div>
+            </figcaption>
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  ...
+                </button>
+<ul class="dropdown-menu">
+                      <a class="nav-link" routerLink="/modificarHabilidad" 
+                      [queryParams]= "{idHabilidad:habilidad.id_habilidad}">
+                        <li>
+                          <button class="dropdown-item" type="button">Modificar Habilidad</button>
+                        </li>
+                      </a>
+                      <li>
+                        <button class="dropdown-item" type="button" (click)="mostrarJSHabilidad(habilidad.id_habilidad)">Exportar</button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button" (click)="eliminarHabilidad(habilidad.id_habilidad)">Eliminar</button>
+                      </li>
+                </ul>
+
+    <!-- TERMINA EL LISTADO-->
+
+</div>
+

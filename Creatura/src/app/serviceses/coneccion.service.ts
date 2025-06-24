@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -95,28 +95,36 @@ export class ConeccionService {
 		return this.http.get(url2);
 	}
 
-	Alta_Habilidades(nueva_habilidad:any){
-		return this.http.post(this.urlHabilidades,nueva_habilidad);
+	Alta_Habilidad(nueva_habilidad:any){
+		return this.http.post(this.urlHabilidades + "/alta.php",nueva_habilidad);
 	}
 	
 	Baja_Habilidad(id:any){
-		const url2 = this.urlHabilidades + "/" + id;
+		const url2 = this.urlHabilidades + "/baja.php?id_habilidad=" + id;
 		return this.http.delete(url2);
 	}
 
-	Modificar_Habilidad(id:any, habilidad:any){
-		const url2 = this.urlHabilidades + "/" + id;
-		return this.http.put(url2,habilidad);
-	}
+  modificarHabilidad(id_habilidad: string, creador: string, data: any): Observable<any> {
+    // Usamos PUT y enviamos id y creador como query params
+    const params = new HttpParams()
+      .set('id_habilidad', id_habilidad)
+      .set('creador', creador);
+
+    return this.http.put<any>(`${this.urlHabilidades}/modificacion.php`, data, { params });
+  }
 
 	Listar_Habilidades(){
 		return this.http.get(this.urlHabilidades);
 	}
 	
-	Listar_Habilidades_Creadas_Por(id:any){	
-		const url2 = this.urlHabilidades + "/creador/" + id;
-		return this.http.get(url2);
+	Listar_Habilidades_Creadas_Por(creador:any){	
+		return this.http.get<any>(this.urlHabilidades + `/retornar_habilidades_creador.php?creador=${creador}`);
 	}
+
+  getHabilidad(id:any){
+    const url2 = this.urlHabilidades + "/retornar_habilidad.php?id_habilidad=" + id;
+    return this.http.get<any>(url2);
+  }
 
 	Listar_Habilidades_Por_Tipo(id:any){	
 		const url2 = this.urlHabilidades + "/tipo/" + id;
