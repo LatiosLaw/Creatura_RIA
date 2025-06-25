@@ -1,299 +1,306 @@
 <app-barra-gestor-creatura></app-barra-gestor-creatura>
 
-
+<div *ngIf = "usuarioActual">
 
 <!-- BARRA DE MODIFIACION DE CREATURA-->
 <div class="cont-titular d-flex align-items-center"> 
-    <div class="titular p-2 w-100 d-flex ">
-        <div class="d-inline">Modificar Creatura</div>
-      
-        <div class="ms-auto d-flex gap-2">
-          <button class="btn btn-dark" type="button" (click) = "genuinaGenuinamenteAgregar()">Confirmar</button>
-          <a class="btn btn-dark" type="button" routerLink="/gestorCreatura">Descartar</a>
-        </div>
-        
-    </div>
-  </div>
-  <!-- END OF BARRA DE MODIFIACION DE CREATURA-->
-  
-  
-  <div class = "container bg-primary">
-   <div class = "row">
-      <div class = "col col-Img bg-danger">
-        <div class="contendoorImagen mt-3 mb-3">
-          <div class="mb-3">
-            <input id="imegenCreatura" type="file" class="form-control" (change)="onFileChange($event)" accept="image/png, image/jpeg" />
-          </div>
-          <img [src]="imagenCreatura" (error)="onImgError($event)" alt="creaturaIMG" class="w-100 img-ajustada">
-        </div>
-  
-      
+  <div class="titular p-2 w-100 d-flex ">
+      <div class="d-inline">Modificar Creatura</div>
+    
+      <div class="ms-auto d-flex gap-2">
+        <button class="btn btn-dark" type="button" (click) = "genuinaGenuinamenteAgregar()">Confirmar</button>
+        <a class="btn btn-dark" type="button" routerLink="/gestorCreatura">Descartar</a>
       </div>
-      <div class = "col col-Stats bg-info" [formGroup]="datosCreaturaForm">
-          <div class = "row justify-content-center">
-              <div class = "col">
-                  <div class="d-flex align-items-center gap-2">
-                      Nombre:<input type="text" placeholder="Escriba el nombre de su Creatura" formControlName="nombre" class=" m-2 p-2" maxlength="30"> 
-                  </div>
-  
-              </div>
+      
+  </div>
+</div>
+<!-- END OF BARRA DE MODIFIACION DE CREATURA-->
 
-              <div class = "col">
+
+<div class = "container bg-primary">
+ <div class = "row">
+    <div class = "col col-Img bg-danger">
+      <div class="contendoorImagen mt-3 mb-3">
+        <div class="mb-3">
+          <input id="imegenCreatura" type="file" class="form-control" (change)="onFileChange($event)" accept="image/png, image/jpeg" />
+        </div>
+        <img [src]="imagenCreatura" (error)="onImgError($event)" alt="creaturaIMG" class="w-100 img-ajustada">
+      </div>
+
+    
+    </div>
+    <div class = "col col-Stats bg-info" [formGroup]="datosCreaturaForm">
+        <div class = "row justify-content-center">
+            <div class = "col">
                 <div class="d-flex align-items-center gap-2">
-                    Publico:<input type="checkbox" class=" m-2 p-2" formControlName ="publicoToken" name="opcion"> 
+                    Nombre:<input type="text" placeholder="Escriba el nombre de su Creatura" formControlName="nombre" class=" m-2 p-2" maxlength="30"> 
                 </div>
 
+            </div>
+
+            <div class = "col">
+              <div class="d-flex align-items-center gap-2">
+                  Publico:<input type="checkbox" class=" m-2 p-2" formControlName ="publicoToken" name="opcion"> 
+              </div>
+
+          </div>
+        </div>
+        
+
+        <div class="row text-center">
+            <div class="col d-flex justify-content-center align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                hp: <input 
+                formControlName="hp"
+                (input)="validarRango($event)"
+                class="form-control bg-success text-white m-2 p-2" type="number" min="1" max="255">
+              </div>
+            </div>
+          
+            <div class="col d-flex justify-content-center align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                atk: <input 
+                formControlName="atk"
+                (input)="validarRango($event)"
+                class="form-control bg-danger text-white m-2 p-2" type="number" min="1" max="255">
+              </div>
+            </div>
+          
+            <div class="col d-flex justify-content-center align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                def: <input 
+                formControlName="def"
+                (input)="validarRango($event)"
+                class="form-control bg-primary text-white m-2 p-2" type="number" min="1" max="255">
+              </div>
+            </div>
+          
+            <div class="w-100"></div>
+          
+            <div class="col d-flex justify-content-center align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                spa: <input 
+                formControlName="satk"
+                (input)="validarRango($event)"
+                class="form-control bg-spa text-white m-2 p-2" type="number" min="1" max="255">
+              </div>
+            </div>
+          
+            <div class="col d-flex justify-content-center align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                  sdef: <input 
+                formControlName="sdef"
+                (input)="validarRango($event)"
+                class="form-control bg-sdef text-white m-2 p-2" type="number" min="1" max="255">
+              </div>
+            </div>
+          
+            <div class="col d-flex justify-content-center align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                spe: <input 
+                formControlName="spe"
+                (input)="validarRango($event)"
+                class="form-control bg-warning text-white m-2 p-2" type="number" min="1" max="255">
+              </div>
             </div>
           </div>
           
-
-          <div class="row text-center">
-              <div class="col d-flex justify-content-center align-items-center">
-                <div class="d-flex align-items-center gap-2">
-                  hp: <input 
-                  formControlName="hp"
-                  (input)="validarRango($event)"
-                  class="form-control bg-success text-white m-2 p-2" type="number" min="1" max="255">
-                </div>
-              </div>
-            
-              <div class="col d-flex justify-content-center align-items-center">
-                <div class="d-flex align-items-center gap-2">
-                  atk: <input 
-                  formControlName="atk"
-                  (input)="validarRango($event)"
-                  class="form-control bg-danger text-white m-2 p-2" type="number" min="1" max="255">
-                </div>
-              </div>
-            
-              <div class="col d-flex justify-content-center align-items-center">
-                <div class="d-flex align-items-center gap-2">
-                  def: <input 
-                  formControlName="def"
-                  (input)="validarRango($event)"
-                  class="form-control bg-primary text-white m-2 p-2" type="number" min="1" max="255">
-                </div>
-              </div>
-            
-              <div class="w-100"></div>
-            
-              <div class="col d-flex justify-content-center align-items-center">
-                <div class="d-flex align-items-center gap-2">
-                  spa: <input 
-                  formControlName="satk"
-                  (input)="validarRango($event)"
-                  class="form-control bg-spa text-white m-2 p-2" type="number" min="1" max="255">
-                </div>
-              </div>
-            
-              <div class="col d-flex justify-content-center align-items-center">
-                <div class="d-flex align-items-center gap-2">
-                    sdef: <input 
-                  formControlName="sdef"
-                  (input)="validarRango($event)"
-                  class="form-control bg-sdef text-white m-2 p-2" type="number" min="1" max="255">
-                </div>
-              </div>
-            
-              <div class="col d-flex justify-content-center align-items-center">
-                <div class="d-flex align-items-center gap-2">
-                  spe: <input 
-                  formControlName="spe"
-                  (input)="validarRango($event)"
-                  class="form-control bg-warning text-white m-2 p-2" type="number" min="1" max="255">
-                </div>
-              </div>
-            </div>
-            
-      <div class = "row">
-          <div class = "col">
-            <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-              aria-expanded="false" [style.backgroundColor]="'#' + tipo1?.color">
-              {{ tipo1?.nombre_tipo }}
-              </button>
-              <ul class="dropdown-menu">
-                <li *ngFor="let tipo1 of tipos1">
-                  <button class="dropdown-item" type="button"
-                    [style.backgroundColor]="'#' + tipo1.color"
-                    (click)="seleccionarTipo1(tipo1)">
-                    {{ tipo1.nombre_tipo }}
-                  </button>
-                </li>
-              </ul>
-            </div>
-  
-            </div>
-          <div class = "col">
-            <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false" [style.backgroundColor]="'#' + tipo2?.color">
-                {{ tipo2?.nombre_tipo }}
-              </button>
-              <ul class="dropdown-menu">
-                <li *ngFor="let tipo2 of tipos2">
-                  <button class="dropdown-item" type="button"
-                    [style.backgroundColor]="'#' + tipo2.color"
-                    (click)="seleccionarTipo2(tipo2)">
-                    {{ tipo2.nombre_tipo }}
-                  </button>
-                </li>
-              </ul>
-            </div>
+    <div class = "row">
+        <div class = "col">
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false" [style.backgroundColor]="'#' + tipo1?.color">
+            {{ tipo1?.nombre_tipo }}
+            </button>
+            <ul class="dropdown-menu">
+              <li *ngFor="let tipo1 of tipos1">
+                <button class="dropdown-item" type="button"
+                  [style.backgroundColor]="'#' + tipo1.color"
+                  (click)="seleccionarTipo1(tipo1)">
+                  {{ tipo1.nombre_tipo }}
+                </button>
+              </li>
+            </ul>
           </div>
-      </div>
-      <div class = "row">
-          <div class = "col">
-              <textarea class="form-control" id="comentario" formControlName="descripcion" rows="4" maxlength="200"
-              placeholder="Escriba la descripción de su Creatura"></textarea>
-          </div>
-      </div>
-      <div class = "row">
-        <table class="table table-bordered">
-          <thead class= "table-dark">
-            <tr>
-              <th>Id</th>
-              <th>Nombre</th>
-              <th>Tipo</th>
-              <th>Potencia</th>
-              <th>Descricion</th>
-              <th>Caregoria</th>
-              <th>Accion</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let moveset of movesets">
-              <td>{{ moveset.id_habilidad }}</td>
-              <td>{{ moveset.nombre_habilidad }}</td>
-              <td [style.backgroundColor]="'#' +   moveset.color_tipo_habilidad">{{ moveset.nombre_tipo_habilidad }}</td>
-              <td>{{ moveset.potencia }}</td>
-              <td>{{ moveset.descripcion }}</td>
-              <td>{{ moveset.categoria_habilidad }}</td>
-              <td> <button class="bg-danger" (click)="eliminarHabilidad(moveset)">Eliminar</button> </td>
-            </tr>
-            <tr *ngIf="movesets.length === 0">
-                <td colspan="7" class="text-center text-muted">La Creatura no tiene habilidades</td>
-              </tr>
 
-            <tr>
-              <td>---</td>
-              <td>---</td>
-              <td>---</td>
-              <td>---</td>
-              <td>---</td>
-              <td>---</td>
-              <td> <button class="bg-success" data-bs-toggle="modal" data-bs-target="#agregarModal">Agregar</button> </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-  
-      </div>
-  
-  
-   </div>
-  
-  
-  </div>
-  <div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-scrollable"> <!-- Aquí se agrega modal-xl y scrollable -->
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="agregarModalLabel">Agregar habilidades</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+        <div class = "col">
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false" [style.backgroundColor]="'#' + tipo2?.color">
+              {{ tipo2?.nombre_tipo }}
+            </button>
+            <ul class="dropdown-menu">
+              <li *ngFor="let tipo2 of tipos2">
+                <button class="dropdown-item" type="button"
+                  [style.backgroundColor]="'#' + tipo2.color"
+                  (click)="seleccionarTipo2(tipo2)">
+                  {{ tipo2.nombre_tipo }}
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
-  
-        <!-- Cuerpo del modal con límite de altura y scroll si se excede -->
-        <!-- Cuerpo del modal -->
-  <div class="modal-body">
-    <div class="dropdown">
-    Filtlal Por Tipo:  
-    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-      aria-expanded="false" [style.backgroundColor]="'#' + tipo3.color">
-      {{ tipo3.nombre_tipo }}
-    </button>
-    <ul class="dropdown-menu">
-      <li *ngFor="let tipo3 of tipos3">
-        <button class="dropdown-item" type="button"
-          [style.backgroundColor]="'#' + tipo3.color"
-          (click)="seleccionartipo3(tipo3)">
-          {{ tipo3.nombre_tipo }}
-        </button>
-      </li>
-    </ul>
-  </div>
-    <!-- Tabla 1 con scroll -->
-    <div style="max-height: 300px; overflow-y: auto;">
-      <table class="table table-bordered table-hover table-sm">
-        <thead class="table-dark">
+    </div>
+    <div class = "row">
+        <div class = "col">
+            <textarea class="form-control" id="comentario" formControlName="descripcion" rows="4" maxlength="200"
+            placeholder="Escriba la descripción de su Creatura"></textarea>
+        </div>
+    </div>
+    <div class = "row">
+      <table class="table table-bordered">
+        <thead class= "table-dark">
           <tr>
             <th>Id</th>
             <th>Nombre</th>
             <th>Tipo</th>
             <th>Potencia</th>
-            <th>Descripción</th>
-            <th>Categoría</th>
-            <th>Acción</th>
+            <th>Descricion</th>
+            <th>Caregoria</th>
+            <th>Accion</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let habilidad of habilidades">
-            <td>{{ habilidad.id_habilidad }}</td>
-            <td>{{ habilidad.nombre_habilidad }}</td>
-            <td>{{ habilidad.id_tipo_habilidad }}</td>
-            <td>{{ habilidad.potencia }}</td>
-            <td>{{ habilidad.descripcion }}</td>
-            <td>{{ habilidad.categoria_habilidad }}</td>
-            <td><button class="btn btn-success btn-sm" (click) = "agregarHabilidad(habilidad)">Agregar</button></td>
+          <tr *ngFor="let moveset of movesets">
+            <td>{{ moveset.id_habilidad }}</td>
+            <td>{{ moveset.nombre_habilidad }}</td>
+            <td [style.backgroundColor]="'#' +   moveset.color_tipo_habilidad">{{ moveset.nombre_tipo_habilidad }}</td>
+            <td>{{ moveset.potencia }}</td>
+            <td>{{ moveset.descripcion }}</td>
+            <td>{{ moveset.categoria_habilidad }}</td>
+            <td> <button class="bg-danger" (click)="eliminarHabilidad(moveset)">Eliminar</button> </td>
           </tr>
-          <tr *ngIf="habilidades.length === 0">
-            <td colspan="7" class="text-center text-muted">No hay habilidades en el sistema</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
-    <hr>
-  
-    <!-- Tabla 2 con scroll -->
-    <div style="max-height: 300px; overflow-y: auto;">
-      <table class="table table-bordered table-hover table-sm">
-        <thead class="table-dark">
+          <tr *ngIf="movesets.length === 0">
+              <td colspan="7" class="text-center text-muted">La Creatura no tiene habilidades</td>
+            </tr>
+
           <tr>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Tipo</th>
-            <th>Potencia</th>
-            <th>Descripción</th>
-            <th>Categoría</th>
-            <th>Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let habilidadNew of habilidadesNew">
-            <td>{{ habilidadNew.id_habilidad }}</td>
-            <td>{{ habilidadNew.nombre_habilidad }}</td>
-            <td>{{ habilidadNew.id_tipo_habilidad }}</td>
-            <td>{{ habilidadNew.potencia }}</td>
-            <td>{{ habilidadNew.descripcion }}</td>
-            <td>{{ habilidadNew.categoria_habilidad }}</td>
-            <td> <button class="bg-danger" (click) = "eliminarHabilidadDeNew(habilidadNew)">Eliminar</button> </td>
-          </tr>
-          <tr *ngIf="habilidadesNew.length === 0">
-            <td colspan="7" class="text-center text-muted">No hay habilidades agregadas</td>
+            <td>---</td>
+            <td>---</td>
+            <td>---</td>
+            <td>---</td>
+            <td>---</td>
+            <td>---</td>
+            <td> <button class="bg-success" data-bs-toggle="modal" data-bs-target="#agregarModal">Agregar</button> </td>
           </tr>
         </tbody>
       </table>
     </div>
-  
+
+    </div>
+
+
+ </div>
+
+
+</div>
+<div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable"> <!-- Aquí se agrega modal-xl y scrollable -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="agregarModalLabel">Agregar habilidades</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <!-- Cuerpo del modal con límite de altura y scroll si se excede -->
+      <!-- Cuerpo del modal -->
+<div class="modal-body">
+  <div class="dropdown">
+  Filtlal Por Tipo:  
+  <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+    aria-expanded="false" [style.backgroundColor]="'#' + tipo3.color">
+    {{ tipo3.nombre_tipo }}
+  </button>
+  <ul class="dropdown-menu">
+    <li *ngFor="let tipo3 of tipos3">
+      <button class="dropdown-item" type="button"
+        [style.backgroundColor]="'#' + tipo3.color"
+        (click)="seleccionartipo3(tipo3)">
+        {{ tipo3.nombre_tipo }}
+      </button>
+    </li>
+  </ul>
+</div>
+  <!-- Tabla 1 con scroll -->
+  <div style="max-height: 300px; overflow-y: auto;">
+    <table class="table table-bordered table-hover table-sm">
+      <thead class="table-dark">
+        <tr>
+          <th>Id</th>
+          <th>Nombre</th>
+          <th>Tipo</th>
+          <th>Potencia</th>
+          <th>Descripción</th>
+          <th>Categoría</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let habilidad of habilidades">
+          <td>{{ habilidad.id_habilidad }}</td>
+          <td>{{ habilidad.nombre_habilidad }}</td>
+          <td>{{ habilidad.id_tipo_habilidad }}</td>
+          <td>{{ habilidad.potencia }}</td>
+          <td>{{ habilidad.descripcion }}</td>
+          <td>{{ habilidad.categoria_habilidad }}</td>
+          <td><button class="btn btn-success btn-sm" (click) = "agregarHabilidad(habilidad)">Agregar</button></td>
+        </tr>
+        <tr *ngIf="habilidades.length === 0">
+          <td colspan="7" class="text-center text-muted">No hay habilidades en el sistema</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  
-  
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" (click) = "genuinamenteAgregar()">Confirmar</button>
-          sexo
-        </div>
+
+  <hr>
+
+  <!-- Tabla 2 con scroll -->
+  <div style="max-height: 300px; overflow-y: auto;">
+    <table class="table table-bordered table-hover table-sm">
+      <thead class="table-dark">
+        <tr>
+          <th>Id</th>
+          <th>Nombre</th>
+          <th>Tipo</th>
+          <th>Potencia</th>
+          <th>Descripción</th>
+          <th>Categoría</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let habilidadNew of habilidadesNew">
+          <td>{{ habilidadNew.id_habilidad }}</td>
+          <td>{{ habilidadNew.nombre_habilidad }}</td>
+          <td>{{ habilidadNew.id_tipo_habilidad }}</td>
+          <td>{{ habilidadNew.potencia }}</td>
+          <td>{{ habilidadNew.descripcion }}</td>
+          <td>{{ habilidadNew.categoria_habilidad }}</td>
+          <td> <button class="bg-danger" (click) = "eliminarHabilidadDeNew(habilidadNew)">Eliminar</button> </td>
+        </tr>
+        <tr *ngIf="habilidadesNew.length === 0">
+          <td colspan="7" class="text-center text-muted">No hay habilidades agregadas</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click) = "genuinamenteAgregar()">Confirmar</button>
+        sexo
       </div>
     </div>
   </div>
-  
+</div>
+
+
+</div>
+<div *ngIf = "!usuarioActual">
+<div class="container">
+  <img ngSrc="logo.jpg" fill>
+</div>
+</div>

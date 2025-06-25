@@ -26,6 +26,10 @@ export class ModificarCreaturaComponent {
   }
   
   constructor(private connector: ConeccionService, private fb: FormBuilder,private route: ActivatedRoute) {
+    const usuarioData = localStorage.getItem('usuarioActual');
+    if (usuarioData) {
+      this.usuarioActual = JSON.parse(usuarioData);
+    }
     this.datosCreaturaForm = this.fb.group({
       hp: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
       atk: [null, [Validators.required, Validators.min(1), Validators.max(255)]],
@@ -39,6 +43,7 @@ export class ModificarCreaturaComponent {
     });
    
   }
+  usuarioActual:any;
   imagenCreatura = "defoult.jpg";
   imagenCreatura2:any;
   movesets: any[] = [];
@@ -144,6 +149,7 @@ export class ModificarCreaturaComponent {
   }
 
   ngOnInit(): void {
+  
     this.tipo3 = this.typeNull;
     this.route.queryParams.subscribe(
       params => {

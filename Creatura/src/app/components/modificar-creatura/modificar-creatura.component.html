@@ -1,5 +1,6 @@
-<app-barra-gestor-creatura></app-barra-gestor-creatura>
 
+<app-barra-gestor-creatura></app-barra-gestor-creatura>
+<div *ngIf = "usuarioActual">
 <!-- BARRA DE MODIFIACION DE CREATURA-->
 <div class="cont-titular d-flex align-items-center"> 
   <div class="titular p-2 w-100 d-flex ">
@@ -290,4 +291,10 @@
       </div>
     </div>
   </div>
+</div>
+</div>
+<div *ngIf = "!usuarioActual">
+<div class="container">
+  <img ngSrc="logo.jpg" fill>
+</div>
 </div>

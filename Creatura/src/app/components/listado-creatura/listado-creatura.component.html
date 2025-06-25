@@ -1,5 +1,5 @@
 
-
+<div *ngIf = "usuarioActual">
 <div class="container bg-dark">
   <div class="row row-custom justify-content-center">
 
@@ -59,4 +59,10 @@
     <!-- TERMINA EL LISTADO-->
 </div>
 
+</div>
+</div>
+<div *ngIf = "!usuarioActual">
+<div class="container">
+  <img ngSrc="logo.jpg" fill>
+</div>
 </div>
