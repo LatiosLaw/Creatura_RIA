@@ -7,7 +7,8 @@
 <div class="d-flex flex-wrap justify-content-around">
     @for (creatura of creaturas; track $index){
     <div class="contenido-creatura m-2">
-        <a>
+        <a class="nav-link" routerLink="/mostrarCreatura" 
+               [queryParams]= "{idCreatura:creatura.id_creatura}">
             <div class="text-center">
                 <img [src]="creatura.imagen" (error)="onImgErrorCreatura($event)" class="my-2" draggable="false" [alt]="creatura.nombre_creatura">
             </div>

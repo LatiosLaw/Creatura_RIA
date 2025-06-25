@@ -7,7 +7,7 @@
 <div class="d-flex flex-wrap justify-content-around">
     @for (usuario of usuarios; track $index){
     <div class="contenido-usuario m-2">
-        <a>
+        <a class="nav-link" [routerLink]="['/ver_usuario', usuario.nickname]">
             <div class="text-center">
                 <img [src]="usuario.foto" (error)="onImgErrorUsuario($event)" class="my-2" draggable="false" [alt]="usuario.nickname">
             </div>

@@ -19,7 +19,7 @@
                 </div>
                 <div class="tipos pt-2 pb-1 text-center">
                     <img [src]="creatura.tipo1.icono" class="" draggable="false" [alt]="creatura.tipo1.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo1.color">
-                    <img [src]="creatura.tipo2.icono" class="ms-2" draggable="false" [alt]="creatura.tipo2.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo2.color">
+                    <img [src]="creatura.tipo2.icono" class="ms-2" draggable="false" [alt]="creatura.tipo2.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo2.color" onerror="this.style.display='none';">
                 </div>
             </a>
             <div class="creador-crea-list text-center mt-1 px-2">

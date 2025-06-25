@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ConeccionService } from '../../serviceses/coneccion.service';
-
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-listado-usuarios',
-  imports: [],
+  imports: [RouterLink,CommonModule],
   templateUrl: './listado-usuarios.component.html',
   styleUrl: './listado-usuarios.component.scss'
 })

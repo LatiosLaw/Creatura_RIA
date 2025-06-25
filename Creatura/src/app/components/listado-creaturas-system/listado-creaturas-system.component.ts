@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ConeccionService } from '../../serviceses/coneccion.service';
-
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-listado-creaturas-system',
-  imports: [],
+  imports: [CommonModule,RouterLink],
   templateUrl: './listado-creaturas-system.component.html',
   styleUrl: './listado-creaturas-system.component.scss'
 })
@@ -19,15 +20,11 @@ export class ListadoCreaturasSystemComponent implements OnInit{
 
   ngOnInit(): void {
     this.connector.listadoCreaturaConTipos().subscribe((res) => {
-/*
-      const filtradas = res1.filter((creatura: any) => creatura.creador === 'SYSTEM');
+
+      const filtradas = res.filter((creatura: any) => creatura.creador === 'SYSTEM');
       this.randomizador(filtradas);
       this.creaturas = filtradas;
-*/
-//IMPORTANTE DESCOMENTAR LO DE ARRIBA Y BORRAR/COMENTAR LAS DOS LINEAS DE ABAJO PARA QUE FUNKE COMO DEBE
-      this.randomizador(res);
-      this.creaturas = res;
-      console.log(this.creaturas);
+      
     });
   }
 
