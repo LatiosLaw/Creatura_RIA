@@ -1,0 +1,114 @@
+
+<div  *ngIf="mostrarNormal">
+    <div class="cont-titular d-flex align-items-center"> 
+        <div class="titular p-2 w-100 d-flex">
+            <div class="d-inline">Creaturas Default</div>
+        </div>
+    </div>
+    
+    <div class="d-flex flex-wrap justify-content-around">
+        @for (creatura of creaturas; track $index){
+        <div class="contenido-creatura m-2">
+            <a>
+                <div class="text-center">
+                    <img [src]="creatura.imagen" (error)="onImgErrorCreatura($event)" class="my-2" draggable="false" [alt]="creatura.nombre_creatura">
+                </div>
+                <div class="px-2 text-center nombre-crea-list">
+                    {{ creatura.nombre_creatura }}
+                </div>
+                <div class="tipos pt-2 pb-1 text-center">
+                    <img [src]="creatura.tipo1.icono" class="" draggable="false" [alt]="creatura.tipo1.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo1.color">
+                    <img [src]="creatura.tipo2.icono" class="ms-2" draggable="false" [alt]="creatura.tipo2.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo2.color">
+                </div>
+            </a>
+            <div class="creador-crea-list text-center mt-1 px-2">
+                Creador: {{ creatura.creador }}
+            </div>
+        </div>
+        }
+        
+    </div>
+    <h3 *ngIf="error || creaturas.length === 0">No se encontraron Creaturas</h3>
+    <div class="cont-titular d-flex align-items-center"> 
+        <div class="titular p-2 w-100 d-flex">
+            <div class="d-inline">Creaturas de Usuarios</div>
+    
+        </div>
+    </div>
+    
+    <div class="d-flex flex-wrap justify-content-around">
+        @for (creatura of creaturasDeUsuarios; track $index){
+        <div class="contenido-creatura m-2">
+            <a>
+                <div class="text-center">
+                    <img [src]="creatura.imagen" (error)="onImgErrorCreatura($event)" class="my-2" draggable="false" [alt]="creatura.nombre_creatura">
+                </div>
+                <div class="px-2 text-center nombre-crea-list">
+                    {{ creatura.nombre_creatura }}
+                </div>
+                <div class="tipos pt-2 pb-1 text-center">
+                    <img [src]="creatura.tipo1.icono" class="" draggable="false" [alt]="creatura.tipo1.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo1.color">
+                    <img [src]="creatura.tipo2.icono" class="ms-2" draggable="false" [alt]="creatura.tipo2.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo2.color">
+                </div>
+            </a>
+            <div class="creador-crea-list text-center mt-1 px-2">
+                Creador: {{ creatura.creador }}
+            </div>
+        </div>
+        }
+        
+    </div>
+    <h3 *ngIf="error || creaturasDeUsuarios.length === 0">No se encontraron Creaturas de usuarios</h3>
+    <div class="cont-titular d-flex align-items-center"> 
+        <div class="titular p-2 w-100 d-flex">
+            <div class="d-inline">Usuarios</div>
+        </div>
+    </div>
+    
+    <div class="d-flex flex-wrap justify-content-around">
+        @for (usuario of usuarios; track $index){
+        <div class="contenido-usuario m-2">
+            <a>
+                <div class="text-center">
+                    <img [src]="usuario.foto" (error)="onImgErrorUsuario($event)" class="my-2" draggable="false" [alt]="usuario.nickname">
+                </div>
+                <div class="px-1 text-center nombre-user-list">
+                    {{usuario.nickname}}
+                </div>
+            </a>
+        </div>
+        }
+    </div>
+    <h3 *ngIf="error || usuarios.length === 0">No se encontraron Usuarios</h3>
+</div>
+<div  *ngIf="!mostrarNormal">
+    <div class="cont-titular d-flex align-items-center"> 
+        <div class="titular p-2 w-100 d-flex">
+            <div class="d-inline">Creaturas con el tipo buscado</div>
+        </div>
+    </div>
+    
+    <div class="d-flex flex-wrap justify-content-around">
+        @for (creatura of creaturasTipo; track $index){
+        <div class="contenido-creatura m-2">
+            <a>
+                <div class="text-center">
+                    <img [src]="creatura.imagen" (error)="onImgErrorCreatura($event)" class="my-2" draggable="false" [alt]="creatura.nombre_creatura">
+                </div>
+                <div class="px-2 text-center nombre-crea-list">
+                    {{ creatura.nombre_creatura }}
+                </div>
+                <div class="tipos pt-2 pb-1 text-center">
+                    <img [src]="creatura.tipo1.icono" class="" draggable="false" [alt]="creatura.tipo1.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo1.color">
+                    <img [src]="creatura.tipo2.icono" class="ms-2" draggable="false" [alt]="creatura.tipo2.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo2.color">
+                </div>
+            </a>
+            <div class="creador-crea-list text-center mt-1 px-2">
+                Creador: {{ creatura.creador }}
+            </div>
+        </div>
+        }
+        
+    </div>
+
+</div>

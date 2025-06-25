@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink,Router } from '@angular/router';
 import { RegistrarUsuarioComponent } from '../registrar-usuario/registrar-usuario.component';
 import { LoginComponent } from '../login/login.component';
 import { CommonModule } from '@angular/common';
-
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-barra-busqueda',
   imports: [CommonModule, RouterLink, RegistrarUsuarioComponent, LoginComponent],
@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 export class BarraBusquedaComponent {
   usuarioActual: any = null;
 
-  constructor() {
+  constructor(private router: Router,private cdRef: ChangeDetectorRef) {
     const data = localStorage.getItem('usuarioActual');
     if (data) {
       this.usuarioActual = JSON.parse(data);
@@ -34,7 +34,17 @@ salir() {
     console.error("❌ Falló la eliminación de 'usuarioActual'.");
   }
 }
-
+buscarMomento(texto:any){
+  if(texto){
+    this.router.navigate(['/Busqueishon'], {
+      queryParams: { datoBusqueda: texto }
+    });
+    this.cdRef.detectChanges();
+  }else{
+    alert("falta sexo mano");
+  }
+  
+}
 }
 
 

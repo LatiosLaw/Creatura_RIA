@@ -9,6 +9,7 @@ export class ConeccionService {
   private urlTipos = 'http://localhost/Creatura_PHP/api/tipo';
   //private urlMovesets = 'http://localhost:3000/movesets';
   private urlHabilidades = "http://localhost/Creatura_PHP/api/habilidades";
+  private urlBuscar = "http://localhost/Creatura_PHP/api/busqueda";
 ///creatura/:id_creatura
   constructor(private http: HttpClient) {}
 
@@ -65,6 +66,12 @@ export class ConeccionService {
     console.log("Console log momento");
     console.log(tipo);
 
+    return this.http.get<any>(url2);
+   }
+   buscar(buscar:any){
+    const url2= this.urlBuscar + "/busqueda.php?buscar=" + buscar;
+    //console.log("a ver que da el buscar");
+    //console.log();
     return this.http.get<any>(url2);
    }
    getTipos(){

@@ -15,6 +15,8 @@ import { AgregarCreaturaComponent } from './components/agregar-creatura/agregar-
 import { AltaHabilidadComponent } from './components/alta-habilidad/alta-habilidad.component';
 import { ExportarCreaturaComponent } from './components/exportar-creatura/exportar-creatura.component';
 import { MostrarCreaturaComponent } from './components/mostrar-creatura/mostrar-creatura.component';
+import { BusqueishonMomenteishonComponent } from './components/busqueishon-momenteishon/busqueishon-momenteishon.component';
+import { AyudaComponent } from './components/ayuda/ayuda.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/inicio', pathMatch: 'full'},
@@ -35,6 +37,8 @@ export const routes: Routes = [
     { path: 'agregarHabilidad', component: AltaHabilidadComponent },
     { path: 'exportarCreatura', component: ExportarCreaturaComponent },
     { path: 'mostrarCreatura', component: MostrarCreaturaComponent },
+    { path: 'Busqueishon', component: BusqueishonMomenteishonComponent },
+    { path: 'ayuda', component: AyudaComponent }
 
 
 
