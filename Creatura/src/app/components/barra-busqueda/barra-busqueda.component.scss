@@ -1,13 +1,22 @@
 .main-nav{
     background-color: darkgray;
 }
-
+.navbar-brand {
+    padding: 0;     
+    width: 20%;         
+    height: 60px;      
+  }
 .nombre-usuario{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
+.logo {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    display: block;
+  }
 .inicio-sesion-boton{
     margin-right: 5px;
 }

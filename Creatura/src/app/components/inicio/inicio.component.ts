@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ConeccionService } from '../../serviceses/coneccion.service';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-inicio',
-  imports: [RouterLink],
+  imports: [RouterLink,CommonModule],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.scss'
 })

@@ -12,7 +12,6 @@ export class ConeccionService {
   private urlBuscar = "http://localhost/Creatura_PHP/api/busqueda";
 ///creatura/:id_creatura
   constructor(private http: HttpClient) {}
-
   CrearCreatura(datos: any): Observable<any> {
     return this.http.post(this.url + "/alta.php", datos);
   }
@@ -139,7 +138,8 @@ export class ConeccionService {
 	}
 
   listarUsuarios(){
-    return this.http.get<any[]>(this.urlUsuarios);
+    const url2 = this.urlUsuarios + "/listarAll_usuarios.php";
+    return this.http.get<any[]>(url2);
   }
 	
 }

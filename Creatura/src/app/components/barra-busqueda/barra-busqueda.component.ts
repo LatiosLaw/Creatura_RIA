@@ -4,9 +4,10 @@ import { RegistrarUsuarioComponent } from '../registrar-usuario/registrar-usuari
 import { LoginComponent } from '../login/login.component';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common'
 @Component({
   selector: 'app-barra-busqueda',
-  imports: [CommonModule, RouterLink, RegistrarUsuarioComponent, LoginComponent],
+  imports: [ NgOptimizedImage,CommonModule, RouterLink, RegistrarUsuarioComponent, LoginComponent],
   templateUrl: './barra-busqueda.component.html',
   styleUrl: './barra-busqueda.component.scss'
 })

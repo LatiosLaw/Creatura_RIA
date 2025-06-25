@@ -209,8 +209,7 @@ export class AgregarCreaturaComponent {
 }
  genuinaGenuinamenteAgregar(){
   if(this.tipo1.id_tipo !== "0"){
-    if (this.datosCreaturaForm.valid) {
-      var hpNew = this.datosCreaturaForm.get('hp')?.value;
+    var hpNew = this.datosCreaturaForm.get('hp')?.value;
       var atkNew = this.datosCreaturaForm.get('atk')?.value;
       var defNew = this.datosCreaturaForm.get('def')?.value;
       var sdefNew = this.datosCreaturaForm.get('sdef')?.value;
@@ -260,12 +259,21 @@ export class AgregarCreaturaComponent {
     var desc = this.datosCreaturaForm.get('descripcion')?.value;
   if(!desc){
     this.datosCreaturaForm.patchValue({
-
       descripcion: "",
-
     });
   }
+    this.datosCreaturaForm.patchValue({
+      hp: hpNew, 
+      atk: atkNew,
+      def: defNew,
+      sdef: sdefNew,
+      satk: spaNew,
+      spe: speNew
+    });
       //////If momento////////////////////////////////////////////////////////////////////////////////
+
+    if (this.datosCreaturaForm.valid) {
+      
       const newCretura = {
         //id_creatura: this.creatura.id_creatura,
         nombre_creatura: this.datosCreaturaForm.get('nombre')?.value,
