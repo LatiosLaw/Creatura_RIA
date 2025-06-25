@@ -26,6 +26,8 @@ export class VerUsuarioComponent {
     this.route.params.subscribe(params => {
       this.nickname_usuario = params['nickname'];
       console.log(this.nickname_usuario);
+      this.mostrarUsuario();
+      this.mostrarCreaturas();
     });
   }
 
