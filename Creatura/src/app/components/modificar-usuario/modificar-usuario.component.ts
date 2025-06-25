@@ -47,7 +47,7 @@ this.registroForm.patchValue({
 this.registroForm.patchValue({
   img_vieja: this.usuarioLogueado.foto
 });
-
+this.imagen_usuario = this.usuarioLogueado.foto;
   }
 
     exito(){
