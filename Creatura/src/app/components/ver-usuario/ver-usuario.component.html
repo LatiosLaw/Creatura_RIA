@@ -14,6 +14,8 @@
 <div *ngIf="creaturas?.creaturas && creaturas.creaturas.length > 0">
 ============================ CREATURAS =================================<br>
   <div *ngFor="let c of creaturas.creaturas">
+    <a class="nav-link" routerLink="/mostrarCreatura" 
+    [queryParams]= "{idCreatura:c.id_creatura}">
     <h4>Nombre: {{ c.nombre }}</h4>
     <img [src]="c.imagen" style="max-width: 150px; max-height: 150px;">
     <p>Rating : {{ c.rating }}/5</p>
@@ -21,6 +23,7 @@
     <p>Tipo 2 : {{ c.tipo2.nombre_tipo }}</p>
     <p>Creador: {{ informacion_usuario.usuario.nickname }}</p>
     <!-- Agregá más propiedades según tu modelo -->
+  </a>
   </div>
 </div>
 

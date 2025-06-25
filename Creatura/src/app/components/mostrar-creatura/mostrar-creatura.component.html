@@ -102,9 +102,68 @@
         
     </div>
     <div class = "row">
-        
-
+      
+      <div class="cont-titular d-flex align-items-center"> 
+        <div class="titular p-2 w-100 d-flex">
+            <div class="d-inline">Muy devil</div>
+        </div>
     </div>
+    <button *ngFor = "let tipo of calculoDefMuyEff" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false" [style.backgroundColor]="'#' + tipo.color">
+            {{ tipo.nombre_tipo }}
+          </button>
+    
+      <div class="cont-titular d-flex align-items-center"> 
+        <div class="titular p-2 w-100 d-flex">
+            <div class="d-inline">Devil</div>
+        </div>
+    </div>
+    <button *ngFor = "let tipo of calculoDefEff" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false" [style.backgroundColor]="'#' + tipo.color">
+            {{ tipo.nombre_tipo }}
+          </button>
+    
+      <div class="cont-titular d-flex align-items-center"> 
+        <div class="titular p-2 w-100 d-flex">
+            <div class="d-inline">Neutro</div>
+        </div>
+    </div>
+    <button *ngFor = "let tipo of calculoDefNeu" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+    aria-expanded="false" [style.backgroundColor]="'#' + tipo.color">
+    {{ tipo.nombre_tipo }}
+  </button>
+    
+      <div class="cont-titular d-flex align-items-center"> 
+        <div class="titular p-2 w-100 d-flex">
+            <div class="d-inline">Poco eficaz</div>
+        </div>
+    </div>
+    <button *ngFor = "let tipo of calculoDefNoEff" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+    aria-expanded="false" [style.backgroundColor]="'#' + tipo.color">
+    {{ tipo.nombre_tipo }}
+  </button>
+    
+      <div class="cont-titular d-flex align-items-center"> 
+        <div class="titular p-2 w-100 d-flex">
+            <div class="d-inline">Muy Poco eficaz</div>
+        </div>
+    </div>
+    <button *ngFor = "let tipo of calculoDefMuyNoEff" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+    aria-expanded="false" [style.backgroundColor]="'#' + tipo.color">
+    {{ tipo.nombre_tipo }}
+  </button>
+    
+      <div class="cont-titular d-flex align-items-center"> 
+        <div class="titular p-2 w-100 d-flex">
+            <div class="d-inline">Inmune</div>
+        </div>
+    </div>
+    <button *ngFor = "let tipo of calculoDefInmune" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+    aria-expanded="false" [style.backgroundColor]="'#' + tipo.color">
+    {{ tipo.nombre_tipo }}
+  </button>
+    
+  </div>
     <div class = "row">
       <table class="table table-bordered">
         <thead class= "table-dark">

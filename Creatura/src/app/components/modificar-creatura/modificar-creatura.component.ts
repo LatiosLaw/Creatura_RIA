@@ -55,6 +55,18 @@ export class ModificarCreaturaComponent {
   habilidades: any[] =[];
   habilidades2: any[] = [];
   habilidades3: any[] = [];
+
+  calculoDef: any[] = [];
+  calculoDefMuyEff: any[] = [];
+  calculoDefEff: any[] = [];
+  calculoDefNeu: any[] = [];
+  calculoDefNoEff: any[] = [];
+  calculoDefMuyNoEff: any[] = [];
+  calculoDefInmune: any[] = [];
+
+
+
+
   creatura: any;
   idCreatura:any;
   
@@ -64,6 +76,7 @@ export class ModificarCreaturaComponent {
 
   cargarTipos(){
     this.connector.getTipos().subscribe(data => {
+      
       console.log(data);
       this.tipos1 = [...data];
       this.tipos2 = [...data];
@@ -78,6 +91,7 @@ export class ModificarCreaturaComponent {
         this.tipos3.push(this.typeNull);
       }
       this.limpiarListaDeTipos()
+      
     })
   }
 
@@ -142,7 +156,42 @@ export class ModificarCreaturaComponent {
       this.movesets = data.habilidades;
     })
   }
+  cargarCalculoDef(){
+    this.connector.getCalculaDef(this.creatura.tipo1.id_tipo,this.creatura.tipo2.id_tipo).subscribe(data => {
+      this.calculoDefEff = [];
+      this.calculoDefMuyEff = [];
+      this.calculoDefMuyNoEff = [];
+      this.calculoDefNoEff = [];
+      this.calculoDefNeu = [];
+      this.calculoDefInmune = [];
+      console.log("get calculos defensivos");
+      console.log(data);
+      this.calculoDef = data.defensas;
+      this.calculoDef.forEach(element => {
+        if(element.multiplicador === 0){
+          this.calculoDefInmune.push(element);
+        }else if(element.multiplicador === 1){
+          this.calculoDefNeu.push(element);
+        }else if(element.multiplicador === 2){
+          this.calculoDefEff.push(element);
+        }else if(element.multiplicador === 4){
+          this.calculoDefMuyEff.push(element);
+        }else if(element.multiplicador === 0.5){
+          this.calculoDefNoEff.push(element);
+        }else if(element.multiplicador === 0.25){
+          this.calculoDefMuyNoEff.push(element);
+        }
+      });
+      
+      this.calculoDefEff = [...this.calculoDefEff];
+      this.calculoDefMuyEff = [...this.calculoDefMuyEff];
+      this.calculoDefMuyNoEff = [...this.calculoDefMuyNoEff];
+      this.calculoDefNoEff = [...this.calculoDefNoEff];
+      this.calculoDefNeu = [...this.calculoDefNeu];
+      this.calculoDefInmune = [...this.calculoDefInmune];
 
+    })
+  }
   onImgError(event: Event) {
     const element = event.target as HTMLImageElement;
     element.src = 'defoult.png'; // Ruta de imagen por defecto
@@ -157,6 +206,7 @@ export class ModificarCreaturaComponent {
 
         this.mostrarCreatura2().then((resolve:any) => {
           this.cargarTipos();
+          this.cargarCalculoDef();
           var publicoPosta = false;
           if(this.creatura.publico === 1){
             publicoPosta = true;
@@ -182,11 +232,13 @@ export class ModificarCreaturaComponent {
   seleccionarTipo1(tipo: any): void {
     this.creatura.tipo1 = tipo;
     this.cargarTipos();
+    this.cargarCalculoDef();
 
   }
   seleccionarTipo2(tipo: any): void {
     this.creatura.tipo2 = tipo;
     this.cargarTipos();
+    this.cargarCalculoDef();
 
   }
   seleccionartipo3(tipo: any): void {

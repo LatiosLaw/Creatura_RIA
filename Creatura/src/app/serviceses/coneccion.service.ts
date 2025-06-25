@@ -28,6 +28,13 @@ export class ConeccionService {
     const body = datos;
     return this.http.post<any>(url2,body);
   }
+  getCalculaDef(tipo1:any,tipo2:any){
+    console.log("tipo2");
+    console.log(tipo2);
+    const url2 = this.url + "/retornar_calculo_defensivo.php?tipo1=" + tipo1 + "&tipo2=" + tipo2;
+    console.log(url2);
+    return this.http.get<any>(url2);
+  }
   getCreatura(id:any){
     const url2 = this.url + "/retornar_creatura.php?id_creatura=" + id;
     //retornar_creatura.php?nombre_creatura=Blastoise&creador=SYSTEM

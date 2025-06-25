@@ -32,6 +32,16 @@ export class AgregarCreaturaComponent {
   tipos2: any[] = [];
   tipos3: any[] = [];
 
+  calculoDef: any[] = [];
+  calculoDefMuyEff: any[] = [];
+  calculoDefEff: any[] = [];
+  calculoDefNeu: any[] = [];
+  calculoDefNoEff: any[] = [];
+  calculoDefMuyNoEff: any[] = [];
+  calculoDefInmune: any[] = [];
+
+
+
   typeNull = {
     id_tipo: "0",
     nombre_tipo: "null",
@@ -68,12 +78,52 @@ export class AgregarCreaturaComponent {
     const element = event.target as HTMLImageElement;
     element.src = 'defoult.png'; // Ruta de imagen por defecto
   }
+  cargarCalculoDef(){
+    this.connector.getCalculaDef(this.tipo1.id_tipo,this.tipo2.id_tipo).subscribe(data => {
+      this.calculoDefEff = [];
+      this.calculoDefMuyEff = [];
+      this.calculoDefMuyNoEff = [];
+      this.calculoDefNoEff = [];
+      this.calculoDefNeu = [];
+      this.calculoDefInmune = [];
+      console.log("get calculos defensivos");
+      console.log(data);
+      this.calculoDef = data.defensas;
+      this.calculoDef.forEach(element => {
+        if(element.multiplicador === 0){
+          this.calculoDefInmune.push(element);
+        }else if(element.multiplicador === 1){
+          this.calculoDefNeu.push(element);
+        }else if(element.multiplicador === 2){
+          this.calculoDefEff.push(element);
+        }else if(element.multiplicador === 4){
+          this.calculoDefMuyEff.push(element);
+        }else if(element.multiplicador === 0.5){
+          this.calculoDefNoEff.push(element);
+        }else if(element.multiplicador === 0.25){
+          this.calculoDefMuyNoEff.push(element);
+        }
+      });
+      
+      this.calculoDefEff = [...this.calculoDefEff];
+      this.calculoDefMuyEff = [...this.calculoDefMuyEff];
+      this.calculoDefMuyNoEff = [...this.calculoDefMuyNoEff];
+      this.calculoDefNoEff = [...this.calculoDefNoEff];
+      this.calculoDefNeu = [...this.calculoDefNeu];
+      this.calculoDefInmune = [...this.calculoDefInmune];
+
+    })
+  }
   ngOnInit(): void {
     this.tipo3 = this.typeNull;
     this.creador = "token"
     this.imagenCreatura = "defoult.png"
-    this.cargarTipos();
+   // this.cargarTipos();
+    this.cargarTipos2().then((resolve:any) => {
+      this.cargarCalculoDef();
+    });
     this.habilideishon();
+
     this.idTipo1 = 1;
     this.idTipo2 = 0;
     this.tipo1 = this.typeNull;
@@ -90,7 +140,21 @@ export class AgregarCreaturaComponent {
     });
 
   }
+  cargarTipos2():Promise<void> {
+    return new Promise((resolve, reject) => {
+    this.connector.getTipos().subscribe(data => {
+      console.log(data);
 
+      this.tipos1 = [...data];
+      this.tipos2 = [...data];
+      this.tipos3 = [...data];
+      this.tipos2.push(this.typeNull);
+      this.tipos3.push(this.typeNull);
+      this.limpiarListaDeTipos()
+      resolve();
+    })
+  })
+  }
   cargarTipos(){
     this.connector.getTipos().subscribe(data => {
       console.log(data);
@@ -117,11 +181,13 @@ export class AgregarCreaturaComponent {
   seleccionarTipo1(tipo: any): void {
     this.tipo1 = tipo;
     this.cargarTipos();
+    this.cargarCalculoDef();
 
   }
   seleccionarTipo2(tipo: any): void {
     this.tipo2 = tipo;
     this.cargarTipos();
+    this.cargarCalculoDef();
 
   }
 

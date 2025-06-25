@@ -26,6 +26,16 @@ export class MostrarCreaturaComponent {
   barraRateBlock:boolean = false;
   idCreatura:any;
   usuarioActual:any;
+
+  calculoDef: any[] = [];
+  calculoDefMuyEff: any[] = [];
+  calculoDefEff: any[] = [];
+  calculoDefNeu: any[] = [];
+  calculoDefNoEff: any[] = [];
+  calculoDefMuyNoEff: any[] = [];
+  calculoDefInmune: any[] = [];
+
+
   movesets: any[] = [];
   rating: number = 0;
   stars: number[] = [1, 2, 3, 4, 5];
@@ -37,7 +47,51 @@ export class MostrarCreaturaComponent {
     icono : "no.png",
     creador : "tuvieja"
   }
-
+  cargarCreatura2():Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.connector.getCreaturaConTipos(this.idCreatura).subscribe(data => {
+        console.log(data);
+        var tipo2:any;
+        if(!data.creatura.id_tipo2){
+          tipo2 = this.typeNull;
+        }else{
+          tipo2 = data.creatura.tipo2;
+        }
+        this.creatura = {
+          id_creatura: data.creatura.id_creatura,
+          nombre_creatura: data.creatura.nombre_creatura,
+          id_tipo1: data.creatura.id_tipo1,
+          id_tipo2: tipo2,
+          descripcion: data.creatura.descripcion,
+          hp: data.creatura.hp,
+          atk: data.creatura.atk,
+          def: data.creatura.def,
+          spa: data.creatura.spa,
+          sdef: data.creatura.sdef,
+          spe: data.creatura.spe,
+          creador: data.creatura.creador,
+          imagen: data.creatura.imagen,
+          rating: data.creatura.rating_promedio,
+          tipo1:{
+            id_tipo: data.creatura.tipo1.id_tipo,
+            nombre_tipo: data.creatura.tipo1.nombre_tipo,
+            color: data.creatura.tipo1.color,
+            icono: data.creatura.tipo1.icono,
+            creador: data.creatura.tipo1.creador,
+          },
+          tipo2:{
+            id_tipo: tipo2.id_tipo,
+            nombre_tipo: tipo2.nombre_tipo,
+            color: tipo2.color,
+            icono: tipo2.icono,
+            creador: tipo2.creador,
+          }
+        };
+        this.creturaRating = this.creatura.rating;
+        resolve();
+    });
+    })
+  }
   cargarCreatura(){
       this.connector.getCreaturaConTipos(this.idCreatura).subscribe(data => {
         console.log(data);
@@ -80,6 +134,29 @@ export class MostrarCreaturaComponent {
         this.creturaRating = this.creatura.rating;
     });
   }
+  cargarCalculoDef(){
+    this.connector.getCalculaDef(this.creatura.id_tipo1,this.creatura.id_tipo2.id_tipo).subscribe(data => {
+      console.log("get calculos defensivos");
+      console.log(data);
+      this.calculoDef = data.defensas;
+      this.calculoDef.forEach(element => {
+        if(element.multiplicador === 0){
+          this.calculoDefInmune.push(element);
+        }else if(element.multiplicador === 1){
+          this.calculoDefNeu.push(element);
+        }else if(element.multiplicador === 2){
+          this.calculoDefEff.push(element);
+        }else if(element.multiplicador === 4){
+          this.calculoDefMuyEff.push(element);
+        }else if(element.multiplicador === 0.5){
+          this.calculoDefNoEff.push(element);
+        }else if(element.multiplicador === 0.25){
+          this.calculoDefMuyNoEff.push(element);
+        }
+      });
+
+    })
+  }
   cargarMoveset(){
     this.connector.getMoveset(this.idCreatura).subscribe(data => {
       console.log("get Moveset");
@@ -92,8 +169,12 @@ export class MostrarCreaturaComponent {
       params => {
         this.idCreatura = params['idCreatura'];
       })
-   this.cargarCreatura();
+   //this.cargarCreatura();
+   this.cargarCreatura2().then((resolve:any) => {
+    this.cargarCalculoDef();
+   });
    this.cargarMoveset();
+   
    const datos ={
       id_creatura: this.idCreatura,
       usuario: this.usuarioActual.nickname
