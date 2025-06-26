@@ -1,0 +1,50 @@
+.contenedor-usuarios{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.contenido-usuario{
+    background-color: lightgray;
+    margin: 20px;
+    min-width: 200px;
+    min-height: 225px;
+    max-width: 200px;
+    max-height: 225px;
+    transition: background-color 0.3s ease;
+}
+
+.contenido-usuario:hover{
+    background-color: ghostwhite;
+}
+
+.contenido-usuario a{
+    text-decoration: none;
+    color: black;
+}
+
+.imagen-usuario{
+    text-align: center;
+}
+
+.imagen-usuario img{
+    user-select: none;
+    background-color: white;
+    margin-top: 7px;
+    margin-bottom: 5px;
+    border: 1px solid black;
+    min-width: 185px;
+    min-height: 185px;
+    max-width: 185px;
+    max-height: 185px;
+}
+
+.nombre-usuario{
+    text-align: center;
+    font-size: 18px;
+    padding-left: 5px;
+    padding-right: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

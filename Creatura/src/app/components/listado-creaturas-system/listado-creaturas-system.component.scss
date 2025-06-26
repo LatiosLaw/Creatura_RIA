@@ -1,0 +1,77 @@
+.contenedor-creaturas, .contenedor-usuarios{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.contenido-creatura{
+    background-color: lightgray;
+    cursor: pointer;
+    margin: 20px;
+    min-width: 300px;
+    min-height: 415px;
+    max-width: 300px;
+    max-height: 415px;
+    transition: background-color 0.3s ease;
+}
+
+.contenido-creatura:hover{
+    background-color: ghostwhite;
+}
+
+.contenido-creatura a{
+    text-decoration: none;
+    color: black;
+}
+
+.imagen-creatura{
+    text-align: center;
+}
+
+.imagen-creatura img{
+    background-color: white;
+    margin-top: 10px; 
+    margin-bottom: 5px;
+    user-select: none;
+    border: 1px solid black;
+    min-width: 280px;
+    min-height: 280px;
+    max-width: 280px;
+    max-height: 280px;
+}
+
+.nombre-creatura, .creador-creatura{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nombre-creatura{
+    text-align: center;
+    font-size: 22px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.creador-creatura{
+    text-align: center;
+    margin-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 6px;
+    border-top: 1px solid black;
+}
+
+.tipos{
+    user-select: none;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    text-align: center;
+}
+
+.tipos img{
+    min-width: 35px;
+    min-height: 35px;
+    max-width: 35px;
+    max-height: 35px;
+}

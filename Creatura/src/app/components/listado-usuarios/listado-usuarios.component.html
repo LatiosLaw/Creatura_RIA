@@ -1,17 +1,17 @@
-<div class="cont-titular d-flex align-items-center"> 
-    <div class="titular p-2 w-100 d-flex">
-        <div class="d-inline">Usuarios</div>
+<div class="cont-titular"> 
+    <div class="titular">
+        <div>Otros Creadores de Creaturas</div>
+        <button onclick="history.back();">Volver</button>
     </div>
 </div>
-
-<div class="d-flex flex-wrap justify-content-around">
+<div class="contenedor-usuarios">
     @for (usuario of usuarios; track $index){
-    <div class="contenido-usuario m-2">
+    <div class="contenido-usuario">
         <a class="nav-link" [routerLink]="['/ver_usuario', usuario.nickname]">
-            <div class="text-center">
-                <img [src]="usuario.foto" (error)="onImgErrorUsuario($event)" class="my-2" draggable="false" [alt]="usuario.nickname">
+            <div class="imagen-usuario">
+                <img [src]="usuario.foto" (error)="onImgErrorUsuario($event)" draggable="false" [alt]="usuario.nickname">
             </div>
-            <div class="px-1 text-center nombre-user-list">
+            <div class="nombre-usuario">
                 {{usuario.nickname}}
             </div>
         </a>
