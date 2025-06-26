@@ -1,1 +1,22 @@
 <p>modificar-tipo works!</p>
+
+<div class="container bg-primary">
+	<div class="row">
+		<div class="col col-img bg-banger">
+			<div class="contenedor-imagen mt-3 mb-3">
+				<div class="mb-3">
+					<input id="input-imagen-tipo" type="file" class="formcontrol" (change)="onFileChange($event)" accept="image/png , image/jpeg"/>
+				</div>
+				<img [src]="el_tipo.icono" alt="Icono del tipo"  class="w-100 modificar-tipo-icono" [style.backgroundColor]="'#'+el_tipo.color">
+			</div>
+		</div>
+		<div class="col col-Stats bg-info" [formGroup]="datos_del_tipo_form">
+			<div class="align-items-center d-flex gap-2">
+				Nombre:<input type="text" formControlName="nombre" class="bg-success text-white m-1 p-2" maxlength="30"/>
+			</div>
+			<div class="align-items-center d-flex gap-2">
+				Color:<input [(colorPicker)]="el_color" [style.background]="el_color" (colorPickerChange)="Selecciono_Color($event)"/>
+			</div>
+	</div>
+
+</div>
