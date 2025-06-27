@@ -63,6 +63,11 @@
     margin-top: 5px;
 }
 
+.dropdown-item:active{
+    background-color: rgb(167, 167, 167);
+    color: black;
+}
+
 .tipos{
     user-select: none;
     padding-top: 8px;

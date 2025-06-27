@@ -1,50 +1,74 @@
-
-
-<div>
-
+<div class="habilidades">
+      <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Categoría</th>
+                <th>Potencia</th>
+                <th>Descripción</th>
+                <th>Creador</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
   <!-- ARRANCA EL LISTADO-->
 
+          @for(habilidad of paginadas; track $index){
+          <tr>
 
-      <div *ngFor="let habilidad of paginadas">
-          <div>
-            <figcaption>
-                <div id = "nombreHab">Nombre : {{ habilidad.nombre_habilidad }}</div>
-                <img [src]="habilidad.tipo.icono_base64" style="max-width: 100px; max-height: 100px;" (error)="onImgError($event)" alt="{{ habilidad.icono_tipo }}">
-              <div id = "nombreTipo">Tipo : {{ habilidad.tipo.nombre }}</div>
-              <div id = "Descripcion">Descripcion : {{ habilidad.descripcion }}</div>
-            </figcaption>
-            <figcaption>
-                  <div id="potencia">Categoria : {{ habilidad.categoria_habilidad }}</div>
-            </figcaption>
-            <figcaption>
-                  <div id="potencia">Potencia : {{ habilidad.potencia }}</div>
-            </figcaption>
-            <figcaption>
-                <div id = "creador">Creador: {{ habilidad.creador }}</div>
-            </figcaption>
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <td id = "nombreHab">
+              <strong>
+                {{ habilidad.nombre_habilidad }}
+              </strong>
+            </td>
+
+            <td id = "nombreTipo" [style.background-color]="'#' + habilidad.tipo.color">
+              <img [src]="habilidad.tipo.icono_base64" (error)="onImgError($event)" alt="{{ habilidad.icono_tipo }}">
+              {{ habilidad.tipo.nombre }}
+            </td>
+
+            <td id="potencia">
+              {{ habilidad.categoria_habilidad }}
+            </td>
+
+            <td id="potencia">
+              {{ habilidad.potencia }}
+            </td>
+
+            <td id = "Descripcion">
+              {{ habilidad.descripcion }}
+            </td>
+
+            <td id = "creador">
+              {{ habilidad.creador }}
+            </td>
+
+            <td>
+              <button class="btn btn-dark btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   ...
-                </button>
-<ul class="dropdown-menu">
-                      <a class="nav-link" routerLink="/modificarHabilidad" 
-                      [queryParams]= "{idHabilidad:habilidad.id_habilidad}">
-                        <li>
-                          <button class="dropdown-item" type="button">Modificar Habilidad</button>
-                        </li>
-                      </a>
-                      <li>
-                        <button class="dropdown-item" type="button" (click)="mostrarJSHabilidad(habilidad.id_habilidad)">Exportar</button>
-                      </li>
-                      <li>
-                        <button class="dropdown-item" type="button" (click)="eliminarHabilidad(habilidad.id_habilidad)">Eliminar</button>
-                      </li>
-                </ul>
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" routerLink="/modificarHabilidad" 
+                    [queryParams]= "{idHabilidad:habilidad.id_habilidad}">
+                    Modificar Habilidad
+                  </a>
+                </li>
+                <li>
+                  <button class="dropdown-item" type="button" (click)="mostrarJSHabilidad(habilidad.id_habilidad)">Exportar</button>
+                </li>
+                <li>
+                  <button class="dropdown-item" type="button" (click)="eliminarHabilidad(habilidad.id_habilidad)">Eliminar</button>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          }
 
-    <!-- TERMINA EL LISTADO-->
-
-</div>
-
-      </div>
+        </tbody>
+      </table>
+      <!-- TERMINA EL LISTADO-->
       <mat-paginator  [length]="habilidades.length"
               [pageSize]="8"
               [pageSizeOptions]="[8, 16, 32, 8954]"
