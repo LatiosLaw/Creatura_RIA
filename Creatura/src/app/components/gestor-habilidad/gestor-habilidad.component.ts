@@ -6,10 +6,11 @@ import { ListadoHabilidadComponent } from '../listado-habilidad/listado-habilida
 import { BarraGestorHabilidadComponent } from '../barra-gestor-habilidad/barra-gestor-habilidad.component';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import Swal from 'sweetalert2';
+import { PiePaginaComponent } from '../pie-pagina/pie-pagina.component';
 
 @Component({
   selector: 'app-gestor-habilidad',
-  imports: [RouterOutlet,RouterLink,ListadoHabilidadComponent,BarraGestorHabilidadComponent,CommonModule, NgOptimizedImage],
+  imports: [RouterOutlet,RouterLink,ListadoHabilidadComponent,BarraGestorHabilidadComponent,CommonModule, NgOptimizedImage, PiePaginaComponent],
   templateUrl: './gestor-habilidad.component.html',
   styleUrl: './gestor-habilidad.component.scss'
 })

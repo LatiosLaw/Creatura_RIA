@@ -13,10 +13,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 
 import {customPaginator} from '../../../cosas/matPag';
+import { PiePaginaComponent } from '../pie-pagina/pie-pagina.component';
 
 @Component({
   selector: 'app-busqueishon-momenteishon',
-  imports: [RouterOutlet,RouterLink,CommonModule, NgOptimizedImage, MatPaginatorModule],
+  imports: [RouterOutlet,RouterLink,CommonModule, NgOptimizedImage, MatPaginatorModule, PiePaginaComponent],
   templateUrl: './busqueishon-momenteishon.component.html',
   styleUrl: './busqueishon-momenteishon.component.scss',
   providers: [

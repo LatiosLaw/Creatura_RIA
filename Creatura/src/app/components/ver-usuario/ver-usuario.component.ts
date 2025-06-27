@@ -10,10 +10,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 
 import {customPaginator} from '../../../cosas/matPag';
+import { PiePaginaComponent } from '../pie-pagina/pie-pagina.component';
 @Component({
   selector: 'app-ver-usuario',
   standalone: true,
-  imports: [CommonModule, RouterModule,MatPaginatorModule],
+  imports: [CommonModule, RouterModule,MatPaginatorModule, PiePaginaComponent],
   templateUrl: './ver-usuario.component.html',
   styleUrl: './ver-usuario.component.scss',
   providers: [

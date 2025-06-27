@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsuarioService } from '../../serviceses/usuario.service';
 import Swal from 'sweetalert2';
+import { PiePaginaComponent } from '../pie-pagina/pie-pagina.component';
 
 @Component({
   selector: 'app-modificar-usuario',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, PiePaginaComponent],
   templateUrl: './modificar-usuario.component.html',
   styleUrl: './modificar-usuario.component.scss'
 })
