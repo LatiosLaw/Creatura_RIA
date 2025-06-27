@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="contenedor-creaturas">
-        @for (creatura of creaturas; track $index){
+        @for (creatura of paginadas_Crea; track $index){
         <div class="contenido-creatura">
             <a routerLink="/mostrarCreatura" 
             [queryParams]= "{idCreatura:creatura.id_creatura}">
@@ -36,6 +36,12 @@
 
 
     </div>
+    <mat-paginator  [length]="creaturas.length"
+        [pageSize]="8"
+        [pageSizeOptions]="[8, 16, 32, 8954]"
+        aria-label="Select page"
+        (page)="paginarCrea($event)">
+    </mat-paginator>
     <div class="x-large" *ngIf="error || creaturas.length === 0">No se encontraron creaturas del sistema que coincidan con tu busqueda.</div>
 
     <div class="cont-mini-titular"> 
@@ -44,7 +50,7 @@
         </div>
     </div>
     <div class="contenedor-creaturas">
-        @for (creatura of creaturasDeUsuarios; track $index){
+        @for (creatura of paginadas_CreaUsu; track $index){
         <div class="contenido-creatura">
             <a routerLink="/mostrarCreatura" 
             [queryParams]= "{idCreatura:creatura.id_creatura}">
@@ -66,6 +72,12 @@
         }
         
     </div>
+    <mat-paginator  [length]="creaturasDeUsuarios.length"
+        [pageSize]="8"
+        [pageSizeOptions]="[8, 16, 32, 8954]"
+        aria-label="Select page"
+        (page)="paginarCreaUsu($event)">
+    </mat-paginator>
     <div class="x-large" *ngIf="error || creaturasDeUsuarios.length === 0">No se encontraron creaturas de usuarios que coincidan con tu busqueda.</div>
     
     <div class="cont-mini-titular"> 
@@ -74,7 +86,7 @@
         </div>
     </div>
     <div class="contenedor-usuarios">
-        @for (usuario of usuarios; track $index){
+        @for (usuario of paginadas_Usu; track $index){
         <div class="contenido-usuario">
             <a class="nav-link" [routerLink]="['/ver_usuario', usuario.nickname]">
                 <div class="imagen-usuario">
@@ -88,6 +100,12 @@
         }
         
     </div>
+    <mat-paginator  [length]="usuarios.length"
+        [pageSize]="8"
+        [pageSizeOptions]="[8, 16, 32, 8954]"
+        aria-label="Select page"
+        (page)="paginarUsu($event)">
+    </mat-paginator>
     <div class="x-large" *ngIf="error || usuarios.length === 0">No se encontraron usuarios que coincidan con tu busqueda.</div>
 </div>
 
@@ -98,7 +116,7 @@
         </div>
     </div>
     <div class="contenedor-creaturas">
-        @for (creatura of creaturasTipo; track $index){
+        @for (creatura of paginadas_Tipo; track $index){
         <div class="contenido-creatura">
             <a routerLink="/mostrarCreatura" 
             [queryParams]= "{idCreatura:creatura.id_creatura}">
@@ -119,4 +137,11 @@
         </div>
         }
     </div>
+    <mat-paginator  [length]="creaturasTipo.length"
+        [pageSize]="8"
+        [pageSizeOptions]="[8, 16, 32, 8954]"
+        aria-label="Select page"
+        (page)="paginarTipo($event)">
+    </mat-paginator>
+
 </div>

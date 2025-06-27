@@ -6,7 +6,7 @@
 </div>
 
 <div class="contenedor-creaturas">
-    @for (creatura of creaturas; track $index){
+    @for (creatura of paginadas; track $index){
     <div class="contenido-creatura">
         <a routerLink="/mostrarCreatura" 
                [queryParams]= "{idCreatura:creatura.id_creatura}">

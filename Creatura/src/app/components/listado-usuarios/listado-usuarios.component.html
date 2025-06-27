@@ -5,7 +5,7 @@
     </div>
 </div>
 <div class="contenedor-usuarios">
-    @for (usuario of usuarios; track $index){
+    @for (usuario of paginados; track $index){
     <div class="contenido-usuario">
         <a class="nav-link" [routerLink]="['/ver_usuario', usuario.nickname]">
             <div class="imagen-usuario">
