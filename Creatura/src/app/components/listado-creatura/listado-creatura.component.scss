@@ -1,3 +1,99 @@
+/* You can add global styles to this file, and also import other style files */
+@use 'bootstrap/scss/bootstrap';
+@use 'bootstrap-icons/font/bootstrap-icons.css';
+//@use 'animate.css/animate.min.css';
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+a{
+    text-decoration: none;
+}
+
+.cont-titular{
+    background-color: rgb(178, 190, 201);
+    display: flex;
+    margin-top: 20px;
+}
+.mat-paginator-page-size {
+    display: none !important;
+  }
+.titular{
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    font-size: xx-large;
+    font-weight: 500;
+    margin-right: 5px;
+    align-items: center;
+    overflow: auto;
+}
+
+.titular div{
+    display: inline;
+    letter-spacing: 2px;
+}
+
+.titular button, .titular a{
+    margin-inline-start: auto;
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.nombre-crea-list, .creador-crea-list, .nombre-user-list{
+    white-space: nowrap;
+    //overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cont-mini-titular{
+    background-color: rgb(205, 213, 230);
+    display: flex;
+    margin-top: 20px;
+}
+
+.mini-titular{
+    display: flex;
+    width: 100%;
+    padding: 15px 20px 15px 35px;
+    font-size: 25px;
+    font-weight: 500;
+    margin-right: 5px;
+    align-items: center;
+    overflow: auto;
+}
+
+.contenido-usuario{
+    min-width: 200px;
+    min-height: 235px;
+    max-width: 200px;
+    max-height: 235px;
+}
+
+.contenido-usuario img{
+    user-select: none;
+    border: 1px solid black;
+    min-width: 185px;
+    min-height: 185px;
+    max-width: 185px;
+    max-height: 185px;
+}
+
+.contenido-creatura, .contenido-usuario{
+    background-color: lightgray;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 .col-custom {
 
     max-width: 400px;
