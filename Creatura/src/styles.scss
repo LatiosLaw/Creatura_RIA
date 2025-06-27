@@ -10,7 +10,9 @@ body{
 .cont-titular{
     background-color: lightslategray;
 }
-
+.mat-paginator-page-size {
+    display: none !important;
+  }
 .titular{
     font-size: x-large;
     font-weight: 500;
@@ -35,7 +37,7 @@ body{
 
 .nombre-crea-list, .creador-crea-list, .nombre-user-list{
     white-space: nowrap;
-    overflow: hidden;
+    //overflow: hidden;
     text-overflow: ellipsis;
 }
 
@@ -70,3 +72,5 @@ body{
 .contenido-creatura, .contenido-usuario{
     background-color: lightgray;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

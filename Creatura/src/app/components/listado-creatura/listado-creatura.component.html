@@ -1,68 +1,100 @@
 
 <div *ngIf = "usuarioActual">
-<div class="container bg-dark">
-  <div class="row row-custom justify-content-center">
+  <div class="d-flex flex-wrap justify-content-around">
 
   <!-- ARRANCA EL LISTADO-->
-
-
-      <div class="col-custom bg-primary text-white m-2 p-2" *ngFor="let creatura of creaturas">
-        <a class="nav-link" routerLink="/mostrarCreatura" 
-        [queryParams]= "{idCreatura:creatura.id_creatura}">
-        <img [src]="creatura.imagen" (error)="onImgError($event)" alt="{{ creatura.nombre }}" class="figure-img d-block align-self-start img-ajustada">
-      </a>
-          <div class = "bg-sexo">
-            <figcaption class="figure-caption d-flex justify-content-between">
-                <div id = "nombreCrea">{{ creatura.nombre }}</div>
-              <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  ...
-                </button>
-                 <ul class="dropdown-menu">
-                      <a class="nav-link" routerLink="/modificarCreatura" 
-                      [queryParams]= "{idCreatura:creatura.id_creatura}">
-                        <li>
-                          <button class="dropdown-item" type="button">Modificar Creatura</button>
-                        </li>
-                      </a>
-
-                      <li>
-                        <button class="dropdown-item" type="button">Publicar/Ocultar</button>
-                      </li>
-                      <li>
-                        <button class="dropdown-item" type="button" (click)="mostrarJScreatura(creatura.id_creatura)">Exportar</button>
-                      </li>
-                      <li>
-                        <button class="dropdown-item" type="button" (click)="eliminarCreatura(creatura.id_creatura)">Eliminar</button>
-                      </li>
-                </ul>
-              </div>
-            </figcaption>
-            <figcaption class="figure-caption d-flex justify-content gap-2">
-                <div [style.backgroundColor]="'#' + creatura.tipo1.color">
-                  <div id="tipo1">{{ creatura.tipo1.nombre_tipo }}</div>
-                </div>
-                <div *ngIf="creatura.tipo2" [style.backgroundColor]="'#' + creatura.tipo2.color">
-                      <div id = "tipo2" >{{ creatura.tipo2.nombre_tipo }} </div>
-                </div>
-
-            </figcaption>
-            <figcaption class="figure-caption d-flex justify-content">
-                Creador:
-                <div id = "creador">{{ creatura.creador }}</div>
-            </figcaption>
-            
-          </div>  
-
+  <div class="contenido-creatura m-2" *ngFor="let creatura of paginadas">
+    <a class="nav-link" routerLink="/mostrarCreatura" 
+       [queryParams]="{idCreatura: creatura.id_creatura}">
+      <div class="text-center">
+        <img [src]="creatura.imagen" (error)="onImgError($event)"
+             alt="{{ creatura.nombre }}" class="my-2" draggable="false">
       </div>
-
+    </a>
+  
+    <div class="px-2 text-center nombre-crea-list d-flex justify-content-between align-items-center">
+      <span>{{ creatura.nombre }}</span>
+      
+      <div class="dropdown">
+        <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+          ...
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" routerLink="/modificarCreatura" 
+               [queryParams]="{idCreatura: creatura.id_creatura}">
+              Modificar Creatura
+            </a>
+          </li>
+          <li>
+            <button class="dropdown-item" type="button">Publicar/Ocultar</button>
+          </li>
+          <li>
+            <button class="dropdown-item" type="button" (click)="mostrarJScreatura(creatura.id_creatura)">
+              Exportar
+            </button>
+          </li>
+          <li>
+            <button class="dropdown-item" type="button" (click)="eliminarCreatura(creatura.id_creatura)">
+              Eliminar
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  
+    <div class="tipos pt-2 pb-1 text-center">
+      <img [src]="creatura.tipo1.icono" class="" draggable="false"
+           [alt]="creatura.tipo1.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo1.color">
+      <img *ngIf="creatura.tipo2" [src]="creatura.tipo2.icono" class="ms-2" draggable="false"
+           [alt]="creatura.tipo2.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo2.color">
+    </div>
+  
+    <div class="creador-crea-list text-center mt-1 px-2">
+      Creador: {{ creatura.creador }}
+    </div>
+  </div>
+  
     <!-- TERMINA EL LISTADO-->
 </div>
+<mat-paginator  [length]="creaturas.length"
+[pageSize]="8"
+[pageSizeOptions]="[8, 16, 32, 8954]"
+aria-label="Select page"
+(page)="paginar($event)">
+</mat-paginator>
 
-</div>
 </div>
 <div *ngIf = "!usuarioActual">
 <div class="container">
   <img ngSrc="logo.jpg" fill>
 </div>
 </div>
+
+
+
+<!-- 
+<ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" routerLink="/modificarCreatura" 
+               [queryParams]="{idCreatura: creatura.id_creatura}">
+              Modificar Creatura
+            </a>
+          </li>
+          <li>
+            <button class="dropdown-item" type="button">Publicar/Ocultar</button>
+          </li>
+          <li>
+            <button class="dropdown-item" type="button" (click)="mostrarJScreatura(creatura.id_creatura)">
+              Exportar
+            </button>
+          </li>
+          <li>
+            <button class="dropdown-item" type="button" (click)="eliminarCreatura(creatura.id_creatura)">
+              Eliminar
+            </button>
+          </li>
+        </ul>
+
+
+-->

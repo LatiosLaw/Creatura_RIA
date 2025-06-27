@@ -5,7 +5,7 @@
   <!-- ARRANCA EL LISTADO-->
 
 
-      <div *ngFor="let habilidad of habilidades">
+      <div *ngFor="let habilidad of paginadas">
           <div>
             <figcaption>
                 <div id = "nombreHab">Nombre : {{ habilidad.nombre_habilidad }}</div>
@@ -41,6 +41,16 @@
                 </ul>
 
     <!-- TERMINA EL LISTADO-->
+
+</div>
+
+      </div>
+      <mat-paginator  [length]="habilidades.length"
+              [pageSize]="8"
+              [pageSizeOptions]="[8, 16, 32, 8954]"
+              aria-label="Select page"
+              (page)="paginar($event)">
+</mat-paginator>
 
 </div>
 

@@ -29,14 +29,14 @@ export class InicioComponent implements OnInit{
 
       const filtradas = res1.filter((creatura: any) => creatura.creador === 'SYSTEM');
       this.randomizador(filtradas);
-      this.creaturas = filtradas.slice(0, 15); //limitador
+      this.creaturas = filtradas.slice(0, 12); //limitador
 
       console.log(this.creaturas);
     });
 
     this.connector.listarUsuarios().subscribe((res2) => {
       this.randomizador(res2);
-      this.usuarios = res2.slice(0, 24); //limitador
+      this.usuarios = res2.slice(0, 14); //limitador
       console.log(this.usuarios);
     })
   }

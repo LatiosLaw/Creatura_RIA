@@ -6,11 +6,22 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+
+import { MatPaginatorModule } from '@angular/material/paginator';
+
+import { MatPaginatorIntl } from '@angular/material/paginator';
+
+import {customPaginator} from '../../../cosas/matPag';
+
 @Component({
   selector: 'app-busqueishon-momenteishon',
-  imports: [RouterOutlet,RouterLink,CommonModule, NgOptimizedImage],
+  imports: [RouterOutlet,RouterLink,CommonModule, NgOptimizedImage, MatPaginatorModule],
   templateUrl: './busqueishon-momenteishon.component.html',
-  styleUrl: './busqueishon-momenteishon.component.scss'
+  styleUrl: './busqueishon-momenteishon.component.scss',
+  providers: [
+    { provide: MatPaginatorIntl, useValue: customPaginator() }
+  ]
 })
 export class BusqueishonMomenteishonComponent implements OnInit{
   constructor(private connector: ConeccionService,private route: ActivatedRoute) {
@@ -24,9 +35,94 @@ export class BusqueishonMomenteishonComponent implements OnInit{
   creaturasDeUsuarios: any[]=[];
   usuarios: any[]=[];
   creaturasTipo:any[]=[];
+
+  paginadas_Crea: any[] = [];
+  paginaActual_Crea = 0;
+  tamaPagina_Crea = 8;
+
+  paginadas_Tipo: any[] = [];
+  paginaActual_Tipo = 0;
+  tamaPagina_Tipo = 8;
+
+  paginadas_Usu: any[] = [];
+  paginaActual_Usu = 0;
+  tamaPagina_Usu = 8;
+
+  paginadas_CreaUsu: any[] = [];
+  paginaActual_CreaUsu = 0;
+  tamaPagina_CreaUsu = 8;
+
+
   datiBuscar:any;
   mostrarNormal:boolean=true;
   error:boolean=false;
+
+  paginarCrea(event: PageEvent): void {
+    this.paginaActual_Crea = event.pageIndex;
+    this.tamaPagina_Crea = event.pageSize;
+    this.actualizarListaPaginadaCrea();
+  }
+  actualizarListaPaginadaCrea(){
+   // alert(this. paginaActual + "///" + this.tamaPagina);
+    const start = this.paginaActual_Crea * this.tamaPagina_Crea;
+    const end = start + this.tamaPagina_Crea;
+    this.paginadas_Crea = this.creaturas.slice(start, end);
+  }
+
+  paginarCreaUsu(event: PageEvent): void {
+    this.paginaActual_CreaUsu = event.pageIndex;
+    this.tamaPagina_CreaUsu = event.pageSize;
+    this.actualizarListaPaginadaUsu();
+  }
+  actualizarListaPaginadaCreaUsu(){
+   // alert(this. paginaActual + "///" + this.tamaPagina);
+    const start = this.paginaActual_CreaUsu  * this.tamaPagina_CreaUsu ;
+    const end = start + this.tamaPagina_CreaUsu;
+    this.paginadas_CreaUsu = this.creaturasDeUsuarios.slice(start, end);
+  }
+
+  paginarTipo(event: PageEvent): void {
+    this.paginaActual_Tipo = event.pageIndex;
+    this.tamaPagina_Tipo = event.pageSize;
+    this.actualizarListaPaginadaTipo();
+  }
+  actualizarListaPaginadaTipo(){
+   // alert(this. paginaActual + "///" + this.tamaPagina);
+    const start = this.paginaActual_Tipo * this.tamaPagina_Tipo;
+    const end = start + this.tamaPagina_Tipo;
+    this.paginadas_Tipo = this.creaturasTipo.slice(start, end);
+  }
+
+  paginarUsu(event: PageEvent): void {
+    this.paginaActual_Usu = event.pageIndex;
+    this.tamaPagina_Usu = event.pageSize;
+    this.actualizarListaPaginadaUsu();
+  }
+  actualizarListaPaginadaUsu(){
+   // alert(this. paginaActual + "///" + this.tamaPagina);
+    const start = this.paginaActual_Usu * this.tamaPagina_Usu;
+    const end = start + this.tamaPagina_Usu;
+    this.paginadas_Usu = this.usuarios.slice(start, end);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   cargarCosas(){
     
    this.connector.buscar(this.datiBuscar).subscribe(
@@ -44,8 +140,14 @@ export class BusqueishonMomenteishonComponent implements OnInit{
     }else{
       this.mostrarNormal = true;
     }
+    this.actualizarListaPaginadaCreaUsu();
+    this.actualizarListaPaginadaCrea();
+    this.actualizarListaPaginadaUsu();
+    this.actualizarListaPaginadaTipo();
+
+
+
    // console.log(this.creaturas);
-  
   },
   (error) => {
     this.error = true;
@@ -68,6 +170,10 @@ export class BusqueishonMomenteishonComponent implements OnInit{
       params => {
         this.datiBuscar = params['datoBusqueda'];
         this.cargarCosas();
+        this.actualizarListaPaginadaCrea();
+        this.actualizarListaPaginadaCreaUsu();
+        this.actualizarListaPaginadaTipo();
+        this.actualizarListaPaginadaUsu();
       })
 
 }

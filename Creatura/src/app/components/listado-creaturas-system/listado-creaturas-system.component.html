@@ -5,7 +5,7 @@
 </div>
 
 <div class="d-flex flex-wrap justify-content-around">
-    @for (creatura of creaturas; track $index){
+    @for (creatura of paginadas; track $index){
     <div class="contenido-creatura m-2">
         <a class="nav-link" routerLink="/mostrarCreatura" 
                [queryParams]= "{idCreatura:creatura.id_creatura}">
@@ -27,3 +27,9 @@
     }
     
 </div>
+<mat-paginator  [length]="creaturas.length"
+              [pageSize]="8"
+              [pageSizeOptions]="[8, 16, 32, 8954]"
+              aria-label="Select page"
+              (page)="paginar($event)">
+</mat-paginator>

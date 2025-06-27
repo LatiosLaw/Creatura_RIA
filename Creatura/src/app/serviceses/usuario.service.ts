@@ -50,10 +50,10 @@ retornarUsuario( nickname: any){
   }
 
 retornarCreaturasUsuario( creador: any){
-    const url_completa = this.urlCreaturas + "/retornar_creatura_con_filtros.php?creador=" + creador;
+    const url_completa = this.urlUsuarios + "/listar_creaturas_usuarioPublicos.php?nickname=" + creador;
     return this.http.get<any>(url_completa);
   }
-
+  
   borrarUsuario(nickname: string): Observable<any> {
   const body = {
     nickname,

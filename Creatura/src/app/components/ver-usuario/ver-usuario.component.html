@@ -11,20 +11,39 @@
   </button>
 </div>
 </div>
+
+
 <div *ngIf="creaturas?.creaturas && creaturas.creaturas.length > 0">
 ============================ CREATURAS =================================<br>
-  <div *ngFor="let c of creaturas.creaturas">
-    <a class="nav-link" routerLink="/mostrarCreatura" 
-    [queryParams]= "{idCreatura:c.id_creatura}">
-    <h4>Nombre: {{ c.nombre }}</h4>
-    <img [src]="c.imagen" style="max-width: 150px; max-height: 150px;">
-    <p>Rating : {{ c.rating }}/5</p>
-    <p>Tipo 1 : {{ c.tipo1.nombre_tipo }}</p>
-    <p>Tipo 2 : {{ c.tipo2.nombre_tipo }}</p>
-    <p>Creador: {{ informacion_usuario.usuario.nickname }}</p>
-    <!-- Agregá más propiedades según tu modelo -->
-  </a>
+<div class="d-flex flex-wrap justify-content-around">
+  @for (creatura of paginadas; track $index){
+  <div class="contenido-creatura m-2">
+      <a class="nav-link" routerLink="/mostrarCreatura" 
+             [queryParams]= "{idCreatura:creatura.id_creatura}">
+          <div class="text-center">
+              <img [src]="creatura.imagen" (error)="onImgError($event)" class="my-2" draggable="false" [alt]="creatura.nombre_creatura">
+          </div>
+          <div class="px-2 text-center nombre-crea-list">
+              {{ creatura.nombre}}
+          </div>
+          <div class="tipos pt-2 pb-1 text-center">
+              <img [src]="creatura.tipo1.icono" class="" draggable="false" [alt]="creatura.tipo1.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo1.color">
+              <img [src]="creatura.tipo2.icono" class="ms-2" draggable="false" [alt]="creatura.tipo2.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo2.color">
+          </div>
+      </a>
+      <div class="creador-crea-list text-center mt-1 px-2">
+          Creador: {{ creatura.creador }}
+      </div>
   </div>
+  }
+  
+</div>
+<mat-paginator  [length]="creaturas.creaturas.length"
+            [pageSize]="8"
+            [pageSizeOptions]="[8, 16, 32, 8954]"
+            aria-label="Select page"
+            (page)="paginar($event)">
+</mat-paginator>
 </div>
 
 <!-- Mostrar un mensaje si no hay creaturas -->

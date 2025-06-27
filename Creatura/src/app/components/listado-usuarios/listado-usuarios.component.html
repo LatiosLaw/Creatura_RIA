@@ -5,7 +5,7 @@
 </div>
 
 <div class="d-flex flex-wrap justify-content-around">
-    @for (usuario of usuarios; track $index){
+    @for (usuario of paginados; track $index){
     <div class="contenido-usuario m-2">
         <a class="nav-link" [routerLink]="['/ver_usuario', usuario.nickname]">
             <div class="text-center">
@@ -18,3 +18,9 @@
     </div>
     }
 </div>
+<mat-paginator  [length]="usuarios.length"
+              [pageSize]="8"
+              [pageSizeOptions]="[8, 16, 32, 8954]"
+              aria-label="Select page"
+              (page)="paginar($event)">
+</mat-paginator>
