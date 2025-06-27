@@ -8,12 +8,23 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BarraGestorCreaturaComponent } from '../barra-gestor-creatura/barra-gestor-creatura.component';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+
+import { MatPaginatorModule } from '@angular/material/paginator';
+
+import { MatPaginatorIntl } from '@angular/material/paginator';
+
+import {customPaginator} from '../../../cosas/matPag';
+
 
 @Component({
   selector: 'app-agregar-creatura',
-  imports: [RouterOutlet,RouterLink,CommonModule,ReactiveFormsModule, FormsModule, NgOptimizedImage,BarraGestorCreaturaComponent],
+  imports: [RouterOutlet,RouterLink,CommonModule,ReactiveFormsModule,MatPaginatorModule, FormsModule, NgOptimizedImage,BarraGestorCreaturaComponent],
   templateUrl: './agregar-creatura.component.html',
-  styleUrl: './agregar-creatura.component.scss'
+  styleUrl: './agregar-creatura.component.scss',
+  providers: [
+    { provide: MatPaginatorIntl, useValue: customPaginator() }
+  ]
 })
 export class AgregarCreaturaComponent {
   datosCreaturaForm: FormGroup;
@@ -40,11 +51,17 @@ export class AgregarCreaturaComponent {
   calculoDefMuyNoEff: any[] = [];
   calculoDefInmune: any[] = [];
 
+  paginadas: any[] = [];
 
+  paginaActual = 0;
+  tamaPagina = 8;
+  terminoBusqueda="";
+  habilidadesFiltradas:any[] = [];
+  habilidades2:any[] =[];
 
   typeNull = {
     id_tipo: "0",
-    nombre_tipo: "null",
+    nombre_tipo: "-",
     color :"eaeae5",
     icono : "no.png",
     creador : "tuvieja"
@@ -72,6 +89,18 @@ export class AgregarCreaturaComponent {
       publicoToken: [false, []]
     });
    
+  }
+
+  paginar(event: PageEvent): void {
+    this.paginaActual = event.pageIndex;
+    this.tamaPagina = event.pageSize;
+    this.actualizarListaPaginada();
+  }
+  actualizarListaPaginada(){
+   // alert(this. paginaActual + "///" + this.tamaPagina);
+    const start = this.paginaActual * this.tamaPagina;
+    const end = start + this.tamaPagina;
+    this.paginadas = this.habilidades.slice(start, end);
   }
 
   onImgError(event: Event) {
@@ -203,6 +232,7 @@ export class AgregarCreaturaComponent {
         console.log("getHabilidades");
         console.log(data);
         this.habilidades = data.habilidades;
+        this.habilidades2 = data.habilidades;
         resolve();
       })
     });
@@ -213,7 +243,7 @@ export class AgregarCreaturaComponent {
         console.log("getHabilidades por TIPO");
         console.log(data.habilidades);
         console.log(this.tipo3);
-        //this.habilidades2 = data.habilidades;
+        this.habilidades2 = data.habilidades;
 
         this.habilidades = data.habilidades;
         resolve();
@@ -235,11 +265,16 @@ export class AgregarCreaturaComponent {
     if(this.tipo3.id_tipo === "0"){
       this.cargarHabilidades2().then((resolve:any) => {
         this.limpiarListaHabilidades();
+        this.filtrarHabilidadesPorTexto();
+        this.actualizarListaPaginada();
+        this.habilidades2 = [...this.habilidades];
       });
     }else{
       this.cargarTipos();
     this.listarHabilidadesPorTipos(this.tipo3.id_tipo).then((resolve:any) => {
       this.limpiarListaHabilidades();
+      this.filtrarHabilidadesPorTexto();
+      this.actualizarListaPaginada();
     });
     }
   }
@@ -258,6 +293,7 @@ export class AgregarCreaturaComponent {
   agregarHabilidad(habilidadd:any){
     this.habilidades = this.habilidades.filter(habilidad => habilidad.id_habilidad !== habilidadd.id_habilidad);
     this.habilidadesNew.push(habilidadd);
+    this.actualizarListaPaginada();
  }
  genuinamenteAgregar(){
   this.habilidadesNew.forEach(element => {
@@ -405,6 +441,19 @@ onFileChange(event: Event): void {
     console.log("imagenCreatura2");
     console.log(this.imagenCreatura2);
   }
+}
+filtrarHabilidadesPorTexto(){
+  const terminoMinuscula = this.terminoBusqueda.toLowerCase().trim();
+  if(this.terminoBusqueda !== ""){
+  this.habilidadesFiltradas = this.habilidades2.filter(habilidad => habilidad.nombre_habilidad.toLowerCase().includes(terminoMinuscula));
+    this.habilidades = this.habilidadesFiltradas;
+    this.limpiarListaHabilidades();
+    this.actualizarListaPaginada();
+}else{
+  this.habilidades = this.habilidades2;
+  this.limpiarListaHabilidades();
+  this.actualizarListaPaginada();
+ }
 }
 }
 

@@ -8,12 +8,25 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BarraGestorCreaturaComponent } from '../barra-gestor-creatura/barra-gestor-creatura.component';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+
+import { MatPaginatorModule } from '@angular/material/paginator';
+
+import { MatPaginatorIntl } from '@angular/material/paginator';
+
+import {customPaginator} from '../../../cosas/matPag';
+
+
+
 
 @Component({
   selector: 'app-modificar-creatura',
-  imports: [RouterOutlet,RouterLink,CommonModule,ReactiveFormsModule, FormsModule, NgOptimizedImage,BarraGestorCreaturaComponent],
+  imports: [RouterOutlet,RouterLink,CommonModule,ReactiveFormsModule, FormsModule,MatPaginatorModule, NgOptimizedImage,BarraGestorCreaturaComponent],
   templateUrl: './modificar-creatura.component.html',
-  styleUrl: './modificar-creatura.component.scss'
+  styleUrl: './modificar-creatura.component.scss',
+  providers: [
+    { provide: MatPaginatorIntl, useValue: customPaginator() }
+  ]
 })
 export class ModificarCreaturaComponent {
   datosCreaturaForm: FormGroup;
@@ -54,7 +67,7 @@ export class ModificarCreaturaComponent {
 
   habilidades: any[] =[];
   habilidades2: any[] = [];
-  habilidades3: any[] = [];
+  habilidadesFiltradas: any[] = [];
 
   calculoDef: any[] = [];
   calculoDefMuyEff: any[] = [];
@@ -64,8 +77,12 @@ export class ModificarCreaturaComponent {
   calculoDefMuyNoEff: any[] = [];
   calculoDefInmune: any[] = [];
 
+  paginadas: any[] = [];
 
+  paginaActual = 0;
+  tamaPagina = 8;
 
+  terminoBusqueda = "";
 
   creatura: any;
   idCreatura:any;
@@ -74,6 +91,20 @@ export class ModificarCreaturaComponent {
   tipos2: any[] = [];
   tipos3: any[] = [];
 
+  paginar(event: PageEvent): void {
+    this.paginaActual = event.pageIndex;
+    this.tamaPagina = event.pageSize;
+    this.actualizarListaPaginada();
+  }
+  actualizarListaPaginada(){
+   // alert(this. paginaActual + "///" + this.tamaPagina);
+    const start = this.paginaActual * this.tamaPagina;
+    const end = start + this.tamaPagina;
+    this.paginadas = this.habilidades.slice(start, end);
+  }
+
+
+
   cargarTipos(){
     this.connector.getTipos().subscribe(data => {
       
@@ -81,14 +112,14 @@ export class ModificarCreaturaComponent {
       this.tipos1 = [...data];
       this.tipos2 = [...data];
       this.tipos3 = [...data];
-
+        this.tipos3.push(this.typeNull);
       if(!(this.creatura.tipo2?.id_tipo > 0)){
         //console.log("//////////////////////////////////////////cargarTipos//////////////////////////////////////////");
         //console.log(this.creatura.tipo2);
         this.creatura.tipo2 = this.typeNull;
       }else{
         this.tipos2.push(this.typeNull);
-        this.tipos3.push(this.typeNull);
+      
       }
       this.limpiarListaDeTipos()
       
@@ -244,6 +275,7 @@ export class ModificarCreaturaComponent {
   seleccionartipo3(tipo: any): void {
     this.tipo3 = tipo;
     this.habilideishon();
+    
 
 
   }
@@ -306,22 +338,30 @@ export class ModificarCreaturaComponent {
     if(this.tipo3.id_tipo === "0"){
       this.cargarHabilidades2().then((resolve:any) => {
         this.limpiarListaHabilidades();
+        this.filtrarHabilidadesPorTexto()
+        this.actualizarListaPaginada();
+        this.habilidades2 = [...this.habilidades];
       });
     }else{
       this.cargarTipos();
     this.listarHabilidadesPorTipos(this.tipo3.id_tipo).then((resolve:any) => {
       this.limpiarListaHabilidades();
+      this.filtrarHabilidadesPorTexto()
+      this.actualizarListaPaginada();
     });
     }
   }
   agregarHabilidad(habilidadd:any){
      this.habilidades = this.habilidades.filter(habilidad => habilidad.id_habilidad !== habilidadd.id_habilidad);
      this.habilidadesNew.push(habilidadd);
+     this.actualizarListaPaginada();
   }
   eliminarHabilidadDeNew(habilidadd:any){
     this.habilidadesNew = this.habilidadesNew.filter(habilidad => habilidad.id_habilidad !== habilidadd.id_habilidad);
     this.seleccionartipo3(this.tipo3);
     this.habilidades.push(habilidadd);
+
+    
  }
  genuinamenteAgregar(){
       this.habilidadesNew.forEach(element => {
@@ -474,5 +514,18 @@ onFileChange(event: Event): void {
     reader.readAsDataURL(file); 
     console.log(file);
   }
+}
+filtrarHabilidadesPorTexto(){
+  const terminoMinuscula = this.terminoBusqueda.toLowerCase().trim();
+  if(this.terminoBusqueda !== ""){
+  this.habilidadesFiltradas = this.habilidades2.filter(habilidad => habilidad.nombre_habilidad.toLowerCase().includes(terminoMinuscula));
+    this.habilidades = [...this.habilidadesFiltradas];
+    this.limpiarListaHabilidades();
+    this.actualizarListaPaginada();
+}else{
+  this.habilidades = this.habilidades2;
+  this.limpiarListaHabilidades();
+  this.actualizarListaPaginada();
+ }
 }
 }

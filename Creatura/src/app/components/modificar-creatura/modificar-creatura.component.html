@@ -285,6 +285,23 @@
     </ul>
   </div>
   <!-- Tabla 1 con scroll -->
+  <input
+  type="text"
+  class="form-control buscador"
+  placeholder="Buscar habilidad"
+  [(ngModel)]="terminoBusqueda"
+  (ngModelChange)="filtrarHabilidadesPorTexto()"
+/>
+  <mat-paginator  [length]="habilidades.length"
+  [pageSize]="8"
+  [pageSizeOptions]="[8, 16, 32, 8954]"
+  aria-label="Select page"
+  (page)="paginar($event)">
+  </mat-paginator>
+  
+
+
+
   <div style="max-height: 300px; overflow-y: auto;">
     <table class="table table-bordered table-hover table-sm">
       <thead class="table-dark">
@@ -299,10 +316,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let habilidad of habilidades">
+        <tr *ngFor="let habilidad of paginadas">
           <td>{{ habilidad.id_habilidad }}</td>
           <td>{{ habilidad.nombre_habilidad }}</td>
-          <td>{{ habilidad.id_tipo_habilidad }}</td>
+          <td [style.backgroundColor]="'#' +  habilidad.color_tipo_habilidad">{{ habilidad.nombre_tipo_habilidad }}</td>
           <td>{{ habilidad.potencia }}</td>
           <td>{{ habilidad.descripcion }}</td>
           <td>{{ habilidad.categoria_habilidad }}</td>
@@ -335,7 +352,7 @@
         <tr *ngFor="let habilidadNew of habilidadesNew">
           <td>{{ habilidadNew.id_habilidad }}</td>
           <td>{{ habilidadNew.nombre_habilidad }}</td>
-          <td>{{ habilidadNew.id_tipo_habilidad }}</td>
+          <td [style.backgroundColor]="'#' +  habilidadNew.color_tipo_habilidad">{{ habilidadNew.nombre_tipo_habilidad }}</td>
           <td>{{ habilidadNew.potencia }}</td>
           <td>{{ habilidadNew.descripcion }}</td>
           <td>{{ habilidadNew.categoria_habilidad }}</td>
