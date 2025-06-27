@@ -1,55 +1,49 @@
-<div *ngIf="creaturas">
-    <div class="cont-titular d-flex align-items-center"> 
-        <div class="titular p-2 w-100 d-flex">
-            <div class="d-inline">Creaturas Default</div>
-            <a routerLink="/listadoCreaturasSystem" class="btn btn-dark ms-auto">Ver Más</a>
+    <div class="cont-titular"> 
+        <div class="titular">
+            <div>Creaturas del Sistema</div>
+            <a routerLink="/listadoCreaturasSystem">Ver Más</a>
         </div>
     </div>
-    
-    <div class="d-flex flex-wrap justify-content-around">
+    <div class="contenedor-creaturas">
         @for (creatura of creaturas; track $index){
-        <div class="contenido-creatura m-2">
-            <a class="nav-link" routerLink="/mostrarCreatura" 
+        <div class="contenido-creatura">
+            <a routerLink="/mostrarCreatura" 
                [queryParams]= "{idCreatura:creatura.id_creatura}">
-                <div class="text-center">
-                    <img [src]="creatura.imagen" (error)="onImgErrorCreatura($event)" class="my-2" draggable="false" [alt]="creatura.nombre_creatura">
+                <div class="imagen-creatura">
+                    <img [src]="creatura.imagen" (error)="onImgErrorCreatura($event)" draggable="false" [alt]="creatura.nombre_creatura">
                 </div>
-                <div class="px-2 text-center nombre-crea-list">
+                <div class="nombre-creatura">
                     {{ creatura.nombre_creatura }}
                 </div>
-                <div class="tipos pt-2 pb-1 text-center">
-                    <img [src]="creatura.tipo1.icono" class="" draggable="false" [alt]="creatura.tipo1.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo1.color">
-                    <img [src]="creatura.tipo2.icono" class="ms-2" draggable="false" [alt]="creatura.tipo2.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo2.color" onerror="this.style.display='none';">
+                <div class="tipos">
+                    <img [src]="creatura.tipo1.icono" draggable="false" [alt]="creatura.tipo1.nombre_tipo">
+                    <img class="tipo2" [src]="creatura.tipo2.icono" draggable="false" [alt]="creatura.tipo2.nombre_tipo" onerror="this.style.display='none';">
+                </div>
+                <div class="creador-creatura">
+                    Creador: {{ creatura.creador }}
                 </div>
             </a>
-            <div class="creador-crea-list text-center mt-1 px-2">
-                Creador: {{ creatura.creador }}
-            </div>
         </div>
         }
-        
     </div>
     
-    <div class="cont-titular d-flex align-items-center"> 
-        <div class="titular p-2 w-100 d-flex">
-            <div class="d-inline">Usuarios</div>
-            <a routerLink="/listadoUsuarios" class="btn btn-dark ms-auto">Ver Más</a>
+    <div class="cont-titular"> 
+        <div class="titular">
+            <div >Usuarios</div>
+            <a routerLink="/listadoUsuarios">Ver Más</a>
         </div>
     </div>
-    
-    <div class="d-flex flex-wrap justify-content-around">
+    <div class="contenedor-usuarios">
         @for (usuario of usuarios; track $index){
-        <div class="contenido-usuario m-2">
-            <a class="nav-link" [routerLink]="['/ver_usuario', usuario.nickname]">
-                <div class="text-center">
-                    <img [src]="usuario.foto" (error)="onImgErrorUsuario($event)" class="my-2" draggable="false" [alt]="usuario.nickname">
+        <div class="contenido-usuario">
+            <a [routerLink]="['/ver_usuario', usuario.nickname]">
+                <div class="imagen-usuario">
+                    <img [src]="usuario.foto" (error)="onImgErrorUsuario($event)" draggable="false" [alt]="usuario.nickname">
                 </div>
-                <div class="px-1 text-center nombre-user-list">
+                <div class="nombre-usuario">
                     {{usuario.nickname}}
                 </div>
             </a>
         </div>
         }
     </div>
-
-</div>

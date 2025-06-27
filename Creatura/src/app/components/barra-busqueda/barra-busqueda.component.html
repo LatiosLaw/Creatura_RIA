@@ -1,48 +1,28 @@
-<nav class="navbar navbar-expand-lg main-nav fixed-top">
-    <div class="container-fluid">
+<header class="cabecera-bar">
 
         <a class="navbar-brand" routerLink="inicio">
-            <img src="logo.jpg" alt="[Logo Pagina]" class=" logo ">
-
+            <img src="logo.jpg" alt="[Logo Pagina]" class="logo">
         </a>
-        
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <form class="navbar-collapse mt-2 mb-2">
-                <div class="d-flex justify-content-center w-100">
-                    <input #busquedaInput class="w-50 form-control me-2" type="search" placeholder="Buscar..." id = "busqueishon">
-                    <button type="button" class="bi bi-search btn btn-dark" (click) = "buscarMomento(busquedaInput.value)"></button>
-                </div>
-            </form>
-
-            <ul class="navbar-nav align-items-center" id="navbarList">
-
-              <!-- Si hay usuario -->
-              <li class="nav-item campo-nu" *ngIf="usuarioActual">
-  <button class="btn btn-outline-light ms-2">
-    <a class="nav-link" [routerLink]="['/ver_usuario', usuarioActual.nickname]">Perfil</a>
-  </button>
-  <button class="btn btn-outline-light ms-2" (click)="salir()">Salir</button>
-</li>
-            
-              <!-- Si NO hay usuario -->
-              <li class="nav-item" *ngIf="!usuarioActual">
-                <button type="button" class="btn btn-dark inicio-sesion-boton me-2" data-bs-toggle="modal" data-bs-target="#iniciarSesionModal">
-                  Iniciar Sesión
-                </button>
-                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#registroModal">
-                  Registrarse
-                </button>
-              </li>
-            
-            </ul>
-            
-        </div>
-    </div>
-</nav>
+        <form>
+              <input #busquedaInput type="search" placeholder="Buscar..." id = "busqueishon">
+              <button type="button" class="bi bi-search" (click) = "buscarMomento(busquedaInput.value)"></button>
+        </form>
+        <div class="botones-usuario btn-usr-derecha">
+          @if(usuarioActual){
+            <a [routerLink]="['/ver_usuario', usuarioActual.nickname]">Perfil</a>
+            <button (click)="salir()">Salir</button>
+          }
+          @if(!usuarioActual){
+            <button type="button" data-bs-toggle="modal" data-bs-target="#iniciarSesionModal">
+              Iniciar Sesión
+            </button>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#registroModal">
+              Registrarse
+            </button>
+          }
+        </div>            
+</header>
 
 <div class="modal fade" id="iniciarSesionModal" tabindex="-1" aria-labelledby="iniciarSesionModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

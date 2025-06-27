@@ -1,93 +1,86 @@
 
 <div  *ngIf="mostrarNormal">
-    <div class="cont-titular d-flex align-items-center"> 
-        <div class="titular p-2 w-100 d-flex">
-            <div class="d-inline">Creaturas Default</div>
+    <div class="cont-titular"> 
+        <div class="titular">
+            <div>Resultados de la Busqueda</div>
+            <button onclick="history.back();">Volver</button>
         </div>
     </div>
-    
-    <div class="d-flex flex-wrap justify-content-around">
-        @for (creatura of paginadas_Crea; track $index){
-        <div class="contenido-creatura m-2">
-            <a class="nav-link" routerLink="/mostrarCreatura" 
+
+    <div class="cont-mini-titular"> 
+        <div class="mini-titular">
+            <div>Creaturas del Sistema Encontradas</div>
+        </div>
+    </div>
+    <div class="contenedor-creaturas">
+        @for (creatura of creaturas; track $index){
+        <div class="contenido-creatura">
+            <a routerLink="/mostrarCreatura" 
             [queryParams]= "{idCreatura:creatura.id_creatura}">
-                <div class="text-center">
-                    <img [src]="creatura.imagen" (error)="onImgErrorCreatura($event)" class="my-2" draggable="false" [alt]="creatura.nombre_creatura">
+                <div class="imagen-creatura">
+                    <img [src]="creatura.imagen" (error)="onImgErrorCreatura($event)" draggable="false" [alt]="creatura.nombre_creatura">
                 </div>
-                <div class="px-2 text-center nombre-crea-list">
-                    {{ creatura.nombre_creatura }}
+                <div class="nombre-creatura">
+                    {{ creatura.nombre }}
                 </div>
-                <div class="tipos pt-2 pb-1 text-center">
-                    <img [src]="creatura.tipo1.icono" class="" draggable="false" [alt]="creatura.tipo1.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo1.color">
-                    <img [src]="creatura.tipo2.icono" class="ms-2" draggable="false" [alt]="creatura.tipo2.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo2.color">
+                <div class="tipos">
+                    <img [src]="creatura.tipo1.icono" draggable="false" [alt]="creatura.tipo1.nombre_tipo">
+                    <img class="tipo2" [src]="creatura.tipo2.icono" draggable="false" [alt]="creatura.tipo2.nombre_tipo" onerror="this.style.display='none';">
+                </div>
+                <div class="creador-creatura">
+                    Creador: {{ creatura.creador }}
                 </div>
             </a>
-            <div class="creador-crea-list text-center mt-1 px-2">
-                Creador: {{ creatura.creador }}
-            </div>
         </div>
         }
 
 
     </div>
-    <mat-paginator  [length]="creaturas.length"
-    [pageSize]="8"
-    [pageSizeOptions]="[8, 16, 32, 8954]"
-    aria-label="Select page"
-    (page)="paginarCrea($event)">
-</mat-paginator>
-    <h3 *ngIf="error || creaturas.length === 0">No se encontraron Creaturas</h3>
-    <div class="cont-titular d-flex align-items-center"> 
-        <div class="titular p-2 w-100 d-flex">
-            <div class="d-inline">Creaturas de Usuarios</div>
-    
+    <div class="x-large" *ngIf="error || creaturas.length === 0">No se encontraron creaturas del sistema que coincidan con tu busqueda.</div>
+
+    <div class="cont-mini-titular"> 
+        <div class="mini-titular">
+            <div>Creaturas de Usuarios Encontradas</div>
         </div>
     </div>
-    
-    <div class="d-flex flex-wrap justify-content-around">
-        @for (creatura of paginadas_CreaUsu; track $index){
-        <div class="contenido-creatura m-2">
-            <a class="nav-link" routerLink="/mostrarCreatura" 
+    <div class="contenedor-creaturas">
+        @for (creatura of creaturasDeUsuarios; track $index){
+        <div class="contenido-creatura">
+            <a routerLink="/mostrarCreatura" 
             [queryParams]= "{idCreatura:creatura.id_creatura}">
-                <div class="text-center">
-                    <img [src]="creatura.imagen" (error)="onImgErrorCreatura($event)" class="my-2" draggable="false" [alt]="creatura.nombre_creatura">
+                <div class="imagen-creatura">
+                    <img [src]="creatura.imagen" (error)="onImgErrorCreatura($event)" draggable="false" [alt]="creatura.nombre_creatura">
                 </div>
-                <div class="px-2 text-center nombre-crea-list">
-                    {{ creatura.nombre_creatura }}
+                <div class="nombre-creatura">
+                    {{ creatura.nombre }}
                 </div>
-                <div class="tipos pt-2 pb-1 text-center">
-                    <img [src]="creatura.tipo1.icono" class="" draggable="false" [alt]="creatura.tipo1.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo1.color">
-                    <img [src]="creatura.tipo2.icono" class="ms-2" draggable="false" [alt]="creatura.tipo2.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo2.color">
+                <div class="tipos">
+                    <img [src]="creatura.tipo1.icono" draggable="false" [alt]="creatura.tipo1.nombre_tipo">
+                    <img class="tipo2" [src]="creatura.tipo2.icono" draggable="false" [alt]="creatura.tipo2.nombre_tipo" onerror="this.style.display='none';">
+                </div>
+                <div class="creador-creatura">
+                    Creador: {{ creatura.creador }}
                 </div>
             </a>
-            <div class="creador-crea-list text-center mt-1 px-2">
-                Creador: {{ creatura.creador }}
-            </div>
         </div>
         }
         
     </div>
-    <mat-paginator  [length]="creaturasDeUsuarios.length"
-              [pageSize]="8"
-              [pageSizeOptions]="[8, 16, 32, 8954]"
-              aria-label="Select page"
-              (page)="paginarCreaUsu($event)">
-        </mat-paginator>
-    <h3 *ngIf="error || creaturasDeUsuarios.length === 0">No se encontraron Creaturas de usuarios</h3>
-    <div class="cont-titular d-flex align-items-center"> 
-        <div class="titular p-2 w-100 d-flex">
-            <div class="d-inline">Usuarios</div>
+    <div class="x-large" *ngIf="error || creaturasDeUsuarios.length === 0">No se encontraron creaturas de usuarios que coincidan con tu busqueda.</div>
+    
+    <div class="cont-mini-titular"> 
+        <div class="mini-titular">
+            <div>Usuarios Encontrados</div>
         </div>
     </div>
-    
-    <div class="d-flex flex-wrap justify-content-around">
-        @for (usuario of paginadas_Usu; track $index){
-        <div class="contenido-usuario m-2">
+    <div class="contenedor-usuarios">
+        @for (usuario of usuarios; track $index){
+        <div class="contenido-usuario">
             <a class="nav-link" [routerLink]="['/ver_usuario', usuario.nickname]">
-                <div class="text-center">
-                    <img [src]="usuario.foto" (error)="onImgErrorUsuario($event)" class="my-2" draggable="false" [alt]="usuario.nickname">
+                <div class="imagen-usuario">
+                    <img [src]="usuario.foto" (error)="onImgErrorUsuario($event)" draggable="false" [alt]="usuario.nickname">
                 </div>
-                <div class="px-1 text-center nombre-user-list">
+                <div class="nombre-usuario">
                     {{usuario.nickname}}
                 </div>
             </a>
@@ -95,47 +88,35 @@
         }
         
     </div>
-    <mat-paginator  [length]="usuarios.length"
-              [pageSize]="8"
-              [pageSizeOptions]="[8, 16, 32, 8954]"
-              aria-label="Select page"
-              (page)="paginarUsu($event)">
-        </mat-paginator>
-    <h3 *ngIf="error || usuarios.length === 0">No se encontraron Usuarios</h3>
+    <div class="x-large" *ngIf="error || usuarios.length === 0">No se encontraron usuarios que coincidan con tu busqueda.</div>
 </div>
+
 <div  *ngIf="!mostrarNormal">
-    <div class="cont-titular d-flex align-items-center"> 
-        <div class="titular p-2 w-100 d-flex">
-            <div class="d-inline">Creaturas con el tipo buscado</div>
+    <div class="cont-mini-titular"> 
+        <div class="mini-titular">
+            <div>Creaturas del tipo específico encontradas</div>
         </div>
     </div>
-    
-    <div class="d-flex flex-wrap justify-content-around">
-        @for (creatura of paginadas_Tipo; track $index){
-        <div class="contenido-creatura m-2">
-            <a>
-                <div class="text-center">
-                    <img [src]="creatura.imagen" (error)="onImgErrorCreatura($event)" class="my-2" draggable="false" [alt]="creatura.nombre_creatura">
+    <div class="contenedor-creaturas">
+        @for (creatura of creaturasTipo; track $index){
+        <div class="contenido-creatura">
+            <a routerLink="/mostrarCreatura" 
+            [queryParams]= "{idCreatura:creatura.id_creatura}">
+                <div class="imagen-creatura">
+                    <img [src]="creatura.imagen" (error)="onImgErrorCreatura($event)" draggable="false" [alt]="creatura.nombre_creatura">
                 </div>
-                <div class="px-2 text-center nombre-crea-list">
-                    {{ creatura.nombre_creatura }}
+                <div class="creador-creatura">
+                    {{ creatura.nombre }}
                 </div>
-                <div class="tipos pt-2 pb-1 text-center">
-                    <img [src]="creatura.tipo1.icono" class="" draggable="false" [alt]="creatura.tipo1.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo1.color">
-                    <img [src]="creatura.tipo2.icono" class="ms-2" draggable="false" [alt]="creatura.tipo2.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo2.color">
+                <div class="tipos">
+                    <img [src]="creatura.tipo1.icono" draggable="false" [alt]="creatura.tipo1.nombre_tipo" >
+                    <img class="tipo2" [src]="creatura.tipo2.icono" draggable="false" [alt]="creatura.tipo2.nombre_tipo" onerror="this.style.display='none';">
+                </div>
+                <div class="creador-creatura">
+                    Creador: {{ creatura.creador }}
                 </div>
             </a>
-            <div class="creador-crea-list text-center mt-1 px-2">
-                Creador: {{ creatura.creador }}
-            </div>
         </div>
         }
-
     </div>
-    <mat-paginator  [length]="creaturasTipo.length"
-    [pageSize]="8"
-    [pageSizeOptions]="[8, 16, 32, 8954]"
-    aria-label="Select page"
-    (page)="paginarTipo($event)">
-</mat-paginator>
 </div>
