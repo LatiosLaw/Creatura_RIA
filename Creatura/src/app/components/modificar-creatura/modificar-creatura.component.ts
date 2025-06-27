@@ -16,9 +16,13 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 
 import {customPaginator} from '../../../cosas/matPag';
+
+
+
+
 @Component({
   selector: 'app-modificar-creatura',
-  imports: [RouterOutlet,RouterLink,CommonModule,ReactiveFormsModule, FormsModule, NgOptimizedImage,BarraGestorCreaturaComponent, PiePaginaComponent],
+  imports: [RouterOutlet,RouterLink,CommonModule,ReactiveFormsModule, FormsModule,MatPaginatorModule, NgOptimizedImage,BarraGestorCreaturaComponent,PiePaginaComponent],
   templateUrl: './modificar-creatura.component.html',
   styleUrl: './modificar-creatura.component.scss',
   providers: [
