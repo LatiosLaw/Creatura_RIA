@@ -50,3 +50,25 @@ a{
 .titular button:hover, .titular a:hover{
     background-color: #333;
 }
+
+.cont-mini-titular{
+    background-color: rgb(205, 213, 230);
+    display: flex;
+    margin-top: 20px;
+}
+
+.mini-titular{
+    display: flex;
+    width: 100%;
+    padding: 15px 20px 15px 35px;
+    font-size: 25px;
+    font-weight: 500;
+    margin-right: 5px;
+    align-items: center;
+    overflow: auto;
+}
+
+.mini-titular div{
+    display: inline;
+    letter-spacing: 1px;
+}

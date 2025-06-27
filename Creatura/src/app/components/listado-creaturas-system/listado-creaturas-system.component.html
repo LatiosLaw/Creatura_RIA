@@ -17,8 +17,8 @@
                 {{ creatura.nombre_creatura }}
             </div>
             <div class="tipos">
-                <img [src]="creatura.tipo1.icono" draggable="false" [alt]="creatura.tipo1.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo1.color">
-                <img [src]="creatura.tipo2.icono" draggable="false" [alt]="creatura.tipo2.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo2.color">
+                <img [src]="creatura.tipo1.icono" draggable="false" [alt]="creatura.tipo1.nombre_tipo">
+                <img class="tipo2" [src]="creatura.tipo2.icono" draggable="false" [alt]="creatura.tipo2.nombre_tipo" onerror="this.style.display='none';">
             </div>
             <div class="creador-creatura">
                 Creador: {{ creatura.creador }}
