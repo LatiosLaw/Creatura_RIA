@@ -1,0 +1,193 @@
+/* Pantalla chica */
+@media (max-width: 991.5px){
+    .contenido-habilidad{
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .info-habilidad{
+        width: 80%;
+        margin-top: 10px;
+        flex-direction: column;
+        text-align: start;
+    }
+}
+
+/* Pantalla grande */
+@media (min-width: 991.5px){
+    .contenido-habilidad{
+        display: flex;
+        gap: 100px;
+        padding: 40px;
+        align-items: center;
+    }
+
+    .info-habilidad{
+        width: 50%;
+    }
+}
+
+.guardar{
+    text-align: center;
+    padding-top: 20px;
+}
+
+.guardar button{
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: larger;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contenido-habilidad{
+    margin-bottom: 1000px;
+    overflow-x: auto;
+}
+
+.contenido-habilidad img{
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.info-habilidad{
+    display: flex;
+    flex-direction: column;
+}
+
+.info-habilidad label, .info-habilidad input{
+    font-size: large;
+}
+
+.info-habilidad label{
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+.info-habilidad input{
+    padding: 8px 5px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.info-habilidad input:focus{
+    border-color: #333;
+    outline: none;
+}
+
+.info-habilidad button{
+    margin-inline-start: auto;
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: larger;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.info-habilidad button:hover{
+    background-color: #333;
+}
+
+.tcp{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.tipo-categoria{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.tipo-categoria div{
+    display: flex;
+    flex-direction: column;
+}
+
+.tipo-categoria div label{
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: large;
+}
+
+.tipo-categoria select{
+    border-radius: 8px;
+    padding: 10px 20px 10px 20px;
+    border: 1px solid black;
+    background-color: black;
+    font-size: large;
+    color: white;
+    appearance: none;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.tipo-categoria select:focus{
+    border-color: white;
+    outline: none;
+}
+
+.tipo-categoria select option{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+
+.tipo-categoria select option:hover{
+    background-color: #333;
+    color: white;
+}
+
+.tipo-categoria select option:first-child{
+  display: none;
+}
+
+.potencia{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.potencia div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.potencia .invalid-feedback{
+    display: flex;
+    justify-content: center;
+}
+
+.potencia div label, .potencia div input{
+    font-size: large;
+}
+
+.potencia div input{
+    width: 80px;
+    margin-left: 15px;
+    padding: 8px 5px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.potencia div input:focus {
+    border-color: #333;
+    outline: none;
+}

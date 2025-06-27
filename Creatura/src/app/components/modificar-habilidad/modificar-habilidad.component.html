@@ -1,11 +1,23 @@
-<form [formGroup]="habilidadForm" (ngSubmit)="onSubmit()" class="pb-3">
-    <!-- NOMBRE -->
-    <div class="mb-3">
-      <label for="nombre_habilidad" class="form-label">Nombre</label>
+<div class="cont-titular"> 
+    <div class="titular">
+        <div>Habilidad</div>
+        <button class="btn-titular" onclick="history.back();">Cancelar</button>
+    </div>
+</div>
+<form [formGroup]="habilidadForm" (ngSubmit)="onSubmit()">
+  <div class="guardar">
+    <input type="text" id="creador" formControlName="creador" hidden>
+    <button type="submit" [disabled]="habilidadForm.invalid">
+      Aceptar
+    </button>
+  </div>
+
+  <div class="contenido-habilidad">
+    <div class="info-habilidad">
+      <label for="nombre_habilidad">Nombre</label>
       <input
         id="nombre_habilidad"
         formControlName="nombre_habilidad"
-        class="form-control"
         [ngClass]="{
           'is-invalid': habilidadForm.get('nombre_habilidad')?.invalid && habilidadForm.get('nombre_habilidad')?.touched
         }"
@@ -15,101 +27,88 @@
           El nombre de la habilidad es obligatorio.
         </div>
       </div>
-    </div>
-
-    <!-- TIPO -->
-<div class="mb-3">
-  <label for="tipo" class="form-label">Tipo</label>
-<select
-  id="tipo"
-  class="form-control"
-  formControlName="tipo"
-  [ngClass]="{
-    'is-invalid': habilidadForm.get('tipo')?.invalid && habilidadForm.get('tipo')?.touched
-  }"
-  [ngStyle]="{
-    'background-color': '#' + getColorByTipoId(habilidadForm.get('tipo')?.value),
-    'color': 'black'
-  }"
->
-    <option value="">-- Seleccione un Tipo --</option>
-    <option
-  *ngFor="let tipo of tipos"
-  [value]="tipo.id_tipo"
-  [ngStyle]="{ 'background-color': '#' + tipo.color, 'color': '#000' }"
->
-  {{ tipo.nombre_tipo }}
-</option>
-  </select>
-  <div *ngIf="habilidadForm.get('tipo')?.touched && habilidadForm.get('tipo')?.invalid" class="invalid-feedback">
-    Debe seleccionar un tipo.
-  </div>
-</div>
-
-
- <!-- CATEGORIA -->
-<div class="mb-3">
-  <label for="categoria" class="form-label">Categoría</label>
-  <select
-    id="categoria"
-    class="form-control"
-    formControlName="categoria"
-    [ngClass]="{
-      'is-invalid': habilidadForm.get('categoria')?.invalid && habilidadForm.get('categoria')?.touched
-    }"
-    required
-  >
-    <option value="">-- Seleccione una Categoría --</option>
-    <option value="FISICO">Físico</option>
-    <option value="ESPECIAL">Especial</option>
-    <option value="ESTADO">Estado</option>
-  </select>
-
-  <!-- Mostrar error solo si se tocó y es inválido -->
-  <div
-    *ngIf="habilidadForm.get('categoria')?.touched && habilidadForm.get('categoria')?.invalid"
-    class="invalid-feedback"
-  >
-    Debe seleccionar una categoría.
-  </div>
-</div>
-
-<!-- POTENCIA -->
-<div class="mb-3">
-  <label for="potencia" class="form-label">Potencia</label>
-  <input
-    id="potencia"
-    type="number"
-    formControlName="potencia"
-    class="form-control"
-    [ngClass]="{
-      'is-invalid': habilidadForm.get('potencia')?.invalid && habilidadForm.get('potencia')?.touched
-    }"
-  />
-  <div *ngIf="habilidadForm.get('potencia')?.touched && habilidadForm.get('potencia')?.errors" class="invalid-feedback">
-    <div *ngIf="habilidadForm.get('potencia')?.errors?.['required']">
-      La potencia es obligatoria.
-    </div>
-    <div *ngIf="habilidadForm.get('potencia')?.errors?.['min']">
-      La potencia no puede ser negativa.
-    </div>
-  </div>
-</div>
-
-       <!-- DESCRIPCION -->
-    <div class="mb-3">
-      <label for="descripcion" class="form-label">Descripcion</label>
+      <label for="descripcion">Descripcion</label>
       <input
         id="descripcion"
         formControlName="descripcion"
-        class="form-control"/>
+      />
     </div>
+    <div class="tcp">
+      <div class="tipo-categoria">
+        <div>
+          <label for="tipo" >Tipo</label>
+          <select
+            id="tipo"
+            formControlName="tipo"
+            [ngClass]="{
+              'is-invalid': habilidadForm.get('tipo')?.invalid && habilidadForm.get('tipo')?.touched
+            }"
+            [ngStyle]="{
+              'background-color': '#' + getColorByTipoId(habilidadForm.get('tipo')?.value)
+            }"
+          >
+            <option value="">Seleccione un Tipo</option>
+            <option
+              *ngFor="let tipo of tipos"
+              [value]="tipo.id_tipo"
+              [ngStyle]="{ 'background-color': '#' + tipo.color }"
+            >
+              {{ tipo.nombre_tipo }}
+            </option>
+          </select>
+          <div *ngIf="habilidadForm.get('tipo')?.touched && habilidadForm.get('tipo')?.invalid" class="invalid-feedback">
+            Debe seleccionar un tipo.
+          </div>
+        </div>
+        <div>
+          <label for="categoria">Categoría</label>
+          <select
+            id="categoria"
+            formControlName="categoria"
+            [ngClass]="{
+              'is-invalid': habilidadForm.get('categoria')?.invalid && habilidadForm.get('categoria')?.touched
+            }"
+            required
+          >
+            <option value="">Seleccione una Categoría</option>
+            <option value="FISICO">Físico</option>
+            <option value="ESPECIAL">Especial</option>
+            <option value="ESTADO">Estado</option>
+          </select>
 
-    <input type="text" id="creador" formControlName="creador" hidden>
-  
-    <button type="submit" class="btn btn-success d-block m-auto" [disabled]="habilidadForm.invalid">
-      Aceptar
-    </button>
-  </form>
+          <!-- Mostrar error solo si se tocó y es inválido -->
+          <div
+            *ngIf="habilidadForm.get('categoria')?.touched && habilidadForm.get('categoria')?.invalid"
+            class="invalid-feedback"
+          >
+            Debe seleccionar una categoría.
+          </div>
+        </div>
+      </div>
+      <div class="potencia">
+        <div>
+          <label for="potencia">Potencia</label>
+          <input
+            id="potencia"
+            type="number"
+            formControlName="potencia"
+            [ngClass]="{
+              'is-invalid': habilidadForm.get('potencia')?.invalid && habilidadForm.get('potencia')?.touched
+            }"
+          />
+        </div>
+        <div *ngIf="habilidadForm.get('potencia')?.touched && habilidadForm.get('potencia')?.errors" class="invalid-feedback">
+          <div *ngIf="habilidadForm.get('potencia')?.errors?.['required']">
+            La potencia es obligatoria.
+          </div>
+          <div *ngIf="habilidadForm.get('potencia')?.errors?.['min']">
+            La potencia no puede ser negativa.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>
 
   <app-pie-pagina></app-pie-pagina>

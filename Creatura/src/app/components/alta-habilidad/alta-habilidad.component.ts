@@ -57,7 +57,7 @@ this.habilidadForm = this.fb.group({
 
   getColorByTipoId(id: string): string {
   const tipo = this.tipos?.find(t => t.id_tipo === id);
-  return tipo ? tipo.color : 'ffffff'; // blanco por defecto
+  return tipo ? tipo.color : '00000'; // blanco por defecto
 }
 
   exito(){
