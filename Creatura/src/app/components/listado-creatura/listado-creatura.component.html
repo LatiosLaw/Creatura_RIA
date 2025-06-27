@@ -1,25 +1,27 @@
 
 <div *ngIf = "usuarioActual">
-  <div class="d-flex flex-wrap justify-content-around">
+  <div class="contenedor-creaturas">
 
   <!-- ARRANCA EL LISTADO-->
-  <div class="contenido-creatura m-2" *ngFor="let creatura of paginadas">
-    <a class="nav-link" routerLink="/mostrarCreatura" 
-       [queryParams]="{idCreatura: creatura.id_creatura}">
-      <div class="text-center">
+   @for (creatura of paginadas; track $index){
+  <div class="contenido-creatura">
+      <div class="imagen-creatura">
         <img [src]="creatura.imagen" (error)="onImgError($event)"
-             alt="{{ creatura.nombre }}" class="my-2 d-block img-ajustada" draggable="false">
+             alt="{{ creatura.nombre }}" draggable="false">
       </div>
-    </a>
   
-    <div class="px-2 text-center nombre-crea-list d-flex justify-content-between align-items-center">
-      <span>{{ creatura.nombre }}</span>
-      
-      <div class="dropdown">
+    <div class="nombre-creatura">
+      {{ creatura.nombre }}
+    </div>
+      <div class="dropdown acciones">
         <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
           ...
         </button>
         <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" routerLink="/mostrarCreatura" 
+              [queryParams]="{idCreatura: creatura.id_creatura}">Ver</a>
+          </li>
           <li>
             <a class="dropdown-item" routerLink="/modificarCreatura" 
                [queryParams]="{idCreatura: creatura.id_creatura}">
@@ -41,20 +43,20 @@
           </li>
         </ul>
       </div>
+      
+    <div class="tipos">
+      <img [src]="creatura.tipo1.icono" draggable="false"
+           [alt]="creatura.tipo1.nombre_tipo">
+      <img class="tipo2" onerror="this.style.display='none';" [src]="creatura.tipo2.icono" draggable="false"
+           [alt]="creatura.tipo2.nombre_tipo">
     </div>
   
-    <div class="tipos pt-2 pb-1 text-center">
-      <img [src]="creatura.tipo1.icono" class="" draggable="false"
-           [alt]="creatura.tipo1.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo1.color">
-      <img *ngIf="creatura.tipo2" [src]="creatura.tipo2.icono" class="ms-2" draggable="false"
-           [alt]="creatura.tipo2.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo2.color">
-    </div>
-  
-    <div class="creador-crea-list text-center mt-1 px-2">
+    <div class="creador-creatura">
       Creador: {{ creatura.creador }}
     </div>
+
   </div>
-  
+  }
     <!-- TERMINA EL LISTADO-->
 </div>
 <mat-paginator  [length]="creaturas.length"
