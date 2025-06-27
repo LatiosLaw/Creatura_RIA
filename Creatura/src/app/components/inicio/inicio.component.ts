@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ConeccionService } from '../../serviceses/coneccion.service';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { PiePaginaComponent } from '../pie-pagina/pie-pagina.component';
 
 @Component({
   selector: 'app-inicio',
-  imports: [RouterLink,CommonModule],
+  imports: [RouterLink,CommonModule, PiePaginaComponent],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.scss'
 })

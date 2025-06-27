@@ -6,11 +6,12 @@ import { ListadoCreaturaComponent } from '../listado-creatura/listado-creatura.c
 import { BarraGestorCreaturaComponent } from '../barra-gestor-creatura/barra-gestor-creatura.component';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import Swal from 'sweetalert2';
+import { PiePaginaComponent } from '../pie-pagina/pie-pagina.component';
 
 
 @Component({
   selector: 'app-gestor-creatura',
-  imports: [RouterOutlet,RouterLink,ListadoCreaturaComponent,BarraGestorCreaturaComponent,CommonModule, NgOptimizedImage],
+  imports: [RouterOutlet,RouterLink,ListadoCreaturaComponent,BarraGestorCreaturaComponent,CommonModule, NgOptimizedImage, PiePaginaComponent],
   templateUrl: './gestor-creatura.component.html',
   styleUrl: './gestor-creatura.component.scss'
 })

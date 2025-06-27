@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BarraGestorCreaturaComponent } from '../barra-gestor-creatura/barra-gestor-creatura.component';
+import { PiePaginaComponent } from '../pie-pagina/pie-pagina.component';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -16,10 +17,9 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 
 import {customPaginator} from '../../../cosas/matPag';
 
-
 @Component({
   selector: 'app-agregar-creatura',
-  imports: [RouterOutlet,RouterLink,CommonModule,ReactiveFormsModule,MatPaginatorModule, FormsModule, NgOptimizedImage,BarraGestorCreaturaComponent],
+  imports: [RouterOutlet,RouterLink,CommonModule,ReactiveFormsModule, FormsModule, NgOptimizedImage,BarraGestorCreaturaComponent, PiePaginaComponent],
   templateUrl: './agregar-creatura.component.html',
   styleUrl: './agregar-creatura.component.scss',
   providers: [

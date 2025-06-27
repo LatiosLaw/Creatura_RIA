@@ -10,9 +10,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 
 import {customPaginator} from '../../../cosas/matPag';
+import { PiePaginaComponent } from '../pie-pagina/pie-pagina.component';
 @Component({
   selector: 'app-listado-creaturas-system',
-  imports: [CommonModule,RouterLink, MatPaginatorModule],
+  imports: [CommonModule,RouterLink, MatPaginatorModule, PiePaginaComponent],
   templateUrl: './listado-creaturas-system.component.html',
   styleUrl: './listado-creaturas-system.component.scss',
   providers: [

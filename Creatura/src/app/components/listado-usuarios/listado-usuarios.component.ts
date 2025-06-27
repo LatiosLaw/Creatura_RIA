@@ -9,11 +9,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 
 import {customPaginator} from '../../../cosas/matPag';
+import { PiePaginaComponent } from '../pie-pagina/pie-pagina.component';
 
 
 @Component({
   selector: 'app-listado-usuarios',
-  imports: [RouterLink,CommonModule,MatPaginatorModule],
+  imports: [RouterLink,CommonModule,MatPaginatorModule, PiePaginaComponent],
   templateUrl: './listado-usuarios.component.html',
   styleUrl: './listado-usuarios.component.scss',
   providers: [

@@ -3,11 +3,12 @@ import { ConeccionService } from '../../serviceses/coneccion.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
+import { PiePaginaComponent } from '../pie-pagina/pie-pagina.component';
 
 @Component({
   selector: 'app-alta-habilidad',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, PiePaginaComponent],
   templateUrl: './alta-habilidad.component.html',
   styleUrl: './alta-habilidad.component.scss'
 })
