@@ -292,7 +292,7 @@
   [(ngModel)]="terminoBusqueda"
   (ngModelChange)="filtrarHabilidadesPorTexto()"
 />
-  <mat-paginator  [length]="habilidades.length"
+  <mat-paginator  [length]="puntoLength"
   [pageSize]="8"
   [pageSizeOptions]="[8, 16, 32, 8954]"
   aria-label="Select page"

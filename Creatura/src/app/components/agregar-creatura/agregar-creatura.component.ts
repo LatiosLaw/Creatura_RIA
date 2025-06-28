@@ -17,6 +17,7 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 
 import {customPaginator} from '../../../cosas/matPag';
 
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-agregar-creatura',
@@ -28,6 +29,7 @@ import {customPaginator} from '../../../cosas/matPag';
   ]
 })
 export class AgregarCreaturaComponent {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   datosCreaturaForm: FormGroup;
   creatura: any;
   creador: any;
@@ -223,6 +225,9 @@ export class AgregarCreaturaComponent {
 
   seleccionartipo3(tipo: any): void {
     this.tipo3 = tipo;
+    this.paginator.pageIndex = 0;
+    this.paginaActual = 0;
+    this.tamaPagina = 8;
     this.habilideishon();
 
 
@@ -444,6 +449,9 @@ onFileChange(event: Event): void {
   }
 }
 filtrarHabilidadesPorTexto(){
+  this.paginator.pageIndex = 0;
+  this.paginaActual = 0;
+  this.tamaPagina = 8;
   const terminoMinuscula = this.terminoBusqueda.toLowerCase().trim();
   if(this.terminoBusqueda !== ""){
   this.habilidadesFiltradas = this.habilidades2.filter(habilidad => habilidad.nombre_habilidad.toLowerCase().includes(terminoMinuscula));

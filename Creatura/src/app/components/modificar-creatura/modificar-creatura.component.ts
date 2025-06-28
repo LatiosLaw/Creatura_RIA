@@ -9,7 +9,7 @@ import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BarraGestorCreaturaComponent } from '../barra-gestor-creatura/barra-gestor-creatura.component';
 import { PiePaginaComponent } from '../pie-pagina/pie-pagina.component';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { PageEvent } from '@angular/material/paginator';
 
 import { MatPaginatorModule } from '@angular/material/paginator';
 
@@ -17,6 +17,8 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 
 import {customPaginator} from '../../../cosas/matPag';
 
+import { ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 
@@ -38,6 +40,7 @@ export class ModificarCreaturaComponent {
     icono : "no.png",
     creador : "tuvieja"
   }
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   
   constructor(private connector: ConeccionService, private fb: FormBuilder,private route: ActivatedRoute) {
     const usuarioData = localStorage.getItem('usuarioActual');
@@ -79,7 +82,7 @@ export class ModificarCreaturaComponent {
   calculoDefInmune: any[] = [];
 
   paginadas: any[] = [];
-
+  estarIndecs = 0;
   paginaActual = 0;
   tamaPagina = 8;
 
@@ -88,6 +91,8 @@ export class ModificarCreaturaComponent {
   creatura: any;
   idCreatura:any;
   
+  puntoLength = 0;
+
   tipos1: any[] = [];
   tipos2: any[] = [];
   tipos3: any[] = [];
@@ -99,6 +104,8 @@ export class ModificarCreaturaComponent {
   }
   actualizarListaPaginada(){
    // alert(this. paginaActual + "///" + this.tamaPagina);
+    
+    this.puntoLength = this.habilidades.length;
     const start = this.paginaActual * this.tamaPagina;
     const end = start + this.tamaPagina;
     this.paginadas = this.habilidades.slice(start, end);
@@ -275,6 +282,9 @@ export class ModificarCreaturaComponent {
   }
   seleccionartipo3(tipo: any): void {
     this.tipo3 = tipo;
+    this.paginaActual = 0;
+    this.tamaPagina = 8;
+    this.paginator.pageIndex = 0;
     this.habilideishon();
     
 
@@ -287,7 +297,7 @@ export class ModificarCreaturaComponent {
           console.log(data.habilidades);
           console.log(this.tipo3);
           this.habilidades2 = data.habilidades;
-  
+          this.puntoLength = this.habilidades.length;
           this.habilidades = data.habilidades;
           resolve();
         })
@@ -517,6 +527,9 @@ onFileChange(event: Event): void {
   }
 }
 filtrarHabilidadesPorTexto(){
+  this.paginator.pageIndex = 0;
+  this.paginaActual = 0;
+  this.tamaPagina = 8;
   const terminoMinuscula = this.terminoBusqueda.toLowerCase().trim();
   if(this.terminoBusqueda !== ""){
   this.habilidadesFiltradas = this.habilidades2.filter(habilidad => habilidad.nombre_habilidad.toLowerCase().includes(terminoMinuscula));
