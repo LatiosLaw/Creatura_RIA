@@ -1,42 +1,52 @@
-<div *ngIf="informacion_usuario">
-  ============================ PERFIL =================================<br>
-  Nickname : {{ informacion_usuario.usuario.nickname }}<br>
-  Correo : {{ informacion_usuario.usuario.correo }}<br>
-  Biografia : {{ informacion_usuario.usuario.biografia }}<br>
-  <img [src]="informacion_usuario.usuario.foto" style="max-width: 150px; max-height: 150px;"><br>
-<div *ngIf="informacion_usuario.usuario.nickname == usuarioLogueado.nickname">
-  <button class="btn btn-outline-light ms-2">
-    <a class="nav-link" [routerLink]="['/modificar_usuario', usuarioLogueado.nickname]">Modificar</a>
-    <a class="nav-link text-danger" (click)="eliminarUsuario()">Eliminar</a>
-  </button>
-</div>
+<div class="cont-titular"> 
+    <div class="titular">
+        <div>Información del Usuario</div>
+        <button class="btn-titular" onclick="history.back();">Volver</button>
+    </div>
 </div>
 
+@if(informacion_usuario){
+  <div class="contenido-usuario">
+    <img [src]="informacion_usuario.usuario.foto">
+    <div class="info-personal">
+      <h2>{{ informacion_usuario.usuario.nickname }}</h2>
+      <p>{{ informacion_usuario.usuario.correo }}</p>
+      <p><strong>Biografia:</strong> {{ informacion_usuario.usuario.biografia }}</p>
+      @if(informacion_usuario.usuario.nickname == usuarioLogueado.nickname){
+        <div>
+          <a [routerLink]="['/modificar_usuario', usuarioLogueado.nickname]">Modificar</a>
+          <a href="#" (click)="eliminarUsuario()">Eliminar</a>
+        </div>
+      }
+    </div>
+  </div>
+}
 
 <div *ngIf="creaturas?.creaturas && creaturas.creaturas.length > 0">
-============================ CREATURAS =================================<br>
-<div class="d-flex flex-wrap justify-content-around">
+<div class="cont-titular"> 
+    <div class="titular">
+        <div>Creaturas del Usuario</div>
+    </div>
+</div>
+
+<div class="contenedor-creaturas">
   @for (creatura of paginadas; track $index){
-  <div class="contenido-creatura m-2">
+  <div class="contenido-creatura">
       <a class="nav-link" routerLink="/mostrarCreatura" 
              [queryParams]= "{idCreatura:creatura.id_creatura}">
-          <div class="text-center">
-              <img [src]="creatura.imagen" (error)="onImgError($event)" class="my-2" draggable="false" [alt]="creatura.nombre_creatura">
-          </div>
-          <div class="px-2 text-center nombre-crea-list">
-              {{ creatura.nombre}}
-          </div>
-          <div class="tipos pt-2 pb-1 text-center">
-              <img [src]="creatura.tipo1.icono" class="" draggable="false" [alt]="creatura.tipo1.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo1.color">
-              <img [src]="creatura.tipo2.icono" class="ms-2" draggable="false" [alt]="creatura.tipo2.nombre_tipo" [style.backgroundColor]="'#' + creatura.tipo2.color">
-          </div>
+        <div class="imagen-creatura">
+            <img [src]="creatura.imagen" (error)="onImgError($event)" draggable="false" [alt]="creatura.nombre_creatura">
+        </div>
+        <div class="nombre-creatura">
+            {{ creatura.nombre}}
+        </div>
+        <div class="tipos">
+            <img [src]="creatura.tipo1.icono" draggable="false" [alt]="creatura.tipo1.nombre_tipo">
+            <img class="tipo2" [src]="creatura.tipo2.icono" draggable="false" [alt]="creatura.tipo2.nombre_tipo" onerror="this.style.display='none';">
+        </div>
       </a>
-      <div class="creador-crea-list text-center mt-1 px-2">
-          Creador: {{ creatura.creador }}
-      </div>
   </div>
   }
-  
 </div>
 <mat-paginator  [length]="creaturas.creaturas.length"
             [pageSize]="8"

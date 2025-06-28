@@ -1,0 +1,110 @@
+/* Pantalla chica */
+@media (max-width: 991.5px){
+    .contenido-usuario{
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .contenido-usuario img{
+        min-width: 300px;
+        min-height: 300px;
+        max-width: 300px;
+        max-height: 300px;
+    }
+
+    .imagen{
+        max-width: 500px;
+    }
+
+    .info-personal{
+        width: 80%;
+        margin-top: 10px;
+        flex-direction: column;
+        text-align: start;
+    }
+}
+
+/* Pantalla grande */
+@media (min-width: 991.5px){
+    .contenido-usuario{
+        display: flex;
+        gap: 100px;
+        padding: 40px;
+        align-items: center;
+    }
+
+    .info-personal{
+        width: 50%;
+    }
+
+    .contenido-usuario img{
+        min-width: 500px;
+        min-height: 500px;
+        max-width: 500px;
+        max-height: 500px;
+    }
+
+    .imagen{
+        min-width: 500px;
+        max-width: 500px;
+    }
+
+    .imagen, .imagen input{
+        font-size: large;
+    }
+}
+
+.contenido-usuario img{
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.imagen label, .imagen input{
+    margin-bottom: 10px;
+}
+
+.info-personal{
+    display: flex;
+    flex-direction: column;
+}
+
+.info-personal label, .info-personal input{
+    font-size: large;
+}
+
+.info-personal label{
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+.info-personal input{
+    margin-bottom: 20px;
+    padding: 8px 5px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.info-personal input:focus {
+    border-color: #333;
+    outline: none;
+}
+
+.info-personal button{
+    margin-inline-start: auto;
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: larger;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.info-personal button:hover{
+    background-color: #333;
+}

@@ -1,39 +1,46 @@
-<form [formGroup]="registroForm" (ngSubmit)="onSubmit()" class="pb-3">
-    <!-- NICKNAME -->
-    <div class="mb-3">
-      <label for="nickname" class="form-label">Nickname</label>
+<div class="cont-titular"> 
+    <div class="titular">
+        <div>Información del Usuario</div>
+        <button class="btn-titular" onclick="history.back();">Volver</button>
+    </div>
+</div>
+
+<form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+  <div class="contenido-usuario">
+    <div class="imagen">
+      <label for="fotoPerfil">Nueva Foto de Perfil (opcional)</label>
+      <input id="fotoPerfil" type="file" (change)="onFileChange($event)" />
+      <img *ngIf="usuarioLogueado?.foto" [src]="imagen_usuario" alt="creaturaIMG" id="img_vieja">
+    </div>
+    <div class="info-personal">
+      <label for="nickname">Nickname</label>
       <input
-  id="nickname"
-  formControlName="nickname"
-  class="form-control"
-  style="background-color: #e9ecef; color: #6c757d;"
-  [ngClass]="{
-    'is-invalid': registroForm.get('nickname')?.invalid && registroForm.get('nickname')?.touched
-  }"
-  readonly
-/>
+        id="nickname"
+        formControlName="nickname"
+        style="background-color: #e9ecef; color: #6c757d;"
+        [ngClass]="{
+          'is-invalid': registroForm.get('nickname')?.invalid && registroForm.get('nickname')?.touched
+        }"
+        readonly
+        maxlength="30"
+      />
       <div *ngIf="registroForm.get('nickname')?.touched && registroForm.get('nickname')?.errors" class="invalid-feedback">
         <div *ngIf="registroForm.get('nickname')?.errors?.['required']">
           El nickname es obligatorio.
         </div>
       </div>
-    </div>
-  
-    <!-- CORREO -->
-    <div class="mb-3">
-      <label for="correo" class="form-label">Correo</label>
-<input
-  id="correo"
-  type="email"
-  formControlName="correo"
-  class="form-control"
-  style="background-color: #e9ecef; color: #6c757d;"
-  [ngClass]="{
-    'is-invalid': registroForm.get('correo')?.invalid && registroForm.get('correo')?.touched
-  }"
-  readonly
-/>
-
+      <label for="correo">Correo</label>
+      <input
+        id="correo"
+        type="email"
+        formControlName="correo"
+        style="background-color: #e9ecef; color: #6c757d;"
+        [ngClass]="{
+          'is-invalid': registroForm.get('correo')?.invalid && registroForm.get('correo')?.touched
+        }"
+        readonly
+        maxlength="30"
+      />
       <div *ngIf="registroForm.get('correo')?.touched && registroForm.get('correo')?.errors" class="invalid-feedback">
         <div *ngIf="registroForm.get('correo')?.errors?.['required']">
           El correo es obligatorio.
@@ -42,33 +49,21 @@
           El correo no es válido.
         </div>
       </div>
-    </div>
 
-    <img *ngIf="usuarioLogueado?.foto" [src]="imagen_usuario" alt="creaturaIMG" id="img_vieja">
+      <label for="biografia">Biografía (Opcional)</label>
+      <input maxlength="200" id="biografia" formControlName="biografia">
 
-    <div class="mb-3">
-      <label for="fotoPerfil" class="form-label">Nueva Foto de perfil (opcional)</label>
-       <input id="fotoPerfil" type="file" class="form-control" (change)="onFileChange($event)" />
-    </div>
+      <label for="contra">Nueva Contraseña (Opcional)</label>
+      <input  maxlength="30" type="password" id="contra" formControlName="contra">
 
-    <div class="mb-3">
-      <label for="contra" class="form-label">Nueva Contraseña (opcional)</label>
-      <input type="password" id="contra" formControlName="contra" class="form-control">
-    </div>
-  
-    <div class="mb-3">
-      <label for="ver_contra" class="form-label">Verificar Nueva Contraseña</label>
-      <input type="password" id="ver_contra" formControlName="ver_contra" class="form-control">
-    </div>
+      <label for="ver_contra" >Verificar Nueva Contraseña</label>
+      <input maxlength="30" type="password" id="ver_contra" formControlName="ver_contra" >
 
-    <div class="mb-3">
-      <label for="biografia" class="form-label">Biografía (opcional)</label>
-      <textarea id="biografia" formControlName="biografia" class="form-control"></textarea>
+      <button type="submit" [disabled]="registroForm.invalid">
+        Modificar
+      </button>
     </div>
-
-    <button type="submit" class="btn btn-success d-block m-auto" [disabled]="registroForm.invalid">
-      Modificar
-    </button>
+  </div>
   </form>
   
 

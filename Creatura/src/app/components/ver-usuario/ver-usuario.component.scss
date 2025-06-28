@@ -1,3 +1,154 @@
-.mat-paginator-page-size {
-    display: none !important;
-  }
+/* Pantalla chica */
+@media (max-width: 991.5px){
+    .contenido-usuario{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .contenido-usuario img{
+        margin-top: 10px;
+        min-width: 300px;
+        min-height: 300px;
+        max-width: 300px;
+        max-height: 300px;
+    }
+
+    .info-personal{
+        width: 80%;
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/* Pantalla grande */
+@media (min-width: 991.5px){
+    .contenido-usuario{
+        display: flex;
+        gap: 100px;
+        padding: 40px;
+        align-items: center;
+    }
+
+    .info-personal{
+        width: 50%;
+    }
+
+    .contenido-usuario img{
+        min-width: 500px;
+        min-height: 500px;
+        max-width: 500px;
+        max-height: 500px;
+    }
+}
+
+.contenido-usuario img{
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.info-personal{
+    font-size: large;
+}
+
+.info-personal h2{
+  font-weight: bold;
+}
+
+.info-personal h2, .info-personal p{
+    margin-bottom: 20px;
+}
+
+.info-personal a{
+    background-color: black;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.info-personal a:hover{
+    background-color: #333;
+}
+
+.contenedor-creaturas{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.contenido-creatura{
+    background-color: lightgray;
+    cursor: pointer;
+    margin: 20px;
+    min-width: 300px;
+    min-height: 380px;
+    max-width: 300px;
+    max-height: 380px;
+    transition: background-color 0.3s ease;
+}
+
+.contenido-creatura:hover{
+    background-color: ghostwhite;
+}
+
+.contenido-creatura a{
+    text-decoration: none;
+    color: black;
+}
+
+.imagen-creatura{
+    text-align: center;
+}
+
+.imagen-creatura img{
+    background-color: white;
+    margin-top: 10px; 
+    margin-bottom: 5px;
+    user-select: none;
+    border: 1px solid black;
+    min-width: 280px;
+    min-height: 280px;
+    max-width: 280px;
+    max-height: 280px;
+}
+
+.nombre-creatura{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    font-size: 22px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.tipos{
+    user-select: none;
+    padding-top: 8px;
+    padding-bottom: 9px;
+    text-align: center;
+}
+
+.tipos img{
+    min-width: 35px;
+    min-height: 35px;
+    max-width: 35px;
+    max-height: 35px;
+}
+
+.tipo2{
+    margin-left: 5px;
+}
+
+.rating{
+    text-align: center;
+    padding-bottom: 20px;
+}
