@@ -108,11 +108,13 @@ export class ConeccionService {
 
 	Baja_Tipo(id:any){
 		//Sustituir con la llamada a api adecuada.
-		return this.get_Todos_Los_Tipos();
+		const url2 = this.urlTipos + "/baja.php?id_tipo="+id;
+		return this.http.delete(url2);
 	}
 	Modificar_Tipo(id:any, tipo:any){
 		//Sustituir con la llamada a api adecuada.
-		return this.get_Todos_Los_Tipos();
+		const url2 = this.urlTipos+"/modificacion.php";
+		return this.http.post(url2, tipo);
 	}
 	
 }

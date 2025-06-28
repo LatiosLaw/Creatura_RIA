@@ -10,6 +10,7 @@ import { ColorPickerComponent, ColorPickerService , ColorPickerDirective } from 
 import { TipoComparado } from '../../interfaces/tipo-comparado';
 import { ResultadoPeticionDefensas } from '../../interfaces/resultado-peticion-defensas';
 import { Tipo } from '../../interfaces/tipo';
+import {TiposDeResistencias} from '../../interfaces/tipos-de-resistencias'
 
 @Component({
   selector: 'app-modificar-tipo',
@@ -19,14 +20,32 @@ import { Tipo } from '../../interfaces/tipo';
 })
 export class ModificarTipoComponent {
 
+
+
 	datos_del_tipo_form : FormGroup;
 
 	el_tipo : Tipo;
 
-	el_color:string;	
+	buffer_de_todos_los_tipos: Tipo[] =[];
+
+	el_color:string;
+
+	el_nombre_original:string;	
+
+	se_modifico_icono:boolean;
+
+	resistencias: number[][] = [];
+
+	resistencias_Tipo: TiposDeResistencias;
+
+	Autodefensa : number;
+
+	creador:string;
+
 
 	constructor(private connector: ConeccionService, private fb: FormBuilder,private route: ActivatedRoute, private router:Router){
 	
+		this.se_modifico_icono=false;
 		this.datos_del_tipo_form = this.fb.group({
 			nombre: [null ,[Validators.required]]
 		});
@@ -40,13 +59,30 @@ export class ModificarTipoComponent {
 			creador: "SYSTEM"
 		};
 		this.el_color=this.el_tipo.color;
+		this.el_nombre_original = this.el_tipo.nombre_tipo;
+
+		this.resistencias.push([]);
+		this.resistencias.push([]);
+		this.resistencias.push([]);
+		this.resistencias.push([]);
+
+		this.resistencias_Tipo={
+			inmunidades:[],
+			resistencias:[],
+			neutralidades:[],
+			debilidades:[]
+		}
+
+
+		this.Autodefensa=1;
+
+		this.creador=this.el_tipo.creador;
 
 	}
 
 
 	url_iconos = 'http://localhost:41062/www/imagenes/tipos/';
 
-	buffer_de_todos_los_tipos: Tipo[] | undefined;
 
 	ngOnInit(): void{
 	
@@ -76,7 +112,67 @@ export class ModificarTipoComponent {
 					nombre: this.el_tipo.nombre_tipo
 				});
 				this.el_color=this.el_tipo.color;
+				this.el_nombre_original = this.el_tipo.nombre_tipo;
+				this.connector.Mostar_Tipo(this.el_tipo.id_tipo).subscribe((res:any) =>{
+					let la_respuesta:ResultadoPeticionDefensas=res;
+					let las_defensas:any[]= la_respuesta.defensas;
+					las_defensas.forEach((el_otro_tipo:TipoComparado) =>{
+						if(el_otro_tipo.id_tipo==this.el_tipo.id_tipo){
+							this.Autodefensa=el_otro_tipo.multiplicador;
+						}
+						switch(el_otro_tipo.multiplicador){
+							case 0:{
+								this.resistencias[0].push(el_otro_tipo.id_tipo);
+								let tipo_tmp=this.buffer_de_todos_los_tipos.find(t=>t.id_tipo==el_otro_tipo.id_tipo);
+								if (tipo_tmp!=undefined){
+								this.resistencias_Tipo.inmunidades.push(tipo_tmp);
+								}
+								break;
+							}
+							case 0.5:{
+								this.resistencias[1].push(el_otro_tipo.id_tipo);
+								let tipo_tmp=this.buffer_de_todos_los_tipos.find(t=>t.id_tipo==el_otro_tipo.id_tipo);
+								if (tipo_tmp!=undefined){
+								this.resistencias_Tipo.resistencias.push(tipo_tmp);
+								}
+								break;
+							}
+							case 1:{
+								this.resistencias[2].push(el_otro_tipo.id_tipo);
+								let tipo_tmp=this.buffer_de_todos_los_tipos.find(t=>t.id_tipo==el_otro_tipo.id_tipo);
+								if (tipo_tmp!=undefined){
+								this.resistencias_Tipo.neutralidades.push(tipo_tmp);
+								}
+								break;
+							}
+							case 2:{
+								this.resistencias[3].push(el_otro_tipo.id_tipo);
+								let tipo_tmp=this.buffer_de_todos_los_tipos.find(t=>t.id_tipo==el_otro_tipo.id_tipo);
+								if (tipo_tmp!=undefined){
+								this.resistencias_Tipo.debilidades.push(tipo_tmp);
+								}
+								break;
+							}
+						}
+					
+					
+					});
+					console.log("El tipo selecionado tiene "+this.resistencias_Tipo.debilidades.length+" debilidades.")
+					console.log("El tipo selecionado tiene "+this.resistencias_Tipo.inmunidades.length+" inmunidades.")
+					console.log("El tipo selecionado tiene "+this.resistencias_Tipo.neutralidades.length+" neutralidades.")
+					console.log("El tipo selecionado tiene "+this.resistencias_Tipo.resistencias.length+" resistencias.")
+
+								let tipo_tmp  =
+									this.buffer_de_todos_los_tipos.find(t=>
+										  {return t.id_tipo==4;});
+								if (tipo_tmp!=undefined){
+								 console.log("Se encontro el tipo "+tipo_tmp.nombre_tipo);
+								}
+				
+				
+				});
 				console.log("Modificando el tipo: "+this.el_tipo.id_tipo);
+
 			 }
 			});
 		 });
@@ -118,6 +214,7 @@ onFileChange(event: Event): void {
     };
 
     reader.readAsDataURL(file); 
+    this.se_modifico_icono=true;
     console.log(file);
   }
 }
@@ -128,5 +225,50 @@ Selecciono_Color(color:string){
 	//console.log("El color del tipo ahora es: "+this.el_tipo.color);
 
 }
+
+Realizar_Solicitud_de_Modificacion(){
+
+	const nueva_imagen : string = (this.se_modifico_icono) ? this.el_tipo.icono : "";
+	let datos_modificacion = {
+		id_tipo : this.el_tipo.id_tipo,
+		nombre_original : this.el_nombre_original,
+		nombre : this.el_tipo.nombre_tipo,
+		color_hex : this.el_tipo.color,
+		self_int: this.Autodefensa,
+		creador: this.el_tipo.creador,
+		debilidades: this.resistencias[3],
+		resistencias: this.resistencias[1],
+		inmunidades: this.resistencias[0]
+
+
+	}
+
+}
+
+Quitar_Debilidad(id:number){
+	let Tipo_tmp_index:number = this.resistencias_Tipo.debilidades.findIndex(t => t.id_tipo==id);
+	let Tipo_tmp : Tipo | undefined = this.resistencias_Tipo.debilidades.at(Tipo_tmp_index);
+	if (Tipo_tmp!=undefined){
+	this.resistencias_Tipo.debilidades.splice(Tipo_tmp_index,1);
+	this.resistencias_Tipo.neutralidades.push(Tipo_tmp);
+	}
+}
+Quitar_Resistencia(id:number){
+	let Tipo_tmp_index:number = this.resistencias_Tipo.resistencias.findIndex(t => t.id_tipo==id);
+	let Tipo_tmp : Tipo | undefined = this.resistencias_Tipo.resistencias.at(Tipo_tmp_index);
+	if (Tipo_tmp!=undefined){
+	this.resistencias_Tipo.resistencias.splice(Tipo_tmp_index,1);
+	this.resistencias_Tipo.neutralidades.push(Tipo_tmp);
+	}
+}
+Quitar_Inmunidad(id:number){
+	let Tipo_tmp_index:number = this.resistencias_Tipo.inmunidades.findIndex(t => t.id_tipo==id);
+	let Tipo_tmp : Tipo | undefined = this.resistencias_Tipo.inmunidades.at(Tipo_tmp_index);
+	if (Tipo_tmp!=undefined){
+	this.resistencias_Tipo.inmunidades.splice(Tipo_tmp_index,1);
+	this.resistencias_Tipo.neutralidades.push(Tipo_tmp);
+	}
+}
+
 
 }

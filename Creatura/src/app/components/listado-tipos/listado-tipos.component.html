@@ -1,6 +1,6 @@
 <div class="cont-titular d-flex align-items-center"> 
 	<div class="titular p-2 w-100 d-flex">
-		<div class="d-inline">Gestor de Creaturas</div>
+		<div class="d-inline">Listardo de Tipos</div>
 
           <button class="btn btn-dark ms-auto " type="button" >
            Crear Tipo
@@ -27,7 +27,7 @@
 					...
 				</button>
 				<ul class="dropdown-menu">
-					<a class="nav-link" routerLink="/modificarTipo" [queryParams]="{id_Tipo:tipo.id_tipo}">
+					<a class="nav-link" routerLink="/modificarTipo" [queryParams]="{id_Tipo:tipo.id_tipo}" ng-reflect-router-link="modificarTipo">
 					<li>
 						<button class="dropdown-item" type="button">Modificar Tipo</button>
 					</li>

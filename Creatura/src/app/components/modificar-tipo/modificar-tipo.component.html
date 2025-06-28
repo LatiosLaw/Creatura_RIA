@@ -1,4 +1,16 @@
-<p>modificar-tipo works!</p>
+<div class="cont-titular d-flex align-items-center"> 
+	<div class="titular p-2 w-100 d-flex">
+		<div class="d-inline">Modificar Tipo</div>
+	</div>
+          <button class="btn btn-dark ms-auto " type="button" >
+           Confirmar
+          </button>
+	<a class="nav-link" routerLink="listarTipos" ng-reflect-router-link="listarTipos" href="/listarTipos">
+          <button class="btn btn-dark ms-auto " type="button" >
+           Cancelar
+          </button>
+	</a>
+</div>
 
 <div class="container bg-primary">
 	<div class="row">
@@ -16,6 +28,56 @@
 			</div>
 			<div class="align-items-center d-flex gap-2">
 				Color:<input [(colorPicker)]="el_color" [style.background]="el_color" (colorPickerChange)="Selecciono_Color($event)"/>
+			</div>
+			<div class="align-items-center">
+				<p class="align-text-left">Debilidades: </p>
+				<div class="d-flex flex-wrap justify-content-left">
+					@for (un_tipo of resistencias_Tipo.debilidades; track $index){
+					<div class="m-2 d-flex justify-content-center"[style.backgroundColor]="'#'+un_tipo.color">
+						<div>
+						<img [src]="un_tipo.icono" [alt]="un_tipo.nombre_tipo" >
+						</div>
+						<div class="mt-1 px-2 text-center">
+							{{un_tipo.nombre_tipo}}
+						</div>
+						<div>
+							<button class="close" (click)="Quitar_Debilidad(un_tipo.id_tipo)">X</button>
+						</div>
+					</div>
+					}
+				</div>
+				<p class="align-text-left">Resistencias: </p>
+				<div class="d-flex flex-wrap justify-content-left">
+					@for (un_tipo of resistencias_Tipo.resistencias; track $index){
+					<div class="m-2 d-flex justify-content-center"[style.backgroundColor]="'#'+un_tipo.color">
+						<div>
+						<img [src]="un_tipo.icono" [alt]="un_tipo.nombre_tipo" >
+						</div>
+						<div class="mt-1 px-2 text-center">
+							{{un_tipo.nombre_tipo}}
+						</div>
+						<div>
+						<button class="close" (click)="Quitar_Resistencia(un_tipo.id_tipo)">X</button>
+						</div>
+					</div>
+					}
+				</div>
+				<p class="align-text-left">Inmunidades: </p>
+				<div class="d-flex flex-wrap justify-content-left">
+					@for (un_tipo of resistencias_Tipo.inmunidades; track $index){
+					<div class="m-2 d-flex justify-content-center"[style.backgroundColor]="'#'+un_tipo.color">
+						<div>
+						<img [src]="un_tipo.icono" [alt]="un_tipo.nombre_tipo" >
+						</div>
+						<div class="mt-1 px-2 text-center">
+							{{un_tipo.nombre_tipo}}
+						</div>
+						<div>
+						<button class="close" (click)="Quitar_Inmunidad(un_tipo.id_tipo)">X</button>
+						</div>
+					</div>
+					}
+				</div>
 			</div>
 	</div>
 

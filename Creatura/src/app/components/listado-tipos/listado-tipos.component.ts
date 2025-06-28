@@ -22,7 +22,8 @@ export class ListadoTiposComponent {
 	mostar_tipos_html:any;
 
 
-	constructor(private connector: ConeccionService, private fb: FormBuilder,private route: ActivatedRoute){}
+	constructor(private connector: ConeccionService, private fb: FormBuilder,private route: ActivatedRoute){
+	}
 
 	url_iconos = 'http://localhost:41062/www/imagenes/tipos/';
 	
