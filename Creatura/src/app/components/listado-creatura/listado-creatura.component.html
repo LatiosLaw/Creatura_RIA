@@ -47,7 +47,7 @@
     <div class="tipos">
       <img [src]="creatura.tipo1.icono" draggable="false"
            [alt]="creatura.tipo1.nombre_tipo">
-      <img class="tipo2" onerror="this.style.display='none';" [src]="creatura.tipo2.icono" draggable="false"
+      <img *ngIf= "creatura.tipo2.id_tipo !== 0" class="tipo2" [src]="creatura.tipo2.icono" draggable="false"
            [alt]="creatura.tipo2.nombre_tipo">
     </div>
   
@@ -69,7 +69,7 @@ aria-label="Select page"
 </div>
 <div *ngIf = "!usuarioActual">
 <div class="container">
-  <img ngSrc="logo.jpg" fill>
+  <img ngSrc="logo.png" fill>
 </div>
 </div>
 
