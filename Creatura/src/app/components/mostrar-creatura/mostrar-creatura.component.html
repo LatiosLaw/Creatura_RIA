@@ -40,35 +40,47 @@
       </div>
       <p><strong>Descrición:</strong> {{creatura.descripcion}} </p>
       <div class="stats">
-        <p>Estadisticas: </p>
+        <p>Estadísticas: </p>
         <strong>HP </strong>
-        <div class="barra" data-value="" data-max-value="255" data-type="HP">
-            <div class="barra-inner"><div>{{creatura.hp}}</div></div>
+        <div class="barra" #statBar data-max-value="255" data-type="HP">
+          <div class="barra-inner">
+            <div>{{creatura.hp}}</div>
+          </div>
         </div>
 
         <strong>ATK </strong>
-        <div class="barra" data-value="" data-max-value="255" data-type="ATK">
-            <div class="barra-inner"><div>{{creatura.atk}}</div></div>
+        <div class="barra" #statBar data-max-value="255" data-type="ATK">
+          <div class="barra-inner">
+            <div>{{creatura.atk}}</div>
+          </div>
         </div>
 
         <strong>DEF </strong>
-        <div class="barra" data-value="" data-max-value="255" data-type="DEF">
-            <div class="barra-inner"><div>{{creatura.def}}</div></div>
+        <div class="barra" #statBar data-max-value="255" data-type="DEF">
+          <div class="barra-inner">
+            <div>{{creatura.def}}</div>
+          </div>
         </div>
 
         <strong>SPA </strong>
-        <div class="barra" data-value="" data-max-value="255" data-type="SPA">
-            <div class="barra-inner"><div>{{creatura.spa}}</div></div>
+        <div class="barra" #statBar data-max-value="255" data-type="SPA">
+          <div class="barra-inner">
+            <div>{{creatura.spa}}</div>
+          </div>
         </div>
 
         <strong>SDEF </strong>
-        <div class="barra" data-value="" data-max-value="255" data-type="SDEF">
-            <div class="barra-inner"><div>{{creatura.sdef}}</div></div>
+        <div class="barra" #statBar data-max-value="255" data-type="SDEF">
+          <div class="barra-inner">
+            <div>{{creatura.sdef}}</div>
+          </div>
         </div>
 
         <strong>SPE </strong>
-        <div class="barra" data-value="" data-max-value="255" data-type="SPE">
-            <div class="barra-inner"><div>{{creatura.spe}}</div></div>
+        <div class="barra" #statBar data-max-value="255" data-type="SPE">
+          <div class="barra-inner">
+            <div>{{creatura.spe}}</div>
+          </div>
         </div>
       </div>
     </div>
