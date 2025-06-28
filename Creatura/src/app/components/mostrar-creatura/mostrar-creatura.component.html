@@ -134,7 +134,7 @@
       </div>
     }
     @if(calculoDefInmune && calculoDefInmune.length > 0){
-      <h3>Inmune (x0.25)</h3>
+      <h3>Inmune (x0)</h3>
       <div class="multiplicador">
         @for(tipo of calculoDefInmune; track $index){
           <div [style.backgroundColor]="'#' + tipo.color">{{ tipo.nombre_tipo }}</div>
