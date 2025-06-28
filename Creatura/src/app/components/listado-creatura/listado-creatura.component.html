@@ -68,35 +68,9 @@ aria-label="Select page"
 
 </div>
 <div *ngIf = "!usuarioActual">
-<div class="container">
-  <img ngSrc="logo.png" fill>
-</div>
-</div>
+  <div class = "container">
+  <img src="logo.png" class = "img-ajustada2">
+  </div>
+ </div>
 
 <div class="margen"></div>
-
-<!-- 
-<ul class="dropdown-menu">
-          <li>
-            <a class="dropdown-item" routerLink="/modificarCreatura" 
-               [queryParams]="{idCreatura: creatura.id_creatura}">
-              Modificar Creatura
-            </a>
-          </li>
-          <li>
-            <button class="dropdown-item" type="button">Publicar/Ocultar</button>
-          </li>
-          <li>
-            <button class="dropdown-item" type="button" (click)="mostrarJScreatura(creatura.id_creatura)">
-              Exportar
-            </button>
-          </li>
-          <li>
-            <button class="dropdown-item" type="button" (click)="eliminarCreatura(creatura.id_creatura)">
-              Eliminar
-            </button>
-          </li>
-        </ul>
-
-
--->

@@ -74,3 +74,14 @@ a{
     display: inline;
     letter-spacing: 1px;
 }
+.img-ajustada2 {
+    width: 100%;       
+    object-fit: fill; 
+    display: block;    
+  }
+  .tipos-img{
+    min-width: 35px;
+    min-height: 35px;
+    max-width: 35px;
+    max-height: 35px;
+}

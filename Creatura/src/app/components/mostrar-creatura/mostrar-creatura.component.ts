@@ -88,6 +88,7 @@ export class MostrarCreaturaComponent implements OnInit, AfterViewInit {
   cargarCreatura2(): Promise<void> {
     return new Promise((resolve, reject) => {
       this.connector.getCreaturaConTipos(this.idCreatura).subscribe(data => {
+        console.log ("getCreatura");
         console.log(data);
         var tipo2: any;
         if (!data.creatura.id_tipo2) {

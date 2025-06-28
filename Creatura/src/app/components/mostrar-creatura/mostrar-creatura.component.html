@@ -35,8 +35,12 @@
       </div>
       <p>Puntuación de la Creatura: <strong>{{creturaRating}}/5</strong></p>
       <div class="tipos-creatura">
-        <div [style.backgroundColor]="'#' + creatura.tipo1?.color"> {{creatura.tipo1.nombre_tipo}}</div>
-        <div [style.backgroundColor]="'#' + creatura.tipo2?.color"> {{creatura.tipo2.nombre_tipo}}</div>
+        <div [style.backgroundColor]="'#' + creatura.tipo1?.color">
+          <img [src]="creatura.tipo1.icono" class = "tipos-img">
+           {{creatura.tipo1.nombre_tipo}}</div>
+        <div [style.backgroundColor]="'#' + creatura.tipo2?.color">
+          <img [src]="creatura.tipo2.icono" class = "tipos-img">
+           {{creatura.tipo2.nombre_tipo}}</div>
       </div>
       <p><strong>Descrición:</strong> {{creatura.descripcion}} </p>
       <div class="stats">
@@ -97,7 +101,9 @@
       <h3>Muy débil (x4)</h3>
       <div class="multiplicador">
         @for(tipo of calculoDefMuyEff; track $index){
-          <div [style.backgroundColor]="'#' + tipo.color">{{ tipo.nombre_tipo }}</div>
+          <div [style.backgroundColor]="'#' + tipo.color">
+            <img [src]="tipo.icono" class = "tipos-img">
+            {{ tipo.nombre_tipo }}</div>
         }
       </div>
     }
@@ -105,7 +111,9 @@
       <h3>Débil (x2)</h3>
       <div class="multiplicador">
         @for(tipo of calculoDefEff; track $index){
-          <div [style.backgroundColor]="'#' + tipo.color">{{ tipo.nombre_tipo }}</div>
+          <div [style.backgroundColor]="'#' + tipo.color">
+            <img [src]="tipo.icono" class = "tipos-img">
+            {{ tipo.nombre_tipo }}</div>
         }
       </div>
     }
@@ -113,7 +121,9 @@
       <h3>Neutro (x1)</h3>
       <div class="multiplicador">
         @for(tipo of calculoDefNeu; track $index){
-          <div [style.backgroundColor]="'#' + tipo.color">{{ tipo.nombre_tipo }}</div>
+          <div [style.backgroundColor]="'#' + tipo.color">
+            <img [src]="tipo.icono">
+            {{ tipo.nombre_tipo }}</div>
         }
       </div>
     }
@@ -121,7 +131,9 @@
       <h3>Resistente (x0.5)</h3>
       <div class="multiplicador">
         @for(tipo of calculoDefNoEff; track $index){
-          <div [style.backgroundColor]="'#' + tipo.color">{{ tipo.nombre_tipo }}</div>
+          <div [style.backgroundColor]="'#' + tipo.color">
+            <img [src]="tipo.icono" class = "tipos-img">
+            {{ tipo.nombre_tipo }}</div>
         }
       </div>
     }
@@ -129,7 +141,9 @@
       <h3>Muy Resistente (x0.25)</h3>
       <div class="multiplicador">
         @for(tipo of calculoDefMuyNoEff; track $index){
-          <div [style.backgroundColor]="'#' + tipo.color">{{ tipo.nombre_tipo }}</div>
+          <div [style.backgroundColor]="'#' + tipo.color">
+            <img [src]="tipo.icono" class = "tipos-img">
+            {{ tipo.nombre_tipo }}</div>
         }
       </div>
     }
@@ -137,7 +151,9 @@
       <h3>Inmune (x0)</h3>
       <div class="multiplicador">
         @for(tipo of calculoDefInmune; track $index){
-          <div [style.backgroundColor]="'#' + tipo.color">{{ tipo.nombre_tipo }}</div>
+          <div [style.backgroundColor]="'#' + tipo.color">
+            <img [src]="tipo.icono" class = "tipos-img">
+            {{ tipo.nombre_tipo }}</div>
         }
       </div>
     }
