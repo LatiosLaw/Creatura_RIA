@@ -1,199 +1,219 @@
-<div class = "container ngif" *ngIf="creatura">
-<div class = "row">
-    <div class = "col col-Img bg-danger">
-            <img [src]="creatura.imagen" (error)="onImgError($event)" alt="creaturaIMG" class="w-100  img-ajustada">
-            <div class = "row justify-content-center">
-                <div class= "col d-flex justify-content-center gap-2">
-                    <div class="btn btn-primary" [style.backgroundColor]="'#' + creatura.tipo1?.color">{{creatura.tipo1.nombre_tipo}}</div>
-                
-                    <div class="btn btn-primary" [style.backgroundColor]="'#' + creatura.tipo2?.color">{{creatura.tipo2.nombre_tipo}}</div>
-                </div>
-            </div>
-            <div class="row">
-                <textarea id="comentario" rows="4" maxlength="200"
-                placeholder="Escriba la descripción de su Creatura" [value] = "creatura.descripcion"></textarea>
-            </div>
-    </div>
-    
+<div class="ngif" *ngIf="creatura">
 
-    <!--////////////////////////////////////////-->
-    <div class = "col col-Stats bg-info">
-        <div class = "row justify-content-start">
-            <div class = "col">
-                <div class="d-flex align-items-center gap-2">
-                    Nombre:<input type="text" class="bg-success text-white m-2 p-2" maxlength="30" [value] = "creatura.nombre_creatura"> 
-                </div>
-            </div>
-            <div class="col">
-                Creador: {{creatura.creador}}
-            </div>
-            <div class="col">
-                <div class="d-flex align-items-center ">
-                    Calificá:  
-                    <i *ngFor="let star of stars; index as i"
-                       class="bi"
-                       [ngClass]="{
-                         'bi-star-fill text-warning': i < rating,
-                         'bi-star text-secondary': i >= rating,
-                         'cursor-pointer': !barraRateBlock,
-                         'opacity-50': barraRateBlock
-                       }"
-                       [style.cursor]="barraRateBlock ? 'default' : 'pointer'"
-                       (click)="ratingMomento(i + 1)"
-                       style="font-size: 2rem; cursor: pointer;">
-                    </i>
-                  </div>
-                  <div class="col">rating: "{{creturaRating}}"</div>
-            </div>
+
+
+
+  <div class="cont-titular"> 
+      <div class="titular">
+          <div>Información de la Creatura</div>
+          <button class="btn-titular" onclick="history.back();">Volver</button>
+      </div>
+  </div>
+
+  <div class="contenido-creatura">
+    <img [src]="creatura.imagen" (error)="onImgError($event)" alt="creaturaIMG">
+    <div class="info-creatura">
+      <div class="rycc">
+        <div class="creador-creatura">
+          <h2> {{creatura.nombre_creatura}} </h2>
+          <p>Hecho por <strong> {{creatura.creador}} </strong></p>
         </div>
-        <div class="row text-center">
-            <div class="col d-flex justify-content-start align-items-center">
-              <div class="d-flex align-items-center gap-2">
-                hp: <input 
-                
-                class="form-control bg-success text-white m-2 p-2" type="number" min="1" max="255" [value] = "creatura.hp">
-              </div>
-            </div>
-            <div class="w-100"></div>
-            <div class="col d-flex justify-content-start r align-items-center">
-              <div class="d-flex align-items-center gap-2">
-                atk: <input 
-               
-                class="form-control bg-danger text-white m-2 p-2" type="number" min="1" max="255" [value] = "creatura.atk">
-              </div>
-            </div>
-            <div class="w-100"></div>
-            <div class="col d-flex justify-content-start  align-items-center">
-              <div class="d-flex align-items-center gap-2">
-                def: <input 
-                
-                class="form-control bg-primary text-white m-2 p-2" type="number" min="1" max="255" [value] = "creatura.def">
-              </div>
-            </div>
-          
-            <div class="w-100"></div>
-          
-            <div class="col d-flex justify-content-start  align-items-center">
-              <div class="d-flex align-items-center gap-2">
-                spa: <input 
-               
-                class="form-control bg-spa text-white m-2 p-2" type="number" min="1" max="255" [value] = "creatura.spa">
-              </div>
-            </div>
-            <div class="w-100"></div>
-            <div class="col d-flex justify-content-start  align-items-center">
-              <div class="d-flex align-items-center gap-2">
-                  sdef: <input 
-                    
-                class="form-control bg-sdef text-white m-2 p-2" type="number" min="1" max="255" [value] = "creatura.sdef">
-              </div>
-            </div>
-            <div class="w-100"></div>
-            <div class="col d-flex justify-content-start  align-items-center">
-              <div class="d-flex align-items-center gap-2">
-                spe: <input 
-               
-                class="form-control bg-warning text-white m-2 p-2" type="number" min="1" max="255" [value] = "creatura.spe">
-              </div>
-            </div>
-          </div>
-          
-    <div class = "row">
-        
-    </div>
-    <div class = "row">
-      
-      <div class="cont-titular d-flex align-items-center"> 
-        <div class="titular p-2 w-100 d-flex">
-            <div class="d-inline">Muy devil</div>
+        <div class="rating">
+          <p>¡Puntua a esta Creatura!</p>  
+          <i *ngFor="let star of stars; index as i"
+            [ngClass]="{
+              'bi-star-fill text-warning': i < rating,
+              'bi-star text-secondary': i >= rating,
+              'cursor-pointer': !barraRateBlock,
+              'opacity-50': barraRateBlock
+            }"
+            [style.cursor]="barraRateBlock ? 'default' : 'pointer'"
+            (click)="ratingMomento(i + 1)"
+            style="font-size: 2rem; cursor: pointer;">
+          </i>
         </div>
+      </div>
+      <p>Puntuación de la Creatura: <strong>{{creturaRating}}/5</strong></p>
+      <div class="tipos-creatura">
+        <div [style.backgroundColor]="'#' + creatura.tipo1?.color"> {{creatura.tipo1.nombre_tipo}}</div>
+        <div [style.backgroundColor]="'#' + creatura.tipo2?.color"> {{creatura.tipo2.nombre_tipo}}</div>
+      </div>
+      <p><strong>Descrición:</strong> {{creatura.descripcion}} </p>
+      <div class="stats">
+        <p>Estadisticas: </p>
+        <strong>HP </strong>
+        <div class="barra" data-value="" data-max-value="255" data-type="HP">
+            <div class="barra-inner"><div>{{creatura.hp}}</div></div>
+        </div>
+
+        <strong>ATK </strong>
+        <div class="barra" data-value="" data-max-value="255" data-type="ATK">
+            <div class="barra-inner"><div>{{creatura.atk}}</div></div>
+        </div>
+
+        <strong>DEF </strong>
+        <div class="barra" data-value="" data-max-value="255" data-type="DEF">
+            <div class="barra-inner"><div>{{creatura.def}}</div></div>
+        </div>
+
+        <strong>SPA </strong>
+        <div class="barra" data-value="" data-max-value="255" data-type="SPA">
+            <div class="barra-inner"><div>{{creatura.spa}}</div></div>
+        </div>
+
+        <strong>SDEF </strong>
+        <div class="barra" data-value="" data-max-value="255" data-type="SDEF">
+            <div class="barra-inner"><div>{{creatura.sdef}}</div></div>
+        </div>
+
+        <strong>SPE </strong>
+        <div class="barra" data-value="" data-max-value="255" data-type="SPE">
+            <div class="barra-inner"><div>{{creatura.spe}}</div></div>
+        </div>
+      </div>
     </div>
-    <button *ngFor = "let tipo of calculoDefMuyEff" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-            aria-expanded="false" [style.backgroundColor]="'#' + tipo.color">
-            {{ tipo.nombre_tipo }}
-          </button>
+  </div>
+
+  <div class="cont-titular"> 
+    <div class="titular">
+      <div>Interacciones defensivas</div>
+    </div>
+  </div>
+
+  <div class="defensas">
+    @if(calculoDefMuyEff && calculoDefMuyEff.length > 0){
+      <h3>Muy débil (x4)</h3>
+      <div class="multiplicador">
+        @for(tipo of calculoDefMuyEff; track $index){
+          <div [style.backgroundColor]="'#' + tipo.color">{{ tipo.nombre_tipo }}</div>
+        }
+      </div>
+    }
+    @if(calculoDefEff && calculoDefEff.length > 0){
+      <h3>Débil (x2)</h3>
+      <div class="multiplicador">
+        @for(tipo of calculoDefEff; track $index){
+          <div [style.backgroundColor]="'#' + tipo.color">{{ tipo.nombre_tipo }}</div>
+        }
+      </div>
+    }
+    @if(calculoDefNeu && calculoDefNeu.length > 0){
+      <h3>Neutro (x1)</h3>
+      <div class="multiplicador">
+        @for(tipo of calculoDefNeu; track $index){
+          <div [style.backgroundColor]="'#' + tipo.color">{{ tipo.nombre_tipo }}</div>
+        }
+      </div>
+    }
+    @if(calculoDefNoEff && calculoDefNoEff.length > 0){
+      <h3>Resistente (x0.5)</h3>
+      <div class="multiplicador">
+        @for(tipo of calculoDefNoEff; track $index){
+          <div [style.backgroundColor]="'#' + tipo.color">{{ tipo.nombre_tipo }}</div>
+        }
+      </div>
+    }
+    @if(calculoDefMuyNoEff && calculoDefMuyNoEff.length > 0){
+      <h3>Muy Resistente (x0.25)</h3>
+      <div class="multiplicador">
+        @for(tipo of calculoDefMuyNoEff; track $index){
+          <div [style.backgroundColor]="'#' + tipo.color">{{ tipo.nombre_tipo }}</div>
+        }
+      </div>
+    }
+    @if(calculoDefInmune && calculoDefInmune.length > 0){
+      <h3>Inmune (x0.25)</h3>
+      <div class="multiplicador">
+        @for(tipo of calculoDefInmune; track $index){
+          <div [style.backgroundColor]="'#' + tipo.color">{{ tipo.nombre_tipo }}</div>
+        }
+      </div>
+    }
     
-      <div class="cont-titular d-flex align-items-center"> 
-        <div class="titular p-2 w-100 d-flex">
-            <div class="d-inline">Devil</div>
-        </div>
-    </div>
-    <button *ngFor = "let tipo of calculoDefEff" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-            aria-expanded="false" [style.backgroundColor]="'#' + tipo.color">
-            {{ tipo.nombre_tipo }}
-          </button>
-    
-      <div class="cont-titular d-flex align-items-center"> 
-        <div class="titular p-2 w-100 d-flex">
-            <div class="d-inline">Neutro</div>
-        </div>
-    </div>
-    <button *ngFor = "let tipo of calculoDefNeu" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-    aria-expanded="false" [style.backgroundColor]="'#' + tipo.color">
-    {{ tipo.nombre_tipo }}
-  </button>
-    
-      <div class="cont-titular d-flex align-items-center"> 
-        <div class="titular p-2 w-100 d-flex">
-            <div class="d-inline">Poco eficaz</div>
-        </div>
-    </div>
-    <button *ngFor = "let tipo of calculoDefNoEff" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-    aria-expanded="false" [style.backgroundColor]="'#' + tipo.color">
-    {{ tipo.nombre_tipo }}
-  </button>
-    
-      <div class="cont-titular d-flex align-items-center"> 
-        <div class="titular p-2 w-100 d-flex">
-            <div class="d-inline">Muy Poco eficaz</div>
-        </div>
-    </div>
-    <button *ngFor = "let tipo of calculoDefMuyNoEff" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-    aria-expanded="false" [style.backgroundColor]="'#' + tipo.color">
-    {{ tipo.nombre_tipo }}
-  </button>
-    
-      <div class="cont-titular d-flex align-items-center"> 
-        <div class="titular p-2 w-100 d-flex">
-            <div class="d-inline">Inmune</div>
-        </div>
-    </div>
-    <button *ngFor = "let tipo of calculoDefInmune" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-    aria-expanded="false" [style.backgroundColor]="'#' + tipo.color">
-    {{ tipo.nombre_tipo }}
-  </button>
     
   </div>
-    <div class = "row">
-      <table class="table table-bordered">
-        <thead class= "table-dark">
+
+  <div class="cont-titular">
+      <div class="titular">
+          <div>Habilidades que puede aprender</div>
+      </div>
+  </div>
+
+  <div class="habilidades">
+    <table>
+        <thead>
           <tr>
-            <th>Id</th>
             <th>Nombre</th>
             <th>Tipo</th>
+            <th>Categoría</th>
             <th>Potencia</th>
-            <th>Descricion</th>
-            <th>Caregoria</th>
+            <th>Descrición</th>
+            <th>Creador</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let moveset of movesets">
-            <td>{{ moveset.id_habilidad }}</td>
-            <td>{{ moveset.nombre_habilidad }}</td>
-            <td [style.backgroundColor]="'#' +  moveset.color_tipo_habilidad">{{ moveset.nombre_tipo_habilidad }}</td>
-            <td>{{ moveset.potencia }}</td>
-            <td>{{ moveset.descripcion }}</td>
-            <td>{{ moveset.categoria_habilidad }}</td>
-            
-          </tr>
-
+          @for(moveset of movesets; track $index){
+            <tr>
+              <td>{{ moveset.nombre_habilidad }}</td>
+              <td [style.backgroundColor]="'#' +  moveset.color_tipo_habilidad">{{ moveset.nombre_tipo_habilidad }}</td>
+              <td>{{ moveset.categoria_habilidad }}</td>
+              <td>{{ moveset.potencia }}</td>
+              <td>{{ moveset.descripcion }}</td>
+              <td>{{ moveset.creador }}</td>
+            </tr>
+          }
         </tbody>
       </table>
-    </div>
+  </div>
 
-    </div>
-    
-</div>
 </div>
 
 <app-pie-pagina></app-pie-pagina>
+
+<!--
+Necesito de algo como esto para que carguen las barras, y no sé adaptarlo a este proyecto
+
+function getColor(valor) {
+    let r, g, b;
+
+    if (valor <= 50) {
+        const factor = valor / 50;
+        r = 255;
+        g = Math.round(165 * factor);
+        b = 0;
+    } else if (valor <= 80) {
+        const factor = (valor - 40) / 40;
+        r = 255;
+        g = Math.round(175 + (90 * factor));
+        b = 0;
+    } else if (valor <= 110) {
+        const factor = (valor - 80) / 30;
+        r = Math.round(255 * (1 - factor));
+        g = 255;
+        b = 0;
+    } else {
+        const factor = (valor - 110) / 145;
+        r = Math.round(0 + (100 * factor));
+        g = Math.round(255 - (35 * factor));
+        b = Math.round(0 + (255 * factor));
+    }
+
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
+    window.onload = function () {
+        const barras = document.querySelectorAll('.barra');
+
+        barras.forEach(function (barra) {
+            const value = parseInt(barra.getAttribute('data-value'));
+            const maxValue = parseInt(barra.getAttribute('data-max-value'));
+
+            const porcentaje = (value / maxValue) * 100;
+
+            const barraInner = barra.querySelector('.barra-inner');
+            barraInner.style.width = porcentaje + '%';
+            barraInner.style.backgroundColor = getColor(value);
+        });
+    };
+
+-->

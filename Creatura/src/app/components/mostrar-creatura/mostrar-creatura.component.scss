@@ -1,32 +1,281 @@
-.col-Stats{
-    max-width: 60%;
-    min-width: 60%;
-    height: auto;
+/* Pantalla chica */
+@media (max-width: 991.5px){
+    .contenido-creatura{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
 
+    .contenido-creatura img{
+        margin-top: 10px;
+        min-width: 300px;
+        min-height: 300px;
+        max-width: 300px;
+        max-height: 300px;
+    }
+
+    .info-creatura{
+        width: 80%;
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .rycc{
+        justify-content: space-around;
+    }
+
+    .stats{
+        text-align: left;
+    }
 }
 
-.col-Img{
-    max-width: 40%;
-    min-width: 40%;
-    height: auto;
+/* Pantalla grande */
+@media (min-width: 991.5px){
+    .contenido-creatura{
+        display: flex;
+        gap: 100px;
+        padding: 40px;
+        align-items: center;
+    }
 
+    .info-creatura{
+        width: 50%;
+    }
 
+    .contenido-creatura img{
+        min-width: 500px;
+        min-height: 500px;
+        max-width: 500px;
+        max-height: 500px;
+    }
+
+    
+    .rycc{
+        justify-content: space-between;
+    }
+
+    .tipos-creatura{
+        display: flex;
+        justify-content: space-around;
+        width: 40%;
+    }
 }
 
-.img-ajustada {
-    width: 100%;       /* ocupa todo el ancho del contenedor */
-    height: auto;     /* altura fija */
-    object-fit: fill;  /* estira la imagen para rellenar */
-    display: block;    /* elimina espacios blancos debajo de la imagen */
-    aspect-ratio: 1 / 1;
-  }
-  
-  .bg-sdef{
-    background-color: deeppink;
-  }
-  .bg-spa{
-    background-color: rgb(43, 230, 255);
-  }
-  textarea {
-    resize: none;
-  }
+.info-creatura{
+    display: flex;
+    flex-direction: column;
+    font-size: large;
+}
+
+.info-creatura h2, .info-creatura p{
+    margin-bottom: 20px;
+}
+
+.info-creatura h2{
+  font-weight: bolder;
+}
+
+.info-creatura button{
+    margin-inline-start: auto;
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.info-creatura button:hover{
+    background-color: #333;
+}
+
+.rycc{
+    display: flex;
+}
+
+.creador-creatura a{
+    color: black;
+}
+
+.rating p{
+    margin-bottom: -5px;
+}
+
+.star{
+    cursor: pointer;
+    font-size: xx-large;
+    margin-bottom: 5px;
+}
+
+#rating-msg{
+    display: none;
+    margin-bottom: 20px;
+}
+
+.tipos-creatura{
+    margin-bottom: 20px;
+}
+
+.tipos-creatura div{
+    color: white;
+    padding: 10px 25px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.tipos-creatura img{
+    border: none;
+    min-width: 25px;
+    min-height: 25px;
+    max-width: 25px;
+    max-height: 25px;
+    margin-right: 10px;
+}
+
+.stats p{
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.stats strong{
+    margin: 0 0 0 15px;
+    font-size: medium;
+}
+
+.barra{
+    width: 100%;
+    height: 30px;
+    background-color: #ddd;
+    border-radius: 50px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.barra-inner{
+    height: 100%;
+    width: 0%;
+    transition: width 0.5s ease;
+    border-radius: 50px 0 0 50px;
+    display: flex;
+    align-items: center;
+}
+
+.barra-inner div{
+    margin-left: 15px;
+}
+
+.defensas{
+    background-color: #ebebeb;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.defensas .multiplicador{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.defensas h3{
+    margin: 0 0 5px 15px;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.multiplicador div{
+    padding: 15px;
+    border-radius: 15px;
+    color: white;
+    min-width: 100px;
+    text-align: center;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.multiplicador div img{
+    min-width: 25px;
+    min-height: 25px;
+    max-width: 25px;
+    max-height: 25px;
+    margin-right: 10px;
+}
+
+.habilidades{
+    border-radius: 10px;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table a{
+    display: flex;
+    padding: 0 10px;
+    height: 100%;
+    color: inherit;
+    font-weight: bold;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+table a div{
+    display: flex;
+    text-align: center;
+    align-self: center;
+}
+
+table a:hover{
+    background-color: ghostwhite;
+    color: black;
+}
+
+th{
+    background-color: darkgray;
+    color: black;
+    padding: 8px;
+    text-align: left;
+    font-size: 16px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+td{
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    text-align: center;
+    height: 40px;
+}
+
+td[style]{
+    color: white;
+    font-weight: bold;
+}
+
+tr:nth-child(odd){
+    background-color: white;
+}
+
+tr:nth-child(even){
+    background-color: #ebebeb;
+}
+
+.habilidades, .defensas{
+    margin: 40px 100px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
