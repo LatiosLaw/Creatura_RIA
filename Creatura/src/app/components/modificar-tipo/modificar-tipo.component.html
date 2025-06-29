@@ -1,0 +1,142 @@
+<div class="cont-titular d-flex align-items-center"> 
+	<div class="titular p-2 w-100 d-flex">
+		<div class="d-inline">Modificar Tipo</div>
+	</div>
+          <button class="btn btn-dark ms-auto " type="button" (click)="Confirmar()" >
+           Confirmar
+          </button>
+	<a class="nav-link" routerLink="listarTipos" ng-reflect-router-link="listarTipos" href="/listarTipos">
+          <button class="btn btn-dark ms-auto " type="button" >
+           Cancelar
+          </button>
+	</a>
+</div>
+
+<div class="container bg-primary">
+	<div class="row">
+		<div class="col col-img bg-banger">
+			<div class="contenedor-imagen mt-3 mb-3">
+				<div class="mb-3">
+					<input id="input-imagen-tipo" type="file" class="formcontrol" (change)="onFileChange($event)" accept="image/png , image/jpeg"/>
+				</div>
+				<img [src]="el_tipo.icono" alt="Icono del tipo"  class="modificar-tipo-icono" [style.backgroundColor]="'#'+el_tipo.color">
+			</div>
+			<div class="align-items-center d-flex gap-2">
+				Color:<input [(colorPicker)]="el_color" [style.backgroundColor]="el_color" (colorPickerChange)="Selecciono_Color($event)"/>
+			</div>
+		</div>
+		<div class="col col-Stats bg-info" [formGroup]="datos_del_tipo_form">
+			<div class="align-items-center d-flex gap-2">
+				Nombre:<input type="text" formControlName="nombre" class="bg-success text-white m-1 p-2" maxlength="30"/>
+			</div>
+			<div class="align-items-center">
+				<!-- Comienzo lista de Debilidades -->
+				<div class="d-flex justify-content-between">
+				<p class="align-text-left">Debilidades: </p>
+				<div class="dropdown selector-tipo-resistencia">
+					<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Seleccione un tipo
+					</button>
+					<div class="dropdown-menu selector-resistencia-tipo-menu">
+						@for (un_tipo of resistencias_Tipo.neutralidades; track $index){
+						<button class="Cambio-resistencia-boton  dropdown-item" type="button" [style.backgroundColor]="'#'+un_tipo.color" (click)="Agregar_Debilidad(un_tipo.id_tipo)">
+							<img [src]="un_tipo.icono" alt="Icono de un tipo" class="icono-a-seleccionar" draggable="false">
+							<div class="nombre-tipo-en-botton-seleccionador">
+								{{un_tipo.nombre_tipo}}
+							</div>
+							
+							
+						</button>
+
+						}
+					</div>
+
+
+				</div>
+				</div>
+				<div class="d-flex flex-wrap justify-content-left">
+					@for (un_tipo of resistencias_Tipo.debilidades; track $index){
+					<div class="una-resistencia-no-neutra m-2 d-flex justify-content-center"[style.backgroundColor]="'#'+un_tipo.color">
+						<img class="icono-resistencia-no-neutra" [src]="un_tipo.icono" [alt]="un_tipo.nombre_tipo" >
+						<div class="nombre-resistencia-no-neutra mt-1 px-2 text-center">
+							{{un_tipo.nombre_tipo}}
+						</div>
+							<button class="quitar-resistencia-no-neutra close" (click)="Quitar_Debilidad(un_tipo.id_tipo)">X</button>
+					</div>
+					}
+				</div>
+			</div>
+			<!-- Fin lista de debilidades-->
+				<div class="d-flex justify-content-between">
+				<p class="align-text-left">Resistencias: </p>
+				<div class="dropdown selector-tipo-resistencia">
+					<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Seleccione un tipo
+					</button>
+					<div class="dropdown-menu selector-resistencia-tipo-menu">
+						@for (un_tipo of resistencias_Tipo.neutralidades; track $index){
+						<button class="Cambio-resistencia-boton  dropdown-item" type="button" [style.backgroundColor]="'#'+un_tipo.color" (click)="Agregar_Resistencia(un_tipo.id_tipo)">
+							<img [src]="un_tipo.icono" alt="Icono de un tipo" class="icono-a-seleccionar" draggable="false">
+							<div class="nombre-tipo-en-botton-seleccionador">
+								{{un_tipo.nombre_tipo}}
+							</div>
+							
+							
+						</button>
+
+						}
+					</div>
+
+
+				</div>
+				</div>
+				<div class="d-flex flex-wrap justify-content-left">
+					@for (un_tipo of resistencias_Tipo.resistencias; track $index){
+					<div class="una-resistencia-no-neutra  m-2 d-flex justify-content-center"[style.backgroundColor]="'#'+un_tipo.color">
+						<img class="icono-resistencia-no-neutra" [src]="un_tipo.icono" [alt]="un_tipo.nombre_tipo" >
+						<div class="nombre-resistencia-no-neutra mt-1 px-2 text-center">
+							{{un_tipo.nombre_tipo}}
+						</div>
+							<button class="close quitar-resistencia-no-neutra" (click)="Quitar_Resistencia(un_tipo.id_tipo)">X</button>
+					</div>
+					}
+				</div>
+				<!--</div>-->
+				<div class="d-flex justify-content-between">
+				<p class="align-text-left">Inmunidades: </p>
+				<div class="dropdown selector-tipo-resistencia">
+					<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Seleccione un tipo
+					</button>
+					<div class="dropdown-menu selector-resistencia-tipo-menu">
+						@for (un_tipo of resistencias_Tipo.neutralidades; track $index){
+						<button class="Cambio-resistencia-boton  dropdown-item" type="button" [style.backgroundColor]="'#'+un_tipo.color" (click)="Agregar_Inmunidad(un_tipo.id_tipo)">
+							<img [src]="un_tipo.icono" alt="Icono de un tipo" class="icono-a-seleccionar" draggable="false">
+							<div class="nombre-tipo-en-botton-seleccionador">
+								{{un_tipo.nombre_tipo}}
+							</div>
+							
+							
+						</button>
+
+						}
+					</div>
+
+
+				</div>
+				</div>
+				<div class="d-flex flex-wrap justify-content-left">
+					@for (un_tipo of resistencias_Tipo.inmunidades; track $index){
+					<div class="una-resistencia-no-neutra m-2 d-flex justify-content-center"[style.backgroundColor]="'#'+un_tipo.color">
+						<img class="icono-resistencia-no-neutra" [src]="un_tipo.icono" [alt]="un_tipo.nombre_tipo" >
+						<div class="nombre-resistencia-no-neutra mt-1 px-2 text-center">
+							{{un_tipo.nombre_tipo}}
+						</div>
+							<button class="quitar-resistencia-no-neutra close" (click)="Quitar_Inmunidad(un_tipo.id_tipo)">X</button>
+					</div>
+					}
+				</div>
+				<!--</div>-->
+	</div>
+
+</div>

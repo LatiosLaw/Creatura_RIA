@@ -1,0 +1,62 @@
+
+img.modificar-tipo-icono{
+  width: 100%;
+  height: 100%;
+}
+
+div.selector-tipo-resistencia{
+
+}
+
+div.selector-tipo-resistencia:hover > div.selector-resistencia-tipo-menu{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  gap: 0px;
+}
+
+div.selector-resistencia-tipo-menu{
+  display: none;
+  width:460px;
+}
+
+button.Cambio-resistencia-boton{
+  width:150px;
+  height:60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+img.icono-a-seleccionar{
+  width:50px;
+  height:50px;
+  align-self: flex-start;
+}
+
+div.nombre-tipo-en-botton-seleccionador {
+  width:100px;
+  height: 30px;
+  align-self: flex-end;
+}
+
+div.una-resistencia-no-neutra{
+ display: flex;
+ align-items: center;
+}
+
+img.icono-resistencia-no-neutra{
+  width: 50px;
+  height: 50px;
+}
+
+div.nombre-resistencia-no-neutra{
+
+}
+
+button.quitar-resistencia-no-neutra{
+  background: transparent;
+  border-style: none;
+}
