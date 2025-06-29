@@ -4,14 +4,25 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ConeccionService {
+	private url_recursos = 'http://localhost:41062/www';
   private url = 'http://localhost:41062/www/api';
 	private url_creatura = this.url + '/creatura';
   private urlUsuarios = this.url+'/usuario';
   private urlTipos = this.url+'/tipo';
   //private urlMovesets = 'http://localhost:3000/movesets';
   private urlHabilidades = this.url+"/habilidades";
+
+	private header_para_get_imagenes = new HttpHeaders();
+
 ///creatura/:id_creatura
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  	
+	  this.header_para_get_imagenes.set("Access-Control-Allow-Origin", '*');
+	  this.header_para_get_imagenes.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+	  this.header_para_get_imagenes.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  
+
+  }
 
   // Método para crear un usuario con POST
   /*altaCreatura(datos: any): Observable<any> {
@@ -52,9 +63,6 @@ export class ConeccionService {
    getTipos(){
     return this.http.get<any[]>(this.urlTipos+ "/retornarAll_tipos.php");
    }
-	Alta_Tipo(nuevo_tipo:any): Observable<any>{
-		return this.http.post(this.urlTipos, nuevo_tipo);
-	}
 
 
 	get_Tipos_Creados_Por(id:any){
@@ -113,8 +121,17 @@ export class ConeccionService {
 	}
 	Modificar_Tipo(id:any, tipo:any){
 		//Sustituir con la llamada a api adecuada.
-		const url2 = this.urlTipos+"/modificacion.php";
+		const url2 = this.urlTipos+"/modificacion.php?id_tipo="+id;
 		return this.http.post(url2, tipo);
 	}
+
+	Get_Imagen_Tipo(nombre:string) : Observable<Blob>{
+		const url2 = this.url_recursos + "/imagenes/tipos/"+nombre;
+		return this.http.get(url2 , {headers: this.header_para_get_imagenes, responseType: 'blob'});
+	}
 	
+	Alta_Tipo(nuevo_tipo:any): Observable<any>{
+		const url2 = this.urlTipos+"/alta.php";
+		return this.http.post(url2, nuevo_tipo);
+	}
 }

@@ -239,23 +239,24 @@ export class ListadoTiposComponent {
 			showCloseButton: true
 		}).then( eleccion => {
 			if (eleccion.isConfirmed){
-				this.connector.Baja_Tipo(id).subscribe((res)=>{
+				this.connector.Baja_Tipo(id).subscribe(res=>{
 					Swal.fire({
 						title: "¡El tipo fue borrado exitosamente!",
 						icon: "success",
-						draggable: true
+						draggable: true,
+	        				confirmButtonColor: '#3085d6'
 					});
 					this.ngOnInit();
 
 				}, err => {
-					Swal.fire({
+						Swal.fire({
 						title: "Error al eliminar el Tipo.",
-						text: "Al intentar eliminar el tipo se produsco el ERROR: \n"+err.status,
+						text: "Al intentar eliminar el tipo se produsco el ERROR: "+err.status+"\n "+err.message,
 						icon: "error",
 	        				confirmButtonColor: '#3085d6'
 					});
 				
-				})
+				},()=>{})
 			}
 		
 		});

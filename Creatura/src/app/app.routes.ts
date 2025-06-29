@@ -12,6 +12,7 @@ import { ExportarCreaturaComponent } from './components/exportar-creatura/export
 import { MostrarCreaturaComponent } from './components/mostrar-creatura/mostrar-creatura.component';
 import { ListadoTiposComponent } from './components/listado-tipos/listado-tipos.component'
 import { ModificarTipoComponent } from './components/modificar-tipo/modificar-tipo.component'
+import { AgregarTipoComponent } from './components/agregar-tipo/agregar-tipo.component'
 
 export const routes: Routes = [
     { path: '', redirectTo: '/inicio', pathMatch: 'full'},
@@ -27,8 +28,9 @@ export const routes: Routes = [
     { path: 'agregarCreatura', component: AgregarCreaturaComponent },
     { path: 'exportarCreatura', component: ExportarCreaturaComponent },
     { path: 'mostrarCreatura', component: MostrarCreaturaComponent },
-    { path: 'listarTipos' , component: ListadoTiposComponent},
-    { path : 'modificarTipo' , component: ModificarTipoComponent}
+    { path: 'listarTipos' , component: ListadoTiposComponent },
+    { path: 'modificarTipo' , component: ModificarTipoComponent },
+    { path: 'agregarTipo' , component: AgregarTipoComponent }
 
 
 

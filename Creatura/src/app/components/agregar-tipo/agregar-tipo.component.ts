@@ -12,13 +12,15 @@ import { ResultadoPeticionDefensas } from '../../interfaces/resultado-peticion-d
 import { Tipo } from '../../interfaces/tipo';
 import {TiposDeResistencias} from '../../interfaces/tipos-de-resistencias'
 
+
 @Component({
-  selector: 'app-modificar-tipo',
+  selector: 'app-agregar-tipo',
   imports: [ReactiveFormsModule , ColorPickerComponent , ColorPickerDirective],
-  templateUrl: './modificar-tipo.component.html',
-  styleUrl: './modificar-tipo.component.scss'
+  templateUrl: './agregar-tipo.component.html',
+  styleUrl: './agregar-tipo.component.scss'
 })
-export class ModificarTipoComponent {
+export class AgregarTipoComponent {
+
 
 
 
@@ -47,7 +49,7 @@ export class ModificarTipoComponent {
 	
 		this.se_modifico_icono=false;
 		this.datos_del_tipo_form = this.fb.group({
-			nombre: ["" ,[Validators.required]]
+			nombre: [null ,[Validators.required]]
 		});
 
 		
@@ -93,106 +95,14 @@ export class ModificarTipoComponent {
 				console.log("La lista de todos los tipos es undefined");
 				this.router.navigate(["/listarTipos"]);
 			 }
+		 this.resistencias_Tipo.neutralidades=this.buffer_de_todos_los_tipos;
 			 let se_encontro_tipo=false;
-			this.route.queryParams.subscribe(params => {
-				if(this.buffer_de_todos_los_tipos != undefined){
-				for (let un_tipo of this.buffer_de_todos_los_tipos){
-					if (un_tipo.id_tipo === params['id_Tipo']){
-						this.el_tipo= un_tipo;
-						se_encontro_tipo=true;
-					}
-				}
-				}
-			 if (this.el_tipo==undefined || ! se_encontro_tipo){
-				 console.log("El tipo es undefined");
-				this.router.navigate(["/listarTipos"]);
-			 }else {
-
 				this.datos_del_tipo_form.patchValue({
 					nombre: this.el_tipo.nombre_tipo
 				});
-				this.el_color='#'+this.el_tipo.color;
-				this.el_nombre_original = this.el_tipo.nombre_tipo;
-				let url_icono_separado = this.el_tipo.icono.split('/');
-				let el_nombre_del_icono = url_icono_separado[url_icono_separado.length-1];
-				this.connector.Get_Imagen_Tipo(el_nombre_del_icono).subscribe(res =>{
-					
-					let file:Blob = res;
-
-				const reader = new FileReader();
-
-				reader.onload = () => {
-					//if(condicional para la extencion del archivo){
-					this.el_tipo.icono = reader.result as string;
-					//}
-
-				};
-
-				reader.readAsDataURL(file);
-
-				console.log(this.el_tipo.icono);	
-
-				
-				}, err =>{
-					console.log("Hubo un Error al importar el icono.\nCodigo: "+err.status+"\n"+err.message);
-				}
-				);
-				this.connector.Mostar_Tipo(this.el_tipo.id_tipo).subscribe((res:any) =>{
-					let la_respuesta:ResultadoPeticionDefensas=res;
-					let las_defensas:any[]= la_respuesta.defensas;
-					las_defensas.forEach((el_otro_tipo:TipoComparado) =>{
-						if(el_otro_tipo.id_tipo==this.el_tipo.id_tipo){
-							this.Autodefensa=el_otro_tipo.multiplicador;
-						}
-						switch(el_otro_tipo.multiplicador){
-							case 0:{
-								this.resistencias[0].push(el_otro_tipo.id_tipo);
-								let tipo_tmp=this.buffer_de_todos_los_tipos.find(t=>t.id_tipo==el_otro_tipo.id_tipo);
-								if (tipo_tmp!=undefined){
-								this.resistencias_Tipo.inmunidades.push(tipo_tmp);
-								}
-								break;
-							}
-							case 0.5:{
-								this.resistencias[1].push(el_otro_tipo.id_tipo);
-								let tipo_tmp=this.buffer_de_todos_los_tipos.find(t=>t.id_tipo==el_otro_tipo.id_tipo);
-								if (tipo_tmp!=undefined){
-								this.resistencias_Tipo.resistencias.push(tipo_tmp);
-								}
-								break;
-							}
-							case 1:{
-								this.resistencias[2].push(el_otro_tipo.id_tipo);
-								let tipo_tmp=this.buffer_de_todos_los_tipos.find(t=>t.id_tipo==el_otro_tipo.id_tipo);
-								if (tipo_tmp!=undefined){
-								this.resistencias_Tipo.neutralidades.push(tipo_tmp);
-								}
-								break;
-							}
-							case 2:{
-								this.resistencias[3].push(el_otro_tipo.id_tipo);
-								let tipo_tmp=this.buffer_de_todos_los_tipos.find(t=>t.id_tipo==el_otro_tipo.id_tipo);
-								if (tipo_tmp!=undefined){
-								this.resistencias_Tipo.debilidades.push(tipo_tmp);
-								}
-								break;
-							}
-						}
-					
-					
-					});
-					console.log("El tipo selecionado tiene "+this.resistencias_Tipo.debilidades.length+" debilidades.")
-					console.log("El tipo selecionado tiene "+this.resistencias_Tipo.inmunidades.length+" inmunidades.")
-					console.log("El tipo selecionado tiene "+this.resistencias_Tipo.neutralidades.length+" neutralidades.")
-					console.log("El tipo selecionado tiene "+this.resistencias_Tipo.resistencias.length+" resistencias.")
-				
-				
-				});
-				console.log("Modificando el tipo: "+this.el_tipo.id_tipo);
-
-			 }
-			});
 		 });
+
+
 
 		 let tmp_1 = this.datos_del_tipo_form.get('nombre');
 		 if (tmp_1!= null){
@@ -200,7 +110,6 @@ export class ModificarTipoComponent {
 			this.el_tipo.nombre_tipo=cambio;
 		});
 		 }
-
 	}
 
 	//La siguiente funcion es solo para mi [Manuel]; es para que funcione con mi configuración local.
@@ -271,10 +180,7 @@ Get_Datos_de_Modificacion():any{
 	}
 	
 
-	const nueva_imagen : string = (this.se_modifico_icono) ? this.el_tipo.icono : "";
 	let datos_modificacion = {
-		id_tipo : this.el_tipo.id_tipo,
-		nombre_original : this.el_nombre_original,
 		nombre : this.el_tipo.nombre_tipo,
 		color_hex : this.el_tipo.color,
 		self_int: this.Autodefensa,
@@ -354,8 +260,7 @@ Confirmar(){
 	}).then(eleccion => {
 		if(eleccion.isConfirmed){
 			let los_datos_a_enviar:any = this.Get_Datos_de_Modificacion();
-			console.log("Los datos de la modificaion son: \n"+los_datos_a_enviar.toString());
-			this.connector.Modificar_Tipo(this.el_tipo.id_tipo, los_datos_a_enviar).subscribe(
+			this.connector.Alta_Tipo(los_datos_a_enviar).subscribe(
 			res => {
 				
 				Swal.fire({

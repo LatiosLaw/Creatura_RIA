@@ -1,10 +1,11 @@
 <div class="cont-titular d-flex align-items-center"> 
 	<div class="titular p-2 w-100 d-flex">
-		<div class="d-inline">Listardo de Tipos</div>
-
+		<div class="d-inline">Listado de Tipos</div>
+	<a class="nav-link ms-auto" routerLink="/agregarTipo">
           <button class="btn btn-dark ms-auto " type="button" >
            Crear Tipo
           </button>
+	</a>
 	</div>
 </div>
       
@@ -34,9 +35,6 @@
 					</a>
 					<li>
 						<button class="dropdown-item" type="button" (click)="Mostrar_Tipo(tipo.id_tipo)">Mostar Tipo</button>
-					</li>
-					<li>
-						<button class="dropdown-item" type="button" (click)="Exportar_Tipo(tipo.id_tipo)">Exportar Tipo</button>
 					</li>
 					<li>
 						<button class="dropdown-item" type="button" (click)="Eliminar_Tipo(tipo.id_tipo)">Eliminar Tipo</button>
