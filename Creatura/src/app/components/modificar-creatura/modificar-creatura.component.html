@@ -2,117 +2,47 @@
 <app-barra-gestor-creatura></app-barra-gestor-creatura>
 <div *ngIf = "usuarioActual">
 <!-- BARRA DE MODIFIACION DE CREATURA-->
-<div class="cont-titular d-flex align-items-center"> 
-  <div class="titular p-2 w-100 d-flex ">
-      <div class="d-inline">Modificar Creatura</div>
-    
-      <div class="ms-auto d-flex gap-2">
-        <button class="btn btn-dark" type="button" (click) = "genuinaGenuinamenteAgregar()">Confirmar</button>
-        <a class="btn btn-dark" type="button" routerLink="/gestorCreatura">Descartar</a>
-      </div>
-      
+  <div class="cont-mini-titular"> 
+    <div class="mini-titular">
+        <div>Modificar Creatura</div>
+        <div class="ms-auto d-flex gap-2">
+          <button class="btn-titular" type="button" (click) = "genuinaGenuinamenteAgregar()">Confirmar</button>
+          <a class="btn-titular" routerLink="/gestorCreatura">Descartar</a>
+        </div>
+    </div>
   </div>
-</div>
-<!-- END OF BARRA DE MODIFIACION DE CREATURA-->
 
-
-<div class = "container bg-primary" *ngIf="creatura">
- <div class = "row">
-    <div class = "col col-Img bg-danger">
-       <div class= "contendoorImagen mt-3 mb-3">
-        <div class="mb-3">
-          <input id="imegenCreatura" type="file" class="form-control" (change)="onFileChange($event)"  accept="image/png, image/jpeg" />
-        </div>
-            <img [src]="imagenCreatura" (error)="onImgError($event)" alt="creaturaIMG" class="w-100  img-ajustada">
-        
-         <!--  <img ngSrc="defoult.jpg" fill>-->
-    </div>
-
-    
-    </div>
-    <div class = "col col-Stats bg-info" [formGroup]="datosCreaturaForm">
-        <div class = "row justify-content-center">
-            <div class = "col">
-                <div class="d-flex align-items-center gap-2">
-                    Nombre:<input type="text" formControlName="nombre" class="bg-success text-white m-2 p-2" maxlength="30"> 
-                </div>
-
-            </div>
-            <div class = "col">
-              <div class="d-flex align-items-center gap-2">
-                  Publico:<input type="checkbox" class=" m-2 p-2" formControlName ="publicoToken" name="opcion"> 
-              </div>
-
+  <div *ngIf="creatura" [formGroup]="datosCreaturaForm">
+    <div class="contenido-creatura">
+      <div class="imagen">
+        <label for="imegenCreatura">Nueva Imagen de la Creatura:</label>
+        <input id="imegenCreatura" type="file" (change)="onFileChange($event)"  accept="image/png, image/jpeg" />
+        <img [src]="imagenCreatura" (error)="onImgError($event)" alt="creaturaIMG">
+      </div>
+      <div class="info-creatura">
+        <div class="visibilidad">
+          <div>
+            <label>Publico <input type="checkbox" formControlName ="publicoToken" name="opcion"></label>
           </div>
         </div>
-        <div class="row text-center">
-            <div class="col d-flex justify-content-center align-items-center">
-              <div class="d-flex align-items-center gap-2">
-                hp: <input 
-                formControlName="hp"
-                (input)="validarRango($event)"
-                class="form-control bg-success text-white m-2 p-2" type="number" min="1" max="255">
-              </div>
-            </div>
-          
-            <div class="col d-flex justify-content-center align-items-center">
-              <div class="d-flex align-items-center gap-2">
-                atk: <input 
-                formControlName="atk"
-                (input)="validarRango($event)"
-                class="form-control bg-danger text-white m-2 p-2" type="number" min="1" max="255">
-              </div>
-            </div>
-          
-            <div class="col d-flex justify-content-center align-items-center">
-              <div class="d-flex align-items-center gap-2">
-                def: <input 
-                formControlName="def"
-                (input)="validarRango($event)"
-                class="form-control bg-primary text-white m-2 p-2" type="number" min="1" max="255">
-              </div>
-            </div>
-          
-            <div class="w-100"></div>
-          
-            <div class="col d-flex justify-content-center align-items-center">
-              <div class="d-flex align-items-center gap-2">
-                spa: <input 
-                formControlName="satk"
-                (input)="validarRango($event)"
-                class="form-control bg-spa text-white m-2 p-2" type="number" min="1" max="255">
-              </div>
-            </div>
-          
-            <div class="col d-flex justify-content-center align-items-center">
-              <div class="d-flex align-items-center gap-2">
-                  sdef: <input 
-                formControlName="sdef"
-                (input)="validarRango($event)"
-                class="form-control bg-sdef text-white m-2 p-2" type="number" min="1" max="255">
-              </div>
-            </div>
-          
-            <div class="col d-flex justify-content-center align-items-center">
-              <div class="d-flex align-items-center gap-2">
-                spe: <input 
-                formControlName="spe"
-                (input)="validarRango($event)"
-                class="form-control bg-warning text-white m-2 p-2" type="number" min="1" max="255">
-              </div>
-            </div>
-          </div>
-          
-    <div class = "row">
-        <div class = "col">
-          <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-              aria-expanded="false" [style.backgroundColor]="'#' + creatura.tipo1?.color">
+        <div class="info">
+          <label for="nombreCrea">Nombre</label>
+          <input type="text" id="nombreCrea" formControlName="nombre" maxlength="30">
+
+          <label for="comentario">Descripción</label>
+          <input type="text" id="comentario" formControlName="descripcion" maxlength="200">
+        </div>
+        <div class="tipos">
+          <div>
+            <label for="type1">Tipo 1</label>
+            <button id="type1" class="dropdown-toggle tipos-agregar" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false" [style.backgroundColor]="'#' + creatura.tipo1?.color">
               {{ creatura.tipo1?.nombre_tipo }}
             </button>
             <ul class="dropdown-menu">
               <li *ngFor="let tipo1 of tipos1">
-                <button class="dropdown-item" type="button"
+                <button type="button"
+                  class="dropdown-item"
                   [style.backgroundColor]="'#' + tipo1.color"
                   (click)="seleccionarTipo1(tipo1)">
                   {{ tipo1.nombre_tipo }}
@@ -120,17 +50,16 @@
               </li>
             </ul>
           </div>
-
-          </div>
-        <div class = "col">
-          <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-              aria-expanded="false" [style.backgroundColor]="'#' + creatura.tipo2?.color">
+          <div>
+            <label for="type2">Tipo 2</label>
+            <button id="type2" class="dropdown-toggle tipos-agregar" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false" [style.backgroundColor]="'#' + creatura.tipo2?.color">
               {{ creatura.tipo2?.nombre_tipo }}
             </button>
             <ul class="dropdown-menu">
               <li *ngFor="let tipo2 of tipos2">
-                <button class="dropdown-item" type="button"
+                <button type="button"
+                  class="dropdown-item"
                   [style.backgroundColor]="'#' + tipo2.color"
                   (click)="seleccionarTipo2(tipo2)">
                   {{ tipo2.nombre_tipo }}
@@ -139,90 +68,140 @@
             </ul>
           </div>
         </div>
-    </div>
-    <div class = "row">
-        <div class = "col">
-            <textarea class="form-control" id="comentario" formControlName="descripcion" rows="4" maxlength="200"
-            placeholder="Escriba la descripción de su Creatura"></textarea>
+        <div class="stats">
+          <div>
+            <label for="statHp">HP</label>
+            <input id="statHp" formControlName="hp" (input)="validarRango($event)" type="number" min="1" max="255">
+          </div>
+          <input class="barra-stat" type="range" formControlName="hp" (input)="validarRango($event)" min="1" max="255">
+
+          <div>
+            <label for="statAtk">ATK</label>
+            <input id="statAtk" formControlName="atk" (input)="validarRango($event)" type="number" min="1" max="255">
+          </div>
+          <input class="barra-stat" type="range" formControlName="atk" (input)="validarRango($event)" min="1" max="255">
+
+          <div>
+            <label for="statDef">DEF</label>
+            <input id="statDef" formControlName="def" (input)="validarRango($event)" type="number" min="1" max="255">
+          </div>
+          <input class="barra-stat" type="range" formControlName="def" (input)="validarRango($event)" min="1" max="255">
+
+          <div>
+            <label for="statSatk">SPA</label>
+            <input id="statSatk" formControlName="satk" (input)="validarRango($event)" type="number" min="1" max="255">
+          </div>
+          <input class="barra-stat" type="range" formControlName="satk" (input)="validarRango($event)" min="1" max="255">
+
+          <div>
+            <label for="statSdef">SDEF</label>
+            <input id="statSdef" formControlName="sdef" (input)="validarRango($event)" type="number" min="1" max="255">
+          </div>
+          <input class="barra-stat" type="range" formControlName="sdef" (input)="validarRango($event)" min="1" max="255">
+
+          <div>
+            <label for="statSpe">SPE</label>
+            <input id="statSpe" formControlName="spe" (input)="validarRango($event)" type="number" min="1" max="255">
+          </div>
+          <input class="barra-stat" type="range" formControlName="spe" (input)="validarRango($event)" min="1" max="255">
         </div>
-    </div>
-    <div class = "row">
-      
-        <div class="cont-titular d-flex align-items-center"> 
-          <div class="titular p-2 w-100 d-flex">
-              <div class="d-inline">Muy devil</div>
-          </div>
+        
       </div>
-      <button *ngFor = "let tipo of calculoDefMuyEff" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-              aria-expanded="false" [style.backgroundColor]="'#' + tipo.color">
-              {{ tipo.nombre_tipo }}
-            </button>
-      
-        <div class="cont-titular d-flex align-items-center"> 
-          <div class="titular p-2 w-100 d-flex">
-              <div class="d-inline">Devil</div>
-          </div>
-      </div>
-      <button *ngFor = "let tipo of calculoDefEff" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-              aria-expanded="false" [style.backgroundColor]="'#' + tipo.color">
-              {{ tipo.nombre_tipo }}
-            </button>
-      
-        <div class="cont-titular d-flex align-items-center"> 
-          <div class="titular p-2 w-100 d-flex">
-              <div class="d-inline">Neutro</div>
-          </div>
-      </div>
-      <button *ngFor = "let tipo of calculoDefNeu" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-      aria-expanded="false" [style.backgroundColor]="'#' + tipo.color">
-      {{ tipo.nombre_tipo }}
-    </button>
-      
-        <div class="cont-titular d-flex align-items-center"> 
-          <div class="titular p-2 w-100 d-flex">
-              <div class="d-inline">Poco eficaz</div>
-          </div>
-      </div>
-      <button *ngFor = "let tipo of calculoDefNoEff" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-      aria-expanded="false" [style.backgroundColor]="'#' + tipo.color">
-      {{ tipo.nombre_tipo }}
-    </button>
-      
-        <div class="cont-titular d-flex align-items-center"> 
-          <div class="titular p-2 w-100 d-flex">
-              <div class="d-inline">Muy Poco eficaz</div>
-          </div>
-      </div>
-      <button *ngFor = "let tipo of calculoDefMuyNoEff" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-      aria-expanded="false" [style.backgroundColor]="'#' + tipo.color">
-      {{ tipo.nombre_tipo }}
-    </button>
-      
-        <div class="cont-titular d-flex align-items-center"> 
-          <div class="titular p-2 w-100 d-flex">
-              <div class="d-inline">Inmune</div>
-          </div>
-      </div>
-      <button *ngFor = "let tipo of calculoDefInmune" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-      aria-expanded="false" [style.backgroundColor]="'#' + tipo.color">
-      {{ tipo.nombre_tipo }}
-    </button>
-      
     </div>
 
 
+    <div class="cont-mini-titular"> 
+      <div class="mini-titular">
+          <div>Interacciones Defensivas</div>
+      </div>
+    </div>
 
-    <div class = "row">
-      <table class="table table-bordered">
-        <thead class= "table-dark">
+      <div class="defensas">
+      @if(calculoDefMuyEff && calculoDefMuyEff.length > 0){
+        <h3>Muy débil (x4)</h3>
+        <div class="multiplicador">
+          @for(tipo of calculoDefMuyEff; track $index){
+            <div [style.backgroundColor]="'#' + tipo.color">
+              <img [src]="tipo.icono" class = "tipos-img">
+              {{ tipo.nombre_tipo }}</div>
+          }
+        </div>
+      }
+      @if(calculoDefEff && calculoDefEff.length > 0){
+        <h3>Débil (x2)</h3>
+        <div class="multiplicador">
+          @for(tipo of calculoDefEff; track $index){
+            <div [style.backgroundColor]="'#' + tipo.color">
+              <img [src]="tipo.icono" class = "tipos-img">
+              {{ tipo.nombre_tipo }}</div>
+          }
+        </div>
+      }
+      @if(calculoDefNeu && calculoDefNeu.length > 0){
+        <h3>Neutro (x1)</h3>
+        <div class="multiplicador">
+          @for(tipo of calculoDefNeu; track $index){
+            <div [style.backgroundColor]="'#' + tipo.color">
+              <img [src]="tipo.icono">
+              {{ tipo.nombre_tipo }}</div>
+          }
+        </div>
+      }
+      @if(calculoDefNoEff && calculoDefNoEff.length > 0){
+        <h3>Resistente (x0.5)</h3>
+        <div class="multiplicador">
+          @for(tipo of calculoDefNoEff; track $index){
+            <div [style.backgroundColor]="'#' + tipo.color">
+              <img [src]="tipo.icono" class = "tipos-img">
+              {{ tipo.nombre_tipo }}</div>
+          }
+        </div>
+      }
+      @if(calculoDefMuyNoEff && calculoDefMuyNoEff.length > 0){
+        <h3>Muy Resistente (x0.25)</h3>
+        <div class="multiplicador">
+          @for(tipo of calculoDefMuyNoEff; track $index){
+            <div [style.backgroundColor]="'#' + tipo.color">
+              <img [src]="tipo.icono" class = "tipos-img">
+              {{ tipo.nombre_tipo }}</div>
+          }
+        </div>
+      }
+      @if(calculoDefInmune && calculoDefInmune.length > 0){
+        <h3>Inmune (x0)</h3>
+        <div class="multiplicador">
+          @for(tipo of calculoDefInmune; track $index){
+            <div [style.backgroundColor]="'#' + tipo.color">
+              <img [src]="tipo.icono" class = "tipos-img">
+              {{ tipo.nombre_tipo }}</div>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="cont-mini-titular"> 
+      <div class="mini-titular">
+          <div>Habilidades de la Creatura</div>
+      </div>
+    </div>
+
+    <div class="cont-pseudo-titular"> 
+      <div class="pseudo-titular">
+          <div>Habilidades Previamente Seleccionadas</div>
+      </div>
+    </div>
+
+    <div class="habilidades quitar">
+      <table>
+        <thead>
           <tr>
             <th>Id</th>
             <th>Nombre</th>
             <th>Tipo</th>
             <th>Potencia</th>
-            <th>Descricion</th>
-            <th>Caregoria</th>
-            <th>Accion</th>
+            <th>Descrición</th>
+            <th>Categoría</th>
+            <th>Acción</th>
           </tr>
         </thead>
         <tbody>
@@ -233,78 +212,49 @@
             <td>{{ moveset.potencia }}</td>
             <td>{{ moveset.descripcion }}</td>
             <td>{{ moveset.categoria_habilidad }}</td>
-            <td> <button class="bg-danger" (click)="eliminarHabilidad(moveset)">Eliminar</button> </td>
-            
-          </tr>
-          <tr>
-            <td>---</td>
-            <td>---</td>
-            <td>---</td>
-            <td>---</td>
-            <td>---</td>
-            <td>---</td>
-            <td> <button class="bg-success" data-bs-toggle="modal" data-bs-target="#agregarModal">Agregar</button> </td>
+            <td> <button (click)="eliminarHabilidad(moveset)">Eliminar</button> </td>
           </tr>
         </tbody>
       </table>
     </div>
-
-    </div>
-
-
- </div>
-
-
-</div>
-<div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-scrollable"> <!-- Aquí se agrega modal-xl y scrollable -->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="agregarModalLabel">Agregar habilidades</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-      </div>
-
-      <!-- Cuerpo del modal con límite de altura y scroll si se excede -->
-      <!-- Cuerpo del modal -->
-<div class="modal-body">
-
-  <div class="dropdown">
-    Filtlal Por Tipo:  
-    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-      aria-expanded="false" [style.backgroundColor]="'#' + tipo3.color">
-      {{ tipo3.nombre_tipo }}
-    </button>
-    <ul class="dropdown-menu">
-      <li *ngFor="let tipo3 of tipos3">
-        <button class="dropdown-item" type="button"
-          [style.backgroundColor]="'#' + tipo3.color"
-          (click)="seleccionartipo3(tipo3)">
-          {{ tipo3.nombre_tipo }}
-        </button>
-      </li>
-    </ul>
   </div>
-  <!-- Tabla 1 con scroll -->
+  <div class="cont-pseudo-titular"> 
+    <div class="pseudo-titular">
+        <div>Habilidades Seleccionables</div>
+        <div class="ms-auto d-flex gap-2 align-items-center">
+          <label for="filtro">Filtrar Por Tipo</label> 
+          <button id="filtro" class="dropdown-toggle btn-titular" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false" [style.backgroundColor]="'#' + tipo3.color">
+            {{ tipo3.nombre_tipo }}
+          </button>
+          <ul class="dropdown-menu">
+            <li *ngFor="let tipo3 of tipos3">
+              <button class="dropdown-item" type="button"
+                [style.backgroundColor]="'#' + tipo3.color"
+                (click)="seleccionartipo3(tipo3)">
+                {{ tipo3.nombre_tipo }}
+              </button>
+            </li>
+          </ul>
+        </div>
+    </div>
+  </div>
   <input
-  type="text"
-  class="form-control buscador"
-  placeholder="Buscar habilidad"
-  [(ngModel)]="terminoBusqueda"
-  (ngModelChange)="filtrarHabilidadesPorTexto()"
-/>
-  <mat-paginator  [length]="puntoLength"
-  [pageSize]="8"
-  [pageSizeOptions]="[8, 16, 32, 8954]"
-  aria-label="Select page"
-  (page)="paginar($event)">
-  </mat-paginator>
-  
-
-
-
-  <div style="max-height: 300px; overflow-y: auto;">
-    <table class="table table-bordered table-hover table-sm">
-      <thead class="table-dark">
+    class="busqueda-habilidad"
+    type="text"
+    placeholder="Buscar habilidad"
+    [(ngModel)]="terminoBusqueda"
+    (ngModelChange)="filtrarHabilidadesPorTexto()"
+  />
+  <div class="habilidades agregar">
+    <mat-paginator  [length]="puntoLength"
+    [pageSize]="8"
+    [pageSizeOptions]="[8, 16, 32, 8954]"
+    aria-label="Select page"
+    (page)="paginar($event)">
+    </mat-paginator>
+    <table>
+      <thead>
         <tr>
           <th>Id</th>
           <th>Nombre</th>
@@ -323,7 +273,7 @@
           <td>{{ habilidad.potencia }}</td>
           <td>{{ habilidad.descripcion }}</td>
           <td>{{ habilidad.categoria_habilidad }}</td>
-          <td><button class="btn btn-success btn-sm" (click) = "agregarHabilidad(habilidad)">Agregar</button></td>
+          <td><button (click) = "agregarHabilidad(habilidad)">Agregar</button></td>
         </tr>
         <tr *ngIf="habilidades.length === 0">
           <td colspan="7" class="text-center text-muted">No hay habilidades en el sistema</td>
@@ -332,12 +282,15 @@
     </table>
   </div>
 
-  <hr>
-
-  <!-- Tabla 2 con scroll -->
-  <div style="max-height: 300px; overflow-y: auto;">
-    <table class="table table-bordered table-hover table-sm">
-      <thead class="table-dark">
+  <div class="cont-pseudo-titular"> 
+    <div class="pseudo-titular">
+        <div>Habilidades Seleccionadas</div>
+        <button class="btn-titular" type="button" (click) = "genuinamenteAgregar()">Confirmar Selección</button>
+    </div>
+  </div>
+  <div class="habilidades quitar">
+    <table>
+      <thead>
         <tr>
           <th>Id</th>
           <th>Nombre</th>
@@ -356,7 +309,7 @@
           <td>{{ habilidadNew.potencia }}</td>
           <td>{{ habilidadNew.descripcion }}</td>
           <td>{{ habilidadNew.categoria_habilidad }}</td>
-          <td> <button class="bg-danger" (click) = "eliminarHabilidadDeNew(habilidadNew)">Eliminar</button> </td>
+          <td> <button (click) = "eliminarHabilidadDeNew(habilidadNew)">Eliminar</button> </td>
         </tr>
         <tr *ngIf="habilidadesNew.length === 0">
           <td colspan="7" class="text-center text-muted">No hay habilidades agregadas</td>
@@ -364,21 +317,10 @@
       </tbody>
     </table>
   </div>
-
-</div>
-
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click) = "genuinamenteAgregar()">Confirmar</button>
-        sexo
-      </div>
-    </div>
-  </div>
-</div>
 </div>
 <div *ngIf = "!usuarioActual">
-  <div class = "container">
-  <img src="logo.png" class = "img-ajustada2">
+  <div>
+  <img src="logo.png">
   </div>
  </div>
 <app-pie-pagina></app-pie-pagina>

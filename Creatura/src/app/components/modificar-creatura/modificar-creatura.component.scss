@@ -1,32 +1,507 @@
-.col-Stats{
-    max-width: 60%;
-    min-width: 60%;
-    height: auto;
+/* Pantalla chica */
+@media (max-width: 991.5px){
+    .contenido-creatura{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
 
+    .contenido-creatura img{
+        min-width: 300px;
+        min-height: 300px;
+        max-width: 300px;
+        max-height: 300px;
+    }
+
+    .imagen{
+        max-width: 500px;
+    }
+
+    .imagen label{
+        margin-top: 30px;
+    }
+
+    .info-creatura{
+        width: 80%;
+        margin-top: 10px;
+        flex-direction: column;
+        text-align: start;
+    }
+
+    .visibilidad div{
+        margin-inline: auto;
+    }
+
+    .busqueda-habilidad{
+        display: flex;
+        justify-self: center;
+        width: 50%;
+    }
 }
 
-.col-Img{
-    max-width: 40%;
-    min-width: 40%;
-    height: auto;
+/* Pantalla grande */
+@media (min-width: 991.5px){
+    .contenido-creatura{
+        display: flex;
+        gap: 100px;
+        padding: 0 40px 40px 40px;
+        align-items: center;
+    }
 
+    .info-creatura{
+        width: 50%;
+        overflow-y: auto;
+    }
 
+    .contenido-creatura img{
+        min-width: 500px;
+        min-height: 500px;
+        max-width: 500px;
+        max-height: 500px;
+    }
+
+    .imagen{
+        min-width: 500px;
+        max-width: 500px;
+    }
+
+    .imagen, .imagen input{
+        font-size: large;
+    }
+
+    .visibilidad div{
+        margin-inline-start: auto;
+    }
+
+    .busqueda-habilidad{
+        margin-inline-start: 140px;
+        width: 30%;
+    }
 }
 
-.img-ajustada {
-    width: 100%;       /* ocupa todo el ancho del contenedor */
-    height: auto;     /* altura fija */
-    object-fit: fill;  /* estira la imagen para rellenar */
-    display: block;    /* elimina espacios blancos debajo de la imagen */
-    aspect-ratio: 1 / 1;
-  }
-  
-  .bg-sdef{
-    background-color: deeppink;
-  }
-  .bg-spa{
-    background-color: rgb(43, 230, 255);
-  }
-  textarea {
-    resize: none;
-  }
+.contenido-creatura{
+    margin-top: 10px;
+}
+
+.contenido-creatura img{
+    border-radius: 10px;
+}
+
+.guardar{
+    text-align: center;
+    padding-top: 20px;
+}
+
+.guardar button{
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: larger;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.imagen label, .imagen input{
+    margin-bottom: 10px;
+}
+
+.info-creatura{
+    display: flex;
+    flex-direction: column;
+}
+
+.info-creatura label, .info-creatura input{
+    font-size: large;
+}
+
+.info-creatura input{
+    padding: 8px 5px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.info-creatura input:focus {
+    border-color: #333;
+    outline: none;
+}
+
+.visibilidad{
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.visibilidad select{
+    border-radius: 8px;
+    padding: 10px 20px 10px 20px;
+    border: 1px solid black;
+    background-color: black;
+    font-size: large;
+    color: white;
+    appearance: none;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.visibilidad select:focus{
+    border-color: white;
+    outline: none;
+}
+
+.visibilidad select option{
+    background-color: white;
+    color: black;
+    font-weight: bold;
+}
+
+.visibilidad select option:first-child{
+    display: none;
+}
+
+
+.visibilidad select option:hover{
+    background-color: #333;
+    color: white;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.info label{
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+.info input, .barra-stat{
+    margin-bottom: 20px;
+}
+
+.tipos{
+    display: flex;
+    justify-content: space-around;
+    gap: 5px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+}
+
+.tipos div{
+  display: flex;
+  flex-direction: column;
+}
+
+.tipos div label{
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.tipos-agregar{
+    border-radius: 8px;
+    padding: 10px 20px 10px 20px;
+    border: 1px solid black;
+    background-color: black;
+    font-size: large;
+    color: white;
+    appearance: none;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.tipos-agregar:focus{
+    border-color: white;
+    outline: none;
+}
+
+.tipos-agregar option{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+
+.tipos-agregar option:hover{
+    background-color: #333;
+    color: white;
+}
+
+.stats{
+    display: flex;
+    flex-direction: column;
+}
+
+.stats div{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.stats div input{
+    margin-left: 15px;
+}
+
+.barra-stat{
+    background-color: green;
+    margin-top: 5px;
+}
+
+/* Estilo para el track (la línea por donde se mueve el thumb) */
+input[type="range"]{
+  -webkit-appearance: none;  /* Eliminar el estilo predeterminado */
+  height: 2px;
+  background: #ddd;
+  border-radius: 500px;
+  outline: none;
+}
+
+/* Estilo para el thumb (el círculo o cuadrado que se mueve) */
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  background: black;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Estilo cuando el thumb está en hover */
+input[type="range"]::-webkit-slider-thumb:hover{
+  background: #333;
+}
+
+/* Estilos para Firefox */
+input[type="range"]::-moz-range-track{
+  height: 8px;
+  background: #ddd;
+  border-radius: 500px;
+}
+
+input[type="range"]::-moz-range-thumb{
+  width: 30px;
+  height: 30px;
+  background: black;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+input[type="range"]::-moz-range-thumb:hover{
+  background: #333;
+}
+
+.defensas{
+    background-color: #ebebeb;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 40px 100px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.defensas .multiplicador{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.defensas h3{
+    margin: 0 0 5px 15px;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.multiplicador div{
+    padding: 15px;
+    border-radius: 15px;
+    color: white;
+    min-width: 100px;
+    text-align: center;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.multiplicador div img{
+    min-width: 25px;
+    min-height: 25px;
+    max-width: 25px;
+    max-height: 25px;
+    margin-right: 10px;
+}
+
+.selector-tipo{
+    margin: 40px 0 0 120px;
+    font-size: larger;
+}
+
+.selector-tipo select{
+    border-radius: 8px;
+    padding: 10px 20px 10px 20px;
+    border: 1px solid black;
+    background-color: black;
+    font-size: large;
+    color: white;
+    appearance: none;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.selector-tipo select:focus{
+    border-color: white;
+    outline: none;
+}
+
+.selector-tipo select option{
+    background-color: white;
+    font-weight: bold;
+}
+
+.selector-tipo select option:hover{
+    background-color: #333;
+    color: white;
+}
+
+.selector-tipo select option:first-child{
+  display: none;
+}
+
+.cont-pseudo-titular{
+    background-color: rgb(238, 241, 247);
+    display: flex;
+    margin-top: 20px;
+}
+
+.pseudo-titular{
+    display: flex;
+    width: 100%;
+    padding: 10px 20px 10px 75px;
+    font-size: 22px;
+    font-weight: 500;
+    margin-right: 5px;
+    align-items: center;
+    overflow: auto;
+}
+
+.pseudo-titular div{
+    display: inline;
+    letter-spacing: 1px;
+}
+
+.pseudo-titular .btn-titular{
+    margin-inline-start: auto;
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    letter-spacing: 0px;
+}
+
+.pseudo-titular .btn-titular:hover{
+    background-color: #333;
+}
+
+.habilidades{
+    border-radius: 10px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table button{
+    padding: 7px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 7px;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.agregar{
+    margin: 20px 100px 40px 100px;
+}
+
+.agregar button{
+    background-color: rgb(35, 168, 35);
+    color: white;
+}
+
+.agregar button:hover{
+    background-color: rgb(42, 223, 42);
+}
+
+.quitar{
+    margin: 40px 100px;
+}
+
+.quitar button{
+    background-color: rgb(177, 44, 44);
+    color: white;
+}
+
+.quitar button:hover{
+    background-color: rgb(230, 65, 65);
+}
+
+.busqueda-habilidad{
+    padding: 8px 5px;
+    margin-top: 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.busqueda-habilidad:focus{
+    border-color: #333;
+    outline: none;
+}
+
+th{
+    background-color: darkgray;
+    color: black;
+    padding: 8px;
+    text-align: left;
+    font-size: 16px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+td{
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    text-align: center;
+    height: 40px;
+}
+
+td[style]{
+    color: white;
+    font-weight: bold;
+}
+
+tr:nth-child(odd){
+    background-color: white;
+}
+
+tr:nth-child(even){
+    background-color: #ebebeb;
+}
