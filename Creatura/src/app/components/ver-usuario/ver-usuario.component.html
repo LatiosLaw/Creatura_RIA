@@ -15,7 +15,7 @@
       @if(informacion_usuario.usuario.nickname == usuarioLogueado.nickname){
         <div>
           <a [routerLink]="['/modificar_usuario', usuarioLogueado.nickname]">Modificar</a>
-          <a href="#" (click)="eliminarUsuario()">Eliminar</a>
+          <a (click)="eliminarUsuario()">Eliminar</a>
         </div>
       }
     </div>

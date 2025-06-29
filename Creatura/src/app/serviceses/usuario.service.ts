@@ -7,7 +7,6 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 })
 export class UsuarioService {
   private urlUsuarios = 'http://localhost/Creatura_PHP/api/usuario';
-  private urlCreaturas = 'http://localhost/Creatura_PHP/api/creatura';
 
   constructor(private http: HttpClient) {}
 

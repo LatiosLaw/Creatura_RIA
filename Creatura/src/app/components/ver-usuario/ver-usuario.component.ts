@@ -102,7 +102,7 @@ eliminarUsuario(): void {
     this.usuarioControlador.borrarUsuario(this.usuarioLogueado.nickname).subscribe({
       next: (res) => {
         console.log('Eliminación exitosa:', res);
-        localStorage.clear;
+        localStorage.clear();
         this.router.navigate(['inicio']);
       },
       error: (err) => {
