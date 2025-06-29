@@ -297,6 +297,9 @@ Quitar_Debilidad(id:number){
 	if (Tipo_tmp!=undefined){
 	this.resistencias_Tipo.debilidades.splice(Tipo_tmp_index,1);
 	this.resistencias_Tipo.neutralidades.push(Tipo_tmp);
+	if(Tipo_tmp.id_tipo==this.el_tipo.id_tipo){
+		this.Autodefensa=1;
+	}
 	}
 }
 Quitar_Resistencia(id:number){
@@ -305,6 +308,9 @@ Quitar_Resistencia(id:number){
 	if (Tipo_tmp!=undefined){
 	this.resistencias_Tipo.resistencias.splice(Tipo_tmp_index,1);
 	this.resistencias_Tipo.neutralidades.push(Tipo_tmp);
+	if(Tipo_tmp.id_tipo==this.el_tipo.id_tipo){
+		this.Autodefensa=1;
+	}
 	}
 }
 Quitar_Inmunidad(id:number){
@@ -313,6 +319,9 @@ Quitar_Inmunidad(id:number){
 	if (Tipo_tmp!=undefined){
 	this.resistencias_Tipo.inmunidades.splice(Tipo_tmp_index,1);
 	this.resistencias_Tipo.neutralidades.push(Tipo_tmp);
+	if(Tipo_tmp.id_tipo==this.el_tipo.id_tipo){
+		this.Autodefensa=1;
+	}
 	}
 }
 
@@ -322,6 +331,9 @@ Agregar_Debilidad(id:number){
 	if (tipo_tmp!= undefined){
 		this.resistencias_Tipo.neutralidades.splice(tipo_tmp_index,1);
 		this.resistencias_Tipo.debilidades.push(tipo_tmp);
+	if(tipo_tmp.id_tipo==this.el_tipo.id_tipo){
+		this.Autodefensa=2;
+	}
 	}
 }
 Agregar_Inmunidad(id:number){
@@ -330,6 +342,9 @@ Agregar_Inmunidad(id:number){
 	if (tipo_tmp!= undefined){
 		this.resistencias_Tipo.neutralidades.splice(tipo_tmp_index,1);
 		this.resistencias_Tipo.inmunidades.push(tipo_tmp);
+	if(tipo_tmp.id_tipo==this.el_tipo.id_tipo){
+		this.Autodefensa=0;
+	}
 	}
 }
 Agregar_Resistencia(id:number){
@@ -338,6 +353,9 @@ Agregar_Resistencia(id:number){
 	if (tipo_tmp!= undefined){
 		this.resistencias_Tipo.neutralidades.splice(tipo_tmp_index,1);
 		this.resistencias_Tipo.resistencias.push(tipo_tmp);
+	if(tipo_tmp.id_tipo==this.el_tipo.id_tipo){
+		this.Autodefensa=0.5;
+	}
 	}
 }
 

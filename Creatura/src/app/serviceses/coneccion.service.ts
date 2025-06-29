@@ -65,10 +65,6 @@ export class ConeccionService {
    }
 
 
-	get_Tipos_Creados_Por(id:any){
-		const url2 = this.urlTipos +"/creador/"+id;
-		return this.http.get<any>(url2);
-	}
 	get_Tipo_Con_Id(id:any){
 		const url2 = this.urlTipos + "/retornar_tipo.php?id_tipo=" + id;
 		return this.http.get(url2);
@@ -133,5 +129,10 @@ export class ConeccionService {
 	Alta_Tipo(nuevo_tipo:any): Observable<any>{
 		const url2 = this.urlTipos+"/alta.php";
 		return this.http.post(url2, nuevo_tipo);
+	}
+
+	get_Tipos_Creados_Por(nombre:string){
+		const url2 = this.urlTipos +"/retornar_tipos_usuario.php?creador="+nombre;
+		return this.http.get<any>(url2);
 	}
 }

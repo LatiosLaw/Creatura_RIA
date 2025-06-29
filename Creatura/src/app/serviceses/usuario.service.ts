@@ -6,38 +6,35 @@ import { catchError, map, Observable, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class UsuarioService {
-  private apiUrl = 'http://localhost:3000/usuarios';
+  private apiUrl : string = 'http://localhost:41062/www/api/usuario';
 
   constructor(private http: HttpClient) {}
 
   registrarUsuario(datos: any): Observable<any> {
-    return this.http.post(this.apiUrl, datos);
+    return this.http.post(this.apiUrl+"/alta.php", datos);
   }
 
   loginUsuario(nickname: string, contrasena: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${nickname}`).pipe(
-      map(usuario => {
-        if (!usuario) {
-          throw new Error('Usuario no encontrado');
-        }
-  
-        if (usuario.contraseña !== contrasena) {
-          throw new Error('Contraseña incorrecta');
-        }
-  
-        // Guardar en localStorage (solo como ejemplo, no es seguro guardar contraseñas)
+	  let body : any = {nickname:nickname, contra: contrasena };
+    return this.http.post<any>(this.apiUrl+"/login.php", body ).pipe(
+    map(respuesta => {
+      if (respuesta.resultado === 'ok' && respuesta.usuario) {
+        // Guardar en localStorage (sin contraseña)
         localStorage.setItem('usuarioActual', JSON.stringify({
-          nickname: usuario.nickname,
-          correo: usuario.correo,
-          biografia: usuario.biografia,
-          tipo: usuario.tipo
+          nickname: respuesta.usuario.nickname,
+          correo: respuesta.usuario.correo,
+          biografia: respuesta.usuario.biografia,
+          foto: respuesta.usuario.foto
         }));
-  
-        return usuario;
-      }),
-      catchError(error => {
-        return throwError(() => error);
-      })
-    );
+        return respuesta.usuario;
+      } else {
+        throw new Error(respuesta.mensaje || 'Error en el login');
+      }
+    }),
+    catchError(error => {
+      console.error('Error en loginUsuario:', error);
+      return throwError(() => error);
+    })
+  );
   }
 }

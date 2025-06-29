@@ -14,6 +14,8 @@ import Swal from 'sweetalert2';
 export class RegistrarUsuarioComponent {
   registroForm: FormGroup;
 
+	imagen_usuario:string="";	
+
   constructor(private fb: FormBuilder, 
     private usuarioService : UsuarioService,
     private localStorage: LocalStorageService) {
@@ -22,7 +24,6 @@ export class RegistrarUsuarioComponent {
       correo: ['', [Validators.required, Validators.email]],
       contrasena: ['', [Validators.required, Validators.minLength(8)]],
       verificarContrasena: ['', Validators.required],
-      fotoPerfil: [null],
       biografia: [''],
     }, {
       validators: this.contrasenasIguales
@@ -55,11 +56,13 @@ export class RegistrarUsuarioComponent {
     if (this.registroForm.valid) {
       const formValue = this.registroForm.value;
   
+	const  la_foto = (this.imagen_usuario !== "") ? this.imagen_usuario : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA+gAAAJYAgMAAACMcCS2AAAADFBMVEX///+cWdH89DQsLCwJ46u7AAACIklEQVR42uzPgQAAAAwEofmjjPJBrgy6z1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi8q1wEAAAAAAAAAAAAAAAAAAAAAAAAAAACAsT8HAgAAMBCEKOePsge5MggAAAAAAAAAAAAAAAAAai5LvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9qFz/LPUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1IvUi9SL1orU/BwIAAAAAgvytB+kMui66Lrouui66Lrouui66Lrouui66Lrouui66Lrouui66Lrouui66Lrouui66Lrouui66Lrouui66Lrouui66Lrouui66Lrouui66Lrouui66Lrouui66Lrouui66Lrouui66Lrouui66Lrouui66LoLrAexd5BaimjhMAAAAAElFTkSuQmCC";
+
       const datos = {
         nickname: formValue.nickname,
         correo: formValue.correo,
         contraseña: formValue.contrasena,          // renombrado
-        foto: formValue.fotoPerfil,                // renombrado
+        foto: la_foto,                // renombrado
         biografia: formValue.biografia,
       };
   
@@ -68,17 +71,36 @@ export class RegistrarUsuarioComponent {
           this.exito();
           this.registroForm.reset();
         },
-        error: () => this.error(),
+        error: (err) =>{
+		console.log(err.message);
+	    Swal.fire({
+	      title: "¡Error!",
+	      text: "Al intentar registrar el usuario ocurrio el Error: "+err.status+"\n "+err.message,
+	      //html: err.message,
+	      icon: "error"
+    });
+	},
       });
     } else {
       console.warn('Formulario inválido');
     }
   }
 
-  onFileChange(event: any) {
-    const file = event.target.files?.[0];
-    if (file) {
-      this.registroForm.patchValue({ fotoPerfil: file });
-    }
+  onFileChange(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      this.imagen_usuario = reader.result as string;
+    };
+
+    reader.readAsDataURL(file); 
+
+    console.log("imagen usuario :");
+    console.log(this.imagen_usuario);
+
   }
+}
 }

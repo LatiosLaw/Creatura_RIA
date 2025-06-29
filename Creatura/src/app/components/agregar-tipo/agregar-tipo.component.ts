@@ -11,6 +11,7 @@ import { TipoComparado } from '../../interfaces/tipo-comparado';
 import { ResultadoPeticionDefensas } from '../../interfaces/resultado-peticion-defensas';
 import { Tipo } from '../../interfaces/tipo';
 import {TiposDeResistencias} from '../../interfaces/tipos-de-resistencias'
+import { LocalStorageService } from '../../serviceses/local-storage.service'
 
 
 @Component({
@@ -42,10 +43,10 @@ export class AgregarTipoComponent {
 
 	Autodefensa : number;
 
-	creador:string;
+	creador:any;
 
 
-	constructor(private connector: ConeccionService, private fb: FormBuilder,private route: ActivatedRoute, private router:Router){
+	constructor(private connector: ConeccionService, private fb: FormBuilder,private route: ActivatedRoute, private router:Router,private localStorage: LocalStorageService){
 	
 		this.se_modifico_icono=false;
 		this.datos_del_tipo_form = this.fb.group({
@@ -58,7 +59,7 @@ export class AgregarTipoComponent {
 			nombre_tipo: "default",
 			color: "777777",
 			icono: "",
-			creador: "SYSTEM"
+			creador: "UNKNOWN"
 		};
 		this.el_color='#'+this.el_tipo.color;
 		this.el_nombre_original = this.el_tipo.nombre_tipo;
@@ -74,11 +75,17 @@ export class AgregarTipoComponent {
 			neutralidades:[],
 			debilidades:[]
 		}
-
+		this.creador=this.el_tipo.creador;
 
 		this.Autodefensa=1;
 
-		this.creador=this.el_tipo.creador;
+		const usuarioData = localStorage.getItem<any>('usuarioActual');
+		if (usuarioData) {
+			//this.creador= JSON.parse(usuarioData);
+			this.creador = usuarioData;
+			this.el_tipo.creador=this.creador.nickname;
+			console.log(this.creador);
+		}
 
 	}
 
@@ -203,6 +210,9 @@ Quitar_Debilidad(id:number){
 	if (Tipo_tmp!=undefined){
 	this.resistencias_Tipo.debilidades.splice(Tipo_tmp_index,1);
 	this.resistencias_Tipo.neutralidades.push(Tipo_tmp);
+	if(Tipo_tmp.id_tipo==this.el_tipo.id_tipo){
+		this.Autodefensa=1;
+	}
 	}
 }
 Quitar_Resistencia(id:number){
@@ -211,6 +221,9 @@ Quitar_Resistencia(id:number){
 	if (Tipo_tmp!=undefined){
 	this.resistencias_Tipo.resistencias.splice(Tipo_tmp_index,1);
 	this.resistencias_Tipo.neutralidades.push(Tipo_tmp);
+	if(Tipo_tmp.id_tipo==this.el_tipo.id_tipo){
+		this.Autodefensa=1;
+	}
 	}
 }
 Quitar_Inmunidad(id:number){
@@ -219,6 +232,9 @@ Quitar_Inmunidad(id:number){
 	if (Tipo_tmp!=undefined){
 	this.resistencias_Tipo.inmunidades.splice(Tipo_tmp_index,1);
 	this.resistencias_Tipo.neutralidades.push(Tipo_tmp);
+	if(Tipo_tmp.id_tipo==this.el_tipo.id_tipo){
+		this.Autodefensa=1;
+	}
 	}
 }
 
@@ -228,6 +244,9 @@ Agregar_Debilidad(id:number){
 	if (tipo_tmp!= undefined){
 		this.resistencias_Tipo.neutralidades.splice(tipo_tmp_index,1);
 		this.resistencias_Tipo.debilidades.push(tipo_tmp);
+	if(tipo_tmp.id_tipo==this.el_tipo.id_tipo){
+		this.Autodefensa=2;
+	}
 	}
 }
 Agregar_Inmunidad(id:number){
@@ -236,6 +255,9 @@ Agregar_Inmunidad(id:number){
 	if (tipo_tmp!= undefined){
 		this.resistencias_Tipo.neutralidades.splice(tipo_tmp_index,1);
 		this.resistencias_Tipo.inmunidades.push(tipo_tmp);
+	if(tipo_tmp.id_tipo==this.el_tipo.id_tipo){
+		this.Autodefensa=0;
+	}
 	}
 }
 Agregar_Resistencia(id:number){
@@ -244,6 +266,9 @@ Agregar_Resistencia(id:number){
 	if (tipo_tmp!= undefined){
 		this.resistencias_Tipo.neutralidades.splice(tipo_tmp_index,1);
 		this.resistencias_Tipo.resistencias.push(tipo_tmp);
+	if(tipo_tmp.id_tipo==this.el_tipo.id_tipo){
+		this.Autodefensa=0.5;
+	}
 	}
 }
 

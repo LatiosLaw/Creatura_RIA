@@ -28,11 +28,6 @@ export class LoginComponent {
     }
   
     error(){
-      Swal.fire({
-        title: "Error!",
-        text: "Algo ha salido mal!",
-        icon: "error"
-      });
     }
   
     iniciarSesion() {
@@ -54,9 +49,14 @@ export class LoginComponent {
     
             // Aquí podés redirigir o mostrar otra alerta si querés
           },
-          error: (err) => {
-            this.error();
+          error: (err:any) => {
+            //this.error();
             // Mostrar error en UI
+	    Swal.fire({
+		    title: "¡Error!",
+		    text: "Al intentar iniciar session aperecio el Error: "+err.status+"\n "+err.message,
+		    icon: "error"
+	    });
           }
         });
       }

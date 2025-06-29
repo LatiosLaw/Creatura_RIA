@@ -21,17 +21,32 @@ export class ListadoTiposComponent {
 	
 	mostar_tipos_html:any;
 
+	usuario_actual:any;
+
 
 	constructor(private connector: ConeccionService, private fb: FormBuilder,private route: ActivatedRoute){
+		const usuarioData = localStorage.getItem('usuarioActual');
+		if (usuarioData) {
+			this.usuario_actual = JSON.parse(usuarioData);
+		} 
+
+		
 	}
 
 	url_iconos = 'http://localhost:41062/www/imagenes/tipos/';
 	
 	ngOnInit(): void {
+		/*
 		this.connector.get_Todos_Los_Tipos().subscribe(res => {
 			this.tipos = res;
 			this.Arreglar_url_imagenes();
 		});
+	       */
+	      this.connector.get_Tipos_Creados_Por(this.usuario_actual.nickname).subscribe((res:any) =>{
+	      	this.tipos = res;
+		this.Arreglar_url_imagenes();
+	      
+	      });
 		//this.mostar_tipos_html = require('html-loader!./mostrar-tipos.html');
 		//this.mostar_tipos_html = this.mostar_tipos_html.default;
 
