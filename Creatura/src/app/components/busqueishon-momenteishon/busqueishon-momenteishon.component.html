@@ -36,14 +36,15 @@
 
 
     </div>
+    <div class="x-large" *ngIf="error || creaturas.length === 0">No se encontraron creaturas del sistema que coincidan con tu busqueda.</div>
+
     <mat-paginator  [length]="creaturas.length"
         [pageSize]="8"
         [pageSizeOptions]="[8, 16, 32, 8954]"
         aria-label="Select page"
         (page)="paginarCrea($event)">
     </mat-paginator>
-    <div class="x-large" *ngIf="error || creaturas.length === 0">No se encontraron creaturas del sistema que coincidan con tu busqueda.</div>
-
+    
     <div class="cont-mini-titular"> 
         <div class="mini-titular">
             <div>Creaturas de Usuarios Encontradas</div>
@@ -72,13 +73,14 @@
         }
         
     </div>
+    <div class="x-large" *ngIf="error || creaturasDeUsuarios.length === 0">No se encontraron creaturas de usuarios que coincidan con tu busqueda.</div>
+    
     <mat-paginator  [length]="creaturasDeUsuarios.length"
         [pageSize]="8"
         [pageSizeOptions]="[8, 16, 32, 8954]"
         aria-label="Select page"
         (page)="paginarCreaUsu($event)">
     </mat-paginator>
-    <div class="x-large" *ngIf="error || creaturasDeUsuarios.length === 0">No se encontraron creaturas de usuarios que coincidan con tu busqueda.</div>
     
     <div class="cont-mini-titular"> 
         <div class="mini-titular">
@@ -100,13 +102,14 @@
         }
         
     </div>
+    <div class="x-large" *ngIf="error || usuarios.length === 0">No se encontraron usuarios que coincidan con tu busqueda.</div>
     <mat-paginator  [length]="usuarios.length"
         [pageSize]="8"
         [pageSizeOptions]="[8, 16, 32, 8954]"
         aria-label="Select page"
         (page)="paginarUsu($event)">
     </mat-paginator>
-    <div class="x-large" *ngIf="error || usuarios.length === 0">No se encontraron usuarios que coincidan con tu busqueda.</div>
+   
 </div>
 
 <div  *ngIf="!mostrarNormal">

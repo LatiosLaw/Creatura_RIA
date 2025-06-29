@@ -106,24 +106,6 @@ export class BusqueishonMomenteishonComponent implements OnInit{
     this.paginadas_Usu = this.usuarios.slice(start, end);
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   cargarCosas(){
     
    this.connector.buscar(this.datiBuscar).subscribe(
@@ -157,8 +139,11 @@ export class BusqueishonMomenteishonComponent implements OnInit{
     this.creaturasDeUsuarios = [];
     this.usuarios = [];
     this.creaturasTipo = [];
-    // Código que querés ejecutar si falla:
     this.mostrarNormal = true;
+    this.actualizarListaPaginadaCreaUsu();
+    this.actualizarListaPaginadaCrea();
+    this.actualizarListaPaginadaUsu();
+    this.actualizarListaPaginadaTipo();
     //Swal.fire("Error", "No se pudieron obtener los datos de búsqueda.", "error");
   }
 
