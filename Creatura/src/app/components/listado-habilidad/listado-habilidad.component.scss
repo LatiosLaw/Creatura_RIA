@@ -5,7 +5,7 @@
 
 .habilidades{
     padding: 15px 0;
-    margin-bottom: 1000px;
+   // margin-bottom: 1000px;
     overflow-x: auto;
 }
 
@@ -53,4 +53,7 @@ tr:nth-child(odd){
 
 tr:nth-child(even){
     background-color: #ebebeb;
+}
+.margen{
+    margin-bottom: 600px;
 }
