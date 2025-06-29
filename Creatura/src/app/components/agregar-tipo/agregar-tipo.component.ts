@@ -90,20 +90,18 @@ export class AgregarTipoComponent {
 	}
 
 
-	url_iconos = 'http://localhost:41062/www/imagenes/tipos/';
+	url_iconos = 'http://localhost/Creatura_PHP/imagenes/tipos/';
 
 
 	ngOnInit(): void{
 	
 		 this.connector.get_Todos_Los_Tipos().subscribe(res => {
 		 	this.buffer_de_todos_los_tipos=res;
-		 	this.Arreglar_url_imagenes();
 			 if (this.buffer_de_todos_los_tipos==undefined){
 				console.log("La lista de todos los tipos es undefined");
 				this.router.navigate(["/listarTipos"]);
 			 }
 		 this.resistencias_Tipo.neutralidades=this.buffer_de_todos_los_tipos;
-			 let se_encontro_tipo=false;
 				this.datos_del_tipo_form.patchValue({
 					nombre: this.el_tipo.nombre_tipo
 				});
@@ -119,43 +117,20 @@ export class AgregarTipoComponent {
 		 }
 	}
 
-	//La siguiente funcion es solo para mi [Manuel]; es para que funcione con mi configuración local.
-	Arreglar_url_imagenes():void{
-		if (this.buffer_de_todos_los_tipos == undefined){
-			return;
-		}
-		let buffer_temporal_de_todos_los_tipos : Tipo[] =[];
-		for (let un_tipo of this.buffer_de_todos_los_tipos){
-			if (un_tipo == undefined){
-				return;
-			}
-			if (un_tipo.icono == undefined){
-				return;
-			}
-			un_tipo.icono = this.url_iconos + un_tipo.icono;
-			buffer_temporal_de_todos_los_tipos.push(un_tipo);
-		}
-		this.buffer_de_todos_los_tipos = buffer_temporal_de_todos_los_tipos;
-	
-	}
 	Cargar_Todos_Los_Tipos():void{
 	
 		}
-onFileChange(event: Event): void {
+		onFileChange(event: Event): void {
   const input = event.target as HTMLInputElement;
   if (input.files && input.files[0]) {
     const file = input.files[0];
     const reader = new FileReader();
 
     reader.onload = () => {
-      //if(condicional para la extencion del archivo){
-        this.el_tipo.icono = reader.result as string;
-      //}
-      
+      this.el_tipo.icono = reader.result as string;
     };
 
     reader.readAsDataURL(file); 
-    this.se_modifico_icono=true;
     console.log(file);
   }
 }
@@ -273,6 +248,7 @@ Agregar_Resistencia(id:number){
 }
 
 Confirmar(){
+
 	Swal.fire({
 		title: "Modificar tipo",
 		text: "¿Desea confirmar los cambios?",
@@ -285,6 +261,7 @@ Confirmar(){
 	}).then(eleccion => {
 		if(eleccion.isConfirmed){
 			let los_datos_a_enviar:any = this.Get_Datos_de_Modificacion();
+			console.log(los_datos_a_enviar);
 			this.connector.Alta_Tipo(los_datos_a_enviar).subscribe(
 			res => {
 				

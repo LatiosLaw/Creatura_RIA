@@ -80,10 +80,6 @@ export class ModificarTipoComponent {
 
 	}
 
-
-	url_iconos = 'http://localhost:41062/www/imagenes/tipos/';
-
-
 	ngOnInit(): void{
 	
 		 this.connector.get_Todos_Los_Tipos().subscribe(res => {
@@ -216,7 +212,7 @@ export class ModificarTipoComponent {
 			if (un_tipo.icono == undefined){
 				return;
 			}
-			un_tipo.icono = this.url_iconos + un_tipo.icono;
+			un_tipo.icono = un_tipo.icono;
 			buffer_temporal_de_todos_los_tipos.push(un_tipo);
 		}
 		this.buffer_de_todos_los_tipos = buffer_temporal_de_todos_los_tipos;

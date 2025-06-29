@@ -32,8 +32,6 @@ export class ListadoTiposComponent {
 
 		
 	}
-
-	url_iconos = 'http://localhost:41062/www/imagenes/tipos/';
 	
 	ngOnInit(): void {
 		/*
@@ -44,7 +42,6 @@ export class ListadoTiposComponent {
 	       */
 	      this.connector.get_Tipos_Creados_Por(this.usuario_actual.nickname).subscribe((res:any) =>{
 	      	this.tipos = res;
-		this.Arreglar_url_imagenes();
 	      
 	      });
 		//this.mostar_tipos_html = require('html-loader!./mostrar-tipos.html');
@@ -141,7 +138,7 @@ export class ListadoTiposComponent {
 				<a>
 				
 				<div class="imagen-del-tipo-mostar-tipo text-center" style="${imagen_del_tipo_styles}">
-				<img src="${this.url_iconos+un_tipo.icono}" class="icon-del-tipo-mostrar-tipo" alt="${un_tipo.nombre_tipo}" style="${icon_del_tipo_styles}">
+				<img src="${un_tipo.icono}" class="icon-del-tipo-mostrar-tipo" alt="${un_tipo.nombre_tipo}" style="${icon_del_tipo_styles}">
 				</div>
 				<div class="nombre-del-tipo-mostar-tipo text-center" style="${nombre_del_tipo_styles}">
 				${un_tipo.nombre_tipo}
@@ -162,7 +159,7 @@ export class ListadoTiposComponent {
 				<a>
 				
 				<div class="imagen-del-tipo-mostar-tipo text-center" style="${imagen_del_tipo_styles}">
-				<img src="${this.url_iconos+un_tipo.icono}" class="icon-del-tipo-mostrar-tipo" alt="${un_tipo.nombre_tipo}" style="${icon_del_tipo_styles}">
+				<img src="${un_tipo.icono}" class="icon-del-tipo-mostrar-tipo" alt="${un_tipo.nombre_tipo}" style="${icon_del_tipo_styles}">
 				</div>
 				<div class="nombre-del-tipo-mostar-tipo text-center" style="${nombre_del_tipo_styles}">
 				${un_tipo.nombre_tipo}
@@ -183,7 +180,7 @@ export class ListadoTiposComponent {
 				<a>
 				
 				<div class="imagen-del-tipo-mostar-tipo text-center" style="${imagen_del_tipo_styles}">
-				<img src="${this.url_iconos+un_tipo.icono}" class="icon-del-tipo-mostrar-tipo" alt="${un_tipo.nombre_tipo}" style="${icon_del_tipo_styles}">
+				<img src="${un_tipo.icono}" class="icon-del-tipo-mostrar-tipo" alt="${un_tipo.nombre_tipo}" style="${icon_del_tipo_styles}">
 				</div>
 				<div class="nombre-del-tipo-mostar-tipo text-center" style="${nombre_del_tipo_styles}">
 				${un_tipo.nombre_tipo}
@@ -204,7 +201,7 @@ export class ListadoTiposComponent {
 				<a>
 				
 				<div class="imagen-del-tipo-mostar-tipo text-center" style="${imagen_del_tipo_styles}">
-				<img src="${this.url_iconos+un_tipo.icono}" class="icon-del-tipo-mostrar-tipo" alt="${un_tipo.nombre_tipo}" style="${icon_del_tipo_styles}">
+				<img src="${un_tipo.icono}" class="icon-del-tipo-mostrar-tipo" alt="${un_tipo.nombre_tipo}" style="${icon_del_tipo_styles}">
 				</div>
 				<div class="nombre-del-tipo-mostar-tipo text-center" style="${nombre_del_tipo_styles}">
 				${un_tipo.nombre_tipo}
@@ -275,24 +272,5 @@ export class ListadoTiposComponent {
 			}
 		
 		});
-	}
-	//La siguiente funcion es solo para mi [Manuel]; es para que funcione con mi configuración local.
-	Arreglar_url_imagenes():void{
-		if (this.tipos == undefined){
-			return;
-		}
-		let buffer_temporal_de_todos_los_tipos : Tipo[] =[];
-		for (let un_tipo of this.tipos){
-			if (un_tipo == undefined){
-				return;
-			}
-			if (un_tipo.icono == undefined){
-				return;
-			}
-			un_tipo.icono = this.url_iconos + un_tipo.icono;
-			buffer_temporal_de_todos_los_tipos.push(un_tipo);
-		}
-		this.tipos = buffer_temporal_de_todos_los_tipos;
-	
 	}
 }

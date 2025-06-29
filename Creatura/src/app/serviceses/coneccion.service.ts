@@ -158,7 +158,7 @@ private urlHabilidades = "http://localhost/Creatura_PHP/api/habilidades";
 	}
 
 	Get_Imagen_Tipo(nombre:string) : Observable<Blob>{
-		const url2 = this.urlImagenes + "/imagenes/tipos/"+nombre;
+		const url2 = this.urlImagenes + nombre;
 		return this.http.get(url2 , {headers: this.header_para_get_imagenes, responseType: 'blob'});
 	}
 	
