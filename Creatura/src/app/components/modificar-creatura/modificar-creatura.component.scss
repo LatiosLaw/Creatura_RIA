@@ -201,14 +201,10 @@
     outline: none;
 }
 
-.tipos-agregar option{
-    background-color: black;
-    color: white;
+.tipos-desplegados{
     font-weight: bold;
-}
-
-.tipos-agregar option:hover{
-    background-color: #333;
+    text-align: center;
+    background-color: black;
     color: white;
 }
 

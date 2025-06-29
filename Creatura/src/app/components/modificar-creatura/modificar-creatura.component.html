@@ -42,7 +42,7 @@
             <ul class="dropdown-menu">
               <li *ngFor="let tipo1 of tipos1">
                 <button type="button"
-                  class="dropdown-item"
+                  class="dropdown-item tipos-desplegados"
                   [style.backgroundColor]="'#' + tipo1.color"
                   (click)="seleccionarTipo1(tipo1)">
                   {{ tipo1.nombre_tipo }}
@@ -59,7 +59,7 @@
             <ul class="dropdown-menu">
               <li *ngFor="let tipo2 of tipos2">
                 <button type="button"
-                  class="dropdown-item"
+                  class="dropdown-item tipos-desplegados"
                   [style.backgroundColor]="'#' + tipo2.color"
                   (click)="seleccionarTipo2(tipo2)">
                   {{ tipo2.nombre_tipo }}
@@ -229,7 +229,7 @@
           </button>
           <ul class="dropdown-menu">
             <li *ngFor="let tipo3 of tipos3">
-              <button class="dropdown-item" type="button"
+              <button class="dropdown-item tipos-desplegados" type="button"
                 [style.backgroundColor]="'#' + tipo3.color"
                 (click)="seleccionartipo3(tipo3)">
                 {{ tipo3.nombre_tipo }}

@@ -35,7 +35,7 @@ export class ModificarCreaturaComponent implements OnInit {
   typeNull = {
     id_tipo: "0",
     nombre_tipo: "-",
-    color: "eaeae5",
+    color: "fffff",
     icono: "no.png",
     creador: "tuvieja"
   }
