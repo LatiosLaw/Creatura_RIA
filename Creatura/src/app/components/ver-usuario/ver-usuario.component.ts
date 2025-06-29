@@ -34,6 +34,10 @@ export class VerUsuarioComponent {
     const data = localStorage.getItem('usuarioActual');
     if (data) {
       this.usuarioLogueado = JSON.parse(data);
+    }else{
+      this.usuarioLogueado ={
+        nickname: null
+      }
     }
 
     this.route.params.subscribe(params => {
