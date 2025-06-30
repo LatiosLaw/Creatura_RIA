@@ -255,7 +255,6 @@ export class ListadoTiposComponent {
 					Swal.fire({
 						title: "¡El tipo fue borrado exitosamente!",
 						icon: "success",
-						draggable: true,
 	        				confirmButtonColor: '#3085d6'
 					});
 					this.ngOnInit();

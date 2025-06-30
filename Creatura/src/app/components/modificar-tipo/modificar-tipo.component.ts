@@ -375,7 +375,6 @@ Confirmar(){
 				Swal.fire({
 					title: "¡El tipo fue modificado exitosamente!",
 					icon: "success",
-					draggable: true,
 					confirmButtonColor: '#3085d6'
 				});
 				this.router.navigate(["/listarTipos"]);
